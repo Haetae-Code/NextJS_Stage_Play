@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+//import Link from 'next/Link';
 import { Box, chakra, Container, useColorModeValue} from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -12,7 +12,7 @@ const linkStyle = {
 
 const Header = () => {
   return (
-    <Container>
+    <Container pt='5' w='100' ml='20'>
         <Box>
             <CwuLogoImage
                 src="/asset/image/cwulogo.png"

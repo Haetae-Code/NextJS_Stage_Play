@@ -11,7 +11,6 @@ const Main = ({ children, router }) => {
         <meta name="author" content="CWU CSE" />
         <title>Stage_Play</title>
       </Head>
-      
       {/* <NavBar path={router.asPath} /> */}
         <Container>
           {children}

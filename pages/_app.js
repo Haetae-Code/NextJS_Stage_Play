@@ -10,6 +10,8 @@ if (typeof window !== 'undefined') {
 const Website = ({Component, pageProps, router }) => {
     return (
         <Chakra cookies={pageProps.cookies}>
+            <Flex>
+            <Header></Header>
                 <Layout router={router}>
                     <AnimatePresence
                     exitBeforeEnter
@@ -22,6 +24,7 @@ const Website = ({Component, pageProps, router }) => {
                         <Component {...pageProps} key={router.route}></Component>
                     </AnimatePresence>
                 </Layout>
+            </Flex>
         </Chakra>
     )
 }

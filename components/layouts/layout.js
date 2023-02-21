@@ -13,7 +13,6 @@ const Layout = ({ children, title }) => {
   const t = `${title} - Stage Play`
   return (
     <Container>
-    <Header></Header>
     <motion.article
       initial="hidden"
       animate="enter"
