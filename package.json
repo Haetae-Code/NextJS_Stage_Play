@@ -1,0 +1,35 @@
+{
+  "name": "NextJS_Stage_Play",
+  "version": "1.0.0",
+  "description": "NextJS_Stage_Play",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "prettier": "prettier - write .",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrusdCat/NextJS_Stage_Play.git"
+  },
+  "keywords": [],
+  "author": "Min Hyeok Jeon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrusdCat/NextJS_Stage_Play/issues"
+  },
+  "homepage": "https://github.com/CrusdCat/NextJS_Stage_Play#readme",
+  "dependencies": {
+    "@chakra-ui/react": "^2.5.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "framer-motion": "^9.0.4",
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-next": "^13.1.6",
+    "prettier": "^2.8.4"
+  }
+}
