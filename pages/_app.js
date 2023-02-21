@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Box, Container, Flex } from '@chakra-ui/react'
 import Layout from '../components/layouts/layout'
 import Chakra from '../components/chakra'
+import Header from '../components/Header'
 
 if (typeof window !== 'undefined') {
     window.history.scrollRestoration = 'manual'

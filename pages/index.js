@@ -13,16 +13,14 @@ import {
   Flex
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-
-
+import Header from '../components/Header'
 
 
 
 const Page = () => {
     return (
-
-
-            <Container maxW="600opx" pt={10} ml={14}>
+        <Container>
+            <Container  pt={10} ml={14}>
                     <Box pl='1' display={'flex'}>
                         <Box flexGrow={1}>
                             <Heading as="h1" variant="page-title">
@@ -32,9 +30,8 @@ const Page = () => {
                             <p>Stage Play</p>
                         </Box>
                     </Box>
-
             </Container>
-
+        </Container>    
     )
 }
 

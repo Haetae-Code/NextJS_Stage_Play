@@ -1,5 +1,7 @@
+import { Container } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Head from 'next/head'
+import Header from '../Header'
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: 20 },
@@ -10,6 +12,8 @@ const variants = {
 const Layout = ({ children, title }) => {
   const t = `${title} - Stage Play`
   return (
+    <Container>
+    <Header></Header>
     <motion.article
       initial="hidden"
       animate="enter"
@@ -31,6 +35,7 @@ const Layout = ({ children, title }) => {
         {/* <GridItemStyle /> */}
       </>
     </motion.article>
+    </Container>
   )
 }
 

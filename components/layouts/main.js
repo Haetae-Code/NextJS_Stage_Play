@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Box, Container, Flex } from '@chakra-ui/react'
-
+import Header from '../Header'
 const Main = ({ children, router }) => {
   return (
     <Box as="main" pb={8}>
@@ -11,9 +11,8 @@ const Main = ({ children, router }) => {
         <meta name="author" content="CWU CSE" />
         <title>Stage_Play</title>
       </Head>
-
-      {/* <NavBar path={router.asPath} /> */}
       
+      {/* <NavBar path={router.asPath} /> */}
         <Container>
           {children}
         </Container>
