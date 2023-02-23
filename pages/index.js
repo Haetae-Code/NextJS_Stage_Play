@@ -20,7 +20,7 @@ import Header from '../components/Header'
 const Page = () => {
     return (
         <Container>
-            <Container  pt={10} ml={14}>
+            <Container  pt={10} ml={1}>
                     <Box pl='1' display={'flex'}>
                         <Box flexGrow={1}>
                             <Heading as="h1" variant="page-title">

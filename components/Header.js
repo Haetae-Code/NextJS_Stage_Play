@@ -12,7 +12,7 @@ const linkStyle = {
 
 const Header = () => {
   return (
-    <Container pt='5' w='100' ml='20'>
+    <Container pt='5' w='100' ml='10'>
         <Box>
             <CwuLogoImage
                 src="/asset/image/cwulogo.png"
