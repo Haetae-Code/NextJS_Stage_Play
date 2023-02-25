@@ -17,7 +17,14 @@ const Header = (props) => {
   return (
     <Container pt='5' ml='10'>
       <Flex>
-          <Box>
+          <motion.Box
+          initial={{ scale: 1.5 }} 
+          animate={{ scale: 1 }}
+          transition={{
+            duration:0.7,
+            //delay:0.5,
+          }}
+          >
               <CwuLogoImage
                   src="/asset/image/cwulogo.png"
                   alt='cwulogo'
@@ -25,16 +32,15 @@ const Header = (props) => {
                   width="100"
                   height="90"
               />
-          </Box>
+          </motion.Box>
           {/* 검색바 */}
-              <Box ml={10} pt='5'>
+              <Box ml={10} pt='7'>
                 <motion.div
-                initial={{ scale: 1.5 }} 
+                initial={{ scale: 1.3 }} 
                 animate={{ scale: 1 }}
                 transition={{
-                  duration:1,
-                  //delay:0.5,
-                  ease: [0, 0.71, 0.2, 1.01]
+                  duration:0.7,
+                  delay:0.3,
                 }}
                 >
                 <Input
