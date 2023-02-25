@@ -44,7 +44,7 @@ const Header = (props) => {
                 }}
                 >
                 <Input
-                borderWidth={'1px'} borderRadius='100'
+                borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
                 variant='outline'
                 placeholder='Search'
                 htmlSize={20} width='auto'/>
