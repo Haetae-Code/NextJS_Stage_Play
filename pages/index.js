@@ -22,7 +22,7 @@ import ImageSlider from '../components/MainImageSlider'
 const Page = () => {
     return (
         <Container>
-            <Container  pt={10} ml={1}>
+            <Container  pt={3} ml={1}>
                 <ImageSlider/>
                     <Box pl='1' display={'flex'}>
                         <Box flexGrow={1}>
