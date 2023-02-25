@@ -48,6 +48,9 @@ const Header = (props) => {
                 variant='outline'
                 placeholder='Search'
                 htmlSize={20} width='auto'/>
+                {/* <Button  size='xs' align='right' mb='1' ml='15' borderColor={'#2d6fbb'} variant='outline' borderWidth={'2px'}>
+                Dark | Light
+                </Button> */}
                 </motion.div>
               </Box>
               {/* <ColorModeToggleButton/> */}
