@@ -13,7 +13,6 @@ import {
   Flex
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import Header from '../components/Header'
 
 
 

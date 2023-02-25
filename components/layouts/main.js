@@ -15,7 +15,6 @@ const Main = ({ children, router }) => {
         <Container>
           {children}
         </Container>
-      
     </Box>
   )
 }

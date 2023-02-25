@@ -9,6 +9,7 @@ const styles = {
   })
 }
 
+
 const components = {
   Heading: {
     variants: {
