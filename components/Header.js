@@ -48,7 +48,7 @@ const Header = (props) => {
                 variant='outline'
                 placeholder='Search'
                 //htmlSize={20} width='auto'
-                width='400px'
+                width='200px'
                 />
                 {/* <Button  size='xs' align='right' mb='1' ml='15' borderColor={'#2d6fbb'} variant='outline' borderWidth={'2px'}>
                 Dark | Light
@@ -60,6 +60,7 @@ const Header = (props) => {
               <Link href="/"><p style={linkStyle}> 홈 </p></Link>
               <Link href="/about"><p style={linkStyle}> 소개 </p></Link>
           </div> */}
+          {/* {로그인} */}
       </Flex>
     </Container>
   )
