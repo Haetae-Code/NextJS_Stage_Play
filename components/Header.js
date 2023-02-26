@@ -17,7 +17,7 @@ const Header = (props) => {
   return (
     <Container pt='5' ml='10'>
       <Flex>
-          <motion.Box
+          <motion.div
           initial={{ scale: 1.5 }} 
           animate={{ scale: 1 }}
           transition={{
@@ -32,11 +32,11 @@ const Header = (props) => {
                   width="100"
                   height="90"
               />
-          </motion.Box>
+          </motion.div>
           {/* 검색바 */}
-              <Box ml={10} pt='7'>
+              <Box ml={13} pt='7'>
                 <motion.div
-                initial={{ scale: 1.3 }} 
+                initial={{ scale: 1.2 }} 
                 animate={{ scale: 1 }}
                 transition={{
                   duration:0.7,
@@ -47,7 +47,9 @@ const Header = (props) => {
                 borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
                 variant='outline'
                 placeholder='Search'
-                htmlSize={20} width='auto'/>
+                //htmlSize={20} width='auto'
+                width='400px'
+                />
                 {/* <Button  size='xs' align='right' mb='1' ml='15' borderColor={'#2d6fbb'} variant='outline' borderWidth={'2px'}>
                 Dark | Light
                 </Button> */}

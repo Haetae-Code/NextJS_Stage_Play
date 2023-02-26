@@ -3,6 +3,8 @@ import { Box, Container, Flex } from '@chakra-ui/react'
 import Layout from '../components/layouts/layout'
 import Chakra from '../components/chakra'
 import Header from '../components/Header'
+import ImageSlider from '../components/MainImageSlider'
+
 
 if (typeof window !== 'undefined') {
     window.history.scrollRestoration = 'manual'
@@ -12,6 +14,7 @@ const Website = ({Component, pageProps, router }) => {
         <Chakra cookies={pageProps.cookies}>
             
             <Header></Header>
+            <ImageSlider />
                 <Layout router={router}>
                     <AnimatePresence
                     exitBeforeEnter

@@ -23,16 +23,13 @@ const Page = () => {
     return (
         <Container>
             <Container  pt={3} ml={1}>
-                <ImageSlider/>
-                    <Box pl='1' display={'flex'}>
-                        <Box flexGrow={1}>
-                            <Heading as="h1" variant="page-title">
-                                Test h1
-                            </Heading>
-                            <p>Developer test page</p>
-                            <p>Stage Play</p>
-                        </Box>
-                    </Box>
+                <Box flexGrow={1} pl='1' display={'flex'}>
+                    <Heading as="h1" variant="page-title">
+                        Test h1
+                    </Heading>
+                    <p>Developer test page</p>
+                    <p>Stage Play</p>
+                </Box>
             </Container>
         </Container>    
     )

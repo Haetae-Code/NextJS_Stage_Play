@@ -46,7 +46,7 @@ const ImageSlider = () => {
         ]
       )
     return (
-        <>
+        <Container align='center'>
                 <div ref={sliderRef} className="keen-slider">
                 <div className="keen-slider__slide number-slide1">
                     
@@ -79,7 +79,7 @@ const ImageSlider = () => {
                     />
                 </div>
                 </div>
-        </>
+        </Container>
     )
   }
   export default ImageSlider
