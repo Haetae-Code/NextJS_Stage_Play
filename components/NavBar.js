@@ -13,7 +13,8 @@ import {
   MenuList,
   MenuButton,
   IconButton,
-  useColorModeValue
+  useColorModeValue,
+  Input
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
@@ -67,6 +68,13 @@ const Navbar = props => {
           <Heading as="h1" size="lg" letterSpacing={'tighter'}>
             <Logo />
           </Heading>
+          <Input
+                borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
+                variant='outline'
+                placeholder='Search'
+                //htmlSize={20} width='auto'
+                width='200px'
+                />
         </Flex>
 
         <Stack
@@ -97,6 +105,7 @@ const Navbar = props => {
           </LinkItem> */}
         </Stack>
 
+{/* {mob} */}
         <Box flex={1} align="right">
           <ColorMode />
 
