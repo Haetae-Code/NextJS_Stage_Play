@@ -62,6 +62,10 @@ const Header = (props) => {
           </div> */}
           {/* {로그인} */}
       </Flex>
+      {/* {NaviBar} */}
+      <Box>
+
+      </Box>
     </Container>
   )
 }
