@@ -13,8 +13,6 @@ import {
   Flex
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from 'keen-slider/react'
 import React from 'react'
 import ImageSlider from '../components/MainImageSlider'
 
