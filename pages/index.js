@@ -20,7 +20,8 @@ import ImageSlider from '../components/MainImageSlider'
 
 const Page = () => {
     return (
-        <Container>
+        <Container w="100%">
+            <ImageSlider></ImageSlider>
             <Container  pt={3} ml={1}>
                 <Box flexGrow={1} pl='1' display={'flex'}>
                     <Heading as="h1" variant="page-title">

@@ -3,7 +3,6 @@ import { Box, Container, Flex } from '@chakra-ui/react'
 import Layout from '../components/layouts/layout'
 import Chakra from '../components/chakra'
 import Header from '../components/Header'
-import ImageSlider from '../components/MainImageSlider'
 import Nav from '../components/NavBar'
 
 
@@ -16,7 +15,6 @@ const Website = ({Component, pageProps, router }) => {
             
             {/* <Header></Header> */}
             <Nav></Nav>
-            <ImageSlider/>
                 <Layout router={router}>
                     <AnimatePresence
                     exitBeforeEnter

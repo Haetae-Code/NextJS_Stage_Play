@@ -46,7 +46,7 @@ const ImageSlider = () => {
         ]
       )
     return (
-        <Container align='center'>
+        <Container align='center' w="100%">
                 <div ref={sliderRef} className="keen-slider">
                 <div className="keen-slider__slide number-slide1">
                     
