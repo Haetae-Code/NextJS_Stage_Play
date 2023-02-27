@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Text, useColorModeValue, chakra } from '@chakra-ui/react'
+import { Text, useColorModeValue, chakra, Fe } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 
@@ -34,7 +34,8 @@ const Logo = () => {
                   alt='cwulogo'
                   borderRadius="10"
                   width="100"
-                  height="90"
+                  height="100"
+                  pt = {'5'}
               />
         <Text
           color={useColorModeValue('gray.800', 'whiteAlpha.900')}
