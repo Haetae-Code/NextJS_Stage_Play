@@ -18,7 +18,6 @@ import { useKeenSlider } from 'keen-slider/react'
 import React from 'react'
 import ImageSlider from '../components/MainImageSlider'
 
-
 const Page = () => {
     return (
         <Container>
