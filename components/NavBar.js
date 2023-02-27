@@ -48,18 +48,18 @@ const Navbar = props => {
 
   return (
     <Box
-      position="fixed"
+      position="flex"
       as="nav"
       w="100%"
       bg={useColorModeValue('#ffffff40', '#20202380')}
-      css={{ backdropFilter: 'blur(10px)' }}
+      css={{ backdropFilter: 'blur(5px)' }}
       zIndex={2}
       {...props}
     >
       <Container
         display="flex"
-        p={2}
-        maxW="container.md"
+        p={3}
+        maxW="container"
         wrap="wrap"
         align="center"
         justify="space-between"
