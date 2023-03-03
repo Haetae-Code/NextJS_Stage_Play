@@ -27,6 +27,7 @@ const Page = () => {
                     </Heading>
                     <p>Developer test page</p>
                     <p>Stage Play</p>
+                    <p>welcome</p>
                 </Box>
             </Container>
         </Container>    
