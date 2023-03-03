@@ -3,9 +3,10 @@ import { Box, chakra, Container, useColorModeValue, Button, Input, Flex,} from '
 import Image from 'next/image'
 import { motion, useMotionValue } from "framer-motion"
 import {ColorModeToggleButton} from "./ColorModeButton"
-const CwuLogoImage = chakra(Image, {
-    shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
-})
+import {Nav} from "./NavBar"
+// const CwuLogoImage = chakra(Image, {
+//     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
+// })
 
 const linkStyle = {
   marginRight: '1rem'
@@ -25,13 +26,13 @@ const Header = (props) => {
             //delay:0.5,
           }}
           >
-              <CwuLogoImage
+              {/* <CwuLogoImage
                   src="/asset/image/cwulogo.png"
                   alt='cwulogo'
                   borderRadius="10"
                   width="100"
                   height="90"
-              />
+              /> */}
           </motion.div>
           {/* 검색바 */}
               <Box ml={13} pt='7'>
@@ -62,6 +63,10 @@ const Header = (props) => {
           </div> */}
           {/* {로그인} */}
       </Flex>
+      {/* {NaviBar} */}
+      <Box>
+        {/* <Nav></Nav> */}
+      </Box>
     </Container>
   )
 }

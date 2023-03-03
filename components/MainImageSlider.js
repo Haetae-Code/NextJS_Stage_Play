@@ -2,11 +2,12 @@ import { Box, chakra, Container, useColorModeValue, Button, Input, Flex,} from '
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import React from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
+import { Image } from '@chakra-ui/react'
 
-const Images = chakra(Image, {
-    shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
-})
+// const Images = chakra(Image, {
+//     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
+// })
 
 
 const ImageSlider = () => {
@@ -46,16 +47,22 @@ const ImageSlider = () => {
         ]
       )
     return (
-        <Container align='center'>
+        <Container>
                 <div ref={sliderRef} className="keen-slider">
-                <div className="keen-slider__slide number-slide1">
+                  <div className="keen-slider__slide number-slide1">
+                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'}/>
+                  </div>
+                  <div className="keen-slider__slide number-slide2">
+                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'} />
+                  </div>
+                {/* <div className="keen-slider__slide number-slide1">
                     
                     <Images
                     src="/asset/image/ImageSlider/Acting.png"
                     alt='cwulogo'
                     borderRadius="10"
                     width="600"
-                    height="200"
+                    height="300"
                     />
                 </div>
                 <div className="keen-slider__slide number-slide1">
@@ -65,7 +72,7 @@ const ImageSlider = () => {
                     alt='cwulogo'
                     borderRadius="10"
                     width="600"
-                    height="200"
+                    height="300"
                     />
                 </div>
                 <div className="keen-slider__slide number-slide1">
@@ -75,9 +82,9 @@ const ImageSlider = () => {
                     alt='cwulogo'
                     borderRadius="10"
                     width="600"
-                    height="200"
+                    height="300"
                     />
-                </div>
+                </div> */}
                 </div>
         </Container>
     )
