@@ -19,8 +19,8 @@ import {
   TabPanel
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
+//import ImageSlider from '../components/MainImageSlider'
 import React from 'react'
-import ImageSlider from '../components/MainImageSlider'
 import { auto } from '@popperjs/core'
 
 
@@ -54,7 +54,7 @@ const Page = () => {
 
                         <TabPanels>
                             <TabPanel>
-                            <p><Table variant='simple'>
+                            <div><Table variant='simple'>
                                 <Tbody>
                                     <Tr>
                                         <Td>공연 장소</Td>
@@ -75,16 +75,16 @@ const Page = () => {
                                     <Th>1000만원</Th>
                                     </Tr>
                                 </Tfoot>
-                            </Table></p>
+                            </Table></div>
                             </TabPanel>
                             <TabPanel>
-                                <p>채준혁</p>
+                                <div>채준혁</div>
                             </TabPanel>
                             <TabPanel>
-                                <p>잘생겼다</p>
+                                <div>잘생겼다</div>
                             </TabPanel>
                             <TabPanel>
-                                <p>질문있어요</p>
+                                <div>질문있어요</div>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
