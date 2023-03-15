@@ -90,42 +90,18 @@ const Navbar = props => {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-          <Accordion>
-            <AccordionItem>
-              <h2>
-                <Menu isLazy id="navbar-menu">
-                  <AccordionButton>
-                    <LinkItem href="/" path={path}>
-                      Menu1
-                    </LinkItem>
-                  </AccordionButton>
-
-                  <AccordionButton>
-                    <LinkItem href="/" path={path}>
-                      Menu2
-                    </LinkItem>
-                  </AccordionButton>
-
-                  <AccordionButton>
-                    <LinkItem href="/" path={path}>
-                      Menu3
-                    </LinkItem>
-                  </AccordionButton>
-
-                  <AccordionButton>
-                    <LinkItem href="/" path={path}>
-                      Menu4
-                    </LinkItem>
-                  </AccordionButton>
-                </Menu>
-              </h2>
-              <AccordionPanel pb={4}>
-                이건 피씨버전에 들어가는 건가.
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-          
-      
+          <LinkItem href="/" path={path}>
+            Menu1
+          </LinkItem>
+          <LinkItem href="/" path={path}>
+            Menu2
+          </LinkItem>
+          <LinkItem href="/" path={path}>
+            Menu3
+          </LinkItem>
+          <LinkItem href="/" path={path}>
+            Menu4
+          </LinkItem>
           {/* <LinkItem
             target="_blank"
             href="/"
