@@ -50,9 +50,6 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   const { path } = props
-dddddddddddddddd
-dddddddddddddddddd
-dddd
   return (
     <Box
       position="flex"
