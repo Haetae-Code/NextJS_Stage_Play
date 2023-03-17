@@ -20,62 +20,79 @@ import{
  HStack,
  colorScheme,
  ButtonGroup,
- Stack,
- tr,
- table
+ Stack
 } from '@chakra-ui/react'
 import react from 'react'
 
+//이번주에 한 일: 간격 조정/ 홈페이지 들어가자마자 나오는 오류 해결, 날짜 추가, 버튼 위치 조정
+//카드사이즈 조정 -> 찾아봐야함
 
-//사이즈 늘리고 버튼 위치, 사이 공백 정도?
-//여기에서는 문제가 발생했다고 뜨지 않지만 홈페이지 접속시 발생하는 오류 해결해야함.//unhandled runtime error가 발생함 그 밑에는 call stack
-// but. 대략적인 틀은 어느정도 넣어놨음.
-
-//문제점의 이유 발견 -> 테이블 테그 작성시 페이지 오류가 발생
 const Page2 = () => {
   
     return(
-        //카드부분 좌우로 사이즈 늘림과 동시에 사이즈 고정
+      
         <>
 
         <Card
-          direction={{ base: 'column', sm: 'row' }}
+          direction={{  base: 'column', sm: 'row' }}
           overflow='hidden'
           variant='outline'
         >
           <Image
             objectFit='cover'
             maxW={{ base: '100%', sm: '200px' }}
-            src='https://bit.ly/dan-abramov'
+            src='http://placekitten.com/201/300'
             alt='뮤지컬~~~' />
+            
           <CardBody>
+            
             <Heading size='md'>작품명</Heading>
-
+            <print>&nbsp;&nbsp;&nbsp;</print>
             <Text py='2'>
-              <table>
-                <tr>장소:?</tr>
-                <tr>출연진:?</tr>
-                <tr>기간:?</tr>
-                <tr>시간:?</tr>
-              </table>
+            장소:?
             </Text>
+            <Text py='2'>
+            출연진:?
+            </Text>
+            <Text py='2'>
+            기간:?
+            </Text>
+            <Text py='2'>
+            시간:?
+            </Text>
+            <Text py='2'>
+            줄거리: ?
+            </Text>
+
           </CardBody>
+          
         </Card> 
-        
+        <print>&nbsp;</print>
         <FormControl isRequired>
         <FormLabel>이름</FormLabel>
         <Input placeholder='필수기재' />
+        <print>&nbsp;</print>
+        </FormControl>
+        <FormControl isRequired> 
+        <FormLabel>날짜 선택</FormLabel>
+        <Input
+        placeholder="Select Date and Time"
+        size="md"
+        type="datetime-local"/>
+        <print>&nbsp;</print>
         </FormControl>
         <FormControl isRequired>
         <FormLabel>전화번호</FormLabel>
         <Input placeholder='필수기재' />
+        &nbsp;
         <Stack direction='row' spacing={4}>
-           <Button  colorScheme='blue' variant='outline'>
-           인증번호
+          
+           <Button  colorScheme='blue' variant='outline' >
+           인증번호받기
          </Button>
          </Stack>
         </FormControl>
-      
+        <print>&nbsp;</print>
         <HStack>
          <PinInput>
          <PinInputField />
@@ -84,10 +101,12 @@ const Page2 = () => {
          <PinInputField />
         </PinInput>
       </HStack>
+      <print>&nbsp;</print>
         <Text mb='8px'>배우님에게: {}</Text>
         <Textarea isInvalid placeholder='필수기재' />
      
-        <Stack direction='row' spacing={4} align='center'>
+        <print>&nbsp;</print>
+        <Stack  align='center'> 
         <Button  colorScheme='blue' variant='outline'>
           예약하기
          </Button>
