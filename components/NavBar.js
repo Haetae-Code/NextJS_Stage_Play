@@ -14,7 +14,12 @@ import {
   MenuButton,
   IconButton,
   useColorModeValue,
-  Input
+  Input,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
@@ -45,7 +50,6 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   const { path } = props
-
   return (
     <Box
       position="flex"
@@ -68,7 +72,7 @@ const Navbar = props => {
           <Heading as="h1" size="lg" letterSpacing={'tighter'}>
             <Logo />
           </Heading>
-          <Input
+          <Input            
                 borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
                 variant='outline'
                 placeholder='Search'
@@ -77,21 +81,26 @@ const Navbar = props => {
                 />
         </Flex>
 
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          display={{ base: 'none', md: 'flex' }}
-          width={{ base: 'full', md: 'auto' }}
-          alignItems="center"
-          flexGrow={1}
-          mt={{ base: 4, md: 0 }}
-        >
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            display={{ base: 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }}
+          >
           <LinkItem href="/" path={path}>
             Menu1
           </LinkItem>
           <LinkItem href="/" path={path}>
-            Manu2
+            Menu2
           </LinkItem>
-          <LinkItem href="/">Manu3</LinkItem>
+          <LinkItem href="/" path={path}>
+            Menu3
+          </LinkItem>
+          <LinkItem href="/" path={path}>
+            Menu4
+          </LinkItem>
           {/* <LinkItem
             target="_blank"
             href="/"
@@ -106,7 +115,56 @@ const Navbar = props => {
         </Stack>
 
 {/* {mob} */}
-        <Box flex={1} align="right">
+      <Accordion>
+        <AccordionItem>
+          <h2>
+            <Box  flex={1} align="right">
+              <ColorMode />
+              <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
+                <Menu isLazy id="navbar-menu">
+                  <MenuButton
+                    as={IconButton}
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                    aria-lable="Options"
+                  />
+
+                    <AccordionButton>
+                      <MenuItem as={MenuLink} href="/">
+                        Menu1
+                      </MenuItem>
+                    </AccordionButton>
+                
+                    <AccordionButton>
+                      <MenuItem as={MenuLink} href="/">
+                        Menu2
+                      </MenuItem>
+                    </AccordionButton>
+                
+                    <AccordionButton>
+                      <MenuItem as={MenuLink} href="/">
+                        Menu3
+                      </MenuItem>
+                    </AccordionButton>
+
+                    <AccordionButton>
+                      <MenuItem as={MenuLink} href="/">
+                        Menu4
+                      </MenuItem>
+                    </AccordionButton>
+                       대머리 
+                </Menu> 
+              </Box>             
+            </Box>   
+          </h2>
+          <AccordionPanel pb={4}>
+            테스트 삼아서 만들어봤는데 잘 됐으면 좋겠다 메롱.
+          </AccordionPanel>
+        </AccordionItem>
+    </Accordion>
+  
+        
+   {/* <Box  flex={1} align="right">
           <ColorMode />
 
           <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
@@ -140,8 +198,10 @@ const Navbar = props => {
             </Menu>
           </Box>
         </Box>
+        */}
       </Container>
     </Box>
+     
   )
 }
 

@@ -18,12 +18,12 @@ import ImageSlider from '../components/MainImageSlider'
 
 const Page = () => {
     return (
-        <Container w="100%">
+        <Container maxWidth='100%'>
             <ImageSlider></ImageSlider>
-            <Container  pt={3} ml={1}>
-                <Box flexGrow={1} pl='1' display={'flex'}>
+            <Container  pt={3} maxWidth='100%'>
+                <Box flexGrow={1} display={'flex'}>
                     <Heading as="h1" variant="page-title">
-                        Test h1
+                        Test h1 this is the maxW test
                     </Heading>
                     <p>Developer test page</p>
                     <p>Stage Play</p>

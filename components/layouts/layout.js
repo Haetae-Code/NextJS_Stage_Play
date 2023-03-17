@@ -1,5 +1,5 @@
-import { Container } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { Container, chakra, shouldForwardProp } from '@chakra-ui/react'
+import { motion, isValidMotionProp } from 'framer-motion'
 import Head from 'next/head'
 import Header from '../Header'
 
@@ -9,17 +9,22 @@ const variants = {
   exit: { opacity: 0, x: -0, y: 20 }
 }
 
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+})
+
 const Layout = ({ children, title }) => {
   const t = `${title} - Stage Play`
   return (
-    <Container>
-    <motion.article
+    <Container maxWidth='container.xl'>
+    <ChakraBox
       initial="hidden"
       animate="enter"
       exit="exit"
       variants={variants}
       transition={{ duration: 1.7, type: 'easeInOut' }}
       style={{ position: 'relative' }}
+      maxWidth="100%"
     >
       <>
         {title && (
@@ -33,7 +38,7 @@ const Layout = ({ children, title }) => {
 
         {/* <GridItemStyle /> */}
       </>
-    </motion.article>
+    </ChakraBox>
     </Container>
   )
 }
