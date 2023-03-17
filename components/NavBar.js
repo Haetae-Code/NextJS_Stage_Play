@@ -50,7 +50,6 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   const { path } = props
-
   return (
     <Box
       position="flex"
@@ -153,7 +152,7 @@ const Navbar = props => {
                         Menu4
                       </MenuItem>
                     </AccordionButton>
-                       
+                       대머리 
                 </Menu> 
               </Box>             
             </Box>   
