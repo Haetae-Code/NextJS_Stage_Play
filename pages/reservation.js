@@ -20,7 +20,8 @@ import {
   Tab,
   TabPanel,
   Button,
-  VStack
+  VStack,
+  Stack
 
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
@@ -31,7 +32,18 @@ import { auto } from '@popperjs/core'
 const Page = () => {
     return (
         <Container ml={40}>
-            <Heading py={10}> 제목: 포스터</Heading>
+            <Stack spacing={3} direction='row' align='center'>
+                <Heading py={10}> 제목: 공연 제목</Heading>
+                <Button colorScheme='blue' size='xs'>
+                현재상영중
+                </Button>
+                <Button colorScheme='blue' size='xs'>
+                예매중
+                </Button>
+                <Button colorScheme='red' size='xs'>
+                D-100
+                </Button>
+            </Stack>
             <Container>
             <Flex w={800}>
                 <Box>
