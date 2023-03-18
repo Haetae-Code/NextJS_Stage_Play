@@ -19,6 +19,8 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Button,
+  VStack
 
 } from '@chakra-ui/react'
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
@@ -26,23 +28,22 @@ import {
 import React from 'react'
 import { auto } from '@popperjs/core'
 
-
 const Page = () => {
     return (
-        <Container m={0}>
-            <Heading py={10}> 제목: 럭키 채준혁.ver</Heading>
+        <Container ml={40}>
+            <Heading py={10}> 제목: 포스터</Heading>
             <Container>
             <Flex w={800}>
                 <Box>
                     <Image
                         src='https://bit.ly/dan-abramov' alt='Dan Abramov'
-                        rounded="1rem"
                         shadow="2xl"
-                        width={400}
-                        height={400}
+                        w={300}
+                        h={400}
                         display="block"
                     />
                 </Box>
+                <VStack>
                 <Box ml={10}>
                 <TableContainer mt={20}>
                     <Table variant='simple'>
@@ -69,9 +70,18 @@ const Page = () => {
                     </Table>
                 </TableContainer>
                 </Box>
+                <Box>
+                    <Button mt={20} 
+                    width='320px' 
+                    border='2px' 
+                    colorScheme='blue'> 
+                    예매하기 
+                    </Button>
+                </Box>
+                </VStack>
             </Flex>
             </Container>
-            <Tabs py={20}>
+            <Tabs w={'max-content'} py={20}>
                 <TabList>
                     <Tab>공연 정보</Tab>                       
                     <Tab>캐스팅 정보</Tab>
@@ -80,16 +90,16 @@ const Page = () => {
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <div>알빠노</div>
+                        <div>정보정보정보정보정보정보정보정보정보정보정보정보정보</div>
                     </TabPanel>
                     <TabPanel>
-                        <div>채준혁</div>
+                        <div>정보정보정보정보정보정보정보정보정보정보정보정보정보</div>
                     </TabPanel>
                     <TabPanel>
-                        <div>잘생겼다</div>
+                        <div>후기후기후기후기후기후기후기후기후기후기후기후기후기</div>
                     </TabPanel>
                     <TabPanel>
-                        <div>질문있어요</div>
+                        <div>질문질문질문질문질문질문질문질문질문질문질문질문질문</div>
                     </TabPanel>
                 </TabPanels>
             </Tabs>
