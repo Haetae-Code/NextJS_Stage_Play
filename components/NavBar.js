@@ -20,6 +20,12 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button,
+  ButtonGroup,
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
@@ -89,18 +95,51 @@ const Navbar = props => {
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-          <LinkItem href="/" path={path}>
-            Menu1
-          </LinkItem>
-          <LinkItem href="/" path={path}>
-            Menu2
-          </LinkItem>
-          <LinkItem href="/" path={path}>
-            Menu3
-          </LinkItem>
-          <LinkItem href="/" path={path}>
-            Menu4
-          </LinkItem>
+          <Menu>
+            <MenuButton as={Button}>
+              <LinkItem href="/" path={path}>
+                Menu1
+              </LinkItem>
+            </MenuButton>
+            <MenuList>
+              <MenuItem><span>와우 폼  미쳤다</span></MenuItem>
+              <MenuItem><span>이게 되네</span></MenuItem>
+            </MenuList>
+          </Menu>
+
+          <Menu>
+            <MenuButton as={Button}>
+              <LinkItem href="/" path={path}>
+                Menu2
+              </LinkItem>
+            </MenuButton>
+            <MenuList>
+              <MenuItem><span>폼 미 쳤 다</span></MenuItem>
+            </MenuList>
+          </Menu>
+
+          <Menu>
+            <MenuButton as={Button}>
+              <LinkItem href="/" path={path}>
+                Menu3
+              </LinkItem>
+            </MenuButton>
+            <MenuList>
+              <MenuItem><span>와우.</span></MenuItem>
+            </MenuList>
+          </Menu>
+          
+          <Menu>
+            <MenuButton as={Button}>
+              <LinkItem href="/" path={path}>
+                Menu4
+              </LinkItem>
+            </MenuButton>
+            <MenuList>
+              <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
+            </MenuList>
+          </Menu>
+          
           {/* <LinkItem
             target="_blank"
             href="/"
