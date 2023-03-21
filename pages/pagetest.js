@@ -1,10 +1,11 @@
-import { Button, ButtonGroup, input} from '@chakra-ui/react'
+import { Button, ButtonGroup, Input, Box, Center} from '@chakra-ui/react'
 
 const pagetest = () => {
     return (
-        <Button colorScheme='blue'> Button 
+        <Box align={Center}>
             <Input placeholder='Basic usage' />
-        </Button>
+            <Button colorScheme='blue'>Join test</Button>
+        </Box>
 
     )
 }
