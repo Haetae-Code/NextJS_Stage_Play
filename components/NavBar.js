@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, Fragment } from 'react'
 import Logo from './logo'
 import NextLink from 'next/link'
 import {
@@ -26,7 +26,12 @@ import {
   MenuDivider,
   Button,
   ButtonGroup,
+  Text,
+  VStack,
+  Center,
+  Divider
 } from '@chakra-ui/react'
+
 import { HamburgerIcon } from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
 import ColorMode from './ColorModeButton'
@@ -55,16 +60,20 @@ const MenuLink = forwardRef((props, ref) => (
 ))
 
 const Navbar = props => {
+  
   const { path } = props
   return (
+    <Fragment>
+    <VStack>
     <Box
       position="flex"
       as="nav"
       w="100%"
       bg={useColorModeValue('#ffffff40', '#20202380')}
-      css={{ backdropFilter: 'blur(5px)' }}
+      css={{backdropFilter: 'blur(5px)'}}
       zIndex={2}
       {...props}
+
     >
       <Container
         display="flex"
@@ -74,86 +83,31 @@ const Navbar = props => {
         align="center"
         justify="space-between"
       >
-        <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-            <Logo />
-          </Heading>
+        {/*로고 아이콘*/}
+        <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+              <Logo />  
+        </Heading>
+
+        <Container>
+          <Flex align="center" mr={5}>
+            
+            {/*검색바*/}
           <Input            
                 borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
                 variant='outline'
                 placeholder='Search'
                 //htmlSize={20} width='auto'
-                width='200px'
+                width='500px'
+                
                 />
-        </Flex>
-
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            display={{ base: 'none', md: 'flex' }}
-            width={{ base: 'full', md: 'auto' }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, md: 0 }}
-          >
-          <Menu>
-            <MenuButton as={Button}>
-              <LinkItem href="/" path={path}>
-                Menu1
-              </LinkItem>
-            </MenuButton>
-            <MenuList>
-              <MenuItem><span>와우 폼  미쳤다</span></MenuItem>
-              <MenuItem><span>이게 되네</span></MenuItem>
-            </MenuList>
-          </Menu>
-
-          <Menu>
-            <MenuButton as={Button}>
-              <LinkItem href="/" path={path}>
-                Menu2
-              </LinkItem>
-            </MenuButton>
-            <MenuList>
-              <MenuItem><span>폼 미 쳤 다</span></MenuItem>
-            </MenuList>
-          </Menu>
-
-          <Menu>
-            <MenuButton as={Button}>
-              <LinkItem href="/" path={path}>
-                Menu3
-              </LinkItem>
-            </MenuButton>
-            <MenuList>
-              <MenuItem><span>와우.</span></MenuItem>
-            </MenuList>
-          </Menu>
+          </Flex>
+        </Container>
+        
           
-          <Menu>
-            <MenuButton as={Button}>
-              <LinkItem href="/" path={path}>
-                Menu4
-              </LinkItem>
-            </MenuButton>
-            <MenuList>
-              <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
-            </MenuList>
-          </Menu>
-          
-          {/* <LinkItem
-            target="_blank"
-            href="/"
-            path={path}
-            display="inline-flex"
-            alignItems="center"
-            style={{ gap: 4 }}
-            pl={2}
-          >
-            Manu4
-          </LinkItem> */}
-        </Stack>
-
-{/* {mob} */}
+     
+        
+        
+        {/* {mob} */}
       <Accordion>
         <AccordionItem>
           <h2>
@@ -170,25 +124,25 @@ const Navbar = props => {
 
                     <AccordionButton>
                       <MenuItem as={MenuLink} href="/">
-                        Menu1
+                        <Text fontsize={{ base: '24px', md: '40px', lg: '56px'}}>Menu1</Text>
                       </MenuItem>
                     </AccordionButton>
                 
                     <AccordionButton>
                       <MenuItem as={MenuLink} href="/">
-                        Menu2
+                        <Text fontsize={{ base: '24px', md: '40px', lg: '56px'}}>Menu2</Text>
                       </MenuItem>
                     </AccordionButton>
                 
                     <AccordionButton>
                       <MenuItem as={MenuLink} href="/">
-                        Menu3
+                        <Text fontsize={{ base: '24px', md: '40px', lg: '56px'}}>Menu3</Text>
                       </MenuItem>
                     </AccordionButton>
 
                     <AccordionButton>
                       <MenuItem as={MenuLink} href="/">
-                        Menu4
+                        <Text fontsize={{ base: '24px', md: '40px', lg: '56px'}}>Menu4</Text>
                       </MenuItem>
                     </AccordionButton>
                        대머리 
@@ -200,7 +154,7 @@ const Navbar = props => {
             테스트 삼아서 만들어봤는데 잘 됐으면 좋겠다 메롱.
           </AccordionPanel>
         </AccordionItem>
-    </Accordion>
+      </Accordion> 
   
         
    {/* <Box  flex={1} align="right">
@@ -238,9 +192,89 @@ const Navbar = props => {
           </Box>
         </Box>
         */}
+        
+        
+        
       </Container>
-    </Box>
+      <Container
+      mb={10}
+      >
+        {/*네비바 메뉴 버튼 */}
      
+        <Stack
+            direction={{ base: 'column', md: 'row' }}
+            display={{ base: 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }} 
+          >
+            <Menu>
+              <MenuButton as={Button}>
+                <LinkItem href="/" path={path}>
+                  Menu1
+                </LinkItem>
+              </MenuButton>
+
+              <MenuList>
+                <MenuItem><span>와우 폼  미쳤다</span></MenuItem>
+                <MenuItem><span>이게 되네</span></MenuItem>
+              </MenuList>
+            </Menu>
+
+        
+            <Menu>
+              <MenuButton as={Button}>
+                <LinkItem href="/" path={path}>
+                  Menu2
+                </LinkItem>
+              </MenuButton>
+              <MenuList>
+                <MenuItem><span>안녕하세요.</span></MenuItem>
+              </MenuList>
+            </Menu>
+
+            <Menu>
+              <MenuButton as={Button}>
+                <LinkItem href="/" path={path}>
+                  Menu3
+                </LinkItem>
+              </MenuButton>
+              <MenuList>
+                <MenuItem><span>와우.</span></MenuItem>
+              </MenuList>
+            </Menu>
+            
+            <Menu>
+              <MenuButton as={Button}>
+                <LinkItem href="/" path={path}>
+                  Menu4
+                </LinkItem>
+              </MenuButton>
+              <MenuList>
+                <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
+              </MenuList>
+            </Menu>
+            
+            
+            {/* <LinkItem
+              target="_blank"
+              href="/"
+              path={path}
+              display="inline-flex"
+              alignItems="center"
+              style={{ gap: 4 }}
+              pl={2}
+            >
+              Manu4
+            </LinkItem> */}       
+        </Stack>
+        
+      </Container>
+      <Divider mb={5} mt={-5} orientaion = 'horizontal' />
+    </Box>
+    </VStack>
+    </Fragment>
   )
 }
 
