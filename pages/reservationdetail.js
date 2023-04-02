@@ -27,22 +27,36 @@ import{
  AccordionPanel,
  AccordionIcon,
  Checkbox,
- CheckboxGroup,
+datalist,
+option
  
 } from '@chakra-ui/react'
 import react from 'react'
+import * as React from "react";
 
-//날짜 나머지 구역은 지우기(제이쿼리 사용하면 데이터피커로 편하게 할 수 있음)
-//SMS인증번호는 건당 11~30원 정도이고 상업용으로 될 경우(쇼부가 Okay될 경우) 학교측과 얘기해봐야함
 
+
+const checkOnlyOne = (checkThis) => {
+  const checkboxes = document.getElementsByName('test')
+  
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i] !== checkThis) {
+      checkboxes[i].checked = false
+
+    }
+  }
+}
 
 
 const Page2 = () => {
-  
+ 
+
   
     return(
       
         <>
+
 
         <Card
           direction={{  base: 'column', sm: 'row' }}
@@ -61,19 +75,19 @@ const Page2 = () => {
             <Heading size='md'>캣츠</Heading>
             <print>&nbsp;&nbsp;&nbsp;</print>
             <Text py='2'>
-            장소:?
+            장소:
+            </Text>
+            <Text py='2'> 
+            출연진:
             </Text>
             <Text py='2'>
-            출연진:?
+            기간:
             </Text>
             <Text py='2'>
-            기간:?
+            시간:
             </Text>
             <Text py='2'>
-            시간:?
-            </Text>
-            <Text py='2'>
-            줄거리: ?
+            줄거리:
             </Text>
 
           </CardBody>
@@ -110,59 +124,66 @@ const Page2 = () => {
         <FormControl isRequired>
         <FormLabel>필수선택</FormLabel>
         </FormControl>
+
+        
         <Stack spacing={5} direction='row' >
-        <Checkbox >재학생</Checkbox> 
-        <Checkbox >외부인</Checkbox> 
+        
+
+        
+        <input type="checkbox" name="test" id="test1" value="1"  onChange={(e) => checkOnlyOne(e.target) } ></input><Text>재학생</Text> 
+        <br />
+        <input type="checkbox" name="test" id="test2" value="2"  onChange={(e) => checkOnlyOne(e.target)} ></input> <Text>외부인</Text> 
+        <br />
+
         </Stack>
-
-       <print>&nbsp;</print>
+      
+        <print>&nbsp;</print>
         <FormLabel>학과</FormLabel>
-        <Input placeholder='재학생인경우 필수기재' />
+        <Input placeholder='재학생 필수기재' />
         <print>&nbsp;</print>
-        
-
-        
+       
         <FormLabel>학번</FormLabel>
-        <Input placeholder='재학생인경우 필수기재' />
+        <Input placeholder='재학생 필수기재' />
         <print>&nbsp;</print>
-        
-        
-
-        
-
         
        
         
         <FormControl isRequired> 
         <FormLabel>날짜 선택</FormLabel>
         <Input 
-        placeholder="Select Date and Time"
+        placeholder="Select Date and time"
         size="md"
-        type="datetime-local"/>
+        type="date"
+        min="2023-04-01"
+        max="2023-04-06"
+        />
         <print>&nbsp;</print>
         </FormControl>
+
+        <FormControl isRequired> 
+        <FormLabel>시간 선택</FormLabel>
+        <Input 
+        type="time" 
+        placeholder="Select Date and time"
+        min="13:00"
+        max="16:00"
+        step="1800" 
         
+        />
+       
+        <print>&nbsp;</print>
+        </FormControl>
+
+
+        <print>&nbsp;</print>
         <FormControl isRequired>
         <FormLabel>전화번호</FormLabel>
         <Input placeholder='필수기재' />
         &nbsp;
-        <Stack direction='row' spacing={4}>
-          
-           <Button  colorScheme='blue' variant='outline' >
-           인증번호받기
-         </Button>
-         </Stack>
         </FormControl>
-        <print>&nbsp;</print>
-        <HStack>
-         <PinInput>
-         <PinInputField />
-         <PinInputField />
-          <PinInputField />
-         <PinInputField />
-        </PinInput>
-      </HStack>
-      <print>&nbsp;</print>
+
+     
+  
         <Text mb='8px'>배우님에게: {}</Text>
         <Textarea isInvalid placeholder='필수기재' />
      
@@ -178,9 +199,9 @@ const Page2 = () => {
 
     )
    
-    
-    
   }
+    
+
 
 
 
