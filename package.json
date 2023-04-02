@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
     "prettier": "prettier - write .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
