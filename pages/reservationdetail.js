@@ -15,8 +15,6 @@ import{
  Input,
  FormControl,
  FormLabel,
- PinInput,
- PinInputField,
  HStack,
  colorScheme,
  ButtonGroup,
@@ -28,11 +26,13 @@ import{
  AccordionIcon,
  Checkbox,
 datalist,
-option
- 
+option,
+Select,
+
 } from '@chakra-ui/react'
+
 import react from 'react'
-import * as React from "react";
+import React,{useState} from "react";
 
 
 
@@ -49,8 +49,18 @@ const checkOnlyOne = (checkThis) => {
 }
 
 
+
 const Page2 = () => {
- 
+  const [selectedTime, setSelectedTime]=useState('');
+  const handlTimeChange=(event)=>{
+    setSelectedTime(event.target.value);
+  };
+
+  const timeOptions=selectedTime==="2023-03-29"
+  ?['13:00','17:00']
+  : selectedTime==="2023-03-30"
+    ?['13:00']
+    :[];
 
   
     return(
@@ -75,16 +85,16 @@ const Page2 = () => {
             <Heading size='md'>캣츠</Heading>
             <print>&nbsp;&nbsp;&nbsp;</print>
             <Text py='2'>
-            장소:
+            장  소:
             </Text>
             <Text py='2'> 
             출연진:
             </Text>
             <Text py='2'>
-            기간:
+            기  간:
             </Text>
             <Text py='2'>
-            시간:
+            시  간:
             </Text>
             <Text py='2'>
             줄거리:
@@ -121,13 +131,15 @@ const Page2 = () => {
         <print>&nbsp;</print>
         </FormControl>
 
+        
+
         <FormControl isRequired>
         <FormLabel>필수선택</FormLabel>
         </FormControl>
 
         
         <Stack spacing={5} direction='row' >
-        
+          
 
         
         <input type="checkbox" name="test" id="test1" value="1"  onChange={(e) => checkOnlyOne(e.target) } ></input><Text>재학생</Text> 
@@ -136,6 +148,14 @@ const Page2 = () => {
         <br />
 
         </Stack>
+
+        <print>&nbsp;</print>
+        <FormControl isRequired>
+        <FormLabel>직업확인</FormLabel>
+        <Input placeholder='예: 교수, 대학생' />
+        </FormControl>
+
+        
       
         <print>&nbsp;</print>
         <FormLabel>학과</FormLabel>
@@ -146,34 +166,39 @@ const Page2 = () => {
         <Input placeholder='재학생 필수기재' />
         <print>&nbsp;</print>
         
-       
+      
         
         <FormControl isRequired> 
         <FormLabel>날짜 선택</FormLabel>
         <Input 
-        placeholder="Select Date and time"
+        
         size="md"
         type="date"
-        min="2023-04-01"
-        max="2023-04-06"
+        min="2023-03-29"
+        max="2023-03-30"
+        onChange={handlTimeChange}
+        value={selectedTime}
         />
         <print>&nbsp;</print>
         </FormControl>
+
 
         <FormControl isRequired> 
         <FormLabel>시간 선택</FormLabel>
-        <Input 
-        type="time" 
-        placeholder="Select Date and time"
-        min="13:00"
-        max="16:00"
-        step="1800" 
+
+        <select >
+  
+  {timeOptions.map((time)=>(<option key={time} value={time}>{time}</option>
+  ))}
+</select>
+
+
+
         
-        />
        
         <print>&nbsp;</print>
         </FormControl>
-
+       
 
         <print>&nbsp;</print>
         <FormControl isRequired>
