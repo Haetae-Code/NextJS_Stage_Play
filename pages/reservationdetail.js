@@ -46,12 +46,14 @@ const checkOnlyOne = (checkThis) => {
 
     }
   }
-}
+};
 
 
 
 const Page2 = () => {
   const [selectedTime, setSelectedTime]=useState('');
+  const [isOpen, setisOpen]=useState(false);
+  const [isOpen1, setisOpen1]=useState(true);
   const handlTimeChange=(event)=>{
     setSelectedTime(event.target.value);
   };
@@ -62,7 +64,13 @@ const Page2 = () => {
     ?['13:00']
     :[];
 
-  
+
+    const handleChange=()=>{
+      setisOpen(!isOpen);
+    }
+    const handleChange1=()=>{
+      setisOpen1(!isOpen1);
+    }
     return(
       
         <>
@@ -142,28 +150,32 @@ const Page2 = () => {
           
 
         
-        <input type="checkbox" name="test" id="test1" value="1"  onChange={(e) => checkOnlyOne(e.target) } ></input><Text>재학생</Text> 
+        <input type="checkbox" name="test" id="test1" value="1"  onClick={()=>setisOpen(true)} onChange={(e) => {checkOnlyOne(e.target); handleChange(); handleChange1();}} ></input><Text>재학생</Text> 
         <br />
-        <input type="checkbox" name="test" id="test2" value="2"  onChange={(e) => checkOnlyOne(e.target)} ></input> <Text>외부인</Text> 
+        <input type="checkbox" name="test" id="test2" value="2"  onChange={(e) =>checkOnlyOne(e.target)} ></input> <Text>외부인</Text> 
         <br />
 
         </Stack>
 
         <print>&nbsp;</print>
-        <FormControl isRequired>
-        <FormLabel>직업확인</FormLabel>
-        <Input placeholder='예: 교수, 대학생' />
+        <FormControl isRequired display={isOpen1? 'block' : 'none'}>
+        <FormLabel >직업확인</FormLabel>
+        <Input  placeholder='예: 교수, 의사' />
         </FormControl>
 
         
       
         <print>&nbsp;</print>
-        <FormLabel>학과</FormLabel>
-        <Input placeholder='재학생 필수기재' />
+        <FormControl isRequired  display={isOpen? 'block' : 'none'}>
+        <FormLabel display={isOpen? 'block' : 'none'}>학과</FormLabel>
+        <Input display={isOpen?'block':'none'} placeholder='필수기재' />
+        </FormControl>
         <print>&nbsp;</print>
        
-        <FormLabel>학번</FormLabel>
-        <Input placeholder='재학생 필수기재' />
+        <FormControl isRequired  display={isOpen? 'block' : 'none'}>
+        <FormLabel display={isOpen? 'block' : 'none'}>학번</FormLabel>
+        <Input display={isOpen?'block':'none'} placeholder='필수기재' />
+        </FormControl>
         <print>&nbsp;</print>
         
       
