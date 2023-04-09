@@ -1,4 +1,4 @@
-import { forwardRef, Fragment } from 'react'
+import React, { forwardRef, Fragment, useState, useEffect} from 'react'
 import Logo from './logo'
 import NextLink from 'next/link'
 import {
@@ -61,6 +61,22 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   
+  const [isOpen, setIsOpen] = useState(false);
+  
+  useEffect(()=>{
+    console.log("isOpen value changed:", isOpen);
+  }, [isOpen]);
+
+  function handleMouseEnter()  {
+    console.log("handleMouseEnter called");
+    setIsOpen(true);
+  };
+
+  function handleMouseLeave()  {
+    console.log("handleMouseLeave called");
+    setIsOpen(false);
+  };
+
   const { path } = props
   return (
     <Fragment>
@@ -103,11 +119,7 @@ const Navbar = props => {
           </Flex>
         </Container>
         
-          
-     
-        
-        
-        {/* {mob} */}
+      {/* {mob} */}
       <Accordion>
         <AccordionItem>
           <h2>
@@ -192,10 +204,12 @@ const Navbar = props => {
           </Box>
         </Box>
         */}
+        </Container>
+      
+          
+     
         
-        
-        
-      </Container>
+
       <Container
       mb={10}
       >
@@ -210,16 +224,13 @@ const Navbar = props => {
             mt={{ base: 4, md: 0 }} 
           >
             <Menu>
-              <MenuButton as={Button}>
-                <LinkItem href="/" path={path}>
+              <MenuButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                   Menu1
-                </LinkItem>
               </MenuButton>
-
-              <MenuList>
-                <MenuItem><span>와우 폼  미쳤다</span></MenuItem>
-                <MenuItem><span>이게 되네</span></MenuItem>
-              </MenuList>
+                <MenuList  isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}} >
+                  <MenuItem>Item 1</MenuItem>
+                  <MenuItem>Item 2</MenuItem>
+                </MenuList>
             </Menu>
 
         
@@ -273,6 +284,7 @@ const Navbar = props => {
       </Container>
       <Divider mb={5} mt={-5} orientaion = 'horizontal' />
     </Box>
+    
     </VStack>
     </Fragment>
   )

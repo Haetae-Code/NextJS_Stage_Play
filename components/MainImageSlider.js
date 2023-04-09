@@ -14,6 +14,7 @@ const ImageSlider = () => {
     const [sliderRef] = useKeenSlider(
         {
           loop: true,
+          spacing: 32,
         },
         [
           (slider) => {
@@ -47,13 +48,21 @@ const ImageSlider = () => {
         ]
       )
     return (
-        <Container>
-                <div ref={sliderRef} className="keen-slider">
-                  <div className="keen-slider__slide number-slide1">
-                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'}/>
+        <Container style={{display : 'flex', justifyContent: 'center', border: "1px solid black"}}>
+                <div 
+                  ref={sliderRef} 
+                  className="keen-slider" 
+                  style={{ width:"100%" }}>
+                  <div 
+                  className="keen-slider__slide number-slide1"
+                  >
+                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'} style={{maxWidth: "100%"}}/>
                   </div>
-                  <div className="keen-slider__slide number-slide2">
-                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'} />
+                  <div 
+                  className="keen-slider__slide number-slide2"
+                  
+                  >
+                    <Image src='/asset/image/ImageSlider/Acting.png' alt='Dan Abramov' borderRadius={'10'} style={{maxWidth: "100%"}}/>
                   </div>
                 {/* <div className="keen-slider__slide number-slide1">
                     
