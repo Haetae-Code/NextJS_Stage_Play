@@ -16,6 +16,12 @@ import {
     SliderFilledTrack,
     SliderThumb,
     Text,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Stack,
+    Card,
+    Image,
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 import React, { useState, Fragment } from "react";
@@ -86,6 +92,88 @@ const Page = () => {
                     height="24px"
                 />
             </Box>
+            <print>&nbsp;</print>
+                <p>뮤지컬과</p>
+                <div style={{position:"center"}}>
+                    <SimpleGrid spacing={4} templateColumns='repeat(auto-fill,minmax(200px,1fr))'>
+            <Card maxW='sm'>
+              <Image
+              
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>캣츠</CardBody>
+            <CardFooter> <Stack  align='center'> 
+        <Button  colorScheme='blue' variant='outline'>
+          예약하기
+         </Button>
+        </Stack></CardFooter>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+            
+            </SimpleGrid>
+            </div>
+            <print>&nbsp;</print>
+
+            <div style={{position:"center"}}>
+                <p>영화과</p>
+                    <SimpleGrid spacing={4} templateColumns='repeat(auto-fill,minmax(200px,1fr))'>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            <CardFooter> <Stack  align='center'> 
+        <Button  colorScheme='blue' variant='outline'>
+          예약하기
+         </Button>
+        </Stack></CardFooter>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+            <Card maxW='sm'>
+              <Image
+           borderRadius='sm'
+            src='http://placekitten.com/201/300'
+            alt='캣츠' />
+            <CardBody>aa</CardBody>
+            </Card>
+           
+            </SimpleGrid>
+            </div>
         </Fragment>
     );
 };
