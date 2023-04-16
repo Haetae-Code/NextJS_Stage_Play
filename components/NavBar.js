@@ -30,9 +30,11 @@ import {
     VStack,
     Center,
     Divider,
+    CSSReset,
+    Icon,
 } from "@chakra-ui/react";
 
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CalendarIcon, AttachmentIcon, QuestionIcon, InfoIcon } from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
 import ColorMode from './ColorModeButton'
 
@@ -61,20 +63,20 @@ const MenuLink = forwardRef((props, ref) => (
 
 const Navbar = props => {
   
-  const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   useEffect(()=>{
-    console.log("isOpen value changed:", isOpen);
-  }, [isOpen]);
+    console.log("isHovered value changed:", isHovered);
+  }, [isHovered]);
 
   function handleMouseEnter()  {
     console.log("handleMouseEnter called");
-    setIsOpen(true);
+    setIsHovered(true);
   };
 
   function handleMouseLeave()  {
     console.log("handleMouseLeave called");
-    setIsOpen(false);
+    setIsHovered(false);
   };
 
   const { path } = props
@@ -124,7 +126,20 @@ const Navbar = props => {
         <AccordionItem>
           <h2>
             <Box  flex={1} align="right">
-              <ColorMode />
+                
+                  <Button style={{mr: '100px', border: 'none', backgroundColor: 'transparent'}}>
+                    <LinkItem href="/" path={path}>
+                      관리자 페이지
+                    </LinkItem>
+                  </Button>
+                
+                  
+              <ColorMode> 
+                
+              </ColorMode>
+              
+                      
+               
               <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
                 <Menu isLazy id="navbar-menu">
                   <MenuButton
@@ -214,72 +229,73 @@ const Navbar = props => {
       mb={10}
       >
         {/*네비바 메뉴 버튼 */}
-     
-        <Stack
-            direction={{ base: 'column', md: 'row' }}
-            display={{ base: 'none', md: 'flex' }}
-            width={{ base: 'full', md: 'auto' }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, md: 0 }} 
-          >
-            <Menu>
-              <MenuButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                  Menu1
-              </MenuButton>
-                <MenuList  isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}} >
-                  <MenuItem>Item 1</MenuItem>
-                  <MenuItem>Item 2</MenuItem>
-                </MenuList>
-            </Menu>
+        <Box display="flex" justifyContent="center">         
+             <Menu>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" aria-label="Options"  variant="unstyled" _hover={{ bg: "transparent !important" }} _focus={{ none: true }} zIndex="1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                 <LinkItem href="/" path={path}>
+                   서비스 소개 
+                 </LinkItem>
+             </MenuButton>
+               <MenuList  isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}} >
+                 <MenuItem>Item 1</MenuItem>
+                 <MenuItem>Item 2</MenuItem>
+               </MenuList>
+             </Menu>
 
+       
+           <Menu>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+               <LinkItem href="/" path={path}>
+                 공지사항 
+               </LinkItem>
+             </MenuButton>
+             <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
+               <MenuItem><span>안녕하세요.</span></MenuItem>
+             </MenuList>
+           </Menu>
+
+           <Menu>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+               <LinkItem href="/" path={path}>
+                 학과 소개 
+               </LinkItem>
+             </MenuButton>
+             <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
+               <MenuItem><span>와우.</span></MenuItem>
+             </MenuList>
+           </Menu>
+           
+           <Menu>
+           
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+             <LinkItem href="/" path={path}>
+                예약 &nbsp; <Icon as={CalendarIcon}/>
+              </LinkItem>
+             </MenuButton>
+             
+             <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
+               <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
+             </MenuList>
+           </Menu>
+           
+           
+           {/* <LinkItem
+             target="_blank"
+             href="/"
+             path={path}
+             display="inline-flex"
+             alignItems="center"
+             style={{ gap: 4 }}
+             pl={2}
+           >
+             Manu4
+           </LinkItem> */}       
+
+        </Box>
+          
+            
         
-            <Menu>
-              <MenuButton as={Button}>
-                <LinkItem href="/" path={path}>
-                  Menu2
-                </LinkItem>
-              </MenuButton>
-              <MenuList>
-                <MenuItem><span>안녕하세요.</span></MenuItem>
-              </MenuList>
-            </Menu>
-
-            <Menu>
-              <MenuButton as={Button}>
-                <LinkItem href="/" path={path}>
-                  Menu3
-                </LinkItem>
-              </MenuButton>
-              <MenuList>
-                <MenuItem><span>와우.</span></MenuItem>
-              </MenuList>
-            </Menu>
-            
-            <Menu>
-              <MenuButton as={Button}>
-                <LinkItem href="/" path={path}>
-                  Menu4
-                </LinkItem>
-              </MenuButton>
-              <MenuList>
-                <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
-              </MenuList>
-            </Menu>
-            
-            
-            {/* <LinkItem
-              target="_blank"
-              href="/"
-              path={path}
-              display="inline-flex"
-              alignItems="center"
-              style={{ gap: 4 }}
-              pl={2}
-            >
-              Manu4
-            </LinkItem> */}       
-        </Stack>
+        
         
       </Container>
       <Divider mb={5} mt={-5} orientaion = 'horizontal' />

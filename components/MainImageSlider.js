@@ -17,6 +17,7 @@ import { Image } from "@chakra-ui/react";
 //     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 // })
 
+
 const ImageSlider = () => {
     const [sliderRef] = useKeenSlider(
         {
@@ -55,24 +56,28 @@ const ImageSlider = () => {
         ]
     );
     return (
-        <Container
+        <div>
+            <Container
             style={{
                 display: "flex",
+                position: "center",
                 justifyContent: "center",
-                border: "1px solid black",
+                maxWidth: "1000px",
+                padding: "0 100px",
+                textAlign: "center",
             }}
-        >
+            >
             <div
                 ref={sliderRef}
                 className="keen-slider"
-                style={{ width: "100%" }}
+                style={{ width: "100%", margin: "0 auto"}}
             >
                 <div className="keen-slider__slide number-slide1">
                     <Image
                         src="/asset/image/ImageSlider/Acting.png"
                         alt="Dan Abramov"
                         borderRadius={"10"}
-                        style={{ maxWidth: "100%" }}
+                        style={{ maxWidth: "100%"}}
                     />
                 </div>
                 <div className="keen-slider__slide number-slide2">
@@ -80,7 +85,7 @@ const ImageSlider = () => {
                         src="/asset/image/ImageSlider/Acting.png"
                         alt="Dan Abramov"
                         borderRadius={"10"}
-                        style={{ maxWidth: "100%" }}
+                        style={{ maxWidth: "100%"}}
                     />
                 </div>
                 {/* <div className="keen-slider__slide number-slide1">
@@ -115,6 +120,8 @@ const ImageSlider = () => {
                 </div> */}
             </div>
         </Container>
+        </div>
+        
     );
 };
 export default ImageSlider;
