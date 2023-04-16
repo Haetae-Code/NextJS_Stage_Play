@@ -22,6 +22,16 @@ import {
     Stack,
     Card,
     Image,
+    Divider,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    VStack,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 import React, { useState, Fragment } from "react";
@@ -34,8 +44,15 @@ const Page = () => {
         setValue(newValue);
     };
 
+    const [language, setLanguage] = useState("English");
+
+    const handleLanguageChange = (newLanguage) => {
+        setLanguage(newLanguage);
+    }
+
     return (
-        <Fragment>
+        <div>
+            <Fragment>
             <Container maxWidth="100%">
                 <ImageSlider></ImageSlider>
                 <Container pt={3} maxWidth="100%">
@@ -173,8 +190,70 @@ const Page = () => {
             </Card>
            
             </SimpleGrid>
+
+           
             </div>
         </Fragment>
+        <Box>
+        <Divider mt={8} mb={8} />
+        </Box>
+        <div>&nbsp;</div>
+        <Box>
+        <Text ml={150} fontSize="xl" fontWeight="bold">
+        공지사항 &nbsp;&nbsp;&nbsp;&nbsp;     : &nbsp;&nbsp;&nbsp;&nbsp; 우천으로 인한 행사 일정 변경 안내
+        </Text>
+
+        </Box>
+                <div>&nbsp;</div>
+        <Box>
+            <Divider mt={8} mb={8} />
+            <Flex>
+                
+                <Box>
+                    <Text ml={150} fontSize="xl" fontWeight="bold">
+                        회사 소개
+                    </Text>
+                </Box>
+                
+                <Box>
+                    <Text ml={150} fontSize="xl" fontWeight="bold">
+                        서비스 소개
+                    </Text>
+                </Box>
+
+                <Box>
+                    <Text ml={150} fontSize="xl" fontWeight="bold">
+                        자주 묻는 질문
+                    </Text>
+                </Box>
+
+                <Box>
+                    <Text ml={150} fontSize="xl" fontWeight="bold">
+                        채용
+                    </Text>
+                </Box>
+            </Flex>
+            
+            <Stack
+            direction={{ base: 'column', md: 'row' }}
+            display={{ base: 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
+            alignItems="center"
+            flexGrow={1}
+            mt={{ base: 4, md: 0 }} 
+          >
+                <Menu>
+                    <MenuButton as={Button}>
+                        {language}
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem onClick={() => handleLanguageChange("English")}>English</MenuItem>
+                        <MenuItem onClick={() => handleLanguageChange("한국어")}>한국어</MenuItem>
+                    </MenuList>
+                </Menu>       
+            </Stack>            
+        </Box>
+        </div>       
     );
 };
 
