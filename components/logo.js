@@ -4,22 +4,22 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 
 const LogoBox = styled.span`
-  font-weight: bold;
-  font-size: 18px;
-  display: inline-flex;
-  align-items: center;
-  height: 30px;
-  line-height: 20px;
-  padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    line-height: 20px;
+    padding: 10px;
 
-  > svg {
-    transition: 200ms ease;
-  }
+    > svg {
+        transition: 200ms ease;
+    }
 
-  &:hover > svg {
-    transform: rotate(20deg);
-  }
-`
+    &:hover > svg {
+        transform: rotate(20deg);
+    }
+`;
 
 const CwuLogoImage = chakra(Image, {
     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
