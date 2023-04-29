@@ -45,8 +45,9 @@ const checkOnlyOne = (checkThis) => {
 
 const Page2 = () => {
     const [selectedTime, setSelectedTime] = useState("");
-    const [isOpen, setisOpen] = useState(false);
-    const [isOpen1, setisOpen1] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
+    const [showStudentForm, setShowStudentForm] = useState(false);
+    const [showOccupationForm, setShowOccupationForm] = useState(false);
     const handlTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
@@ -58,12 +59,16 @@ const Page2 = () => {
             ? ["13:00"]
             : [];
 
-    const handleChange = () => {
-        setisOpen(!isOpen);
-    };
-    const handleChange1 = () => {
-        setisOpen1(!isOpen1);
-    };
+            const handleStudentButton = () => {
+                setShowStudentForm(true);
+                setShowOccupationForm(false);
+            };
+        
+            const handleExternalButton = () => {
+                setShowStudentForm(false);
+                setShowOccupationForm(true);
+            };
+            
     return (
         <>
             <Card
@@ -127,13 +132,9 @@ const Page2 = () => {
                     name="test"
                     id="test1"
                     value="1"
-                    onClick={() => setisOpen(true)}
-                    onChange={(e) => {
-                        checkOnlyOne(e.target);
-                        handleChange();
-                        handleChange1();
-                    }}
-                ></input>
+                    onClick={handleStudentButton}
+                    checked={showStudentForm}
+                />
                 <Text>재학생</Text>
                 <br />
                 <input
@@ -141,37 +142,34 @@ const Page2 = () => {
                     name="test"
                     id="test2"
                     value="2"
-                    onChange={(e) => checkOnlyOne(e.target)}
-                ></input>{" "}
+                    onClick={handleExternalButton}
+                    checked={showOccupationForm}
+                />
                 <Text>외부인</Text>
                 <br />
             </Stack>
-
             <print>&nbsp;</print>
-            <FormControl isRequired display={isOpen1 ? "block" : "none"}>
-                <FormLabel>직업확인</FormLabel>
-                <Input placeholder="예: 교수, 의사" />
-            </FormControl>
-
+            {showStudentForm && (
+                <>
+                    <FormControl isRequired>
+                        <FormLabel>학과</FormLabel>
+                        <Input placeholder="필수기재" />
+                    </FormControl>
+                    <print>&nbsp;</print>
+                    <FormControl isRequired>
+                        <FormLabel>학번</FormLabel>
+                        <Input placeholder="필수기재" />
+                    </FormControl>
+                </>
+            )}
+             <print>&nbsp;</print>
+            {showOccupationForm && (
+                <FormControl isRequired>
+                    <FormLabel>직업확인</FormLabel>
+                    <Input placeholder="예: 교수, 의사" />
+                </FormControl>
+            )}
             <print>&nbsp;</print>
-            <FormControl isRequired display={isOpen ? "block" : "none"}>
-                <FormLabel display={isOpen ? "block" : "none"}>학과</FormLabel>
-                <Input
-                    display={isOpen ? "block" : "none"}
-                    placeholder="필수기재"
-                />
-            </FormControl>
-            <print>&nbsp;</print>
-
-            <FormControl isRequired display={isOpen ? "block" : "none"}>
-                <FormLabel display={isOpen ? "block" : "none"}>학번</FormLabel>
-                <Input
-                    display={isOpen ? "block" : "none"}
-                    placeholder="필수기재"
-                />
-            </FormControl>
-            <print>&nbsp;</print>
-
             <FormControl isRequired>
                 <FormLabel>날짜 선택</FormLabel>
                 <Input
