@@ -94,18 +94,13 @@ const Page2 = () => {
                     <h2>
                         <AccordionButton>
                             <Box as="span" flex="1" textAlign="left">
-                                관람시 주의사항
+                                관람 시 주의사항
                             </Box>
                             <AccordionIcon />
                         </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                        구글폼 보니까 코로나 어쩌구로 하면ㄴ서 설명이 ㅉ ㅜㄱ
-                        되어있더라구요? 그래서 추가해보아ㅣㅆ습니다. 뭔가 있는
-                        것 처럼 길게 적는중인데 제가 지금 뭔 말을 하는지
-                        모르겠고 안녕하세요 반갑습니다. 저는 뮤지컬학과
-                        영화영상? 어쩌구 잘 모르겠고ㅓ요 홍캠에는 무슨 학과가
-                        있는지 사실 잘 모릅니다. 감사합니다.
+                        관람 시 주의해야 할 사항들을 적는 공간입니다.
                     </AccordionPanel>
                 </AccordionItem>
             </Accordion>
