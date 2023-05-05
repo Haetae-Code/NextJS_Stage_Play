@@ -323,64 +323,6 @@ const Page = () => {
             </div>
             
         </Fragment>
-        <Divider mt={8} mb={8} />
-        
-        <Container>
-            <box display="flex">
-            <div style={{flex: 1}}><Text fontSize="xl" fontWeight="bold" textAlign="center">공지사항 &nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 우천으로 인한 공연 일정 연기 안내</Text></div>
-            
-            </box>
-        </Container>
-                
-        <Box>
-            <Divider mt={8} mb={8} />
-            <Flex justifyContent="center" mr="100px">
-            
-                <Box display="flex" justifyContent="center">
-
-                    <div style={{ flex: 1 }}>
-                        <Text mt={1} ml={120} fontSize="lg" fontWeight="bold" textAlign="center">
-                            대표 번호<br/> 010-xxxx-xxxx
-                        </Text>
-                    </div>
-
-                    <div style={{ flex: 1 }}>
-                        <Text mt={1} ml={120} fontSize="lg" fontWeight="bold" textAlign="center">
-                            회사 소개
-                        </Text>
-                    </div>
-                    
-                    <div style={{ flex: 1 }}>
-                        <Text mt={1} ml={120} fontSize="lg" fontWeight="bold" textAlign="center">
-                            서비스 <br/>소개
-                        </Text>
-                    </div>
-                
-                    <div style={{ flex: 1 }}>
-                        <Text mt={1} ml={120} fontSize="lg" fontWeight="bold" textAlign="center">
-                             자주 묻는 질문
-                        </Text>
-                    </div>
-
-                    <div style={{ flex: 1 }}>
-                        <Text mt={1} ml={120} fontSize="lg" fontWeight="bold" textAlign="center">
-                            채용
-                        </Text>
-                    </div>
-
-                    
-
-                
-                </Box>
-
-            </Flex>
-            
-            
-            </Box>
-            <footer style={{height: '100px'}}>
-                {/*페이지 하단 여유 공간*/}
-            </footer>
-        
         
         </div>
         

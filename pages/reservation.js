@@ -12,7 +12,6 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     Tabs,
     TabList,
@@ -20,10 +19,10 @@ import {
     Tab,
     TabPanel,
     Button,
-    VStack,
-    HStack,
     Stack,
-    Center,
+    Divider,
+    Text,
+    Link
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 //import ImageSlider from '../components/MainImageSlider'
@@ -234,7 +233,7 @@ const Page = () => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>전민혁혁</Th>
+                                                        <Th>전민혁</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
