@@ -252,8 +252,8 @@ const Navbar = props => {
              </MenuButton>
            </LinkItem>
              <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
-               <MenuItem><span>뮤지컬학과</span></MenuItem>
-               <MenuItem><span>방송영화과</span></MenuItem>
+             <Link href="https://musical.chungwoon.ac.kr/musical/index.do"><MenuItem><span>뮤지컬학과</span></MenuItem></Link>
+             <Link href="https://bf.chungwoon.ac.kr/bf/index.do"><MenuItem><span>방송영화과</span></MenuItem></Link>
              </MenuList>
            </Menu>
            
