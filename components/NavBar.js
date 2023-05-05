@@ -5,7 +5,6 @@ import {
     Container,
     Box,
     Link,
-    Stack,
     Heading,
     Flex,
     Menu,
@@ -19,18 +18,10 @@ import {
     AccordionItem,
     AccordionButton,
     AccordionPanel,
-    AccordionIcon,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
     Button,
-    ButtonGroup,
     Text,
     VStack,
-    Center,
     Divider,
-    CSSReset,
     Icon,
 } from "@chakra-ui/react";
 
@@ -128,7 +119,7 @@ const Navbar = props => {
             <Box  flex={1} align="right">
                 
                   <Button style={{mr: '100px', border: 'none', backgroundColor: 'transparent'}}>
-                    <LinkItem href="/" path={path}>
+                    <LinkItem href="./admin" path={path}>
                       관리자 페이지
                     </LinkItem>
                   </Button>
@@ -231,11 +222,11 @@ const Navbar = props => {
         {/*네비바 메뉴 버튼 */}
         <Box display="flex" justifyContent="center">         
              <Menu>
+             <LinkItem href="./service" path={path}>
              <MenuButton marginRight="20px" as={IconButton} fontSize="lg" aria-label="Options"  variant="unstyled" _hover={{ bg: "transparent !important" }} _focus={{ none: true }} zIndex="1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                 <LinkItem href="/" path={path}>
                    서비스 소개 
-                 </LinkItem>
              </MenuButton>
+             </LinkItem>
                <MenuList  isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}} >
                  <MenuItem>Item 1</MenuItem>
                  <MenuItem>Item 2</MenuItem>
@@ -244,35 +235,34 @@ const Navbar = props => {
 
        
            <Menu>
+           <LinkItem href="./announcement" path={path}>
              <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-               <LinkItem href="/" path={path}>
                  공지사항 
-               </LinkItem>
              </MenuButton>
+             </LinkItem>
              <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
-               <MenuItem><span>안녕하세요.</span></MenuItem>
+             <MenuItem><span>안녕하세요.</span></MenuItem>
              </MenuList>
            </Menu>
 
            <Menu>
-             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-               <LinkItem href="/" path={path}>
+           <LinkItem href="./department" path={path}>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
                  학과 소개 
-               </LinkItem>
              </MenuButton>
+           </LinkItem>
              <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
-               <MenuItem><span>와우.</span></MenuItem>
+             <Link href="https://musical.chungwoon.ac.kr/musical/index.do"><MenuItem><span>뮤지컬학과</span></MenuItem></Link>
+             <Link href="https://bf.chungwoon.ac.kr/bf/index.do"><MenuItem><span>방송영화과</span></MenuItem></Link>
              </MenuList>
            </Menu>
            
            <Menu>
-           
-             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-             <LinkItem href="/" path={path}>
+           <LinkItem href="./reservation" path={path}>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>   
                 예약 &nbsp; <Icon as={CalendarIcon}/>
-              </LinkItem>
              </MenuButton>
-             
+            </LinkItem>
              <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
                <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
              </MenuList>
