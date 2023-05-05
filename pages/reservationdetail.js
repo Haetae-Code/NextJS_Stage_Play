@@ -3,11 +3,8 @@ import NextLink from "next/link";
 import {
     Box,
     Image,
-    Container,
     Card,
-    CardHeader,
     CardBody,
-    CardFooter,
     Heading,
     Text,
     Button,
@@ -15,19 +12,13 @@ import {
     Input,
     FormControl,
     FormLabel,
-    HStack,
-    colorScheme,
-    ButtonGroup,
     Stack,
     Accordion,
     AccordionItem,
     AccordionButton,
     AccordionPanel,
     AccordionIcon,
-    Checkbox,
-    datalist,
-    option,
-    Select,
+
 } from "@chakra-ui/react";
 
 import react from "react";
