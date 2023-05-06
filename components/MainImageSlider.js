@@ -1,11 +1,5 @@
 import {
-    Box,
-    chakra,
     Container,
-    useColorModeValue,
-    Button,
-    Input,
-    Flex,
 } from "@chakra-ui/react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";

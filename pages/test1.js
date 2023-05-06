@@ -1,15 +1,8 @@
-import NextLink from 'next/link'
+//import NextLink from 'next/link'
 import {
-  Link,
   Container,
   Heading,
   Box,
-  SimpleGrid,
-  Button,
-  List,
-  ListItem,
-  useColorModeValue,
-  chakra,
   Flex,
   Slider,
   SliderTrack,

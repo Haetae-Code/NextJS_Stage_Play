@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Text, useColorModeValue, chakra, Fe } from '@chakra-ui/react'
+import { Text, useColorModeValue, chakra, } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 

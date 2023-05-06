@@ -1,10 +1,8 @@
-import NextLink from "next/link";
+//import NextLink from "next/link";
 import {
-    Link,
     Container,
     Heading,
     Box,
-    SimpleGrid,
     Button,
     Flex,
     Text,
@@ -15,19 +13,9 @@ import {
     Card,
     Image,
     Divider,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import React, { useState, Fragment, Component } from "react";
+import React, { useState, Fragment, } from "react";
 import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -38,7 +26,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Page = () => {
     
-    const [sliderIndex, setSliderIndex] = useState(0);
+    const [/*sliderIndex*/, setSliderIndex] = useState(0);
 
     const handleSliderChange = (index) => {
       setSliderIndex(index);

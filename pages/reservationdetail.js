@@ -1,5 +1,5 @@
 //예약상세 페이지
-import NextLink from "next/link";
+//import NextLink from "next/link";
 import {
     Box,
     Image,
@@ -21,10 +21,10 @@ import {
 
 } from "@chakra-ui/react";
 
-import react from "react";
+//import react from "react";
 import React, { useState } from "react";
 
-const checkOnlyOne = (checkThis) => {
+/*const checkOnlyOne = (checkThis) => {
     const checkboxes = document.getElementsByName("test");
 
     for (let i = 0; i < checkboxes.length; i++) {
@@ -32,11 +32,11 @@ const checkOnlyOne = (checkThis) => {
             checkboxes[i].checked = false;
         }
     }
-};
+};*/
 
 const Page2 = () => {
     const [selectedTime, setSelectedTime] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
+    //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [showOccupationForm, setShowOccupationForm] = useState(false);
     const handlTimeChange = (event) => {

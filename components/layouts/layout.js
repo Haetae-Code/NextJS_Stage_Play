@@ -1,7 +1,7 @@
 import { Container, chakra, shouldForwardProp } from "@chakra-ui/react";
 import { motion, isValidMotionProp } from "framer-motion";
 import Head from "next/head";
-import Header from "../Header";
+//import Header from "../Header";
 
 const variants = {
     hidden: { opacity: 0, x: 0, y: 20 },

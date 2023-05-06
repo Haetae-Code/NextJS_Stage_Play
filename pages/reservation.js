@@ -1,6 +1,5 @@
-import NextLink from "next/link"; //공연 정보에 공연 테이블 다 넣기, 외부인 재학생 구분 필요 X
+//import NextLink from "next/link"; //공연 정보에 공연 테이블 다 넣기, 외부인 재학생 구분 필요 X
 import {
-    Container,
     Heading,
     Box,
     Flex,
@@ -12,7 +11,6 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     Tabs,
     TabList,
@@ -20,15 +18,12 @@ import {
     Tab,
     TabPanel,
     Button,
-    VStack,
-    HStack,
     Stack,
-    Center,
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 //import ImageSlider from '../components/MainImageSlider'
 import React from "react";
-import { auto } from "@popperjs/core";
+//import { auto } from "@popperjs/core";
 
 const Page = () => {
     return (

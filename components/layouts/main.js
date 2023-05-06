@@ -1,8 +1,8 @@
 import Head from "next/head";
-import dynamic from "next/dynamic";
-import { Box, Container, Flex } from "@chakra-ui/react";
-import Header from "../Header";
-const Main = ({ children, router }) => {
+//import dynamic from "next/dynamic";
+import { Box, Container,} from "@chakra-ui/react";
+//import Header from "../Header";
+const Main = ({ children, /*router*/ }) => {
     return (
         <Box as="main" pb={8}>
             <Head>

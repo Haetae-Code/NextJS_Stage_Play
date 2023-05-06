@@ -1,27 +1,24 @@
 //import Link from 'next/Link';
 import {
     Box,
-    chakra,
     Container,
-    useColorModeValue,
-    Button,
     Input,
     Flex,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import { motion, useMotionValue } from "framer-motion";
-import { ColorModeToggleButton } from "./ColorModeButton";
-import { Nav } from "./NavBar";
+//import Image from "next/image";
+import { motion, } from "framer-motion";
+//import { ColorModeToggleButton } from "./ColorModeButton";
+//import { Nav } from "./NavBar";
 // const CwuLogoImage = chakra(Image, {
 //     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 // })
 
-const linkStyle = {
-    marginRight: "1rem",
-};
+/*const linkStyle = {
+    marginRight: "1rem"
+};*/
 
-const Header = (props) => {
-    const { path } = props;
+const Header = (/*props*/) => {
+    /*const { path } = props;*/
     return (
         <Container pt="5" ml="10">
             <Flex>

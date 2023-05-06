@@ -1,8 +1,8 @@
 import { AnimatePresence } from "framer-motion";
-import { Box, Container, Flex } from "@chakra-ui/react";
+//import { Box, Container, Flex } from "@chakra-ui/react";
 import Layout from "../components/layouts/layout";
 import Chakra from "../components/chakra";
-import Header from "../components/Header";
+//import Header from "../components/Header";
 import Nav from "../components/NavBar";
 
 if (typeof window !== "undefined") {

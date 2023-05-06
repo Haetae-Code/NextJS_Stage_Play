@@ -25,7 +25,7 @@ import {
     Icon,
 } from "@chakra-ui/react";
 
-import { HamburgerIcon, CalendarIcon, AttachmentIcon, QuestionIcon, InfoIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CalendarIcon,} from '@chakra-ui/icons'
 // import { IoLogoGithub } from 'react-icons/io5'
 import ColorMode from './ColorModeButton'
 
