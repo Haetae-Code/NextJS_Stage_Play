@@ -229,7 +229,7 @@ const Page = () => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>전민혁혁</Th>
+                                                        <Th>전민혁</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
