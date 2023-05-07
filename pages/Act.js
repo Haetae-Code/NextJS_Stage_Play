@@ -1,16 +1,7 @@
 import {
-    Link,
     Container,
     Heading,
     Box,
-    SimpleGrid,
-    Button,
-    List,
-    ListItem,
-    useColorModeValue,
-    chakra,
-    Flex,
-    Center,
     Image,
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";

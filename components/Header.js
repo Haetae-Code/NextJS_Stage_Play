@@ -1,73 +1,77 @@
 //import Link from 'next/Link';
-import { Box, chakra, Container, useColorModeValue, Button, Input, Flex,} from '@chakra-ui/react'
-import Image from 'next/image'
-import { motion, useMotionValue } from "framer-motion"
-import {ColorModeToggleButton} from "./ColorModeButton"
-import {Nav} from "./NavBar"
+import {
+    Box,
+    Container,
+    Input,
+    Flex,
+} from "@chakra-ui/react";
+//import Image from "next/image";
+import { motion, } from "framer-motion";
+//import { ColorModeToggleButton } from "./ColorModeButton";
+//import { Nav } from "./NavBar";
 // const CwuLogoImage = chakra(Image, {
 //     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 // })
 
-const linkStyle = {
-  marginRight: '1rem'
-}
+/*const linkStyle = {
+    marginRight: "1rem"
+};*/
 
-
-const Header = (props) => {
-  const { path } = props
-  return (
-    <Container pt='5' ml='10'>
-      <Flex>
-          <motion.div
-          initial={{ scale: 1.5 }} 
-          animate={{ scale: 1 }}
-          transition={{
-            duration:0.7,
-            //delay:0.5,
-          }}
-          >
-              {/* <CwuLogoImage
+const Header = (/*props*/) => {
+    /*const { path } = props;*/
+    return (
+        <Container pt="5" ml="10">
+            <Flex>
+                <motion.div
+                    initial={{ scale: 1.5 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                        duration: 0.7,
+                        //delay:0.5,
+                    }}
+                >
+                    {/* <CwuLogoImage
                   src="/asset/image/cwulogo.png"
                   alt='cwulogo'
                   borderRadius="10"
                   width="100"
                   height="90"
               /> */}
-          </motion.div>
-          {/* 검색바 */}
-              <Box ml={13} pt='7'>
-                <motion.div
-                initial={{ scale: 1.2 }} 
-                animate={{ scale: 1 }}
-                transition={{
-                  duration:0.7,
-                  delay:0.3,
-                }}
-                >
-                <Input
-                borderWidth={'2px'} borderRadius='100' borderColor={'#2d6fbb'}
-                variant='outline'
-                placeholder='Search'
-                //htmlSize={20} width='auto'
-                width='200px'
-                />
-                {/* <Button  size='xs' align='right' mb='1' ml='15' borderColor={'#2d6fbb'} variant='outline' borderWidth={'2px'}>
+                </motion.div>
+                {/* 검색바 */}
+                <Box ml={13} pt="7">
+                    <motion.div
+                        initial={{ scale: 1.2 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                            duration: 0.7,
+                            delay: 0.3,
+                        }}
+                    >
+                        <Input
+                            borderWidth={"2px"}
+                            borderRadius="100"
+                            borderColor={"#2d6fbb"}
+                            variant="outline"
+                            placeholder="Search"
+                            //htmlSize={20} width='auto'
+                            width="200px"
+                        />
+                        {/* <Button  size='xs' align='right' mb='1' ml='15' borderColor={'#2d6fbb'} variant='outline' borderWidth={'2px'}>
                 Dark | Light
                 </Button> */}
-                </motion.div>
-              </Box>
-              {/* <ColorModeToggleButton/> */}
-          {/* <div>
+                    </motion.div>
+                </Box>
+                {/* <ColorModeToggleButton/> */}
+                {/* <div>
               <Link href="/"><p style={linkStyle}> 홈 </p></Link>
               <Link href="/about"><p style={linkStyle}> 소개 </p></Link>
           </div> */}
-          {/* {로그인} */}
-      </Flex>
-      {/* {NaviBar} */}
-      <Box>
-        {/* <Nav></Nav> */}
-      </Box>
-    </Container>
-  )
-}
-export default Header
+                {/* {로그인} */}
+            </Flex>
+            {/* {NaviBar} */}
+            <Box>{/* <Nav></Nav> */}</Box>
+        </Container>
+    );
+};
+export default Header;

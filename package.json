@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
     "prettier": "prettier - write .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -23,13 +25,22 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "chakra-dayzed-datepicker": "^0.2.7",
     "core-js": "^3.28.0",
+    "date-fns": "^2.29.3",
+    "dayzed": "^3.2.3",
+    "dotenv": "^16.0.3",
     "framer-motion": "^9.0.4",
     "keen-slider": "^6.8.5",
+    "mysql2": "^3.2.0",
     "next": "^13.1.6",
+    "next-connect": "^0.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "serverless-mysql": "^1.5.4"
+    "react-slick": "^0.29.0",
+    "serverless-mysql": "^1.5.4",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^9.2.4"
   },
   "devDependencies": {
     "eslint": "^8.34.0",
