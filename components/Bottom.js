@@ -8,8 +8,27 @@ import {
     Button,
     Link
  } from "@chakra-ui/react";
+import React,{ useState,useEffect } from "react";
+
+ const notices=[
+  "개발자 노트:",
+  "오늘의 공지사항:",
+  "추후 공지예정:",
+ ];
 
 export const Bottom = (props) => {
+const [currentNoticeIndex, setCurrentNoticeIndex]=useState(0);
+useEffect(() => {
+  const intervalId = setInterval(() => {
+    setCurrentNoticeIndex((currentNoticeIndex) =>
+      (currentNoticeIndex + 1) % notices.length
+    );
+  }, 15000);
+
+  return () => {
+    clearInterval(intervalId);
+  };
+}, []);
   return (
     <Box>
     <Divider my={8} />
@@ -17,12 +36,15 @@ export const Bottom = (props) => {
       <Box display="flex">
         <div style={{ flex: 1 }}>
           <Text fontSize="md" fontWeight="bold" textAlign="center">
-            공지사항: 우천으로 인한 공연 일정 연기 안내
+          {notices[currentNoticeIndex]}
           </Text>
         </div>
       </Box>
     </Container>
 
+
+
+     
     <Box>
       <Divider my={8} />
       <Flex justifyContent="center" mr="100px">
@@ -50,9 +72,10 @@ export const Bottom = (props) => {
           </Button>
           <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
           <Link>
-              채용
+              건의사항
           </Link>
           </Button>
+          
         </Box>
       </Flex>
     </Box>
@@ -62,3 +85,4 @@ export const Bottom = (props) => {
   </Box>
   );
 };
+
