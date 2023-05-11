@@ -42,7 +42,7 @@ const Page = () => {
     };
       
     //뮤지컬학과 데이터
-    const dataMu = [
+    const dataMusical = [
         {
             image: 'https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg',
             title: '오페라의 유령',
@@ -71,7 +71,7 @@ const Page = () => {
      
       ];
       //영화과 데이터
-      const dataMo = [
+      const dataMovie = [
         {
             image: 'https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg',
             title: '오페라의 유령',
@@ -140,7 +140,7 @@ const Page = () => {
            
       <Slider {...settings}>
         
-        {dataMu.map((item, index) => (
+        {dataMusical.map((item, index) => (
          <Box key={index} px={3}>
          <Card maxW="sm" borderWidth="0" borderRadius="lg" overflow="hidden">
            <Image src={item.image} alt={item.title} style={{width: '300px', height: '350px'}}/>
@@ -179,7 +179,7 @@ const Page = () => {
 
                 <Slider {...settings}>
         
-        {dataMo.map((item, index) => (
+        {dataMovie.map((item, index) => (
          <Box key={index} px={3}>
          <Card maxW="sm" borderWidth="0" borderRadius="lg" overflow="hidden">
            <Image src={item.image} alt={item.title} style={{width: '300px', height: '350px'}}/>

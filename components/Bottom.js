@@ -70,11 +70,14 @@ useEffect(() => {
               자주 묻는 질문
           </Link>
           </Button>
-          <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
-          <Link>
+          
+            <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null} _focus={{boxShadow: "none"}} _active={{backgroundColor: "blue.600"}}> 
+              <Link>  
               건의사항
-          </Link>
-          </Button>
+              </Link>
+            </Button>
+          
+          
           
         </Box>
       </Flex>

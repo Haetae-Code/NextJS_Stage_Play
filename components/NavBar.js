@@ -71,9 +71,6 @@ const Navbar = props => {
   };
 
   const { path } = props
-dddddddddddddddd
-dddddddddddddddddd
-dddd
   return (
     <Fragment>
     <VStack>
@@ -291,7 +288,7 @@ dddd
         
         
       </Container>
-      <Divider mb={5} mt={-5} orientaion = 'horizontal' />
+      <Divider mb={0} mt={-5} orientaion = 'horizontal' />
     </Box>
     
     </VStack>

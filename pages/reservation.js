@@ -19,6 +19,7 @@ import {
     TabPanel,
     Button,
     Stack,
+    Link,
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 //import ImageSlider from '../components/MainImageSlider'
@@ -90,6 +91,7 @@ const Page = () => {
                             </TableContainer>
                         </Box>
                         <Box>
+                            <Link href="./reservationdetail">
                             <Button
                                 w={"100%"}
                                 size={["sm", "md"]}
@@ -99,6 +101,8 @@ const Page = () => {
                                 {" "}
                                 예매하기
                             </Button>
+                            </Link>
+                            
                         </Box>
                     </Stack>
                 </Flex>
