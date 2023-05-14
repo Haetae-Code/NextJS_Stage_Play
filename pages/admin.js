@@ -90,12 +90,15 @@ const admin = () => {
                     
                     {/* 등록 공연 목록 */}
                     <Box width="70%" border="1px solid">
-                                  
+                      현재 공연 목록을 조회하고, 편집할 수 있는 공간이에요.
+                      <Text mt="30px">등록 공연</Text>
+                        {/* 슬라이드 들어가는 부분*/}
+
                     </Box>
 
                     {/* 공연 추가 */}
-                    <Box width="30%" border="1px solid">
-                        ss
+                    <Box width="30%" border="1px solid" >
+                        공연 관리
                     </Box>
                 </Box>
 
