@@ -4,7 +4,7 @@ import Layout from "../components/layouts/layout";
 import Chakra from "../components/chakra";
 //import Header from "../components/Header";
 import Nav from "../components/NavBar";
-import { Bottom } from "../components/bottom";
+import { Bottom } from "../components/Bottom";
 if (typeof window !== "undefined") {
     window.history.scrollRestoration = "manual";
 }
