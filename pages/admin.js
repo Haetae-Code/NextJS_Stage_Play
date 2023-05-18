@@ -27,7 +27,7 @@ const admin = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 4,
         afterChange: (index) => handleSliderChange(index),
       };
@@ -67,45 +67,84 @@ const admin = () => {
         <div style={{display: 'flex'}}>
 
             {/* 1번 박스(관리자 사이드바/관리자페이지) */}
-            <Box>
+            <Box flex="1" borderRight="2px solid" borderColor="inherit">
                 {/* 관리자 사이드바 */}
-                <Flex as="nav" direction= "column" align="center" justify="space-between">
-                    <Flex align="center" mr={5}/>   
-                    <Flex align="center" direction="column">
-                        <Text mb={3}mt={8}>관리자 메뉴</Text>
-                        <Button mb={3}>공연 관리</Button>
-                        <Button mb={3}>예약자 확인</Button>
-                        <Button mb={3}>Link 3</Button>
-                    </Flex>
-                </Flex>     
+                
+                  <Flex as="nav" direction= "column" align="center" justify="space-between">
+                      <Flex align="center" mr={5}/>   
+                      <Flex mr="20px"align="center" direction="column">
+                          <Text mb={3}mt={8}>관리자 메뉴</Text>
+                          <Button mb={3}>예약자 확인</Button>
+                          <Button mb={3}>배우 관리</Button>
+                      </Flex>
+                  </Flex>
+                
+                     
             </Box>
             
-            <Box h="100vh" borderWidth="1px" borderColor="inherit" marginLeft="50px"/>
+            
             
             {/* 2번 박스(관리자 페이지/편집 공간) */}
-            <Box width="100%">
+            <Box w="80%">
                 {/* 관리자 페이지 */}
-                <Box mt="30px" width="100%" display="flex">
+                <Box  ml="60px" mt="30px" width="100%">
+                  현재 공연 목록을 조회하고, 편집할 수 있는 공간이에요.
+                      <br/>
+                      <br/>
+                      <Text fontSize="40px" mb="30px">등록 공연</Text> 
+                      
+                </Box>
+                <Box ml="50px" display="flex" border="1px solid" borderColor="inherit">
                     {/* 등록 공연 목록/공연 추가 */}
                     
+                    
                     {/* 등록 공연 목록 */}
-                    <Box width="70%" border="1px solid">
-                      현재 공연 목록을 조회하고, 편집할 수 있는 공간이에요.
-                      <Text mt="30px">등록 공연</Text>
-                        {/* 슬라이드 들어가는 부분*/}
-
+                    
+                    <Box ml="30px" w="60%" >
+                    
+                      <Box >
+                        <Box w="90%">
+                        <Slider {...settings}>
+                        {dataMusical.map((item, index) => (
+                          <Box key={index} px={10}>
+                            <Card maxW="xl" maxH="lg" borderWidth="0" borderRadius="sm" overflow="hidden">
+                              <Image mt="30px" mx="auto" src={item.image} alt={item.title} style={{ width: '150px', height: '200px'}}/>
+                              <CardHeader>
+                                <Text fontSize="sm" fontWeight="bold"  mt={2} style={{whiteSpace: 'nowrap', textoverflow: 'ellipsis', width: '80%'}}>
+                                 {item.title}
+                                </Text>
+                              </CardHeader>
+                              <CardBody h="60px">
+                                <Text fontSize="md">{item.description}</Text>
+                              </CardBody>
+                              <CardFooter>
+                              <Button colorScheme="blue">예매하기</Button>
+                              </CardFooter>
+                            </Card>
+                          </Box>
+                          ))}
+                        </Slider>
+                        </Box>    
+                      </Box>
+                      
                     </Box>
 
                     {/* 공연 추가 */}
-                    <Box width="30%" border="1px solid" >
-                        공연 관리
+                    <Box mt="150px" w="40%" h="100%"  >
+                        <Text fontSize="50px" mt="50px" mb="30px" textAlign="center">공연 관리</Text>
+                        <Flex align="center" direction="column">
+                        
+                        <Button mb={3}>공연 추가</Button>
+                        <Button mb={3}>공연 삭제</Button>
+                      </Flex>
+                        
                     </Box>
                 </Box>
-
-
+                
+               
                 {/* 편집 공간 */}
-                <Box mt="30px" border="1px solid" >
-                    ss
+                <Box  flex="1" ml="50px" mt="80px" border="1px solid" borderColor="inherit" overflow="auto" >
+                <Text>하단에 출력됩니다!</Text>
                 </Box>
             </Box>
             
