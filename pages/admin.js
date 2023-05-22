@@ -2,7 +2,6 @@
 import {
     Text,
     Button,
-    Divider,
     Box,
     Flex,
     Card,
@@ -10,7 +9,7 @@ import {
     CardFooter,
     CardHeader,
     Image,
-
+    Link,
 } from "@chakra-ui/react";
 import React, { useState, Fragment,} from "react";
 import Slider from "react-slick";
@@ -75,7 +74,7 @@ const admin = () => {
                       <Flex mr="20px"align="center" direction="column">
                           <Text mb={3}mt={8}>관리자 메뉴</Text>
                           <Button mb={3}>예약자 확인</Button>
-                          <Button mb={3}>배우 관리</Button>
+                          <Link color="inactiveColor" href="/actor"><Button mb={3}>배우 관리</Button></Link>
                       </Flex>
                   </Flex>
                 
