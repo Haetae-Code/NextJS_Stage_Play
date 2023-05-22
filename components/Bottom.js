@@ -51,28 +51,28 @@ useEffect(() => {
         <Box display="flex" justifyContent="center">
            
           <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
-              <Link>
+              <Link color="inactiveColor">
                   대표 번호 010-xxxx-xxx
               </Link>
           </Button>
           <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
-          <Link>
+          <Link color="inactiveColor">
               회사 소개
           </Link>
           </Button>
           <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
-          <Link>
+          <Link color="inactiveColor">
               서비스 소개
           </Link>
           </Button>
           <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null}>
-          <Link>
+          <Link color="inactiveColor">
               자주 묻는 질문
           </Link>
           </Button>
           
             <Button mt={1} ml={90} fontSize="sm" fontWeight="bold" bg={"transparent"} backgroundColor={null} _focus={{boxShadow: "none"}} _active={{backgroundColor: "blue.600"}}> 
-              <Link>  
+              <Link color="inactiveColor">  
               건의사항
               </Link>
             </Button>
