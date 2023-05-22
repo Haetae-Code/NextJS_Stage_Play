@@ -24,6 +24,7 @@ import {
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 //import ImageSlider from '../components/MainImageSlider'
 import React from "react";
+import KakaoMap from "../components/kakaomap";
 //import { auto } from "@popperjs/core";
 
 const Page = () => {
@@ -49,7 +50,7 @@ const Page = () => {
                         제목:이젠 제목이 길어도 괜찮아요
                     </Heading>
                 </Stack>
-
+                
                 <Flex
                     justify={"center"}
                     alignItems={"center"}
@@ -137,10 +138,13 @@ const Page = () => {
                                 </Tbody>
                             </Table>
                             <Box py={10}>
-                                <Image
+                                {/* <Image
                                     src="https://bit.ly/dan-abramov"
                                     alt="Dan Abramov"
-                                />
+                                /> */}
+                                {/* 카카오맵 */}
+                                {/* <kakaomap></kakaomap> */}
+                                <KakaoMap></KakaoMap>
                             </Box>
 
                             <Table>
