@@ -2,7 +2,7 @@ const express = require('express');
 const { ChakraProvider, Box, Heading, UnorderedList, ListItem } = require('@chakra-ui/react');
 const { theme } = require('@chakra-ui/core');
 const app = express();
-const db = require('../lib/db_c');
+const db = require('../../lib/db_c');
 
 app.get('/', async (req, res) => {
   try {
@@ -47,7 +47,7 @@ app.get('/', async (req, res) => {
       </ChakraProvider>
     );
 
-    res.send(html);
+    res.send(Table);
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -58,4 +58,4 @@ app.listen(3306, () => {
   console.log('Server listening on port 3306');
 });
 
-export default get_info;
+export default app;
