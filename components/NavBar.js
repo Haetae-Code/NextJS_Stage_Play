@@ -228,14 +228,37 @@ const Navbar = props => {
           </Box>
         </Box>
         */}
-          </Container>
+        </Container>
+          <Container textAlign="center">
+
+          <Menu>
+             <LinkItem href="./service" path={path}>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" aria-label="Options"  variant="unstyled" _hover={{ bg: "transparent !important" }} _focus={{ none: true }} zIndex="1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                   서비스 소개 
+             </MenuButton>
+             </LinkItem>
+               <MenuList  isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}} >
+                 <MenuItem>Item 1</MenuItem>
+                 <MenuItem>Item 2</MenuItem>
+               </MenuList>
+             </Menu>
+
+       
+           <Menu>
+           <LinkItem href="./announcement" path={path}>
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                 공지사항 
+             </MenuButton>
+             </LinkItem>
+             <MenuList isOpen={true} style={{position: "absolute", top: "100%", left: 0, display:"block"}}>
+             <MenuItem><span>안녕하세요.</span></MenuItem>
+             </MenuList>
+           </Menu>
 
 
-
-<<<<<<< HEAD
            <Menu>
            <LinkItem href="./department" path={path}>
-             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+             <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                  학과 소개 
              </MenuButton>
            </LinkItem>
@@ -258,64 +281,6 @@ const Navbar = props => {
            
            
            {/* <LinkItem
-=======
-
-
-          <Container
-            mb={10}
-          >
-            {/*네비바 메뉴 버튼 */}
-            <Box display="flex" justifyContent="center">
-              <Menu>
-                <LinkItem href="./service" path={path}>
-                  <MenuButton marginRight="20px" as={IconButton} fontSize="lg" aria-label="Options" variant="unstyled" _hover={{ bg: "transparent !important" }} _focus={{ none: true }} zIndex="1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    서비스 소개
-                  </MenuButton>
-                </LinkItem>
-                <MenuList isOpen={true} style={{ position: "absolute", top: "100%", left: 0, display: "block" }} >
-                  <MenuItem>Item 1</MenuItem>
-                  <MenuItem>Item 2</MenuItem>
-                </MenuList>
-              </Menu>
-
-
-              <Menu>
-                <LinkItem href="./announcement" path={path}>
-                  <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    공지사항
-                  </MenuButton>
-                </LinkItem>
-                <MenuList isOpen={true} style={{ position: "absolute", top: "100%", left: 0, display: "block" }}>
-                  <MenuItem><span>안녕하세요.</span></MenuItem>
-                </MenuList>
-              </Menu>
-
-              <Menu>
-                <LinkItem href="./department" path={path}>
-                  <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-                    학과 소개
-                  </MenuButton>
-                </LinkItem>
-                <MenuList isOpen={true} style={{ position: "absolute", top: "100%", left: 0, display: "block" }}>
-                  <Link href="https://musical.chungwoon.ac.kr/musical/index.do"><MenuItem><span>뮤지컬학과</span></MenuItem></Link>
-                  <Link href="https://bf.chungwoon.ac.kr/bf/index.do"><MenuItem><span>방송영화과</span></MenuItem></Link>
-                </MenuList>
-              </Menu>
-
-              <Menu>
-                <LinkItem href="./reservation" path={path}>
-                  <MenuButton marginRight="20px" as={IconButton} fontSize="lg" variant="unstyled" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    예약 &nbsp; <Icon as={CalendarIcon} />
-                  </MenuButton>
-                </LinkItem>
-                <MenuList isOpen={true} style={{ position: "absolute", top: "100%", left: 0, display: "block" }}>
-                  <MenuItem><span>이게 진짜 되네요.</span></MenuItem>
-                </MenuList>
-              </Menu>
-
-
-              {/* <LinkItem
->>>>>>> c0b50a3acda7a86660fc4e3453c8102573f30fcf
              target="_blank"
              href="/"
              path={path}
@@ -327,8 +292,8 @@ const Navbar = props => {
              Manu4
            </LinkItem> */}
 
-            </Box>
-
+          
+            <Box><br/><br/></Box> 
 
 
 
@@ -338,7 +303,10 @@ const Navbar = props => {
         </Box>
 
       </VStack>
+
     </Fragment>
+      
+    
   )
 }
 
