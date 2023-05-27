@@ -11,23 +11,42 @@ import {
     Image,
     Link,
 } from "@chakra-ui/react";
-import React, { useState, Fragment,} from "react";
+import React, { useState, Fragment,useEffect} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const admin = () => {
-    const [sliderIndex, setSliderIndex] = useState(0);
+  const [sliderIndex, setSliderIndex] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(3);
     const handleSliderChange = (index) => {
         setSliderIndex(index);
       };
+
+      useEffect(() => {
+        // 뷰포트 크기 변화 감지하여 slidesToShow 값 업데이트
+        const handleResize = () => {
+          if (window.innerWidth < 600) {
+            setSlidesToShow(1);
+          } else if (window.innerWidth < 960) {
+            setSlidesToShow(2);
+          } else {
+            setSlidesToShow(3);
+          }
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
     
       const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 4,
+        slidesToShow: slidesToShow,
+        slidesToScroll: slidesToShow,
         afterChange: (index) => handleSliderChange(index),
       };
 
@@ -107,32 +126,32 @@ const admin = () => {
                     {/* 등록 공연 목록 */}
                     
                     <Box ml="30px" w="100%">
-                      <Box ml="30px">
-                        <Box w="90%">
-                          <Slider {...settings} style={{ height: '100%' }}>
-                            {dataMusical.map((item, index) => (
-                             <Box key={index} px={10} style={{ width: '150px', maxHeight: '80%', overflow: 'hidden' }}>
-                               <Card maxH="md" height="lg" borderRadius="sm" overflow="hidden" style={{ width: '100%' }}>
-                                  <CardHeader>
-                                    <Image src={item.image} alt={item.title} style={{ width: '100%', objectFit: 'cover' }} />
-                                 </CardHeader>
-                                  <CardBody   overflow="hidden">
-                                   <Text fontSize="sm" fontWeight="bold" mt={2} style={{ whiteSpace: 'normal', width: '100%' }}>
-                                      {item.title}
-                                   </Text>
-                                    <Text fontSize="sm" style={{ whiteSpace: 'normal', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>{item.data}</Text>
-                                  </CardBody>
-                                 <CardFooter display="flex" justifyContent="space-between" style={{ whiteSpace: 'normal' }}>
-                                   <Button size="sm" colorScheme="blue">조회</Button>
-                                    <Button size="sm" colorScheme="blue">수정</Button>
-                                 </CardFooter>
-                                </Card>
-                             </Box>
-                           ))}
-                          </Slider>
-                       </Box>
-                     </Box>
-                    </Box>
+      <Box ml="30px">
+        <Box w="90%" height="100%"> {/* 카드 슬라이더의 높이를 100%로 설정 */}
+          <Slider {...settings} style={{ height: '100%' }}>
+            {dataMusical.map((item, index) => (
+            <Box key={index} px={10} style={{ width: '150px', maxHeight: '80%', overflow: 'hidden', height: 'auto' }}>
+                <Card maxH="md" height="lg" borderRadius="sm" overflow="hidden" style={{ width: '100%' }}>
+                  <CardHeader>
+                    <Image src={item.image} alt={item.title} style={{ width: '100%', objectFit: 'cover' }} />
+                  </CardHeader>
+                  <CardBody overflow="hidden">
+                    <Text fontSize="sm" fontWeight="bold" mt={2} style={{ whiteSpace: 'normal', width: '100%' }}>
+                      {item.title}
+                    </Text>
+                    <Text fontSize="sm" style={{ whiteSpace: 'normal', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>{item.data}</Text>
+                  </CardBody>
+                  <CardFooter display="flex" justifyContent="space-between" style={{ whiteSpace: 'normal' }}>
+                    <Button size="sm" colorScheme="blue">조회</Button>
+                    <Button size="sm" colorScheme="blue">수정</Button>
+                  </CardFooter>
+                </Card>
+              </Box>
+            ))}
+          </Slider>
+        </Box>
+      </Box>
+    </Box>
 
 
                     {/* 공연 추가 */}
