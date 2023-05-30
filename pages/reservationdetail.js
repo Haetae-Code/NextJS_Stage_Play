@@ -18,7 +18,6 @@ import {
     AccordionButton,
     AccordionPanel,
     AccordionIcon,
-
 } from "@chakra-ui/react";
 
 //import react from "react";
@@ -50,16 +49,16 @@ const Page2 = () => {
             ? ["13:00"]
             : [];
 
-            const handleStudentButton = () => {
-                setShowStudentForm(true);
-                setShowOccupationForm(false);
-            };
-        
-            const handleExternalButton = () => {
-                setShowStudentForm(false);
-                setShowOccupationForm(true);
-            };
-            
+    const handleStudentButton = () => {
+        setShowStudentForm(true);
+        setShowOccupationForm(false);
+    };
+
+    const handleExternalButton = () => {
+        setShowStudentForm(false);
+        setShowOccupationForm(true);
+    };
+
     return (
         <>
             <Card
@@ -148,7 +147,7 @@ const Page2 = () => {
                     </FormControl>
                 </>
             )}
-             <print>&nbsp;</print>
+            <print>&nbsp;</print>
             {showOccupationForm && (
                 <FormControl isRequired>
                     <FormLabel>직업확인</FormLabel>

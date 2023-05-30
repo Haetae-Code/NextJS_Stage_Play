@@ -23,8 +23,6 @@ const ColorMode = () => {
                 ></IconButton>
             </motion.div>
         </AnimatePresence>
-
-        
     );
 };
 

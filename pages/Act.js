@@ -1,9 +1,4 @@
-import {
-    Container,
-    Heading,
-    Box,
-    Image,
-} from "@chakra-ui/react";
+import { Container, Heading, Box, Image } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import React from "react";
 

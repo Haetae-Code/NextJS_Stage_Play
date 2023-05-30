@@ -1,7 +1,7 @@
 import excuteQuery from "../../../lib/db";
 
 //구API(not working)
-export default async (req, /*res*/) => {
+export default async (req /*res*/) => {
     try {
         console.log("req nom", req.body);
         const result = await excuteQuery({

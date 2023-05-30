@@ -1,12 +1,7 @@
 //import Link from 'next/Link';
-import {
-    Box,
-    Container,
-    Input,
-    Flex,
-} from "@chakra-ui/react";
+import { Box, Container, Input, Flex } from "@chakra-ui/react";
 //import Image from "next/image";
-import { motion, } from "framer-motion";
+import { motion } from "framer-motion";
 //import { ColorModeToggleButton } from "./ColorModeButton";
 //import { Nav } from "./NavBar";
 // const CwuLogoImage = chakra(Image, {

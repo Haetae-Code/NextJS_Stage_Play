@@ -50,7 +50,7 @@ const Page = () => {
                         제목:이젠 제목이 길어도 괜찮아요
                     </Heading>
                 </Stack>
-                
+
                 <Flex
                     justify={"center"}
                     alignItems={"center"}
@@ -93,17 +93,16 @@ const Page = () => {
                         </Box>
                         <Box>
                             <Link href="./reservationdetail">
-                            <Button
-                                w={"100%"}
-                                size={["sm", "md"]}
-                                border="2px"
-                                colorScheme="blue"
-                            >
-                                {" "}
-                                예매하기
-                            </Button>
+                                <Button
+                                    w={"100%"}
+                                    size={["sm", "md"]}
+                                    border="2px"
+                                    colorScheme="blue"
+                                >
+                                    {" "}
+                                    예매하기
+                                </Button>
                             </Link>
-                            
                         </Box>
                     </Stack>
                 </Flex>
