@@ -1,13 +1,15 @@
-const db = require("../../lib/db_c");
+const db = require("./db_c.js");
+
+console.log("DB_HOST:", db.connection.HOST);
 
 async function fetchPerformanceData() {
     try {
         const results = await db.query(`
-      SELECT P.title, P.location, P.capacity, D.view_day, T.view_time
-      FROM time T
-      JOIN performance P ON T.performance_key = P.performance_key
-      JOIN date D ON T.date_key = D.date_key
-    `);
+            SELECT P.title, P.location, P.capacity, D.view_day, T.view_time
+            FROM Time T
+            JOIN Performance P ON T.performance_key = P.performance_key
+            JOIN Date D ON T.date_key = D.date_key
+        `);
 
         // Print performance data
         console.log("Performance Information:");
@@ -24,10 +26,10 @@ async function fetchPerformanceData() {
 async function fetchActorData() {
     try {
         const results = await db.query(`
-      SELECT P.title, H.performance_key, H.actor_key
-      FROM performance P
-      JOIN human H ON P.performance_key = H.performance_key
-    `);
+            SELECT P.title, F.performance_key, F.actor_key
+            FROM Performance P
+            JOIN Performer F ON P.performance_key = F.performance_key
+        `);
 
         // Print actor data
         console.log("Actor Information:");
@@ -42,5 +44,15 @@ async function fetchActorData() {
 }
 
 // Call the functions to fetch and display data
-fetchPerformanceData();
-fetchActorData();
+async function getData() {
+    try {
+        await fetchPerformanceData();
+        await fetchActorData();
+    } catch (error) {
+        console.error(error);
+    } finally {
+        db.connection.end(); // Close the database connection
+    }
+}
+
+getData();
