@@ -11,9 +11,18 @@ import {
     Tr,
     Th,
 } from "@chakra-ui/react";
-import {} from "react";
+import React, { useState, useEffect } from "react";
 
 const actor = () => {
+    const [actors, setActors] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/actors")
+        .then((response) => response.json())
+        .then((data) => setActors(data))
+        .catch((error) => console.error(error));
+    }, []);
+
     return (
         <div>
             <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
@@ -29,6 +38,8 @@ const actor = () => {
                 <Button ml="20px">일괄 삭제</Button>
 
                 <Stack ml="50px">
+
+                {actors.map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -44,19 +55,19 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>채준혁</Th>
+                                            <Th>{actor.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>컴퓨터공학과</Th>
+                                            <Th>{actor.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>컴공 체육부</Th>
+                                            <Th>{actor.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
-                                            <Th>오페라의 유령</Th>
+                                            <Th></Th>
                                         </Tr>
                                     </Tfoot>
                                 </Table>
@@ -70,7 +81,9 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
+                ))}  
 
+                {actors.map((acotr) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -85,19 +98,19 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>김준서</Th>
+                                            <Th>{actor.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>컴퓨터공학과</Th>
+                                            <Th>{actor.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>컴공 홍보부</Th>
+                                            <Th>{actor.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
-                                            <Th>뮤지컬 모시기</Th>
+                                            <Th></Th>
                                         </Tr>
                                     </Tfoot>
                                 </Table>
@@ -111,7 +124,9 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
+                ))}
 
+                {actors.map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -126,19 +141,19 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>김준서</Th>
+                                            <Th>{actor.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>컴퓨터공학과</Th>
+                                            <Th>{actor.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>컴공 홍보부</Th>
+                                            <Th>{actor.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
-                                            <Th>뮤지컬 모시기</Th>
+                                            <Th></Th>
                                         </Tr>
                                     </Tfoot>
                                 </Table>
@@ -151,6 +166,9 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
+                ))}
+
+                {actors.map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -165,19 +183,19 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>김준서</Th>
+                                            <Th>{actor.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>컴퓨터공학과</Th>
+                                            <Th>{actor.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>컴공 홍보부</Th>
+                                            <Th>{actor.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
-                                            <Th>뮤지컬 모시기</Th>
+                                            <Th></Th>
                                         </Tr>
                                     </Tfoot>
                                 </Table>
@@ -190,6 +208,9 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
+                ))}
+
+                {actors.map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -204,19 +225,19 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>김준서</Th>
+                                            <Th>{actor.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>컴퓨터공학과</Th>
+                                            <Th>{actor.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>컴공 홍보부</Th>
+                                            <Th>{actor.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
-                                            <Th>뮤지컬 모시기</Th>
+                                            <Th></Th>
                                         </Tr>
                                     </Tfoot>
                                 </Table>
@@ -230,6 +251,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
+                ))}
                 </Stack>
             </Box>
         </div>
