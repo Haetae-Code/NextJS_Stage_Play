@@ -27,7 +27,7 @@ import React from "react";
 import KakaoMap from "../components/kakaomap";
 //import { auto } from "@popperjs/core";
 
-const Page = () => {
+const Page = (actorData) => {
     return (
         <Box>
             <Box>
