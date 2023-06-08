@@ -1,11 +1,9 @@
-const db = require("./db_c.js");
-
-console.log("DB_HOST:", db.connection.HOST);
+const db = require("./db_select.js");
 
 async function fetchPerformanceData() {
     try {
         const results = await db.query(`
-            SELECT P.title, P.location, P.capacity, D.view_day, T.view_time
+            SELECT P.title, P.location, P.capacity, D.view_date, T.view_time
             FROM Time T
             JOIN Performance P ON T.performance_key = P.performance_key
             JOIN Date D ON T.date_key = D.date_key
@@ -15,7 +13,7 @@ async function fetchPerformanceData() {
         console.log("Performance Information:");
         for (const row of results) {
             console.log(
-                `Title: ${row.title}, Location: ${row.location}, Capacity: ${row.capacity}, View Day: ${row.view_day}, View Time: ${row.view_time}`
+                `제목: ${row.title}, 장소: ${row.location}, 수용인원: ${row.capacity}, 공연날자: ${row.view_date}, 공연시간: ${row.view_time}`
             );
         }
     } catch (error) {
@@ -46,7 +44,7 @@ async function fetchActorData() {
 // Call the functions to fetch and display data
 async function getData() {
     try {
-        await fetchPerformanceData();
+        //await fetchPerformanceData();
         await fetchActorData();
     } catch (error) {
         console.error(error);
