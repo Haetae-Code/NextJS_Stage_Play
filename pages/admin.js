@@ -15,13 +15,23 @@ import React, { useState, Fragment, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Reservation from "./reservation"; 
 
 const admin = () => {
     const [sliderIndex, setSliderIndex] = useState(0);
     const [slidesToShow, setSlidesToShow] = useState(3);
+   
+    const [actorData, setActorData] = useState(null);
+  const [showPage, setShowPage] = useState(false);
+
+  const handleClick = () => {
+    setShowPage(true);
+  };
+
     const handleSliderChange = (index) => {
         setSliderIndex(index);
     };
+  
 
     useEffect(() => {
         // 뷰포트 크기 변화 감지하여 slidesToShow 값 업데이트
@@ -79,6 +89,8 @@ const admin = () => {
         },
     ];
 
+
+    
     return (
         <div style={{ display: "flex" }}>
             {/* 1번 박스(관리자 사이드바/관리자페이지) */}
@@ -205,6 +217,7 @@ const admin = () => {
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
+                                                        onClick={handleClick}
                                                     >
                                                         수정
                                                     </Button>
@@ -236,6 +249,7 @@ const admin = () => {
 
                 {/* 편집 공간 */}
                 <Box
+                    
                     flex="1"
                     ml="50px"
                     mt="80px"
@@ -244,6 +258,9 @@ const admin = () => {
                     overflow="auto"
                 >
                     <Text>하단에 출력됩니다!</Text>
+                    <Box py={10} ml="30px">
+                    {showPage && <Reservation actorData={actorData} />}                
+                                </Box>
                 </Box>
             </Box>
         </div>
