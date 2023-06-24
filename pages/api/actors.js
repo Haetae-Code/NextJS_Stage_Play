@@ -1,5 +1,5 @@
 const nextConnect = require("next-connect");
-const db = require(".//db_c");
+const db = require("./db");
 
 const handler = nextConnect();
 
