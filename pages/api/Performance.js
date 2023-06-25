@@ -1,5 +1,5 @@
 const nextConnect = require("next-connect");
-const db = require("../../lib/db_c");
+const db = require("./db");
 
 const handler = nextConnect();
 
@@ -10,7 +10,7 @@ handler.use((req, res, next) => {
 
 handler.get(async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM Performance");
+        const results = await db.query("SELECT * FROM Stage_Play_DB.Performance");
         res.status(200).json(results);
     } catch (error) {
         console.error(error);

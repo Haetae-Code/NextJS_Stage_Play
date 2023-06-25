@@ -1,4 +1,5 @@
 //import NextLink from "next/link";
+import React, { useState, useEffect, Fragment } from "react";
 import {
     Container,
     Heading,
@@ -14,14 +15,13 @@ import {
     Image,
     Divider,
 } from "@chakra-ui/react";
-//import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import React, { useState, Fragment } from "react";
 import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Page = () => {
+
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
 
     const handleSliderChange = (index) => {
@@ -37,62 +37,74 @@ const Page = () => {
         afterChange: (index) => handleSliderChange(index),
     };
 
+    const [Performance, setPerformance] = useState([]);
+    
+    useEffect(() => {
+        fetch("/api/Performance")
+        .then((response) => response.json())
+        .then((data) => setPerformance(data))
+        .catch((error) => console.error(error));
+    }, []);
+
     //뮤지컬학과 데이터
-    const dataMusical = [
+    const dataMusical = Performance.map((PerformanceItem) => (
         {
             image: "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg",
-            title: "오페라의 유령",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg",
-            title: "마틸다",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0",
-            title: "문스토리",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg",
-            title: "그날들",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
-            title: "젠틀맨스가이드-사랑과 살인편",
-            description: "04월 18일(화) 온라인, 강남구",
-        },
-    ];
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
+        }
+      ));
+
+
+    
     //영화과 데이터
-    const dataMovie = [
+    const dataMovie = Performance.map((PerformanceItem) => (
         {
             image: "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg",
-            title: "오페라의 유령",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg",
-            title: "마틸다",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0",
-            title: "문스토리",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg",
-            title: "그날들",
-            description: "04월 18일(화) 온라인, 강남구",
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         },
         {
             image: "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
-            title: "젠틀맨스가이드-사랑과 살인편",
-            description: "04월 18일(화) 온라인, 강남구",
-        },
-    ];
+            title: PerformanceItem.title,
+            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
+        }
+    ));
 
     return (
         <div>
