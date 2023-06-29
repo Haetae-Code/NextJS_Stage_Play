@@ -23,13 +23,34 @@ import {
 } from "@chakra-ui/react";
 //import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 //import ImageSlider from '../components/MainImageSlider'
-import React from "react";
+import React, { useState, useEffect } from "react";
 import KakaoMap from "../components/kakaomap";
 //import { auto } from "@popperjs/core";
 
 const Page = (actorData) => {
+
+    const [actors, setActors] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/actors")
+        .then((response) => response.json())
+        .then((data) => setActors(data))
+        .catch((error) => console.error(error));
+    }, []);
+
+    const [Performance, setPerformance] = useState([]);
+    
+    useEffect(() => {
+        fetch("/api/Performance")
+        .then((response) => response.json())
+        .then((data) => setPerformance(data))
+        .catch((error) => console.error(error));
+    }, []);
+
+
     return (
         <Box>
+            {Performance.slice(0, 1).map((PerformanceItem) => (
             <Box>
                 <Stack py={5}>
                     <Flex>
@@ -47,7 +68,7 @@ const Page = (actorData) => {
                         </Button>
                     </Flex>
                     <Heading size={"xl"}>
-                        제목:이젠 제목이 길어도 괜찮아요
+                        제목:{PerformanceItem.title}
                     </Heading>
                 </Stack>
 
@@ -71,7 +92,7 @@ const Page = (actorData) => {
                                     <Tbody>
                                         <Tr>
                                             <Td>공연 장소</Td>
-                                            <Td>홍성캠퍼스</Td>
+                                            <Td>{PerformanceItem.location}</Td>
                                         </Tr>
                                         <Tr>
                                             <Td>공연 기간</Td>
@@ -107,6 +128,7 @@ const Page = (actorData) => {
                     </Stack>
                 </Flex>
             </Box>
+        ))}
 
             <Box>
                 <Tabs align="center" pt={"20"}>
@@ -166,6 +188,7 @@ const Page = (actorData) => {
                         <TabPanel py={10}>
                             <Stack>
                                 <Box py={10}>
+                                {actors.slice(0, 1).map((actor) => (
                                     <Flex>
                                         <Image
                                             src="https://bit.ly/dan-abramov"
@@ -178,23 +201,25 @@ const Page = (actorData) => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>채준혁</Th>
+                                                        <Th>{actor.name}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
-                                                        <Th>컴퓨터공학과</Th>
+                                                        <Th>{actor.department}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>소개</Th>
-                                                        <Th>컴공 체육부</Th>
+                                                        <Th>{actor.introduction}</Th>
                                                     </Tr>
                                                 </Tfoot>
                                             </Table>
                                         </TableContainer>
                                     </Flex>
+                                ))}
                                 </Box>
 
                                 <Box py={10}>
+                                {actors.slice(1, 2).map((actor) => (
                                     <Flex>
                                         <Image
                                             src="https://bit.ly/dan-abramov"
@@ -207,23 +232,25 @@ const Page = (actorData) => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>김준서</Th>
+                                                        <Th>{actor.name}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
-                                                        <Th>컴퓨터공학과</Th>
+                                                        <Th>{actor.department}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>소개</Th>
-                                                        <Th>컴공 홍보부</Th>
+                                                        <Th>{actor.introduction}</Th>
                                                     </Tr>
                                                 </Tfoot>
                                             </Table>
                                         </TableContainer>
                                     </Flex>
+                                ))}
                                 </Box>
 
                                 <Box py={10}>
+                                {actors.slice(2, 3).map((actor) => (
                                     <Flex>
                                         <Image
                                             src="https://bit.ly/dan-abramov"
@@ -236,23 +263,25 @@ const Page = (actorData) => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>전민혁</Th>
+                                                        <Th>{actor.name}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
-                                                        <Th>컴퓨터공학과</Th>
+                                                        <Th>{actor.department}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>소개</Th>
-                                                        <Th>스터디 에이스</Th>
+                                                        <Th>{actor.introduction}</Th>
                                                     </Tr>
                                                 </Tfoot>
                                             </Table>
                                         </TableContainer>
                                     </Flex>
+                                ))}
                                 </Box>
 
                                 <Box py={10}>
+                                {actors.slice(3, 4).map((actor) => (
                                     <Flex>
                                         <Image
                                             src="https://bit.ly/dan-abramov"
@@ -265,20 +294,21 @@ const Page = (actorData) => {
                                                 <Tfoot>
                                                     <Tr>
                                                         <Th>이름</Th>
-                                                        <Th>최인서</Th>
+                                                        <Th>{actor.name}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>학과</Th>
-                                                        <Th>컴퓨터공학과</Th>
+                                                        <Th>{actor.department}</Th>
                                                     </Tr>
                                                     <Tr>
                                                         <Th>소개</Th>
-                                                        <Th>최인서맨</Th>
+                                                        <Th>{actor.introduction}</Th>
                                                     </Tr>
                                                 </Tfoot>
                                             </Table>
                                         </TableContainer>
                                     </Flex>
+                                ))}
                                 </Box>
                             </Stack>
                         </TabPanel>
