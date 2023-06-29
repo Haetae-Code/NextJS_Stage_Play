@@ -13,6 +13,7 @@ import {
     Stack,
     Card,
     Image,
+    Link,
     Divider,
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";
@@ -179,7 +180,9 @@ const Page = () => {
                                     </Text>
                                 </CardBody>
                                 <CardFooter>
+                                    <Link href="./reservation">
                                     <Button colorScheme="blue">예매하기</Button>
+                                    </Link>
                                 </CardFooter>
                             </Card>
                         </Box>
@@ -244,9 +247,11 @@ const Page = () => {
                                         </Text>
                                     </CardBody>
                                     <CardFooter>
+                                        <Link href="./reservation">
                                         <Button colorScheme="blue">
                                             예매하기
                                         </Button>
+                                        </Link>
                                     </CardFooter>
                                 </Card>
                             </Box>
