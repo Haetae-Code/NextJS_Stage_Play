@@ -39,7 +39,7 @@ const actor = () => {
 
                 <Stack ml="50px">
 
-                {actors.map((actor) => (
+                {actors.slice(0, 1).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -83,7 +83,7 @@ const actor = () => {
                     </Box>
                 ))}  
 
-                {actors.map((acotr) => (
+                {actors.slice(1, 2).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -126,7 +126,7 @@ const actor = () => {
                     </Box>
                 ))}
 
-                {actors.map((actor) => (
+                {actors.slice(2, 3).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -168,7 +168,7 @@ const actor = () => {
                     </Box>
                 ))}
 
-                {actors.map((actor) => (
+                {actors.slice(3, 4).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -210,7 +210,7 @@ const actor = () => {
                     </Box>
                 ))}
 
-                {actors.map((actor) => (
+                {actors.slice(4, 5).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
