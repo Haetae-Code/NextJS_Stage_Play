@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 
 //import react from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 /*const checkOnlyOne = (checkThis) => {
     const checkboxes = document.getElementsByName("test");
@@ -59,6 +59,15 @@ const Page2 = () => {
         setShowOccupationForm(true);
     };
 
+    const [perform_Info, setperform_Info] = useState([]);
+    
+    useEffect(() => {
+        fetch("/api/perform_Info")
+        .then((response) => response.json())
+        .then((data) => setperform_Info(data))
+        .catch((error) => console.error(error));
+    }, []);
+
     return (
         <>
             <Card
@@ -73,15 +82,18 @@ const Page2 = () => {
                     alt="캣츠"
                 />
 
+                {perform_Info.length > 0 && (
                 <CardBody>
-                    <Heading size="md">캣츠</Heading>
+                    <Heading size="md">{perform_Infop[0].P.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
-                    <Text py="2">장 소:</Text>
+                    <Text py="2">장 소:{perform_Info[0].P.location}</Text>
                     <Text py="2">출연진:</Text>
-                    <Text py="2">기 간:</Text>
-                    <Text py="2">시 간:</Text>
+                    <Text py="2">기 간:{perform_Info[0].D.view_date}</Text>
+                    <Text py="2">시 간:{perform_Info[0].T.view_time}</Text>
                     <Text py="2">줄거리:</Text>
                 </CardBody>
+                )}
+
             </Card>
             <print>&nbsp;</print>
             <Accordion defaultIndex={[0]} allowMultiple>
