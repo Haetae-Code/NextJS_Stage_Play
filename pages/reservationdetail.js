@@ -84,7 +84,7 @@ const Page2 = () => {
 
                 {perform_Info.length > 0 && (
                 <CardBody>
-                    <Heading size="md">{perform_Infop[0].P.title}</Heading>
+                    <Heading size="md">{perform_Info[0].P.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
                     <Text py="2">장 소:{perform_Info[0].P.location}</Text>
                     <Text py="2">출연진:</Text>
