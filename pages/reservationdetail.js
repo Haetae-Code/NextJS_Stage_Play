@@ -70,6 +70,7 @@ const Page2 = () => {
 
     return (
         <>
+            {perform_Info && perform_Info.map((info) => (
             <Card
                 direction={{ base: "column", sm: "row" }}
                 overflow="hidden"
@@ -78,23 +79,22 @@ const Page2 = () => {
                 <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src="http://placekitten.com/201/300"
-                    alt="캣츠"
+                    src={info.img_url}
+                    alt="${info.title}"
                 />
 
-                {perform_Info.length > 0 && (
                 <CardBody>
-                    <Heading size="md">{perform_Info[0].P.title}</Heading>
+                    <Heading size="md">{info.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
-                    <Text py="2">장 소:{perform_Info[0].P.location}</Text>
+                    <Text py="2">장 소:{info.location}</Text>
                     <Text py="2">출연진:</Text>
-                    <Text py="2">기 간:{perform_Info[0].D.view_date}</Text>
-                    <Text py="2">시 간:{perform_Info[0].T.view_time}</Text>
+                    <Text py="2">기 간:{info.view_day}</Text>
+                    <Text py="2">시 간:{info.view_time}</Text>
                     <Text py="2">줄거리:</Text>
                 </CardBody>
-                )}
-
             </Card>
+            ))}
+            
             <print>&nbsp;</print>
             <Accordion defaultIndex={[0]} allowMultiple>
                 <AccordionItem>
