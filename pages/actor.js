@@ -18,9 +18,9 @@ const actor = () => {
 
     useEffect(() => {
         fetch("/api/actors")
-        .then((response) => response.json())
-        .then((data) => setActors(data))
-        .catch((error) => console.error(error));
+            .then((response) => response.json())
+            .then((data) => setActors(data))
+            .catch((error) => console.error(error));
     }, []);
 
     return (
@@ -38,8 +38,6 @@ const actor = () => {
                 <Button ml="20px">일괄 삭제</Button>
 
                 <Stack ml="50px">
-
-                {actors.slice(0, 1).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -55,15 +53,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[0]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[0]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[0]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -81,9 +79,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}  
 
-                {actors.slice(1, 2).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -98,15 +94,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[1]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[1]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[1]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -124,9 +120,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(2, 3).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -141,15 +135,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[2]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[2]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[2]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -166,9 +160,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(3, 4).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -183,15 +175,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[3]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[3]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[3]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -208,9 +200,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(4, 5).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -225,15 +215,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[4]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[4]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[4]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -251,7 +241,6 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
                 </Stack>
             </Box>
         </div>
