@@ -68,6 +68,19 @@ const Page2 = () => {
         .catch((error) => console.error(error));
     }, []);
 
+    for (let i = 0; i < perform_Info.length; i++) {
+        // view_day 파싱
+        const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
+        const matchedDay = perform_Info[i].view_day.match(dateRegex);
+        perform_Info[i].view_day = matchedDay[1];
+      
+        // view_time 파싱
+        const timeParts = perform_Info[i].view_time.split(':');
+        const hour = parseInt(timeParts[0], 10);
+        const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
+        perform_Info[i].view_time = `${hour}시 ${minute}분`;
+      }
+
     return (
         <>
             {perform_Info.slice(0, 1).map((perform_Info) => (
