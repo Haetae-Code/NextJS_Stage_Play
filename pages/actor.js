@@ -10,11 +10,13 @@ import {
     Tfoot,
     Tr,
     Th,
+    Input
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 
 const actor = () => {
     const [actors, setActors] = useState([]);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     useEffect(() => {
         fetch("/api/actors")
@@ -22,6 +24,38 @@ const actor = () => {
             .then((data) => setActors(data))
             .catch((error) => console.error(error));
     }, []);
+
+    const [newActor, setNewActor] = useState({
+        name: "",
+        department: "",
+        introduction: "",
+        performances: [],
+        imageUrl: "",
+      });
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewActor((prevActor) => ({ ...prevActor, [name]: value }));
+      };
+    
+      const handleAddActor = () => {
+        // 필수 항목 입력 확인
+        if (!newActor.name || !newActor.department || !newActor.introduction) {
+          console.error("필수 항목을 입력하세요.");
+          return;
+        }
+    
+        setActors((prevActors) => [...prevActors, newActor]);
+        setNewActor({
+          name: "",
+          department: "",
+          introduction: "",
+          performances: [],
+          imageUrl: "",
+        });
+        setIsFormVisible(false);
+      };
+    
 
     return (
         <div>
@@ -34,8 +68,49 @@ const actor = () => {
 
                 <br />
 
-                <Button ml="50px">배우 추가</Button>
+                <Button ml="50px" onClick={() => setIsFormVisible(true)}>배우 추가</Button>
                 <Button ml="20px">일괄 삭제</Button>
+
+                {isFormVisible && (
+          <Box mt="20px">
+            <Text mb="10px">배우 정보 입력:</Text>
+            <Input
+              type="text"
+              name="name"
+              placeholder="이름"
+              value={newActor.name}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="department"
+              placeholder="학과"
+              value={newActor.department}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="introduction"
+              placeholder="소개"
+              value={newActor.introduction}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="imageUrl"
+              placeholder="이미지 URL"
+              value={newActor.imageUrl}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Button colorScheme="blue" size="sm" onClick={handleAddActor}>
+              저장
+            </Button>
+          </Box>
+        )}
 
                 <Stack ml="50px">
                     <Box py={10}>

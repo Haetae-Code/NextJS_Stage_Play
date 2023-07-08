@@ -16,6 +16,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Reservation from "./reservation"; 
+import ReservationEdit from "./reservationedit";
 
 const admin = () => {
     const [sliderIndex, setSliderIndex] = useState(0);
@@ -24,13 +25,25 @@ const admin = () => {
     const [actorData, setActorData] = useState(null);
   const [showPage, setShowPage] = useState(false);
 
+  const [showEditPage, setShowEditPage] = useState(false);
+  const [reservationData, setReservationData] = useState(false);
+
   const handleClick = () => {
-    setShowPage(true);
+    setShowEditPage(prevValue => !prevValue);
   };
 
-    const handleSliderChange = (index) => {
-        setSliderIndex(index);
-    };
+  const handleEditClick = () => {
+    setShowEditPage(true);
+  };
+
+  const handleSaveReservation = (updatedData) => {
+    setReservationData(updatedData);
+    setShowEditPage(false);
+  };
+
+  const handleCancelEdit = () => {
+    setShowEditPage(false);
+  };
   
 
     useEffect(() => {
@@ -217,7 +230,7 @@ const admin = () => {
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
-                                                        onClick={handleClick}
+                                                        onClick={handleEditClick}
                                                     >
                                                         수정
                                                     </Button>
@@ -259,7 +272,15 @@ const admin = () => {
                 >
                     <Text>하단에 출력됩니다!</Text>
                     <Box py={10} ml="30px">
-                    {showPage && <Reservation actorData={actorData} />}                
+       {showEditPage ? (
+  <ReservationEdit
+    reservationData={reservationData}
+    onSave={handleSaveReservation}
+    onCancel={handleCancelEdit}
+  />
+) : (
+    null
+)}            
                                 </Box>
                 </Box>
             </Box>
