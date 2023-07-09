@@ -22,16 +22,16 @@ const admin = () => {
     const [slidesToShow, setSlidesToShow] = useState(3);
    
     const [actorData, setActorData] = useState(null);
-  const [showPage, setShowPage] = useState(false);
+    const [showPage, setShowPage] = useState(false);
 
-  const handleClick = () => {
-    setShowPage(true);
-  };
+    const handleClick = () => {
+        setShowPage(true);
+    };
 
     const handleSliderChange = (index) => {
         setSliderIndex(index);
     };
-  
+
 
     useEffect(() => {
         // 뷰포트 크기 변화 감지하여 slidesToShow 값 업데이트
@@ -90,7 +90,7 @@ const admin = () => {
     ];
 
 
-    
+
     return (
         <div style={{ display: "flex" }}>
             {/* 1번 박스(관리자 사이드바/관리자페이지) */}
@@ -108,7 +108,10 @@ const admin = () => {
                         <Text mb={3} mt={8}>
                             관리자 메뉴
                         </Text>
-                        <Button mb={3}>예약자 확인</Button>
+                        <Link color="inactiveColor" href="/reservationcheck">
+                            <Button mb={3}>예약자 확인</Button>
+                        </Link>
+
                         <Link color="inactiveColor" href="/actor">
                             <Button mb={3}>배우 관리</Button>
                         </Link>
@@ -249,7 +252,7 @@ const admin = () => {
 
                 {/* 편집 공간 */}
                 <Box
-                    
+
                     flex="1"
                     ml="50px"
                     mt="80px"
@@ -259,8 +262,8 @@ const admin = () => {
                 >
                     <Text>하단에 출력됩니다!</Text>
                     <Box py={10} ml="30px">
-                    {showPage && <Reservation actorData={actorData} />}                
-                                </Box>
+                        {showPage && <Reservation actorData={actorData} />}
+                    </Box>
                 </Box>
             </Box>
         </div>
