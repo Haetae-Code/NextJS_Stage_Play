@@ -121,7 +121,7 @@ const admin = () => {
                         <Text mb={3} mt={8}>
                             관리자 메뉴
                         </Text>
-                        <Link color="inactiveColor" href="/reservationcheck">
+                        <Link color="inactiveColor" href="/reservation_check">
                             <Button mb={3}>예약자 확인</Button>
                         </Link>
 
