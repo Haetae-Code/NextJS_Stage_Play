@@ -10,18 +10,52 @@ import {
     Tfoot,
     Tr,
     Th,
+    Input
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 
 const actor = () => {
     const [actors, setActors] = useState([]);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
     useEffect(() => {
         fetch("/api/actors")
-        .then((response) => response.json())
-        .then((data) => setActors(data))
-        .catch((error) => console.error(error));
+            .then((response) => response.json())
+            .then((data) => setActors(data))
+            .catch((error) => console.error(error));
     }, []);
+
+    const [newActor, setNewActor] = useState({
+        name: "",
+        department: "",
+        introduction: "",
+        performances: [],
+        imageUrl: "",
+      });
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewActor((prevActor) => ({ ...prevActor, [name]: value }));
+      };
+    
+      const handleAddActor = () => {
+        // 필수 항목 입력 확인
+        if (!newActor.name || !newActor.department || !newActor.introduction) {
+          console.error("필수 항목을 입력하세요.");
+          return;
+        }
+    
+        setActors((prevActors) => [...prevActors, newActor]);
+        setNewActor({
+          name: "",
+          department: "",
+          introduction: "",
+          performances: [],
+          imageUrl: "",
+        });
+        setIsFormVisible(false);
+      };
+    
 
     return (
         <div>
@@ -34,12 +68,51 @@ const actor = () => {
 
                 <br />
 
-                <Button ml="50px">배우 추가</Button>
+                <Button ml="50px" onClick={() => setIsFormVisible(true)}>배우 추가</Button>
                 <Button ml="20px">일괄 삭제</Button>
 
+                {isFormVisible && (
+          <Box mt="20px">
+            <Text mb="10px">배우 정보 입력:</Text>
+            <Input
+              type="text"
+              name="name"
+              placeholder="이름"
+              value={newActor.name}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="department"
+              placeholder="학과"
+              value={newActor.department}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="introduction"
+              placeholder="소개"
+              value={newActor.introduction}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Input
+              type="text"
+              name="imageUrl"
+              placeholder="이미지 URL"
+              value={newActor.imageUrl}
+              onChange={handleInputChange}
+              mb="10px"
+            />
+            <Button colorScheme="blue" size="sm" onClick={handleAddActor}>
+              저장
+            </Button>
+          </Box>
+        )}
+
                 <Stack ml="50px">
-
-                {actors.slice(0, 1).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -55,15 +128,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[0]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[0]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[0]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -81,9 +154,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}  
 
-                {actors.slice(1, 2).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -98,15 +169,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[1]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[1]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[1]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -124,9 +195,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(2, 3).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -141,15 +210,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[2]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[2]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[2]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -166,9 +235,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(3, 4).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -183,15 +250,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[3]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[3]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[3]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -208,9 +275,7 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
 
-                {actors.slice(4, 5).map((actor) => (
                     <Box py={10}>
                         <Flex>
                             <Image
@@ -225,15 +290,15 @@ const actor = () => {
                                     <Tfoot>
                                         <Tr>
                                             <Th>이름</Th>
-                                            <Th>{actor.name}</Th>
+                                            <Th>{actors[4]?.name}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>학과</Th>
-                                            <Th>{actor.department}</Th>
+                                            <Th>{actors[4]?.department}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소개</Th>
-                                            <Th>{actor.introduction}</Th>
+                                            <Th>{actors[4]?.introduction}</Th>
                                         </Tr>
                                         <Tr>
                                             <Th>소속 공연</Th>
@@ -251,7 +316,6 @@ const actor = () => {
                             </Box>
                         </Flex>
                     </Box>
-                ))}
                 </Stack>
             </Box>
         </div>

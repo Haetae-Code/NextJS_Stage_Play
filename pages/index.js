@@ -20,10 +20,15 @@ import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useRouter } from "next/router";
 
 const Page = () => {
 
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
+    const router = useRouter();
+    const handleReservation = (id) => {
+        router.push(`/reservation/${id}`);
+      };
 
     const handleSliderChange = (index) => {
         setSliderIndex(index);
@@ -47,65 +52,45 @@ const Page = () => {
         .catch((error) => console.error(error));
     }, []);
 
+
+
+    // const dataMusical = Performance.map((PerformanceItem, index) => ({
+    //     image:
+    //       index % 5 === 0
+    //         ? "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg"
+    //         : index % 5 === 1
+    //         ? "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg"
+    //         : index % 5 === 2
+    //         ? "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0"
+    //         : index % 5 === 3
+    //         ? "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg"
+    //         : "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
+    //     title: PerformanceItem.title,
+    //     description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+    //   }));
+
     //뮤지컬학과 데이터
     const dataMusical = Performance.map((PerformanceItem) => (
         {
-            image: "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
+            id: PerformanceItem.performance_key,
+            image: PerformanceItem.img_url,
             title: PerformanceItem.title,
             description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         }
       ));
 
 
+
     
     //영화과 데이터
     const dataMovie = Performance.map((PerformanceItem) => (
         {
-            image: "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg",
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        },
-        {
-            image: "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
+            id: PerformanceItem.performance_key,
+            image: PerformanceItem.img_url,
             title: PerformanceItem.title,
             description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
         }
-    ));
+      ));
 
     return (
         <div>
@@ -179,11 +164,11 @@ const Page = () => {
                                         {item.description}
                                     </Text>
                                 </CardBody>
-                                <CardFooter>
-                                    <Link href="./reservation">
-                                    <Button colorScheme="blue">예매하기</Button>
-                                    </Link>
-                                </CardFooter>
+                                    {/* <Link href="./reservation"> */}
+                                    <Button colorScheme="blue" onClick={() => handleReservation(item.id)}>
+                                        예매하기
+                                    </Button>
+                                    {/* </Link> */}
                             </Card>
                         </Box>
                     ))}
@@ -247,11 +232,11 @@ const Page = () => {
                                         </Text>
                                     </CardBody>
                                     <CardFooter>
-                                        <Link href="./reservation">
-                                        <Button colorScheme="blue">
+                                        {/* <Link href="./reservation"> */}
+                                        <Button colorScheme="blue" onClick={() => handleReservation(item.id)}>
                                             예매하기
                                         </Button>
-                                        </Link>
+                                        {/* </Link> */}
                                     </CardFooter>
                                 </Card>
                             </Box>

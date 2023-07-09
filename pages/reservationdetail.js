@@ -68,8 +68,22 @@ const Page2 = () => {
         .catch((error) => console.error(error));
     }, []);
 
+    for (let i = 0; i < perform_Info.length; i++) {
+        // view_day 파싱
+        const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
+        const matchedDay = perform_Info[i].view_day.match(dateRegex);
+        perform_Info[i].view_day = matchedDay[1];
+      
+        // view_time 파싱
+        const timeParts = perform_Info[i].view_time.split(':');
+        const hour = parseInt(timeParts[0], 10);
+        const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
+        perform_Info[i].view_time = `${hour}시 ${minute}분`;
+      }
+
     return (
         <>
+            {perform_Info.slice(0, 1).map((perform_Info) => (
             <Card
                 direction={{ base: "column", sm: "row" }}
                 overflow="hidden"
@@ -78,23 +92,22 @@ const Page2 = () => {
                 <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src="http://placekitten.com/201/300"
-                    alt="캣츠"
+                    src={perform_Info.img_url}
+                    alt="${perform_Info.title}"
                 />
 
-                {perform_Info.length > 0 && (
                 <CardBody>
-                    <Heading size="md">{perform_Infop[0].P.title}</Heading>
+                    <Heading size="md">{perform_Info.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
-                    <Text py="2">장 소:{perform_Info[0].P.location}</Text>
+                    <Text py="2">장 소:{perform_Info.address} {perform_Info.location}</Text>
                     <Text py="2">출연진:</Text>
-                    <Text py="2">기 간:{perform_Info[0].D.view_date}</Text>
-                    <Text py="2">시 간:{perform_Info[0].T.view_time}</Text>
+                    <Text py="2">기 간:{perform_Info.view_day}</Text>
+                    <Text py="2">시 간:{perform_Info.view_time}</Text>
                     <Text py="2">줄거리:</Text>
                 </CardBody>
-                )}
-
             </Card>
+            ))}
+
             <print>&nbsp;</print>
             <Accordion defaultIndex={[0]} allowMultiple>
                 <AccordionItem>
