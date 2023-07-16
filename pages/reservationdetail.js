@@ -22,6 +22,7 @@ import {
 
 //import react from "react";
 import React, { useState, useEffect } from "react";
+import { useRouter} from "next/router";
 
 /*const checkOnlyOne = (checkThis) => {
     const checkboxes = document.getElementsByName("test");
@@ -38,6 +39,12 @@ const Page2 = () => {
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [showOccupationForm, setShowOccupationForm] = useState(false);
+    const [name, setName] = useState("");
+    const [phone_number, setPhoneNumber] = useState("");
+    const [say_actor, setSay_Actor] = useState("");
+    const [reservationStatus, setReservationStatus] = useState("");
+    const router = useRouter();
+
     const handlTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
@@ -58,6 +65,33 @@ const Page2 = () => {
         setShowStudentForm(false);
         setShowOccupationForm(true);
     };
+
+    const handleSubmit = async () => {
+        try {
+          const response = await fetch("/api/insert", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              phone_number: phone_number,
+              say_actor: say_actor,
+            }),
+          });
+    
+          if (response.ok) {
+            setReservationStatus("예매가 성공적으로 완료되었습니다");
+            console.log("Reservation submitted");
+          } else {
+            setReservationStatus("예매가 실패했습니다. 다시 시도해주세요.");
+            console.error("Reservation failed");
+          }
+        } catch (error) {
+            setReservationStatus("예매가 실패했습니다. 다시 시도해주세요.");  
+          console.error(error);
+        }
+      };
 
     const [perform_Info, setperform_Info] = useState([]);
     
@@ -128,7 +162,7 @@ const Page2 = () => {
 
             <FormControl isRequired>
                 <FormLabel>이름</FormLabel>
-                <Input placeholder="필수기재" />
+                <Input placeholder="필수기재" value={name} onChange={(e) => setName(e.target.value)} />
                 <print>&nbsp;</print>
             </FormControl>
 
@@ -210,19 +244,23 @@ const Page2 = () => {
             <print>&nbsp;</print>
             <FormControl isRequired>
                 <FormLabel>전화번호</FormLabel>
-                <Input placeholder="필수기재" />
+                <Input placeholder="필수기재" value={phone_number} onChange={(e) => setPhoneNumber(e.target.value)}/>
                 &nbsp;
             </FormControl>
 
             <Text mb="8px">배우님에게: {}</Text>
-            <Textarea isInvalid placeholder="필수기재" />
+            <Textarea isInvalid placeholder="필수기재" value={say_actor} onChange={(e) => setSay_Actor(e.currentTarget.value)}/>
 
             <print>&nbsp;</print>
             <Stack align="center">
-                <Button colorScheme="blue" variant="outline">
+                <Button colorScheme="blue" variant="outline" onClick={handleSubmit}>
                     예약하기
                 </Button>
             </Stack>
+
+            <Text mb="8px" color={reservationStatus.includes("성공") ? "green.500" : "red.500"}>
+                {reservationStatus}
+            </Text>
         </> //사이에 공백이
     );
 };
