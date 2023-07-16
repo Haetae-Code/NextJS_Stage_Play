@@ -15,8 +15,9 @@ import {
 import React, { useState, useEffect } from "react";
 
 const actor = () => {
-    const [actors, setActors] = useState([]);
+    const [actors, setActors] = useState(false);
     const [isFormVisible, setIsFormVisible] = useState(false);
+
 
     useEffect(() => {
         fetch("/api/actors")
@@ -55,8 +56,13 @@ const actor = () => {
         });
         setIsFormVisible(false);
       };
-    
 
+      const handleDelete = (actor) => {
+        const updatedActors = actors.filter((a) => a !== actor);
+        setActors(updatedActors);
+      };
+
+      
     return (
         <div>
             <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
@@ -112,8 +118,11 @@ const actor = () => {
           </Box>
         )}
 
+
                 <Stack ml="50px">
-                    <Box py={10}>
+
+                    <Box py={10} >
+                        
                         <Flex>
                             <Image
                                 src="https://bit.ly/dan-abramov"
@@ -150,7 +159,7 @@ const actor = () => {
                                 <Button ml="20px" mr="10px">
                                     편집
                                 </Button>
-                                <Button>삭제</Button>
+                                <Button  onClick={() => handleDelete(actors[0])}>삭제</Button>
                             </Box>
                         </Flex>
                     </Box>
@@ -191,7 +200,7 @@ const actor = () => {
                                 <Button ml="20px" mr="10px">
                                     편집
                                 </Button>
-                                <Button>삭제</Button>
+                                <Button onClick={() => handleDelete(actors[1])}>삭제</Button>
                             </Box>
                         </Flex>
                     </Box>
@@ -231,7 +240,7 @@ const actor = () => {
                                 <Button ml="20px" mr="10px">
                                     편집
                                 </Button>
-                                <Button>삭제</Button>
+                                <Button onClick={() => handleDelete(actors[2])}>삭제</Button>
                             </Box>
                         </Flex>
                     </Box>
@@ -271,7 +280,7 @@ const actor = () => {
                                 <Button ml="20px" mr="10px">
                                     편집
                                 </Button>
-                                <Button>삭제</Button>
+                                <Button onClick={() => handleDelete(actors[3])}>삭제</Button>
                             </Box>
                         </Flex>
                     </Box>
@@ -312,7 +321,7 @@ const actor = () => {
                                 <Button ml="20px" mr="10px">
                                     편집
                                 </Button>
-                                <Button>삭제</Button>
+                                <Button onClick={() => handleDelete(actors[4])}>삭제</Button>
                             </Box>
                         </Flex>
                     </Box>

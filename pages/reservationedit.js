@@ -67,8 +67,8 @@ const Page = () => {
                       </Button>
                   </Flex>
                   <Editable defaultValue={state.title} onChange={(value) => handleStateChange('title', value)}>
-                    <EditablePreview fontSize="xl" />
-                     <EditableInput />
+                    <EditablePreview fontSize="xl"  border="1px solid" p={2} borderRadius="md"/>
+                     <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                     </Editable>
               </Stack>
               <Flex
@@ -92,22 +92,22 @@ const Page = () => {
                                         <Tr>
                                             <Td>공연 장소</Td>
                                             <Td><Editable defaultValue={state.location} onChange={(value) => handleStateChange('location', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview  border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable></Td>
                                         </Tr>
                                         <Tr>
                                             <Td>공연 기간</Td>
                                             <Td><Editable defaultValue={state.period} onChange={(value) => handleStateChange('period', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview   border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable></Td>
                                         </Tr>
                                         <Tr>
                                             <Td>공연 시간</Td>
                                             <Td><Editable defaultValue={state.time} onChange={(value) => handleStateChange('time', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview  border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable></Td>
                                         </Tr>
                                     </Tbody>
@@ -115,8 +115,8 @@ const Page = () => {
                                         <Tr>
                                             <Th>가격</Th>
                                             <Th><Editable defaultValue={state.price} onChange={(value) => handleStateChange('price', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview  border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable>
 </Th>
                                         </Tr>
@@ -162,15 +162,15 @@ const Page = () => {
                                     <Tr>
                                         <Td w={20}>장소</Td>
                                         <Td><Editable defaultValue={state. InfoLocation} onChange={(value) => handleStateChange(' InfoLocation', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview  border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable></Td>
                                     </Tr>
                                     <Tr>
                                         <Td w={20}>주소</Td>
                                         <Td><Editable defaultValue={state. address} onChange={(value) => handleStateChange('address', value)}>
-                                              <EditablePreview />
-                                                <EditableInput />
+                                              <EditablePreview  border="1px solid" p={2} borderRadius="md"/>
+                                                <EditableInput  border="1px solid" p={2} borderRadius="md"/>
                                                   </Editable></Td>
                                     </Tr>
                                 </Tbody>
