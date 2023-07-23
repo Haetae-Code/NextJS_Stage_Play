@@ -10,6 +10,11 @@ import {
     CardHeader,
     Image,
     Link,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
 } from "@chakra-ui/react";
 import React, { useState, Fragment, useEffect } from "react";
 import Slider from "react-slick";
@@ -222,7 +227,7 @@ const admin = () => {
                                                         whiteSpace: "normal",
                                                     }}
                                                 >
-                                                    <Link href="./reservationdetail">
+                                                    <Link href="./reservation_check">
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
