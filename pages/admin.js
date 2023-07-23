@@ -121,9 +121,7 @@ const admin = () => {
                         <Text mb={3} mt={8}>
                             관리자 메뉴
                         </Text>
-                        <Link color="inactiveColor" href="/reservation_check">
-                            <Button mb={3}>예약자 확인</Button>
-                        </Link>
+                        
 
                         <Link color="inactiveColor" href="/actor">
                             <Button mb={3}>배우 관리</Button>
@@ -224,12 +222,15 @@ const admin = () => {
                                                         whiteSpace: "normal",
                                                     }}
                                                 >
+                                                    <Link href="./reservationdetail">
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
                                                     >
                                                         조회
                                                     </Button>
+                                                    </Link>
+                                                    
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
