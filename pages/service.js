@@ -33,7 +33,7 @@ const service = () => {
             <Divider orientation="vertical" />
             <Text fontSize="20px"><br/>(각 부서별 역할 적는 곳)</Text>
         </Stack>
-        <a href="https://github.com/wwmmIIll"><Text fontSize="30px">김준서</Text></a> {/*<<<<<<<<<<<<개인 깃허브 주소 */}
+        <Text fontSize="30px"><a href="https://github.com/wwmmIIll">김준서</a></Text> {/*<<<<<<<<<<<<개인 깃허브 주소 */}
         <Text mt="5px" fontSize="20px">"재밌노"</Text>
         <br/>
         <Text fontSize="30px">박지환</Text>
