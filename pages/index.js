@@ -231,13 +231,13 @@ const Page = () => {
                                             {item.description}
                                         </Text>
                                     </CardBody>
-                                    <CardFooter>
+                                    
                                         {/* <Link href="./reservation"> */}
                                         <Button colorScheme="blue" onClick={() => handleReservation(item.id)}>
                                             예매하기
                                         </Button>
                                         {/* </Link> */}
-                                    </CardFooter>
+                                    
                                 </Card>
                             </Box>
                         ))}
