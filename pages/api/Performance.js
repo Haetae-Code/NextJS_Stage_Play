@@ -10,7 +10,9 @@ handler.use((req, res, next) => {
 
 handler.get(async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM Stage_Play_DB.Performance");
+        const results = await db.query(
+            "SELECT * FROM Stage_Play_DB.Performance"
+        );
         res.status(200).json(results);
     } catch (error) {
         console.error(error);

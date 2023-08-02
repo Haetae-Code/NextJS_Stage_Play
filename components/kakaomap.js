@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-
 function KakaoMap() {
     useEffect(() => {
         const mapScript = document.createElement("script");

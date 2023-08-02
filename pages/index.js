@@ -23,12 +23,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
 
 const Page = () => {
-
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
     const router = useRouter();
     const handleReservation = (id) => {
         router.push(`/reservation/${id}`);
-      };
+    };
 
     const handleSliderChange = (index) => {
         setSliderIndex(index);
@@ -44,15 +43,13 @@ const Page = () => {
     };
 
     const [Performance, setPerformance] = useState([]);
-    
+
     useEffect(() => {
         fetch("/api/Performance")
-        .then((response) => response.json())
-        .then((data) => setPerformance(data))
-        .catch((error) => console.error(error));
+            .then((response) => response.json())
+            .then((data) => setPerformance(data))
+            .catch((error) => console.error(error));
     }, []);
-
-
 
     // const dataMusical = Performance.map((PerformanceItem, index) => ({
     //     image:
@@ -70,27 +67,20 @@ const Page = () => {
     //   }));
 
     //뮤지컬학과 데이터
-    const dataMusical = Performance.map((PerformanceItem) => (
-        {
-            id: PerformanceItem.performance_key,
-            image: PerformanceItem.img_url,
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        }
-      ));
+    const dataMusical = Performance.map((PerformanceItem) => ({
+        id: PerformanceItem.performance_key,
+        image: PerformanceItem.img_url,
+        title: PerformanceItem.title,
+        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+    }));
 
-
-
-    
     //영화과 데이터
-    const dataMovie = Performance.map((PerformanceItem) => (
-        {
-            id: PerformanceItem.performance_key,
-            image: PerformanceItem.img_url,
-            title: PerformanceItem.title,
-            description: '04월 18일(화) 온라인, ' + PerformanceItem.location,
-        }
-      ));
+    const dataMovie = Performance.map((PerformanceItem) => ({
+        id: PerformanceItem.performance_key,
+        image: PerformanceItem.img_url,
+        title: PerformanceItem.title,
+        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+    }));
 
     return (
         <div>
@@ -164,11 +154,14 @@ const Page = () => {
                                         {item.description}
                                     </Text>
                                 </CardBody>
-                                    {/* <Link href="./reservation"> */}
-                                    <Button colorScheme="blue" onClick={() => handleReservation(item.id)}>
-                                        예매하기
-                                    </Button>
-                                    {/* </Link> */}
+                                {/* <Link href="./reservation"> */}
+                                <Button
+                                    colorScheme="blue"
+                                    onClick={() => handleReservation(item.id)}
+                                >
+                                    예매하기
+                                </Button>
+                                {/* </Link> */}
                             </Card>
                         </Box>
                     ))}
@@ -231,13 +224,17 @@ const Page = () => {
                                             {item.description}
                                         </Text>
                                     </CardBody>
-                                    
-                                        {/* <Link href="./reservation"> */}
-                                        <Button colorScheme="blue" onClick={() => handleReservation(item.id)}>
-                                            예매하기
-                                        </Button>
-                                        {/* </Link> */}
-                                    
+
+                                    {/* <Link href="./reservation"> */}
+                                    <Button
+                                        colorScheme="blue"
+                                        onClick={() =>
+                                            handleReservation(item.id)
+                                        }
+                                    >
+                                        예매하기
+                                    </Button>
+                                    {/* </Link> */}
                                 </Card>
                             </Box>
                         ))}

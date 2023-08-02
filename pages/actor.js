@@ -86,6 +86,15 @@ const Actor = () => {
         imageUrl: "",
       });
     };
+
+    function truncateText(text, maxLength) {
+      if (text.length <= maxLength) {
+        return text;
+      } else {
+        return text.substring(0, maxLength) + '...';
+      }
+    }
+    
   return (
     <div>
       <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
@@ -145,14 +154,14 @@ const Actor = () => {
 <Stack ml="50px">
         <Flex flexWrap="wrap" gap="20px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor, index) => (
-            <Box key={index} py={10} flex="1 1 45%">
+            <Box key={index} py={10} flex="1 1 45%" mt="-35px">
               <Flex>
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
                   alt="No image"
                   borderRadius="full"
                   boxSize="100px"
-                  mt="30px"
+                  mt="center"
                 />
                 <TableContainer ml="30px">
                   <Table variant="simple">
@@ -168,7 +177,7 @@ const Actor = () => {
                               name="name"
                             />
                           ) : (
-                            <Text isTruncated>{actor.name}</Text>
+                            <Text isTruncated> {truncateText(actor.name, 10)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -183,7 +192,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated>{actor.department}</Text>
+                            <Text isTruncated> {truncateText(actor.department, 4)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -198,7 +207,7 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{actor.introduction}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction, 4)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -215,7 +224,7 @@ const Actor = () => {
                       <Button onClick={handleCancelEdit}>취소</Button>
                     </>
                   ) : (
-                    <Button ml="20px" mr="10px" >
+                    <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
                   )}
@@ -223,10 +232,12 @@ const Actor = () => {
                 </Box>
               </Flex>
             </Box>
+
           ))}
         </Flex>
       </Stack>
       </Box>
+
     </div>
   );
 };

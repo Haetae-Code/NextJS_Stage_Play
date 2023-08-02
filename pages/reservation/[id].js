@@ -31,6 +31,10 @@ import { useRouter } from "next/router";
 const Page = (actorData) => {
     const router = useRouter();
     const { id } = router.query;
+    const handleReservationdetail = (id) => {
+        router.push(`/reservationdetail/${id}`);
+      };
+
     const [actors, setActors] = useState([]);
     useEffect(() => {
         fetch(`/api/actors/${id}`)
@@ -114,12 +118,13 @@ const Page = (actorData) => {
                             </TableContainer>
                         </Box>
                         <Box>
-                            <Link href="../reservationdetail">
+                            <Link>
                                 <Button
                                     w={"100%"}
                                     size={["sm", "md"]}
                                     border="2px"
                                     colorScheme="blue"
+                                    onClick={() => handleReservationdetail(id)}
                                 >
                                     {" "}
                                     예매하기
