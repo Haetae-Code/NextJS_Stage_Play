@@ -29,57 +29,11 @@ const reservationcheck = () => {
         <Box>
             <Heading>예약자 리스트</Heading>
             <Flex justify={"space-between"}>
-                {/*예약자 검색 박스*/}
-                <Box
-                    mr={1}
-                    w="45%"
-                    mt={5}
-                    fontSize="md"
-                    borderRadius={15}
-                    border="1px solid dodgerblue"
-                    p={4}
-                >
-                    <Box align="center" justify="center">
-                        <Flex>
-                            <Text w="25%">이름: &nbsp;</Text>
-                            <Input mb={2} w="full" name="name" type="text" />
-                        </Flex>
-
-                        <Flex>
-                            <Text w="25%">선택: &nbsp;</Text>
-
-                            <Select mb={2} w="full" name="student">
-                                <option>모두</option>
-                                <option>재학생</option>
-                                <option>외부인</option>
-                            </Select>
-                        </Flex>
-
-                        <Flex>
-                            <Text w="25%">학번: &nbsp;</Text>
-                            <Input mb={2} w="full" name="name" type="text" />
-                        </Flex>
-
-                        <Flex>
-                            <Text w="25%">학과: &nbsp;</Text>
-                            <Input mb={2} w="full" name="name" type="text" />
-                        </Flex>
-
-                        <Flex>
-                            <Text w="25%">전화번호: &nbsp;</Text>
-                            <Input mb={5} w="full" name="name" type="text" />
-                        </Flex>
-
-                        <Button colorScheme="blue" /*onClick={() => search()}*/>
-                            검색
-                        </Button>
-                    </Box>
-                </Box>
 
                 {/*공연 예약 현황 박스*/}
                 <Box
                     mr={1}
-                    w="55%"
+                    w="61%"
                     mt={5}
                     fontSize="md"
                     borderRadius={15}
