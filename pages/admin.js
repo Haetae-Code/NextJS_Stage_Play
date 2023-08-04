@@ -1,4 +1,8 @@
 //import NextLink from "next/link";
+import { useRouter } from 'next/router';
+import { AuthContext } from '../components/AuthProvider';
+import NextLink from 'next/link';
+
 import {
     Text,
     Button,
@@ -16,14 +20,19 @@ import {
     AccordionPanel,
     AccordionIcon,
 } from "@chakra-ui/react";
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Reservation from "./reservation";
 import ReservationEdit from "./reservationedit";
 
+
 const admin = () => {
+    const router = useRouter();
+    const { isLoggedIn } = useContext(AuthContext);
+    const [showComponent, setShowComponent] = useState(false);
+
     const [sliderIndex, setSliderIndex] = useState(0);
     const [slidesToShow, setSlidesToShow] = useState(3);
 
@@ -32,6 +41,22 @@ const admin = () => {
 
     const [showEditPage, setShowEditPage] = useState(false);
     const [reservationData, setReservationData] = useState(false);
+
+    useEffect(() => {
+        // 로그인 상태를 체크하여 로그인하지 않은 경우 login 페이지로 리다이렉트
+        //나중에 로컬+서버 각각 쿠키 캐시 코드에서 사용자 로그인 상태 확인, 유지 하는걸로 바꿔야함. 안그럼 해킹 쏘 퍼킹 이지 해짐. 유가릿? 디스이즈 저스트 뽈 테스트. 근데 캐시 로직은 누가 짜려나 히히
+        if (!isLoggedIn) {
+          router.push('/login');
+        }
+      }, [isLoggedIn, router]);
+
+    useEffect(() => { //컴포먼트 연결 지연 테스트코드
+    const timer = setTimeout(() => {
+        setShowComponent(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+    }, []);
 
     const handleClick = () => {
         setShowEditPage((prevValue) => !prevValue);
@@ -67,6 +92,7 @@ const admin = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+    
 
     const settings = {
         dots: true,
@@ -107,8 +133,10 @@ const admin = () => {
     ];
 
     return (
-        <div style={{ display: "flex" }}>
-            {/* 1번 박스(관리자 사이드바/관리자페이지) */}
+        <div>
+            {isLoggedIn ? ( 
+            <div style={{ display: "flex" }}>
+                         {/* 1번 박스(관리자 사이드바/관리자페이지) */}
             <Box flex="1" borderRight="2px solid" borderColor="inherit">
                 {/* 관리자 사이드바 */}
 
@@ -288,7 +316,23 @@ const admin = () => {
                     </Box>
                 </Box>
             </Box>
-        </div>
+            </div>
+            ) : ( 
+            <div>
+                
+                <Box>
+                <Text fontSize="20px" mt="50px" mb="30px" textAlign="center">
+                    로그인이 필요한 페이지입니다.
+                </Text>
+                <Button as={NextLink} href="/login" mb={3}>
+                    로그인 페이지로 이동
+                </Button>
+                </Box>
+            </div>
+            )}
+      </div>
+
+
     );
 };
 
