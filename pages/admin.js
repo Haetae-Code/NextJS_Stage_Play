@@ -50,13 +50,13 @@ const admin = () => {
         }
       }, [isLoggedIn, router]);
 
-    useEffect(() => { //컴포먼트 연결 지연 테스트코드
-    const timer = setTimeout(() => {
-        setShowComponent(true);
-    }, 500);
+    // useEffect(() => { //컴포먼트 연결 지연 테스트코드
+    // const timer = setTimeout(() => {
+    //     setShowComponent(true);
+    // }, 500);
 
-    return () => clearTimeout(timer);
-    }, []);
+    // return () => clearTimeout(timer);
+    // }, []);
 
     const handleClick = () => {
         setShowEditPage((prevValue) => !prevValue);
