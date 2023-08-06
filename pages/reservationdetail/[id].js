@@ -50,7 +50,6 @@ import {
     const [occupation, setOccupation] = useState("");  
     const [reservationStatus, setReservationStatus] = useState("");
   
-  
     const [perform_Info, setperform_Info] = useState([]);
     
     useEffect(() => {
@@ -59,29 +58,25 @@ import {
         .then((data) => setperform_Info(data))
         .catch((error) => console.error(error));
     }, [id]);
-    const handlTimeChange = (event) => {
+    const handleTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
-  
+
+    const timeOptions = perform_Info
+    .filter((perform) => perform.view_day === selectedTime)
+    .map((perform) => perform.view_time);
+
     for (let i = 0; i < perform_Info.length; i++) {
-        // view_day 파싱
         const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
         const matchedDay = perform_Info[i].view_day.match(dateRegex);
         perform_Info[i].view_day = matchedDay[1];
-      
-        // view_time 파싱
+
         const timeParts = perform_Info[i].view_time.split(':');
         const hour = parseInt(timeParts[0], 10);
         const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
         perform_Info[i].view_time = `${hour}시 ${minute}분`;
-      }
-          
-    const PerformanceDate = perform_Info.view_day;
-    const splitPerformanceDate = PerformanceDate.split("~"); // "~" 문자를 기준으로 분할
-  
-    const timeOptions = selectedTime === splitPerformanceDate[0] ? [perform_Info[0].view_time] : [];
-  
-  
+      }      
+
     const handleStudentButton = () => {
         setUserType("student");
         setShowStudentForm(true);
@@ -109,7 +104,7 @@ import {
               department: department,
               id: studentID,
               identity: occupation,
-              time_key: time_key,
+              time_key: perform_Info[0].performance_key,
             }),
           });
     
@@ -128,7 +123,7 @@ import {
   
     return (
         <>
-            {perform_Info.slice(0, 1).map((perform_Info) => (
+            {perform_Info.slice(0, 1).map((perform) => (
             <Card
                 direction={{ base: "column", sm: "row" }}
                 overflow="hidden"
@@ -137,17 +132,17 @@ import {
                 <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src={perform_Info.img_url}
+                    src={perform.img_url}
                     alt=""
                 />
   
                 <CardBody>
-                    <Heading size="md">{perform_Info.title}</Heading>
+                    <Heading size="md">{perform.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
-                    <Text py="2">장 소:{perform_Info.address} {perform_Info.location}</Text>
+                    <Text py="2">장 소:{perform.address} {perform.location}</Text>
                     <Text py="2">출연진:</Text>
-                    <Text py="2">기 간:{perform_Info.view_day}</Text>
-                    <Text py="2">시 간:{perform_Info.view_time}</Text>
+                    <Text py="2">기 간:{perform.view_day}</Text>
+                    <Text py="2">시 간:{perform.view_time}</Text>
                     <Text py="2">줄거리:</Text>
                 </CardBody>
             </Card>
@@ -230,9 +225,9 @@ import {
                 <Input
                     size="md"
                     type="date"
-                    min="2023-08-14"
-                    max="2023-08-14"
-                    onChange={handlTimeChange}
+                    min="2023-08-01"
+                    max="2023-08-31"
+                    onChange={handleTimeChange}
                     value={selectedTime}
                 />
                 <print>&nbsp;</print>
@@ -241,7 +236,7 @@ import {
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
   
-                <select>
+                <select value={selectedTime} onChange={handleTimeChange}>
                     {timeOptions.map((time) => (
                         <option key={time} value={time}>
                             {time}
