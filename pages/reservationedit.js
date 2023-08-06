@@ -23,9 +23,20 @@ import {
     Editable,
     EditablePreview,
     EditableInput,
+    Divider,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverAnchor,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import KakaoMap from "../components/kakaomap";
+import Actor from "./addedactor";
 
 const Page = () => {
     //const [title, setTitle] = useState("제목");
@@ -168,9 +179,6 @@ const Page = () => {
                                                 </Editable>
                                             </Td>
                                         </Tr>
-                                    </Tbody>
-                                    
-                                    <Tbody>
                                         <Tr>
                                             <Td>
                                                 상세 장소
@@ -225,10 +233,30 @@ const Page = () => {
                                             </Editable>
                                             </Td>
                                         </Tr>
-                                        
                                     </Tbody>
+                                    
                                 </Table>
+                                
                             </TableContainer>
+                            <Divider/>
+                                                                                
+                            <Text fontSize="xl">배우</Text>
+                            <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
+                            <Box>
+                                <Popover>
+                                <PopoverTrigger>
+                                    <Button>배우 추가</Button>
+                                </PopoverTrigger>
+                                <PopoverContent width="1000px" maxH="xl" placement="right">
+                                    <PopoverHeader fontSize="xl">등록 배우 조회</PopoverHeader>
+                                    <PopoverBody overflow="auto"><Actor/></PopoverBody>
+                                </PopoverContent>
+                                </Popover>
+                            </Box>
+                            
+                            
+                            <Divider/>
+                                
                         </Box>
                        
                     </Stack>
