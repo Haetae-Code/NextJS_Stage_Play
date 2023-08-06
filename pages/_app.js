@@ -8,6 +8,7 @@ import Nav from "../components/NavBar";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
 import { AuthContext } from '../components/AuthProvider';
+//import "../public/login_func/css/service-style.css"; //service에서의 탑 버튼 만들기
 
 
 if (typeof window !== "undefined") {
