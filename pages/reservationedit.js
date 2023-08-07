@@ -16,15 +16,27 @@ import {
     TabPanels,
     Tab,
     TabPanel,
+    Text,
     Button,
     Stack,
     Link,
     Editable,
     EditablePreview,
     EditableInput,
+    Divider,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverAnchor,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import KakaoMap from "../components/kakaomap";
+import Actor from "./addedactor";
 
 const Page = () => {
     //const [title, setTitle] = useState("제목");
@@ -51,56 +63,45 @@ const Page = () => {
     return (
         <Box>
             <Box>
-                <Stack py={5}>
-                    <Flex>
-                        <Button colorScheme="blue" size="xs">
-                            {" "}
-                            현재상영중{" "}
-                        </Button>
-                        <Button colorScheme="blue" size="xs">
-                            {" "}
-                            예매중{" "}
-                        </Button>
-                        <Button colorScheme="red" size="xs">
-                            {" "}
-                            D-100{" "}
-                        </Button>
-                    </Flex>
-                    <Editable
-                        defaultValue={state.title}
-                        onChange={(value) => handleStateChange("title", value)}
-                    >
-                        <EditablePreview
-                            fontSize="xl"
-                            border="1px solid"
-                            p={2}
-                            borderRadius="md"
-                        />
-                        <EditableInput
-                            border="1px solid"
-                            p={2}
-                            borderRadius="md"
-                        />
-                    </Editable>
-                </Stack>
+                
                 <Flex
-                    justify={"center"}
+                    
                     alignItems={"center"}
                     flexDirection={["column", "row"]}
                 >
-                    <Box mb={[10, 0]} mr={[0, 10]}>
-                        <Image
-                            src="https://bit.ly/dan-abramov"
-                            alt="No image"
-                            shadow="2xl"
-                            display="block"
-                        />
-                    </Box>
+                    
                     <Stack>
                         <Box>
                             <TableContainer>
                                 <Table variant="simple" size={["sm", "md"]}>
                                     <Tbody>
+                                        <Tr>
+                                            <Td>제목</Td>
+                                            <Td>    
+                                                <Editable
+                                                defaultValue={
+                                                    state.title
+                                                }
+                                                onChange={(value) => 
+                                                    handleStateChange(
+                                                        "title", 
+                                                        value
+                                                        )
+                                                    }
+                                                >                       
+                                                    <EditablePreview
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="md"
+                                                    />
+                                                    <EditableInput
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="sm"
+                                                    />
+                                                </Editable>
+                                            </Td>
+                                        </Tr>
                                         <Tr>
                                             <Td>공연 장소</Td>
                                             <Td>
@@ -178,75 +179,11 @@ const Page = () => {
                                                 </Editable>
                                             </Td>
                                         </Tr>
-                                    </Tbody>
-                                    <Tfoot>
                                         <Tr>
-                                            <Th>가격</Th>
-                                            <Th>
-                                                <Editable
-                                                    defaultValue={state.price}
-                                                    onChange={(value) =>
-                                                        handleStateChange(
-                                                            "price",
-                                                            value
-                                                        )
-                                                    }
-                                                >
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                </Editable>
-                                            </Th>
-                                        </Tr>
-                                    </Tfoot>
-                                </Table>
-                            </TableContainer>
-                        </Box>
-                        <Box>
-                            <Link href="./reservationdetail">
-                                <Button
-                                    w={"100%"}
-                                    size={["sm", "md"]}
-                                    border="2px"
-                                    colorScheme="blue"
-                                >
-                                    {" "}
-                                    예매하기
-                                </Button>
-                            </Link>
-                        </Box>
-                    </Stack>
-                </Flex>
-            </Box>
-
-            <Box>
-                <Tabs align="center" pt={"20"}>
-                    <TabList>
-                        <Tab>공연 정보</Tab>
-                        <Tab>캐스팅 정보</Tab>
-                    </TabList>
-
-                    <TabPanels>
-                        <TabPanel>
-                            <Table>
-                                <Thead>
-                                    <Tr>
-                                        <Th fontSize={"x-large"}>공연 장소</Th>
-                                    </Tr>
-                                </Thead>
-                            </Table>
-                            <Table>
-                                <Tbody>
-                                    <Tr>
-                                        <Td w={20}>장소</Td>
-                                        <Td>
+                                            <Td>
+                                                상세 장소
+                                            </Td>
+                                            <Td>
                                             <Editable
                                                 defaultValue={
                                                     state.InfoLocation
@@ -269,11 +206,11 @@ const Page = () => {
                                                     borderRadius="md"
                                                 />
                                             </Editable>
-                                        </Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td w={20}>주소</Td>
-                                        <Td>
+                                            </Td>
+                                        </Tr>
+                                        <Tr>
+                                            <Td>도로명 주소</Td>
+                                            <Td>
                                             <Editable
                                                 defaultValue={state.address}
                                                 onChange={(value) =>
@@ -294,50 +231,39 @@ const Page = () => {
                                                     borderRadius="md"
                                                 />
                                             </Editable>
-                                        </Td>
-                                    </Tr>
-                                </Tbody>
-                            </Table>
-                            <Box py={10}>
-                                {/* <Image
-                                    src="https://bit.ly/dan-abramov"
-                                    alt="Dan Abramov"
-                                /> */}
-                                {/* 카카오맵 */}
-                                {/* <kakaomap></kakaomap> */}
-                                <KakaoMap></KakaoMap>
+                                            </Td>
+                                        </Tr>
+                                    </Tbody>
+                                    
+                                </Table>
+                                
+                            </TableContainer>
+                            <Divider/>
+                                                                                
+                            <Text fontSize="xl">배우</Text>
+                            <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
+                            <Box>
+                                <Popover>
+                                <PopoverTrigger>
+                                    <Button>배우 추가</Button>
+                                </PopoverTrigger>
+                                <PopoverContent width="1000px" maxH="xl" placement="right">
+                                    <PopoverHeader fontSize="xl">등록 배우 조회</PopoverHeader>
+                                    <PopoverBody overflow="auto"><Actor/></PopoverBody>
+                                </PopoverContent>
+                                </Popover>
                             </Box>
+                            
+                            
+                            <Divider/>
+                                
+                        </Box>
+                       
+                    </Stack>
+                </Flex>
+            </Box>
 
-                            <Table>
-                                <Thead>
-                                    <Tr>
-                                        <Th fontSize={"x-large"}>
-                                            포스터 위치
-                                        </Th>
-                                    </Tr>
-                                </Thead>
-                            </Table>
-                            <Box pt={10}>
-                                <Image
-                                    src="https://bit.ly/dan-abramov"
-                                    alt="Dan Abramov"
-                                />
-                            </Box>
-                        </TabPanel>
-
-                        <TabPanel py={10}>
-                            <Stack>
-                                <Box py={10}></Box>
-
-                                <Box py={10}></Box>
-
-                                <Box py={10}></Box>
-
-                                <Box py={10}></Box>
-                            </Stack>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
+            <Box>
                 <Button size="sm" onClick={handleSaveReservation}>
                     저장
                 </Button>

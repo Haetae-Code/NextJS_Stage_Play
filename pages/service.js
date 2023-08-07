@@ -1,6 +1,31 @@
 //import NextLink from "next/link";
 import { Text, Heading, Box, Divider, Stack, Image, Center } from "@chakra-ui/react";
-import React from "react";
+import React from "react"; //중괄호 내용 삽입 , { useState, useEffect }
+//import { Link as ScrollLink } from "react-scroll"; //버튼을 누르면 위로 이동하는 애니메이션 추가 예정
+//import "../public/login_func/css/service-style.css";
+
+//야매 도전
+{/*const service = () => {
+    const [showScrollButton, setShowScrollButton] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowScrollButton(true);
+            } else {
+                setShowScrollButton(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+*/}
 
 const service = () => {
     return (
@@ -11,7 +36,9 @@ const service = () => {
                 </Heading>
             </Center>
             <Divider mt={8} mb={4} />
-            <Text>개발자를 클릭하면 개발자 깃허브 주소로 갈 수 있어요</Text>
+            <Center h="6vh">
+                <Text>개발자를 클릭하면 개발자 깃허브 주소로 갈 수 있어요</Text>
+            </Center>
             <br />
             <Box textAlign="left">
                 <Stack direction="row" h="80px">
@@ -24,7 +51,6 @@ const service = () => {
                         (각 부서별 역할 적는 곳)
                     </Text>
                 </Stack>
-                <div className={styles.imageTextContainer}>
                 <Image
                  src="https://bit.ly/dan-abramov"
                  alt="사진"
@@ -32,13 +58,10 @@ const service = () => {
                  boxSize="150px"
                  mt="center"
                 />
-                </div>
-                <div>
                     <Text fontSize="40px" mr="3px">채준혁</Text>
                     <Text mt="5px" fontSize="20px">
                         너무 재미있어요
                     </Text>
-                </div>
                 <br />
                 <br />
                 <Stack direction="row" h="80px">
@@ -195,6 +218,22 @@ const service = () => {
                     너무 재미있어요
                 </Text>
             </Box>
+             {/*//스크롤 버튼 추가해야 함 -> css 파일 필요
+                <div>
+                    <button id="back-to-top" className={showScrollButton ? 'visible' : ' '} onClick={scrollToTop}>
+                        Back to Top
+                    </button>
+                </div>
+                <center id="top" mt="20px">
+                    <ScrollLink
+                        to="top"
+                        smooth={true}
+                        duration={500}
+                    >
+                        TOP
+                    </ScrollLink>
+                </center> 
+                */}
         </div>
     );
 };
