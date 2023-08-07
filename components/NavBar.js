@@ -77,7 +77,7 @@ const Navbar = (props) => {
         <Fragment>
             <VStack>
                 <Box
-                    position="fixed"
+                    position="flex"
                     as="nav"
                     w="100%"
                     bg={useColorModeValue("#ffffff40", "#20202380")}
