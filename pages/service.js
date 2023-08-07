@@ -32,10 +32,11 @@ const service = () => {
                  boxSize="150px"
                  mt="center"
                 />
+                </div>
                 <div>
                     <Text fontSize="40px" mr="3px">채준혁</Text>
                     <Text mt="5px" fontSize="20px">
-                        "너무 재미있어요"
+                        너무 재미있어요
                     </Text>
                 </div>
                 <br />
@@ -62,7 +63,7 @@ const service = () => {
                 </Text>{" "}
                 {/*<<<<<<<<<<<<개인 깃허브 주소 */}
                 <Text mt="5px" fontSize="20px">
-                    "재밌노"
+                재밌노
                 </Text>
                 <br />
                 <Image
@@ -74,7 +75,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">박지환</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <Image
@@ -86,7 +87,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">김민경</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <br />
@@ -109,7 +110,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">전민혁</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <Image
@@ -121,7 +122,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">전채린</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <br />
@@ -144,7 +145,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">윤태성</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <Image
@@ -156,7 +157,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">채준혁</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <Image
@@ -168,7 +169,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">최인서</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
                 <br />
                 <br />
@@ -191,7 +192,7 @@ const service = () => {
                 />
                 <Text fontSize="30px">이준혁</Text>
                 <Text mt="5px" fontSize="20px">
-                    "너무 재미있어요"
+                    너무 재미있어요
                 </Text>
             </Box>
         </div>

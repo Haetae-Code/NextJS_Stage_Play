@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import {
   Text,
-  Heading,
   Box,
   Divider,
   Stack,
-  VStack,
 } from "@chakra-ui/react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 
@@ -39,16 +37,16 @@ const service = () => {
   const creditsContent = [
     <CustomCredit title="Manager" roles="(각 부서별 역할 적는 곳)">
       <Text fontSize="30px">채준혁</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
+      <Text mt="5px" fontSize="20px">너무 재미있어요</Text>
     </CustomCredit>,
 
     <CustomCredit title="Front" roles="(각 부서별 역할 적는 곳)">
       <Text fontSize="30px"><a href="https://github.com/wwmmIIll">김준서</a></Text>
-      <Text mt="5px" fontSize="20px">"재밌노"</Text>
+      <Text mt="5px" fontSize="20px">재밌노</Text>
       <Text fontSize="30px">박지환</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
+      <Text mt="5px" fontSize="20px">너무 재미있어요</Text>
       <Text fontSize="30px">김민경</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
+      <Text mt="5px" fontSize="20px">너무 재미있어요</Text>
     </CustomCredit>,
 
     // 이하 생략 (Backend, DB, Server에 대한 크레딧 정보 추가)

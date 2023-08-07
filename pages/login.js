@@ -1,6 +1,7 @@
+import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon} from "@chakra-ui/react";
 import { useState, useContext } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { AuthContext } from '../components/AuthProvider';
 
 const LoginPage = () => {
@@ -8,10 +9,14 @@ const LoginPage = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handlePasswordToggle = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleLogin = (e) => { //나중에 백엔 서버랑 디비랑 로컬 사용자 캐시 인증해서 로그인 상태 확인하고 로그인 일정 시간 유지 시키는 작업 필요함
-    e.preventDefault();    
+    e.preventDefault();
     const validEmail = '1234@naver.com';
     const validPassword = '1234';
     if (email === validEmail && password === validPassword) {
@@ -28,45 +33,61 @@ const LoginPage = () => {
         <div className="container-login100">
           <div className="wrap-login100">
             <form className="login100-form validate-form" onSubmit={handleLogin}>
-              <span className="login100-form-title p-b-26">
-                CWU&nbsp;&nbsp;STAGE&nbsp;&nbsp;PLAY
-              </span>
+              <Text className="login100-form-title p-b-26">
+                CWU STAGE PLAY
+              </Text>
               <span className="login100-form-title p-b-48">
-                <img src="/asset/image/cwulogo.png" width="200" height="200" alt="Logo" />
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <img src="/asset/image/cwulogo.png" width="200" height="200" alt="Logo" />
+                </Box>
                 <i className="icon-class-name"></i> {/* 아이콘 클래스 이름 추가 */}
               </span>
-
-              <div className="wrap-input100 validate-input" data-validate="잘못된 이메일">
-                <input
-                  className="input100"
+              {/* 이메일 입력 */}
+              <FormControl className="wrap-input100" isInvalid={false} isRequired>
+                <FormLabel color={"black"} htmlFor="email">이메일</FormLabel>
+                <Input
                   type="text"
-                  name="email"
+                  id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                />
-                <span className="focus-input100" data-placeholder="이메일"></span>
-              </div>
-
-              <div className="wrap-input100 validate-input" data-validate="비밀번호 입력">
-                <span className="btn-show-pass">
-                  <i className="zmdi zmdi-eye"></i>
-                </span>
-                <input
                   className="input100"
-                  type="password"
-                  name="pass"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  border={"none"}
                 />
-                <span className="focus-input100" data-placeholder="비밀번호"></span>
-              </div>
+                {/* 오류 메시지가 필요한 경우 */}
+                {/*<FormErrorMessage>이메일 틀렸다!</FormErrorMessage>*/}
+              </FormControl>
+
+              {/* 비밀번호 입력 */}
+              <FormControl className="wrap-input100" id="password" isRequired>
+                <FormLabel color={"black"}>비밀번호</FormLabel>
+                <InputGroup>
+                  <Input
+                    color={"black"}
+                    type={showPassword ? 'text' : 'password'}
+                    name="pass"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    border={"none"}
+                  />
+                  <InputRightElement>
+                  {/* 눌렀을때 비밀번호 보이게 */}
+                    <Icon
+                      color={"black"}
+                      as={showPassword ? FiEye : FiEyeOff}
+                      className="zmdi zmdi-eye"
+                      onClick={handlePasswordToggle}
+                      cursor={"pointer"}
+                    />
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
 
               <div className="container-login100-form-btn">
                 <div className="wrap-login100-form-btn">
                   <div className="login100-form-bgbtn"></div>
-                  <button className="login100-form-btn" type="submit">
+                  <Button colorScheme="blue" color={"white"} className="login100-form-btn" type="submit">
                     로그인
-                  </button>
+                  </Button>
                 </div>
               </div>
 

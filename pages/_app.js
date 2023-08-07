@@ -1,4 +1,3 @@
-import { useState, useContext, useEffect } from 'react';
 import { AnimatePresence } from "framer-motion";
 //import { Box, Container, Flex } from "@chakra-ui/react";
 import Layout from "../components/layouts/layout";
@@ -7,7 +6,6 @@ import Chakra from "../components/chakra";
 import Nav from "../components/NavBar";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
-import { AuthContext } from '../components/AuthProvider';
 
 
 if (typeof window !== "undefined") {
