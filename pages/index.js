@@ -5,15 +5,12 @@ import {
     Heading,
     Box,
     Button,
-    Flex,
     Text,
     CardBody,
-    CardFooter,
     CardHeader,
     Stack,
     Card,
     Image,
-    Link,
     Divider,
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";

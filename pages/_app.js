@@ -1,4 +1,3 @@
-import { useState, useContext, useEffect } from 'react';
 import { AnimatePresence } from "framer-motion";
 //import { Box, Container, Flex } from "@chakra-ui/react";
 import Layout from "../components/layouts/layout";

@@ -39,6 +39,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scroll": "^1.8.9",
+    "react-icons": "^4.10.1",
     "react-slick": "^0.29.0",
     "serverless-mysql": "^1.5.4",
     "slick-carousel": "^1.8.1",

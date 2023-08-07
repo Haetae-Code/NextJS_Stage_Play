@@ -1,13 +1,8 @@
 import {
     Progress,
-    CardFooter,
-    CardBody,
     Image,
-    CardHeader,
-    Card,
     Box,
     Button,
-    Container,
     Flex,
     Input,
     Select,
@@ -20,7 +15,6 @@ import {
     Th,
     Tbody,
     Td,
-    Tfoot,
     Stack,
 } from "@chakra-ui/react";
 
@@ -143,7 +137,7 @@ const reservationcheck = () => {
                                     </Tr>
                                 </Thead>
 
-                                {/*예약자 확인*/}
+                                {/*재학생 예약자 확인*/}
                                 <Tbody>
                                     <Tr>
                                         <Td>김준서</Td>
@@ -208,7 +202,7 @@ const reservationcheck = () => {
                                     </Tr>
                                 </Thead>
 
-                                {/*예약자 확인*/}
+                                {/*외부인 예약자 확인*/}
                                 <Tbody>
                                     <Tr>
                                         <Td>채준혁</Td>

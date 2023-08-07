@@ -14,17 +14,11 @@ import {
     CardHeader,
     Image,
     Link,
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
 } from "@chakra-ui/react";
-import React, { useState, Fragment, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Reservation from "./reservation";
 import ReservationEdit from "./reservationedit";
 
 
@@ -50,13 +44,13 @@ const admin = () => {
         }
       }, [isLoggedIn, router]);
 
-    useEffect(() => { //컴포먼트 연결 지연 테스트코드
-    const timer = setTimeout(() => {
-        setShowComponent(true);
-    }, 500);
+    // useEffect(() => { //컴포먼트 연결 지연 테스트코드
+    // const timer = setTimeout(() => {
+    //     setShowComponent(true);
+    // }, 500);
 
-    return () => clearTimeout(timer);
-    }, []);
+    // return () => clearTimeout(timer);
+    // }, []);
 
     const handleClick = () => {
         setShowEditPage((prevValue) => !prevValue);

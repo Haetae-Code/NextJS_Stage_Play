@@ -11,7 +11,16 @@ import {
   Tfoot,
   Tr,
   Th,
-  Input
+  Input,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ModalCloseButton,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+  Center
 } from "@chakra-ui/react";
 
 const Actor = () => {
@@ -24,6 +33,8 @@ const Actor = () => {
       imageUrl: "",
     });
     const [isEditing, setIsEditing] = useState(false);
+    const{isOpen,onOpen,onClose}=useDisclosure();
+  
 
     useEffect(() => {
       fetch("/api/actors")
@@ -54,10 +65,6 @@ const Actor = () => {
       setIsFormVisible(false);
     };
   
-    const handleDelete = (actor) => {
-      const updatedActors = actors.filter((a) => a !== actor);
-      setActors(updatedActors);
-    };
   
     const handleEdit = (actor) => {
       setEditableActor(actor);
@@ -78,15 +85,6 @@ const Actor = () => {
       });
     };
 
-    const handleCancelEdit = () => {
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-    };
-
     function truncateText(text, maxLength) {
       if (text.length <= maxLength) {
         return text;
@@ -94,6 +92,8 @@ const Actor = () => {
         return text.substring(0, maxLength) + '...';
       }
     }
+
+
     
   return (
     <div>
@@ -151,19 +151,64 @@ const Actor = () => {
           </Box>
         )}
 
-<Stack ml="50px">
-        <Flex flexWrap="wrap" gap="20px" maxHeight="1000px" overflowY="auto">
+<Stack ml="80px">
+        <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor, index) => (
-            <Box key={index} py={10} flex="1 1 45%" mt="-35px">
+            <Box key={index} py={10} flex="1 1 45%" mt="-20px" ml="40px">
               <Flex>
+                <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
                   alt="No image"
                   borderRadius="full"
                   boxSize="100px"
-                  mt="center"
+                 onClick={onOpen}
                 />
-                <TableContainer ml="30px">
+                </Center>
+                <Modal isCentered isOpen={isOpen} onClose={onClose} size="xl">
+                 <ModalContent>
+                  <ModalHeader>배우 어쩌구</ModalHeader>
+                  <ModalCloseButton/>
+                  <ModalBody>
+                  <Image
+                  src={actor.imageUrl || "https://bit.ly/dan-abramov"}
+                  alt="No image"
+                  borderRadius="full"
+                  boxSize="100px"
+                  mt="center"
+                 onClick={onOpen}
+                />
+                 <TableContainer ml="40px">
+                  <Table variant="simple">
+                    <Tfoot>
+                      <Tr>
+                        <Th>이름</Th>
+                        <Th>
+                           <Text isTruncated> {actor.name}</Text>
+                        </Th>
+                      </Tr>
+                      <Tr>
+                        <Th>학과</Th>
+                        <Th>
+                          <Text isTruncated> {actor.department}</Text>
+                        </Th>
+                      </Tr>
+                      <Tr>
+                        <Th>소개</Th>
+                        <Th>
+                          <Text isTruncated>{actor.introduction}</Text>
+                        </Th>
+                      </Tr>
+                    </Tfoot>
+                  </Table>
+                </TableContainer>
+                  </ModalBody>
+                  <ModalFooter>
+                  </ModalFooter>
+                  </ModalContent> 
+                  </Modal>
+
+                <TableContainer ml="40px">
                   <Table variant="simple">
                     <Tfoot>
                       <Tr>
@@ -192,7 +237,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated> {truncateText(actor.department, 4)}</Text>
+                            <Text isTruncated> {truncateText(actor.department, 8)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -207,7 +252,7 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{truncateText(actor.introduction, 4)}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction, 8)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -221,14 +266,12 @@ const Actor = () => {
                       <Button ml="20px" mr="10px" onClick={handleSave}>
                         저장
                       </Button>
-                      <Button onClick={handleCancelEdit}>취소</Button>
                     </>
                   ) : (
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
                   )}
-                  <Button onClick={() => handleDelete(actor)}>삭제</Button>
                 </Box>
               </Flex>
             </Box>
