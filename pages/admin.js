@@ -69,6 +69,10 @@ const admin = () => {
         setShowEditPage(false);
     };
 
+    const handleSliderChange = (index) => {
+        setSliderIndex(index);
+      };
+
     useEffect(() => {
         // 뷰포트 크기 변화 감지하여 slidesToShow 값 업데이트
         const handleResize = () => {
