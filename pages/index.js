@@ -1,4 +1,5 @@
 //import NextLink from "next/link";
+
 import React, { useState, useEffect, Fragment } from "react";
 import {
     Container,
@@ -12,6 +13,7 @@ import {
     Card,
     Image,
     Divider,
+    useBreakpointValue
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
@@ -34,8 +36,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -103,9 +105,12 @@ const Page = () => {
                 <Divider mt={8} mb={8} />
                 {/*뮤지컬과 행사 슬라이더 */}
                 <Box display="flex">
-                    <p style={{ fontSize: "40px", fontWeight: "bold" }}>
+                    <Text
+                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
+                        fontWeight="bold"
+                    >
                         뮤지컬과
-                    </p>
+                    </Text>
                     <Stack direction="row" h="80px" p={4}>
                         <Divider orientation="vertical" />
                         <Text>
@@ -125,11 +130,19 @@ const Page = () => {
                                 borderRadius="lg"
                                 overflow="hidden"
                             >
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    style={{ width: "300px", height: "350px" }}
-                                />
+                                <Box
+                                    w={{ base: "100%"}}
+                                    h="350px"
+                                    mx="auto"
+                                >
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        objectFit="cover"
+                                        w="100%"
+                                        h="100%"
+                                    />
+                                </Box>
                                 <CardHeader>
                                     <Text
                                         fontSize="xl"
