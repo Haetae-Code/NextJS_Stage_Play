@@ -15,13 +15,11 @@ insert.post(async (req, res) => {
 
     // insert Student or Outsider
     if (userType === 'student') {
-      const insertAudience = "INSERT INTO Stage_Play_DB.Audience (audience_key, name, phone_number, say_actor) VALUES (?, ?, ?, ?)";
-      const insertAudienceValues = [audience_key, name, phone_number, say_actor];
+      const insertAudience = "INSERT INTO Stage_Play_DB.Audience (name, phone_number, say_actor) VALUES (?, ?, ?)";
+      const insertAudienceValues = [name, phone_number, say_actor];
       
-      const student_key = (await db.query("SELECT COALESCE(MAX(student_key), 0) + 1 AS student_key FROM Stage_Play_DB.Student"))[0].student_key;
-
-      const insertStudent = "INSERT INTO Stage_Play_DB.Student (student_key, audience_key, id, department) VALUES (?, ?, ?, ?)";
-      const insertStudentValues = [student_key, student_key, id, department];
+      const insertStudent = "INSERT INTO Stage_Play_DB.Student (audience_key, id, department) VALUES (?, ?, ?)";
+      const insertStudentValues = [audience_key, id, department];
 
       await db.query(insertAudience, insertAudienceValues);
       await db.query(insertStudent, insertStudentValues);
@@ -29,10 +27,8 @@ insert.post(async (req, res) => {
       const insertAudience = "INSERT INTO Stage_Play_DB.Audience (audience_key, name, phone_number, say_actor) VALUES (?, ?, ?, ?)";
       const insertAudienceValues = [audience_key, name, phone_number, say_actor];     
 
-      const outsider_key = (await db.query("SELECT COALESCE(MAX(outsider_key), 0) + 1 AS outsider_key FROM Stage_Play_DB.Outsider"))[0].outsider_key;
-
-      const insertOutsider = "INSERT INTO Stage_Play_DB.Outsider (outsider_key, audience_key, identity) VALUES (?, ?, ?)";
-      const insertOutsiderValues = [outsider_key, outsider_key, identity];
+      const insertOutsider = "INSERT INTO Stage_Play_DB.Outsider (audience_key, identity) VALUES (?, ?)";
+      const insertOutsiderValues = [audience_key, identity];
 
       await db.query(insertAudience, insertAudienceValues);
       await db.query(insertOutsider, insertOutsiderValues);

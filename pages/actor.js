@@ -54,17 +54,27 @@ const Actor = () => {
         console.error("필수 항목을 입력하세요.");
         return;
       }
-  
-      setActors((prevActors) => [...prevActors, editableActor]);
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-      setIsFormVisible(false);
+    
+      fetch("/api/ActorEdit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editableActor),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setActors((prevActors) => [...prevActors, data]);
+          setEditableActor({
+            name: "",
+            department: "",
+            introduction: "",
+            imageUrl: "",
+          });
+          setIsFormVisible(false);
+        })
+        .catch((error) => console.error(error));
     };
-  
   
     const handleEdit = (actor) => {
       setEditableActor(actor);
@@ -72,17 +82,26 @@ const Actor = () => {
     };
 
     const handleSave = () => {
-      setActors((prevActors) =>
-        prevActors.map((actor) =>
-          actor === editableActor ? { ...editableActor } : actor
-        )
-      );
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
+      fetch(`/api/ActorEdit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editableActor),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setActors((prevActors) =>
+            prevActors.map((actor) => (actor.actor_key === data.actor_key ? data : actor))
+          );
+          setEditableActor({
+            name: "",
+            department: "",
+            introduction: "",
+            imageUrl: "",
+          });
+        })
+        .catch((error) => console.error(error));
     };
 
     function truncateText(text, maxLength) {
@@ -93,8 +112,21 @@ const Actor = () => {
       }
     }
 
+    const handleDelete = (actor) => {
+      fetch(`/api/ActorEdit`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(actor),
+      })
+        .then(() => {
+          const updatedActors = actors.filter((a) => a.actor_key !== actor.actor_key);
+          setActors(updatedActors);
+        })
+        .catch((error) => console.error(error));
+    };
 
-    
   return (
     <div>
       <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
@@ -153,8 +185,8 @@ const Actor = () => {
 
 <Stack ml="80px">
         <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
-          {actors.map((actor, index) => (
-            <Box key={index} py={10} flex="1 1 45%" mt="-20px" ml="40px">
+          {actors.map((actor) => (
+            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="40px">
               <Flex>
                 <Center mt="10px" >
                 <Image

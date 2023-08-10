@@ -248,7 +248,7 @@ const Page = () => {
                                     <Button>배우 추가</Button>
                                 </PopoverTrigger>
                                 <PopoverContent width="1000px" maxH="xl" placement="right">
-                                    <PopoverHeader fontSize="xl">등록 배우 조회</PopoverHeader>
+                                    <PopoverHeader >등록 배우 조회</PopoverHeader>
                                     <PopoverBody overflow="auto"><Actor/></PopoverBody>
                                 </PopoverContent>
                                 </Popover>
