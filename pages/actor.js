@@ -304,6 +304,7 @@ const Actor = () => {
                       편집
                     </Button>
                   )}
+                  <Button onClick={()=>handleDelete(actor)}>삭제</Button>
                 </Box>
               </Flex>
             </Box>
