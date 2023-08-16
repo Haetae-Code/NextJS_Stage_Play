@@ -246,7 +246,7 @@ const Actor = () => {
                       <Tr>
                         <Th>이름</Th>
                         <Th>
-                          {isEditing && editableActor === actor ? (
+                          {isEditing && editableActor.actor_key === actor.actor_key ? (
                             <Input
                               type="text"
                               value={editableActor.name}
@@ -261,7 +261,7 @@ const Actor = () => {
                       <Tr>
                         <Th>학과</Th>
                         <Th>
-                          {isEditing && editableActor === actor ? (
+                          {isEditing && editableActor.actor_key === actor.actor_key ? (
                             <Input
                               type="text"
                               value={editableActor.department}
@@ -276,7 +276,7 @@ const Actor = () => {
                       <Tr>
                         <Th>소개</Th>
                         <Th>
-                          {isEditing && editableActor === actor ? (
+                          {isEditing && editableActor.actor_key === actor.actor_key ? (
                             <Input
                               type="text"
                               value={editableActor.introduction}
@@ -293,7 +293,7 @@ const Actor = () => {
                 </TableContainer>
 
                 <Box mt="60px">
-                  {isEditing && editableActor === actor ? (
+                  {isEditing && editableActor.actor_key === actor.actor_key ? (
                     <>
                       <Button ml="20px" mr="10px" onClick={handleSave}>
                         저장
