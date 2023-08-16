@@ -17,13 +17,13 @@ export default async function handler(req, res) {
         },
       });
 
-      const selectedFile = req.files.file; 
-      const fileExtension = '.' + selectedFile.name.split('.').pop();
+      const selectedFile = req.file;
+      const fileExtension = '.' + selectedFile.originalname.split('.').pop();
       const fileName = `${uuidv4()}${fileExtension}`;
       const uploadParams = {
         Bucket: bucketName,
         Key: fileName,
-        Body: selectedFile.data,
+        Body: selectedFile.buffer,
         ACL: 'public-read',
         ContentType: selectedFile.mimetype,
       };
