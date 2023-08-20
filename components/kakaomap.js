@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 
-function KakaoMap() {
+function KakaoMap(props) {
+    const addressValue = props.value;
+    const str_addressValue = addressValue.toString();
+
     useEffect(() => {
         const mapScript = document.createElement("script");
 
@@ -9,7 +12,9 @@ function KakaoMap() {
 
         document.head.appendChild(mapScript);
 
-        const onLoadKakaoMap = () => {
+        const onLoadKakaoMap = (props) => {
+            
+            
             window.kakao.maps.load(() => {
                 const mapContainer = document.getElementById("map");
                 const mapOption = {
@@ -23,7 +28,7 @@ function KakaoMap() {
                 var geocoder = new kakao.maps.services.Geocoder();
 
                 geocoder.addressSearch(
-                    "충남 홍성군 홍성읍 내포로 164",
+                    str_addressValue,
                     function (result, status) {
                         if (status === kakao.maps.services.Status.OK) {
                             var coords = new kakao.maps.LatLng(

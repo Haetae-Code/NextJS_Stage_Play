@@ -14,7 +14,6 @@ import {
   Input,
   Modal,
   ModalContent,
-  ModalOverlay,
   ModalCloseButton,
   ModalHeader,
   ModalFooter,
@@ -34,8 +33,8 @@ const Actor = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const{isOpen,onOpen,onClose}=useDisclosure();
-  
-
+ 
+    
     useEffect(() => {
       fetch("/api/actors")
         .then((response) => response.json())
@@ -127,6 +126,25 @@ const Actor = () => {
         .catch((error) => console.error(error));
     };
 
+
+    const handleImageUpload = (e) => {
+      const selectedImage = e.target.files[0];
+      if (selectedImage) {
+        const formData = new FormData();
+        formData.append("image", selectedImage); // "image"는 서버에서 이미지를 업로드하는 필드 이름
+        fetch("/api/uploadImage", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const imageUrl = data.imageUrl; // 서버에서 반환한 이미지 URL
+            setEditableActor((prevActor) => ({ ...prevActor, imageUrl }));
+          })
+          .catch((error) => console.error(error));
+      }
+    };
+
   return (
     <div>
       <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
@@ -186,8 +204,8 @@ const Actor = () => {
 <Stack ml="80px">
         <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor) => (
-            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="40px">
-              <Flex>
+            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="-20px">
+             <Flex direction="column">
                 <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
@@ -269,7 +287,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated> {truncateText(actor.department, 8)}</Text>
+                            <Text isTruncated> {truncateText(actor.department, 6)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -284,27 +302,33 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{truncateText(actor.introduction, 8)}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction, 6)}</Text>
                           )}
                         </Th>
                       </Tr>
                     </Tfoot>
                   </Table>
                 </TableContainer>
-
+                <Flex justifyContent="space-between">
                 <Box mt="60px">
-                  {isEditing && editableActor === actor ? (
+              {isEditing && editableActor === actor ? (
+                <>
+                  <Button ml="20px" mr="10px" onClick={handleSave}>
+                    저장
+                  </Button>
+                  <input type="file" accept="image/*" onChange={handleImageUpload} />
+                </>
+              ) : (
                     <>
-                      <Button ml="20px" mr="10px" onClick={handleSave}>
-                        저장
-                      </Button>
-                    </>
-                  ) : (
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
+                     <Button   ml="20px" mr="10px" onClick={()=>handleDelete(actor)}>삭제</Button>
+                     </>
                   )}
+
                 </Box>
+                </Flex>
               </Flex>
             </Box>
 

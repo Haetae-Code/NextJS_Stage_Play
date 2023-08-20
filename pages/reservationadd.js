@@ -33,19 +33,17 @@ import {
     PopoverArrow,
     PopoverCloseButton,
     PopoverAnchor,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import KakaoMap from "../components/kakaomap";
 import Actor from "./addedactor";
+import ImageUpload from '../components/ImageUpload';
 
 const Page = () => {
-    //const [title, setTitle] = useState("제목")
-    const [input, setInput] = useState('')
+    //const [title, setTitle] = useState("제목");
+    const[selectedFile, setSelectedFile] = useState(null);
+    
     const [state, setState] = useState({
         title: "제목",
         location: "101호 대강당",
@@ -55,9 +53,7 @@ const Page = () => {
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
     });
-    const handletitleInputChange = (e) => setInput(e.target.value)
-    const handleInputChange =(e) => setInput(e.target.value)
-    const isError = input === ''
+
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
@@ -66,6 +62,17 @@ const Page = () => {
         // 이후 실제 db와 연결해서 확인
         window.alert("저장되었습니다.");
     };
+
+    //[파일 선택 기능]
+    const handleFileChange= (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    }
+
+    //[서버 업로드용] - 백엔드 이미지 업로드 로직 구현 필요합니다. 
+    const handleUpload= () => {
+
+    }
 
     return (
         <Box>
@@ -78,11 +85,16 @@ const Page = () => {
                 >
                     
                     <Stack  display="flex">
-                        <Box alignItems="center" justifyContent="center">
-                            
+                        <Box>
                             <TableContainer>
                                 <Table variant="simple" size={["sm", "md"]}>
                                     <Tbody>
+                                        <Tr>
+                                            <Td>공연 포스터 업로드</Td>
+                                            <Td>
+                                                <ImageUpload/>
+                                            </Td>
+                                        </Tr>
                                         <Tr>
                                             <Td>제목</Td>
                                             <Td>    
@@ -286,7 +298,9 @@ const Page = () => {
                 <Button size="sm" onClick={handleSaveReservation}>
                     저장
                 </Button>
+                
             </Box>
+            
         </Box>
     );
 };
