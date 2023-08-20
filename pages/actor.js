@@ -34,8 +34,8 @@ const Actor = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const{isOpen,onOpen,onClose}=useDisclosure();
-  
-
+    const [selectedActor, setSelectedActor] = useState(null);
+    
     useEffect(() => {
       fetch("/api/actors")
         .then((response) => response.json())
@@ -125,6 +125,36 @@ const Actor = () => {
           setActors(updatedActors);
         })
         .catch((error) => console.error(error));
+    };
+
+    const handleImageChange = (e) => {
+      const selectedImage = e.target.files[0];
+      if (selectedImage) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const imageUrl = reader.result;
+          setEditableActor((prevActor) => ({ ...prevActor, imageUrl }));
+        };
+        reader.readAsDataURL(selectedImage);
+      }
+    };
+
+    const handleImageUpload = (e) => {
+      const selectedImage = e.target.files[0];
+      if (selectedImage) {
+        const formData = new FormData();
+        formData.append("image", selectedImage); // "image"는 서버에서 이미지를 업로드하는 필드 이름
+        fetch("/api/uploadImage", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const imageUrl = data.imageUrl; // 서버에서 반환한 이미지 URL
+            setEditableActor((prevActor) => ({ ...prevActor, imageUrl }));
+          })
+          .catch((error) => console.error(error));
+      }
     };
 
   return (
@@ -293,18 +323,22 @@ const Actor = () => {
                 </TableContainer>
 
                 <Box mt="60px">
-                  {isEditing && editableActor === actor ? (
+              {isEditing && editableActor === actor ? (
+                <>
+                  <Button ml="20px" mr="10px" onClick={handleSave}>
+                    저장
+                  </Button>
+                  <input type="file" accept="image/*" onChange={handleImageUpload} />
+                </>
+              ) : (
                     <>
-                      <Button ml="20px" mr="10px" onClick={handleSave}>
-                        저장
-                      </Button>
-                    </>
-                  ) : (
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
+                     <Button   ml="20px" mr="10px" onClick={()=>handleDelete(actor)}>삭제</Button>
+                     </>
                   )}
-                  <Button onClick={()=>handleDelete(actor)}>삭제</Button>
+
                 </Box>
               </Flex>
             </Box>
