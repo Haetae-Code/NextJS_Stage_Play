@@ -18,6 +18,14 @@ import {
     AccordionButton,
     AccordionPanel,
     AccordionIcon,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    ModalHeader,
+    ModalFooter,
+    ModalCloseButton,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 //import react from "react";
@@ -44,6 +52,7 @@ const Page2 = () => {
     const [say_actor, setSay_Actor] = useState("");
     const [reservationStatus, setReservationStatus] = useState("");
     const router = useRouter();
+    const {isOpen,onOpen,onClose}=useDisclosure();
 
     const handlTimeChange = (event) => {
         setSelectedTime(event.target.value);
@@ -91,6 +100,11 @@ const Page2 = () => {
             setReservationStatus("예매가 실패했습니다. 다시 시도해주세요.");
             console.error(error);
         }
+    };
+
+    const handleButtonClick = () => {
+        onOpen();
+        handleSubmit();
     };
 
     const [perform_Info, setperform_Info] = useState([]);
@@ -271,12 +285,26 @@ const Page2 = () => {
                 <Button
                     colorScheme="blue"
                     variant="outline"
-                    onClick={handleSubmit}
+                    onClick={handleButtonClick}
                 >
                     예약하기
                 </Button>
             </Stack>
-
+            <Modal size='md' isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay/>
+                <ModalContent>
+                    <ModalHeader>예약자 확인</ModalHeader>
+                    <ModalCloseButton/>
+                    <ModalBody>
+                        <Text>이름: {name}</Text>
+                        <Text>필수 선택:</Text>
+                        <Text>날짜: {selectedTime}</Text>
+                        <Text>시간: </Text>
+                        <Text>전화번호: {phone_number}</Text>
+                        <Text>배우님에게: {say_actor}</Text>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
             <Text
                 mb="8px"
                 color={
