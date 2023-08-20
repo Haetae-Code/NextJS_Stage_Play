@@ -14,7 +14,6 @@ import {
   Input,
   Modal,
   ModalContent,
-  ModalOverlay,
   ModalCloseButton,
   ModalHeader,
   ModalFooter,
@@ -34,7 +33,7 @@ const Actor = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const{isOpen,onOpen,onClose}=useDisclosure();
-    const [selectedActor, setSelectedActor] = useState(null);
+ 
     
     useEffect(() => {
       fetch("/api/actors")
@@ -127,17 +126,6 @@ const Actor = () => {
         .catch((error) => console.error(error));
     };
 
-    const handleImageChange = (e) => {
-      const selectedImage = e.target.files[0];
-      if (selectedImage) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const imageUrl = reader.result;
-          setEditableActor((prevActor) => ({ ...prevActor, imageUrl }));
-        };
-        reader.readAsDataURL(selectedImage);
-      }
-    };
 
     const handleImageUpload = (e) => {
       const selectedImage = e.target.files[0];
