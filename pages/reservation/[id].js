@@ -166,9 +166,7 @@ const Page = (actorData) => {
                                     src="https://bit.ly/dan-abramov"
                                     alt="Dan Abramov"
                                 /> */}
-                                    {/* 카카오맵 */}
-                                    {/* <kakaomap></kakaomap> */}
-                                    <KakaoMap></KakaoMap>
+                                    <KakaoMap value={PerformanceItem.address}></KakaoMap>
                                 </Box>
 
                                 {/* 공연 소개 */}
