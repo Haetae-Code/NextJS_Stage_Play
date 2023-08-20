@@ -33,14 +33,19 @@ import {
     PopoverArrow,
     PopoverCloseButton,
     PopoverAnchor,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import KakaoMap from "../components/kakaomap";
 import Actor from "./addedactor";
 
 const Page = () => {
-    //const [title, setTitle] = useState("제목");
-
+    //const [title, setTitle] = useState("제목")
+    const [input, setInput] = useState('')
     const [state, setState] = useState({
         title: "제목",
         location: "101호 대강당",
@@ -50,7 +55,9 @@ const Page = () => {
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
     });
-
+    const handletitleInputChange = (e) => setInput(e.target.value)
+    const handleInputChange =(e) => setInput(e.target.value)
+    const isError = input === ''
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
@@ -71,7 +78,8 @@ const Page = () => {
                 >
                     
                     <Stack  display="flex">
-                        <Box>
+                        <Box alignItems="center" justifyContent="center">
+                            
                             <TableContainer>
                                 <Table variant="simple" size={["sm", "md"]}>
                                     <Tbody>

@@ -21,6 +21,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
 
+import { Mobile } from "../components/responsive";
+
 const Page = () => {
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
     const router = useRouter();
@@ -80,9 +82,11 @@ const Page = () => {
         title: PerformanceItem.title,
         description: "04월 18일(화) 온라인, " + PerformanceItem.location,
     }));
-
+    <responsive/>
     return (
-        <div>
+        <Fragment>
+            
+            <div>
             <Fragment>
                 <Container maxWidth="100%">
                     <div>&nbsp;</div>
@@ -252,6 +256,9 @@ const Page = () => {
                 </div>
             </Fragment>
         </div>
+            
+            
+        </Fragment> 
     );
 };
 
