@@ -33,6 +33,7 @@
     "dayzed": "^3.2.3",
     "dotenv": "^16.1.1",
     "framer-motion": "^9.0.4",
+    "jsonwebtoken": "^9.0.1",
     "keen-slider": "^6.8.5",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.3",
