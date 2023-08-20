@@ -204,8 +204,8 @@ const Actor = () => {
 <Stack ml="80px">
         <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor) => (
-            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="40px">
-              <Flex>
+            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="-20px">
+             <Flex direction="column">
                 <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
@@ -287,7 +287,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated> {truncateText(actor.department, 8)}</Text>
+                            <Text isTruncated> {truncateText(actor.department, 6)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -302,14 +302,14 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{truncateText(actor.introduction, 8)}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction, 6)}</Text>
                           )}
                         </Th>
                       </Tr>
                     </Tfoot>
                   </Table>
                 </TableContainer>
-
+                <Flex justifyContent="space-between">
                 <Box mt="60px">
               {isEditing && editableActor === actor ? (
                 <>
@@ -328,6 +328,7 @@ const Actor = () => {
                   )}
 
                 </Box>
+                </Flex>
               </Flex>
             </Box>
 
