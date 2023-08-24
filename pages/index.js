@@ -38,8 +38,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -110,7 +110,7 @@ const Page = () => {
                 {/*뮤지컬과 행사 슬라이더 */}
                 <Box display="flex">
                     <Text
-                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
+                        fontSize={{ base: "30px", sm: "40px", md: "50px"}}
                         fontWeight="bold"
                     >
                         뮤지컬과
@@ -213,7 +213,7 @@ const Page = () => {
                                         src={item.image}
                                         alt={item.title}
                                         style={{
-                                            width: "300px",
+                                            width: "100%",
                                             height: "350px",
                                         }}
                                     />

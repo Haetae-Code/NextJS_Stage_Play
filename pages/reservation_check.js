@@ -21,13 +21,13 @@ import {
 const reservationcheck = () => {
     return (
         <Box>
-            <Heading>예약자 리스트</Heading>
-            <Flex justify={"space-between"}>
+            <Heading mt={5}>예약자 리스트</Heading>
+            <Flex direction={{ base: 'column', md: 'row' }} justify={"space-between"}>
 
                 {/*공연 예약 현황 박스*/}
                 <Box
-                    mr={1}
-                    w="61%"
+                    mr={{ base: 0, md: 1 }}
+                    w={{ base: '100%', md: '61%' }}
                     mt={5}
                     fontSize="md"
                     borderRadius={15}
@@ -64,7 +64,15 @@ const reservationcheck = () => {
                 </Box>
 
                 {/*예약자 검색 박스*/}
-                <Box mr={1} w="39%" mt={5} fontSize="md" borderRadius={15} border="1px solid dodgerblue" p={4}>
+                <Box
+                    mr={{ base: 0, md: 1 }}
+                    w={{ base: '100%', md: '39%' }}
+                    mt={5}
+                    fontSize="md"
+                    borderRadius={15}
+                    border="1px solid dodgerblue"
+                    p={4}
+                >
 
                     <Box align="center" justify="center">
 
@@ -111,10 +119,11 @@ const reservationcheck = () => {
             </Flex>
 
             {/*예약자 리스트 박스*/}
-            <Flex>
-                <Stack mt={5} mr={1} w="61%">
+            <Flex direction={{ base: 'column', md: 'row' }}>
+                <Stack mt={{ base: 5, md: 0 }} mr={{ base: 0, md: 1 }} w={{ base: '100%', md: '61%' }}>
                     <Box><Text >재학생</Text></Box>
-                    <Box overflowX="auto"
+                    <Box
+                        overflowX="auto"
                         h="200px"
                         whiteSpace="nowrap"
                         px="32px"
@@ -123,8 +132,8 @@ const reservationcheck = () => {
                         borderRadius={10}
                         border="1px solid dodgerblue"
                         p={1}
-
-                        w="auto">
+                        w="auto"
+                    >
                         <TableContainer>
                             <Table size='sm'>
                                 <Thead>
@@ -180,9 +189,12 @@ const reservationcheck = () => {
                         </TableContainer>
                     </Box>
                 </Stack>
-                <Stack mt={5} w="39%">
+                <Stack mt={{ base: 5, md: 0 }} 
+                w={{ base: '100%', md: '39%' }}
+                >
                     <Box><Text >외부인</Text></Box>
-                    <Box overflowX="auto"
+                    <Box
+                        overflowX="auto"
                         h="200px"
                         whiteSpace="nowrap"
                         px="32px"
@@ -191,6 +203,7 @@ const reservationcheck = () => {
                         borderRadius={10}
                         border="1px solid dodgerblue"
                         p={1}
+                        
                     >
                         <TableContainer>
                             <Table size='sm'>
