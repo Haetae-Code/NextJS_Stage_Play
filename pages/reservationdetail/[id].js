@@ -68,8 +68,8 @@ import {
 
     for (let i = 0; i < perform_Info.length; i++) {
         const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
-        const matchedDay = perform_Info[i].view_day.match(dateRegex);
-        perform_Info[i].view_day = matchedDay[1];
+        const matchedDay = perform_Info[i].view_date.match(dateRegex);
+        perform_Info[i].view_date = matchedDay[1];
 
         const timeParts = perform_Info[i].view_time.split(':');
         const hour = parseInt(timeParts[0], 10);

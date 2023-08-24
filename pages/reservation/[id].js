@@ -43,7 +43,6 @@ const Page = (actorData) => {
             .catch((error) => console.error(error));
     }, [id]);
 
-
     const [Performance, setPerformance] = useState([]);
     useEffect(() => {
         fetch(`/api/Performance/${id}`)
@@ -52,6 +51,24 @@ const Page = (actorData) => {
             .catch((error) => console.error(error));
     }, [id]);
 
+    const [perform_Info, setperform_Info] = useState([]);
+    useEffect(() => {
+        fetch(`/api/perform_Info/${id}`)
+        .then((response) => response.json())
+        .then((data) => setperform_Info(data))
+        .catch((error) => console.error(error));
+    }, [id]);
+    
+    for (let i = 0; i < perform_Info.length; i++) {
+        const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
+        const matchedDay = perform_Info[i].view_date.match(dateRegex);
+        perform_Info[i].view_date = matchedDay[1];
+
+        const timeParts = perform_Info[i].view_time.split(':');
+        const hour = parseInt(timeParts[0], 10);
+        const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
+        perform_Info[i].view_time = `${hour}시 ${minute}분`;
+      } 
 
     return (
         <Box>
@@ -93,21 +110,21 @@ const Page = (actorData) => {
                                         <Tbody>
                                             <Tr>
                                                 <Td>공연 장소</Td>
-                                                <Td>{PerformanceItem.address + '  ' + PerformanceItem.location}</Td>
+                                                <Td>{PerformanceItem.location + ' ' +PerformanceItem.address}</Td>
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 기간</Td>
+                                                {perform_Info.map((infoItem) => (
                                                 <Stack>
-                                                    <Td>2023/03/17 13시, 17시</Td>
-                                                    <Td>2023/03/18 13시, 17시</Td>
+                                                    <Td>{infoItem.view_date} {infoItem.view_time}</Td>
                                                 </Stack>
+                                                ))}
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 시간</Td>
-                                                <Td>170분</Td>
+                                                <Td>{PerformanceItem.run_time}분</Td>
                                             </Tr>
                                         </Tbody>
-
                                     </Table>
                                 </TableContainer>
                             </Box>
@@ -215,7 +232,7 @@ const Page = (actorData) => {
                                     <Tbody>
                                         <Tr>
 
-                                            <Td>주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항</Td>
+                                            <Td>{PerformanceItem.rules}</Td>
                                         </Tr>
                                     </Tbody>
                                 </Table>

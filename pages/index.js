@@ -72,7 +72,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+        description: PerformanceItem.location,
     }));
 
     //영화과 데이터
@@ -80,7 +80,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+        description: PerformanceItem.location,
     }));
     <responsive/>
     return (
