@@ -77,7 +77,7 @@ const Navbar = (props) => {
 
     const { path } = props;
     return (
-        <Fragment>
+        <Box>
             <VStack>
                 <Box
                     position="flex"
@@ -111,7 +111,7 @@ const Navbar = (props) => {
                                     variant="outline"
                                     placeholder="Search"
                                     //htmlSize={20} width='auto'
-                                    width="500px"
+                                    width="100%"
                                 />
                                 {/* 모바일로 볼 때 검색바 밑으로 내려가게 
                 <Container>
@@ -346,7 +346,7 @@ const Navbar = (props) => {
                     <Divider mb={0} mt={-5} orientaion="horizontal" />
                 </Box>
             </VStack>
-        </Fragment>
+        </Box>
     );
 };
 
