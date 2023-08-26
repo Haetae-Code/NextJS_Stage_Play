@@ -33,6 +33,14 @@ const Website = ({ Component, pageProps, router }) => {
     //     }
     //   }, [isLoggedIn, isLoginPage, router]);
 
+    const currentpath = router.pathname;
+    const isCreditPage = currentpath === '/Website';
+    if (router.pathname ==='/Website'){
+        return(
+            <Component {...pageProps}/>
+        )
+    }
+
     return (
         <Chakra cookies={pageProps.cookies}>
             {/* <Header></Header> */}

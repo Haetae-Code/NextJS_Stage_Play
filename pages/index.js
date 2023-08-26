@@ -38,8 +38,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -72,7 +72,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: PerformanceItem.location,
+        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
     }));
 
     //영화과 데이터
@@ -80,7 +80,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: PerformanceItem.location,
+        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
     }));
     <responsive/>
     return (
@@ -110,7 +110,7 @@ const Page = () => {
                 {/*뮤지컬과 행사 슬라이더 */}
                 <Box display="flex">
                     <Text
-                        fontSize={{ base: "30px", sm: "40px", md: "50px"}}
+                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
                         fontWeight="bold"
                     >
                         뮤지컬과
@@ -213,7 +213,7 @@ const Page = () => {
                                         src={item.image}
                                         alt={item.title}
                                         style={{
-                                            width: "100%",
+                                            width: "300px",
                                             height: "350px",
                                         }}
                                     />

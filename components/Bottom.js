@@ -30,7 +30,7 @@ export const Bottom = (props) => {
             <Divider my={8} />
             <Container>
                 <Box display="flex">
-                    <Box flex={1}>
+                    <div style={{ flex: 1 }}>
                         <Text
                             fontSize="md"
                             fontWeight="bold"
@@ -38,73 +38,68 @@ export const Bottom = (props) => {
                         >
                             {notices[currentNoticeIndex]}
                         </Text>
-                    </Box>
+                    </div>
                 </Box>
             </Container>
 
             <Box>
                 <Divider my={8} />
-                <Flex justifyContent="center" >
+                <Flex justifyContent="center" mr="100px">
                     <Box display="flex" justifyContent="center">
                         <Button
                             mt={1}
-                            ml={4}
+                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
-                            bg="transparent"
-                            color="inactiveColor"
-                            _hover={{ textDecoration: 'underline' }}
+                            bg={"transparent"}
+                            backgroundColor={null}
                         >
-
-                            대표 번호 010-xxxx-xxx
-
+                            <Link color="inactiveColor">
+                                대표 번호 010-xxxx-xxx
+                            </Link>
                         </Button>
                         <Button
                             mt={1}
-                            ml={4}
+                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
-                            bg="transparent"
-                            color="inactiveColor"
-                            _hover={{ textDecoration: 'underline' }}
+                            bg={"transparent"}
+                            backgroundColor={null}
                         >
-                            회사 소개
+                            <Link color="inactiveColor">회사 소개</Link>
                         </Button>
                         <Button
                             mt={1}
-                            ml={4}
+                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
-                            bg="transparent"
-                            color="inactiveColor"
-                            _hover={{ textDecoration: 'underline' }}
+                            bg={"transparent"}
+                            backgroundColor={null}
                         >
-                            서비스 소개
+                            <Link color="inactiveColor">서비스 소개</Link>
                         </Button>
                         <Button
                             mt={1}
-                            ml={4}
+                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
-                            bg="transparent"
-                            color="inactiveColor"
-                            _hover={{ textDecoration: 'underline' }}
+                            bg={"transparent"}
+                            backgroundColor={null}
                         >
-                            자주 묻는 질문
+                            <Link color="inactiveColor">자주 묻는 질문</Link>
                         </Button>
 
                         <Button
                             mt={1}
-                            ml={4}
+                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
-                            bg="transparent"
-                            color="inactiveColor"
-                            _hover={{ textDecoration: 'underline' }}
-                            _focus={{ boxShadow: 'none' }}
-                            _active={{ backgroundColor: 'blue.600' }}
+                            bg={"transparent"}
+                            backgroundColor={null}
+                            _focus={{ boxShadow: "none" }}
+                            _active={{ backgroundColor: "blue.600" }}
                         >
-                            건의사항
+                            <Link color="inactiveColor">건의사항</Link>
                         </Button>
                     </Box>
                 </Flex>

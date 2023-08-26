@@ -25,12 +25,14 @@ import {
     Divider,
     Icon,
     useMediaQuery,
-    
+    List,
+    ListItem
 } from "@chakra-ui/react";
 
 import { HamburgerIcon, CalendarIcon } from "@chakra-ui/icons";
 // import { IoLogoGithub } from 'react-icons/io5'
 import ColorMode from "./ColorModeButton";
+import SearchBar from "./SearchBar";
 
 const LinkItem = ({ href, path, target, children, ...props }) => {
     const active = path === href;
@@ -60,6 +62,8 @@ const Navbar = (props) => {
     const [isMobile] = useMediaQuery("(max-width: 955px)");
 
     const [isHovered, setIsHovered] = useState(false);
+    
+
 
     useEffect(() => {
         console.log("isHovered value changed:", isHovered);
@@ -74,10 +78,26 @@ const Navbar = (props) => {
         console.log("handleMouseLeave called");
         setIsHovered(false);
     }
+    
 
     const { path } = props;
+
+      //검색창 확인을 위해.
+
+      const [showSuggestions, setShowSuggestions] = useState(false);
+      const [suggestions, setSuggestions] = useState([
+        "추천검색어1",
+        "추천검색어2",
+        "추천검색어3",
+        "추천검색어4",
+      ]);
+    
+      const handleSearchClick = () => {
+        setShowSuggestions(!showSuggestions);
+      };
+
     return (
-        <Box>
+        <Fragment>
             <VStack>
                 <Box
                     position="flex"
@@ -102,7 +122,9 @@ const Navbar = (props) => {
                         </Heading>
 
                         <Container>
+
                             <Flex align="center" mr={5}>
+                            <div style={{ position: "relative" }}>
                                 {/*검색바*/}
                                 <Input
                                     borderWidth={"2px"}
@@ -111,8 +133,33 @@ const Navbar = (props) => {
                                     variant="outline"
                                     placeholder="Search"
                                     //htmlSize={20} width='auto'
-                                    width="100%"
-                                />
+                                    width="500px"
+                                    onClick={handleSearchClick}
+                                  />
+           {showSuggestions && (
+            <Box
+              width="500px"
+              backgroundColor="white"
+              border="1px solid #ccc"
+              borderRadius="4px"
+              boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
+              zIndex={1}
+              marginTop="4px" // 이 부분 추가
+            >
+              {suggestions.map((suggestion, index) => (
+                <Text
+                  key={index}
+                  padding="8px 12px"
+                  cursor="pointer"
+                  transition="background-color 0.3s ease"
+                  _hover={{ backgroundColor: "#f5f5f5" }}
+                >
+                  {suggestion}
+                </Text>
+              ))}
+            </Box>
+          )}
+        </div>
                                 {/* 모바일로 볼 때 검색바 밑으로 내려가게 
                 <Container>
                   <Flex align="center" mr={5}>
@@ -346,7 +393,7 @@ const Navbar = (props) => {
                     <Divider mb={0} mt={-5} orientaion="horizontal" />
                 </Box>
             </VStack>
-        </Box>
+        </Fragment>
     );
 };
 
