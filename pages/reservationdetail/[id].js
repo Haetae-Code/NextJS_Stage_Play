@@ -79,13 +79,13 @@ import {
     };
 
     const timeOptions = perform_Info
-    .filter((perform) => perform.view_day === selectedTime)
+    .filter((perform) => perform.view_date === selectedTime)
     .map((perform) => perform.view_time);
 
     for (let i = 0; i < perform_Info.length; i++) {
         const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
-        const matchedDay = perform_Info[i].view_day.match(dateRegex);
-        perform_Info[i].view_day = matchedDay[1];
+        const matchedDay = perform_Info[i].view_date.match(dateRegex);
+        perform_Info[i].view_date = matchedDay[1];
 
         const timeParts = perform_Info[i].view_time.split(':');
         const hour = parseInt(timeParts[0], 10);
@@ -168,15 +168,7 @@ import {
                         <Stack spacing={2}>
                             {perform_Info.map((infoItem) => (
                                 <Text py="1">
-                                    {infoItem.view_date}
-                                </Text>
-                            ))}
-                        </Stack>
-                    <Text py="2">시 간:</Text>
-                        <Stack spacing={2}>
-                            {perform_Info.map((infoItem) => (
-                                <Text py="1">
-                                    {infoItem.view_time} 
+                                    {infoItem.view_date}  {infoItem.view_time}
                                 </Text>
                             ))}
                         </Stack>
