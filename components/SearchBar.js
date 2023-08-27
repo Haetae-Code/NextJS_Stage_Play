@@ -28,19 +28,20 @@ const Navbar = (props) => {
           }}
         >
           <Input
-            borderWidth={"2px"}
+            borderWidth="2px"
             borderRadius="100"
-            borderColor={"#2d6fbb"}
+            borderColor="#2d6fbb"
             variant="outline"
-            placeholder="Search"
-            width="500px"
+            placeholder="검색어를 입력하세요"
+            width="100%"
             onClick={handleSearchClick}
+            _focus={{ borderColor: "#2d6fbb" }}
           />
           {showSuggestions && (
             <ul
               style={{
                 position: "absolute",
-                top: "100%",
+                top: "calc(100% + 8px)",
                 left: 0,
                 width: "100%",
                 backgroundColor: "white",
@@ -49,16 +50,20 @@ const Navbar = (props) => {
                 boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
                 listStyle: "none",
                 padding: 0,
-                margin: "4px 0",
+                margin: 0,
+                zIndex: 1,
               }}
             >
               {suggestions.map((suggestion, index) => (
                 <li
                   key={index}
                   style={{
-                    padding: "8px 12px",
+                    padding: "10px 16px",
                     cursor: "pointer",
                     transition: "background-color 0.3s ease",
+                    borderBottom: "1px solid #eee",
+                    fontSize: "14px",
+                    color: "#333",
                   }}
                 >
                   {suggestion}

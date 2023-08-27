@@ -147,7 +147,7 @@ const Actor = () => {
 
   return (
     <div>
-      <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
+
       <Box mt="40px" border="1px solid">
         <br />
         <Text ml="50px" fontSize="30px">
@@ -201,11 +201,15 @@ const Actor = () => {
           </Box>
         )}
 
-<Stack ml="80px">
+      <Stack ml={{ base: "0", md: "20px" }}>
         <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor) => (
-            <Box key={actor.id} py={10} flex="1 1 45%" mt="-20px" ml="-20px">
-             <Flex direction="column">
+                          <Box
+                          key={actor.id}
+                          flex={{ base: "1 1 100%", sm: "1 1 50%", md: "1 1 33.33%", lg: "1 1 25%" }}
+                          mb="20px"
+                        >
+             <Flex  direction="column"  alignItems="center">
                 <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
@@ -287,7 +291,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated> {truncateText(actor.department, 6)}</Text>
+                            <Text isTruncated> {truncateText(actor.department,6)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -302,28 +306,31 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{truncateText(actor.introduction, 6)}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction,6)}</Text>
                           )}
                         </Th>
                       </Tr>
                     </Tfoot>
                   </Table>
                 </TableContainer>
-                <Flex justifyContent="space-between">
-                <Box mt="60px">
+                <Flex justifyContent="space-between" alignItems="center" mt="10px">
+                <Box mt={{ base: "20px", md: "60px" }}>
               {isEditing && editableActor === actor ? (
                 <>
                   <Button ml="20px" mr="10px" onClick={handleSave}>
                     저장
                   </Button>
                   <input type="file" accept="image/*" onChange={handleImageUpload} />
+                  {/* <Button size="sm" onClick={handleImageUpload}>이미지 업로드</Button>*/ }
                 </>
               ) : (
                     <>
+                      <Stack spacing="10px" direction={{ base: "column", sm: "row" }}>
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
                      <Button   ml="20px" mr="10px" onClick={()=>handleDelete(actor)}>삭제</Button>
+                    </Stack>
                      </>
                   )}
 
