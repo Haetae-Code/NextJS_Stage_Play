@@ -9,6 +9,9 @@ import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
 import { AuthContext } from '../components/AuthProvider';
 //import "../public/login_func/css/service-style.css"; //service에서의 탑 버튼 만들기
+import '../public/login_func/css/service-style.css'; // 글로벌 CSS 파일 경로
+import { ChakraProvider } from "@chakra-ui/react";
+//import theme from "../theme"; ->확인필요
 
 
 if (typeof window !== "undefined") {
@@ -33,6 +36,15 @@ const Website = ({ Component, pageProps, router }) => {
     //     }
     //   }, [isLoggedIn, isLoginPage, router]);
 
+    function Website({ Component, pageProps }) {
+        return (
+            <ChakraProvider theme={theme}>
+                <Component {...pageProps} />
+            </ChakraProvider>
+        );
+      }
+
+    //원래 본문
     return (
         <Chakra cookies={pageProps.cookies}>
             {/* <Header></Header> */}
@@ -57,3 +69,7 @@ const Website = ({ Component, pageProps, router }) => {
     );
 };
 export default Website;
+
+
+/* 탑 버튼 만들기 1 */
+//export default service;
