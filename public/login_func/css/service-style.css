@@ -1,18 +1,31 @@
-/*.scrollButton {
-    padding: 10px 20px;
-    background-color: azure;
-    color: black;
+/* 탑 버튼 만들기 1 */
+
+.scrollToTopButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #eaeaea;
     border: none;
-    border-radius: 4px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 16px;
-}
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .scrollToTopButton:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+  }
 
-.container {
-    margin: 20px;
-}
-*/
+  .back-to-top {
+    font-family: "GmarketSansMedium";
+  }  
 
+/* 탑 버틈 만들기 2 
 #back-to-top{
     font-family: "GmarketSansMedium";
     font-size: 1em;
@@ -43,3 +56,4 @@
 #back-to-top.visible{
     opacity: 1;
 }
+*/
