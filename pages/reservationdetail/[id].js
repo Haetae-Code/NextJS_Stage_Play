@@ -148,7 +148,7 @@ import {
                 <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src={infoItem.img_url}
+                    src={PerformanceItem.img_url}
                     alt=""
                 />
   
