@@ -14,17 +14,20 @@ import {
     CardHeader,
     Image,
     Link,
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Divider,
 } from "@chakra-ui/react";
-import React, { useState, Fragment, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Reservation from "./reservation";
 import ReservationEdit from "./reservationedit";
 
 
@@ -42,6 +45,13 @@ const admin = () => {
     const [showEditPage, setShowEditPage] = useState(false);
     const [reservationData, setReservationData] = useState(false);
 
+    //공연 조회
+    const { isOpen: isViewModalOpen, onOpen: onViewModalOpen, onClose: onViewModalClose } = useDisclosure();
+    //공연 수정
+    const { isOpen: isEditModalOpen, onOpen: onEditModalOpen, onClose: onEditModalClose } = useDisclosure();
+    //공연 삭제
+    const { isOpen: isDelModalOpen, onOpen: onDelModalOpen, onClose: onDelModalClose} = useDisclosure();
+
     useEffect(() => {
         // 로그인 상태를 체크하여 로그인하지 않은 경우 login 페이지로 리다이렉트
         //나중에 로컬+서버 각각 쿠키 캐시 코드에서 사용자 로그인 상태 확인, 유지 하는걸로 바꿔야함. 안그럼 해킹 쏘 퍼킹 이지 해짐. 유가릿? 디스이즈 저스트 뽈 테스트. 근데 캐시 로직은 누가 짜려나 히히
@@ -50,13 +60,13 @@ const admin = () => {
         }
       }, [isLoggedIn, router]);
 
-    useEffect(() => { //컴포먼트 연결 지연 테스트코드
-    const timer = setTimeout(() => {
-        setShowComponent(true);
-    }, 500);
+    // useEffect(() => { //컴포먼트 연결 지연 테스트코드
+    // const timer = setTimeout(() => {
+    //     setShowComponent(true);
+    // }, 500);
 
-    return () => clearTimeout(timer);
-    }, []);
+    // return () => clearTimeout(timer);
+    // }, []);
 
     const handleClick = () => {
         setShowEditPage((prevValue) => !prevValue);
@@ -74,6 +84,10 @@ const admin = () => {
     const handleCancelEdit = () => {
         setShowEditPage(false);
     };
+
+    const handleSliderChange = (index) => {
+        setSliderIndex(index);
+      };
 
     useEffect(() => {
         // 뷰포트 크기 변화 감지하여 slidesToShow 값 업데이트
@@ -169,6 +183,9 @@ const admin = () => {
                     <Text fontSize="40px" mb="30px">
                         등록 공연
                     </Text>
+                    <Box mt="-40px" mr="60px" mb="10px" align="right">
+                    <Link color="inactiveColor" href="./reservationadd"><Button>공연 추가</Button></Link>
+                    </Box>
                 </Box>
                 <Box
                     ml="50px"
@@ -251,24 +268,237 @@ const admin = () => {
                                                         whiteSpace: "normal",
                                                     }}
                                                 >
-                                                    <Link href="./reservation_check">
+                                                    
                                                         <Button
                                                             size="sm"
                                                             colorScheme="blue"
+                                                            onClick={onViewModalOpen}
                                                         >
                                                             조회
                                                         </Button>
-                                                    </Link>
 
+                                                        
+
+                                                        <Modal isOpen={isViewModalOpen} onClose={onViewModalClose}>
+                                                            <ModalOverlay
+                                                                bg='transparent'
+                                                                backdropFilter='blur(10px)'
+                                                            />
+                                                            <ModalContent
+                                                                display="flex"
+                                                                
+                                                                maxW="1200px"
+                                                                height="800px"
+                                                            >
+                                                                <ModalHeader>공연 정보</ModalHeader>
+                                                                <ModalCloseButton/>
+                                                                <ModalBody>
+                                                                    <Text fontWeight='bold' mb='1rem'>
+                                                                        여기서 확인해보세요.
+                                                                    </Text>
+                                                                    <Box>
+                                                                    <Flex>
+                                                                        <Image src={item.image} 
+                                                                        style={{
+                                                                            width: "20%",
+                                                                            objectFit: "cover",
+                                                                        }}/>
+                                                                        <Box ml="30px">
+                                                                            <Box>
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.09 
+                                                                            </Text>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            <br/>
+                                                                            </Box>
+                                                                            <Box mt="10px">
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.10
+                                                                            </Text>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            </Box>
+                                                                        </Box>
+                                                                        
+                                                                    </Flex>
+                                                                    <Flex>
+                                                                        
+                                                                    </Flex>
+                                                                    </Box>
+                                                                    
+                                                                    
+                                                                </ModalBody>
+
+                                                                <ModalFooter>
+                                                                    <Button mr={3} onClick={onViewModalClose}>
+                                                                        닫기
+                                                                    </Button>
+                                                                    
+                                                                </ModalFooter>
+                                                            </ModalContent>
+                                                            
+                                                        </Modal>
+                                                    
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
                                                         onClick={
-                                                            handleEditClick
+                                                            //handleEditClick
+                                                            onEditModalOpen
                                                         }
+                                                        ml="10px"
+                                                        mr="10px"
                                                     >
                                                         수정
                                                     </Button>
+                                                    <Modal isOpen={isEditModalOpen} onClose={onEditModalClose}>
+                                                            <ModalOverlay
+                                                                bg='transparent'
+                                                                backdropFilter='blur(10px)'
+                                                            />
+                                                            <ModalContent
+                                                                display="flex"
+                                                                
+                                                                maxW="1200px"
+                                                                height="800px"
+                                                            >
+                                                                <ModalHeader>공연 정보</ModalHeader>
+                                                                <ModalCloseButton/>
+                                                                <ModalBody>
+                                                                    <Text fontWeight='bold' mb='1rem'>
+                                                                        여기서 확인해보세요.
+                                                                    </Text>
+                                                                    <Box>
+                                                                    <Flex>
+                                                                        <Image src={item.image} 
+                                                                        style={{
+                                                                            width: "20%",
+                                                                            objectFit: "cover",
+                                                                        }}/>
+                                                                        <Box ml="30px">
+                                                                            <Box>
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.09 
+                                                                            </Text>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            <br/>
+                                                                            </Box>
+                                                                            <Box mt="10px">
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.10
+                                                                            </Text>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            </Box>
+                                                                        </Box>
+                                                                        
+                                                                    </Flex>
+                                                                    <Flex>
+                                                                        
+                                                                    </Flex>
+                                                                    </Box>
+                                                                    
+                                                                    
+                                                                </ModalBody>
+
+                                                                <ModalFooter>
+                                                                    <Button mr={3} onClick={onEditModalClose}>
+                                                                        닫기
+                                                                    </Button>
+                                                                    
+                                                                </ModalFooter>
+                                                            </ModalContent>
+                                                            
+                                                        </Modal>
+                                                    
+                                                        <Button
+                                                            size="sm"
+                                                            colorScheme="blue"
+                                                            onClick={onDelModalOpen}
+                                                        >
+                                                            삭제
+                                                        </Button>                            
+                                                        <Modal isOpen={isDelModalOpen} onClose={onDelModalClose}>
+                                                            <ModalOverlay
+                                                                bg='transparent'
+                                                                backdropFilter='blur(10px)'
+                                                            />
+                                                            <ModalContent
+                                                                display="flex"
+                                                                
+                                                                maxW="1200px"
+                                                                height="800px"
+                                                            >
+                                                                <ModalHeader>삭제 공연 정보</ModalHeader>
+                                                                <ModalCloseButton/>
+                                                                <ModalBody>
+                                                                    <Text fontWeight='bold' mb='1rem'>
+                                                                        삭제하길 원하는 시간대를 선택해주세요, 일괄 삭제를 원하시면 우측 버튼을 눌러주세요.
+                                                                        <Button ml="100px">일괄 삭제</Button>
+                                                                    </Text>
+                                                                    <Box>
+                                                                    <Flex>
+                                                                        <Image src={item.image} 
+                                                                        style={{
+                                                                            width: "20%",
+                                                                            objectFit: "cover",
+                                                                        }}/>
+                                                                        <Box ml="30px">
+                                                                            <Box>
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.09 
+                                                                            </Text>
+                                                                            <Link color="inactiveColor" ><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            <br/>
+                                                                            </Box>
+                                                                            <Box mt="10px">
+                                                                            <Text fontSize="30px">
+                                                                                2023.08.10
+                                                                            </Text>
+                                                                            <Link color="inactiveColor"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            </Box>
+                                                                        </Box>
+                                                                        
+                                                                    </Flex>
+                                                                    <Flex>
+                                                                        
+                                                                    </Flex>
+                                                                    </Box>
+                                                                    
+                                                                    
+                                                                </ModalBody>
+
+                                                                <ModalFooter>
+                                                                    <Button mr={3} onClick={onEditModalClose}>
+                                                                        닫기
+                                                                    </Button>
+                                                                    
+                                                                </ModalFooter>
+                                                            </ModalContent>
+                                                            
+                                                        </Modal>
                                                 </CardFooter>
                                             </Card>
                                         </Box>
@@ -278,43 +508,11 @@ const admin = () => {
                         </Box>
                     </Box>
 
-                    {/* 공연 추가 */}
+                    
                 </Box>
-                <Box ml="30px" w="100%">
-                    <Text
-                        fontSize="20px"
-                        mt="50px"
-                        mb="30px"
-                        textAlign="center"
-                    >
-                        공연 관리
-                    </Text>
-                    <Flex align="center" direction="column">
-                        <Button mb={3}>공연 추가</Button>
-                        <Button mb={3}>공연 삭제</Button>
-                    </Flex>
-                </Box>
+                
 
-                {/* 편집 공간 */}
-                <Box
-                    flex="1"
-                    ml="50px"
-                    mt="80px"
-                    border="1px solid"
-                    borderColor="inherit"
-                    overflow="auto"
-                >
-                    <Text>하단에 출력됩니다!</Text>
-                    <Box py={10} ml="30px">
-                        {showEditPage ? (
-                            <ReservationEdit
-                                reservationData={reservationData}
-                                onSave={handleSaveReservation}
-                                onCancel={handleCancelEdit}
-                            />
-                        ) : null}
-                    </Box>
-                </Box>
+                
             </Box>
             </div>
             ) : ( 

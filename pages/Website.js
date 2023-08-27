@@ -1,70 +1,104 @@
 import { useEffect, useState } from "react";
-import {
-  Text,
-  Heading,
-  Box,
-  Divider,
-  Stack,
-  VStack,
-} from "@chakra-ui/react";
+import { Text, Box, VStack } from "@chakra-ui/react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 
-// 커스텀 크레딧 컴포넌트
+const titleStyle = {
+  fontSize: "50px",
+  fontWeight: "bold",
+  marginRight: "20px",
+  textAlign: "left",
+};
+
 const CustomCredit = ({ title, roles, children }) => (
-  <>
-    <Stack direction="row" h="80px">
-      <Text fontSize="50px" fontWeight="bold" mr="20px">{title}</Text>
-      <Divider orientation="vertical" />
-      <Text fontSize="20px"><br/>{roles}</Text>
-    </Stack>
-    {children}
+  <Box>
+    <VStack spacing="20px" margin="20px">
+      <Text style={{ ...titleStyle, color: "white" }}>{title}</Text>
+      <Text fontSize="20px" color="white">{roles}</Text>
+      {children}
+    </VStack>
     <br />
-    <br />
-  </>
+  </Box>
 );
-
-const service = () => {
+const Service = () => {
   const [creditsVisible, setCreditsVisible] = useState(false);
+  const [showTitlePrompt, setShowTitlePrompt] = useState(false);
 
-  useEffect(() => {
-    // 5초 뒤에 크레딧을 보이도록 설정
-    const timeout = setTimeout(() => {
-      setCreditsVisible(true);
-    }, 5000);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // 각 부서별 크레딧 정보
   const creditsContent = [
-    <CustomCredit title="Manager" roles="(각 부서별 역할 적는 곳)">
-      <Text fontSize="30px">채준혁</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
-    </CustomCredit>,
+    <VStack spacing="20px" margin="20px">
+      <CustomCredit title="Manager" roles="(각 부서별 역할 적는 곳)">
+        <Text fontSize="30px" color="white">채준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+      </CustomCredit>
 
-    <CustomCredit title="Front" roles="(각 부서별 역할 적는 곳)">
-      <Text fontSize="30px"><a href="https://github.com/wwmmIIll">김준서</a></Text>
-      <Text mt="5px" fontSize="20px">"재밌노"</Text>
-      <Text fontSize="30px">박지환</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
-      <Text fontSize="30px">김민경</Text>
-      <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
-    </CustomCredit>,
+      <CustomCredit title="Front" roles="(각 부서별 역할 적는 곳)">
+      <Text fontSize="30px" color="white">김준서</Text>
+        <Text mt="5px" fontSize="20px" color="white">"재밌노"</Text>
+        <Text fontSize="30px" color="white">박지환</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+        <Text fontSize="30px" color="white">김민경</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+      </CustomCredit>
 
-    // 이하 생략 (Backend, DB, Server에 대한 크레딧 정보 추가)
+      <CustomCredit title="DB" roles="(각 부서별 역할 적는 곳)">
+      <Text fontSize="30px" color="white">채준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text fontSize="30px" color="white">윤태성</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text fontSize="30px" color="white">최인서</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+      </CustomCredit>
+
+      <CustomCredit title="Server" roles="(각 부서별 역할 적는 곳)">
+        <Text fontSize="30px" color="white">이준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>        
+      </CustomCredit>    
+    </VStack>,
   ];
-
   const [currentCredit, cycleCredits] = useCycle(...creditsContent);
 
-  // 크레딧을 자동으로 변경하기 위한 useEffect
   useEffect(() => {
-    if (creditsVisible) {
-      const autoCycle = setInterval(() => {
-        cycleCredits();
-      }, 5000); // 5초마다 크레딧 변경
-      return () => clearInterval(autoCycle);
-    }
-  }, [creditsVisible, cycleCredits]);
+    setTimeout(() => {
+      setCreditsVisible(true);
+    }, 1000);
+
+    setTimeout(() => {
+      setShowTitlePrompt(true);
+    }, 1000 + (creditsContent.length * 20000));
+
+    setTimeout(() => {
+      setCreditsVisible(false);
+    }, 1000 + (creditsContent.length * 20000) + 10000);
+
+    setTimeout(() => {
+      // 크레딧 컨텐츠가 모두 출력된 후 1초 뒤에 service.js 페이지로 이동
+      window.location.href = "./service"; // 원하는 페이지 경로로 수정
+    }, 1000 + (creditsContent.length * 20000) + 1000); // 1초 뒤에 이동
+  }, []);
+
+  const loopCredits = () => {
+    if (!creditsVisible) return null;
+
+    return (
+      <AnimatePresence>
+        {/* 크레딧 컨텐츠가 아래에서부터 시작하도록 "initial" 속성을 추가 */}
+        <motion.div
+          key={currentCredit?.key || ""}
+          initial={{ y: "100%" }}
+          animate={{ y: "-100%" }}
+          exit={{ y: "100%" }}
+          transition={{ duration: 20, ease: "linear" }}
+        >
+          {currentCredit}
+        </motion.div>
+      </AnimatePresence>
+    );
+  };
+
+  const handleTitleClick = () => {
+    setShowTitlePrompt(false);
+    // 페이지 이동 코드 추가
+    window.location.href = "./service"; // 원하는 페이지 경로로 수정
+  };
 
   return (
     <Box
@@ -75,22 +109,33 @@ const service = () => {
       flexDirection="column"
       backgroundColor="black"
       color="white"
+      overflow="hidden"
     >
-      <AnimatePresence>
-        {creditsVisible && (
-          <motion.div
-            key={currentCredit.key}
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            {currentCredit}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Box height="80vh" overflow="hidden" textAlign="center">
+        <motion.div
+          animate={{ y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          position="relative"
+        >
+          <a href="./service" style={{ textDecoration: "none" }}>
+            <Text
+              fontSize="4xl"
+              position="absolute"
+              top="20px"
+              left="20px"
+              zIndex="1"
+              color="white"
+              onClick={handleTitleClick}
+            >
+              Stage_play
+            </Text>
+          </a>
+          {loopCredits()}
+        </motion.div>
+        
+      </Box>
     </Box>
   );
 };
 
-export default service;
+export default Service;

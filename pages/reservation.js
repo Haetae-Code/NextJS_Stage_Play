@@ -56,10 +56,7 @@ const Page = (actorData) => {
                                 {" "}
                                 현재상영중{" "}
                             </Button>
-                            <Button colorScheme="blue" size="xs">
-                                {" "}
-                                예매중{" "}
-                            </Button>
+
                             <Button colorScheme="red" size="xs">
                                 {" "}
                                 D-100{" "}
@@ -71,7 +68,7 @@ const Page = (actorData) => {
                     </Stack>
 
                     <Flex
-                        justify={"center"}
+                        justify={"start"}
                         alignItems={"center"}
                         flexDirection={["column", "row"]}
                     >
@@ -96,19 +93,16 @@ const Page = (actorData) => {
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 기간</Td>
-                                                <Td>2023/03/17~2023/03/20</Td>
+                                                <Stack>
+                                                <Td>2023/03/17 13시, 17시</Td>
+                                                <Td>2023/03/18 13시, 17시</Td>
+                                                </Stack>
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 시간</Td>
                                                 <Td>170분</Td>
                                             </Tr>
                                         </Tbody>
-                                        <Tfoot>
-                                            <Tr>
-                                                <Th>가격</Th>
-                                                <Th>A석-5000원 B석-3000원</Th>
-                                            </Tr>
-                                        </Tfoot>
                                     </Table>
                                 </TableContainer>
                             </Box>
@@ -138,8 +132,12 @@ const Page = (actorData) => {
                     </TabList>
 
                     <TabPanels>
+
+                        {/* 공연 정보 */}
                         <TabPanel>
-                            <Table>
+
+                            {/* 공연 장소 */}
+                            <Table mt={10}>
                                 <Thead>
                                     <Tr>
                                         <Th fontSize={"x-large"}>공연 장소</Th>
@@ -158,6 +156,7 @@ const Page = (actorData) => {
                                     </Tr>
                                 </Tbody>
                             </Table>
+                            
                             <Box py={10}>
                                 {/* <Image
                                     src="https://bit.ly/dan-abramov"
@@ -168,7 +167,24 @@ const Page = (actorData) => {
                                 <KakaoMap></KakaoMap>
                             </Box>
 
+                            {/* 공연 소개 */}
                             <Table>
+                                <Thead>
+                                    <Tr>
+                                        <Th fontSize={"x-large"}>한 줄 소개</Th>
+                                    </Tr>
+                                </Thead>
+                            </Table>
+                            <Table>
+                                <Tbody>
+                                    <Tr>
+                                        <Td>한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개한 줄 소개</Td>
+                                    </Tr>
+                                </Tbody>
+                            </Table>
+
+                            {/* 포스터 위치 */}
+                            <Table mt={10}>
                                 <Thead>
                                     <Tr>
                                         <Th fontSize={"x-large"}>
@@ -183,135 +199,29 @@ const Page = (actorData) => {
                                     alt="Dan Abramov"
                                 />
                             </Box>
+                                                    {/* 주의 사항 */}
+                        <Table>
+                                <Thead>
+                                    <Tr>
+                                        <Th fontSize={"x-large"}>주의 사항</Th>
+                                    </Tr>
+                                </Thead>
+                            </Table>
+                            <Table>
+                                <Tbody>
+                                    <Tr>
+                                        
+                                        <Td>주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항</Td>
+                                    </Tr>
+                                </Tbody>
+                            </Table>
                         </TabPanel>
 
+                        {/* 캐스팅 정보 */}
                         <TabPanel py={10}>
                             <Stack>
                                 <Box py={10}>
                                     {actors.slice(0, 1).map((actor) => (
-                                        <Flex>
-                                            <Image
-                                                src="https://bit.ly/dan-abramov"
-                                                alt="No image"
-                                                borderRadius="full"
-                                                boxSize="100px"
-                                            />
-                                            <TableContainer>
-                                                <Table variant="simple">
-                                                    <Tfoot>
-                                                        <Tr>
-                                                            <Th>이름</Th>
-                                                            <Th>
-                                                                {actor.name}
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>학과</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.department
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>소개</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.introduction
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                    </Tfoot>
-                                                </Table>
-                                            </TableContainer>
-                                        </Flex>
-                                    ))}
-                                </Box>
-
-                                <Box py={10}>
-                                    {actors.slice(1, 2).map((actor) => (
-                                        <Flex>
-                                            <Image
-                                                src="https://bit.ly/dan-abramov"
-                                                alt="No image"
-                                                borderRadius="full"
-                                                boxSize="100px"
-                                            />
-                                            <TableContainer>
-                                                <Table variant="simple">
-                                                    <Tfoot>
-                                                        <Tr>
-                                                            <Th>이름</Th>
-                                                            <Th>
-                                                                {actor.name}
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>학과</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.department
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>소개</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.introduction
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                    </Tfoot>
-                                                </Table>
-                                            </TableContainer>
-                                        </Flex>
-                                    ))}
-                                </Box>
-
-                                <Box py={10}>
-                                    {actors.slice(2, 3).map((actor) => (
-                                        <Flex>
-                                            <Image
-                                                src="https://bit.ly/dan-abramov"
-                                                alt="No image"
-                                                borderRadius="full"
-                                                boxSize="100px"
-                                            />
-                                            <TableContainer>
-                                                <Table variant="simple">
-                                                    <Tfoot>
-                                                        <Tr>
-                                                            <Th>이름</Th>
-                                                            <Th>
-                                                                {actor.name}
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>학과</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.department
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                        <Tr>
-                                                            <Th>소개</Th>
-                                                            <Th>
-                                                                {
-                                                                    actor.introduction
-                                                                }
-                                                            </Th>
-                                                        </Tr>
-                                                    </Tfoot>
-                                                </Table>
-                                            </TableContainer>
-                                        </Flex>
-                                    ))}
-                                </Box>
-
-                                <Box py={10}>
-                                    {actors.slice(3, 4).map((actor) => (
                                         <Flex>
                                             <Image
                                                 src="https://bit.ly/dan-abramov"

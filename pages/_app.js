@@ -1,4 +1,3 @@
-import { useState, useContext, useEffect } from 'react';
 import { AnimatePresence } from "framer-motion";
 //import { Box, Container, Flex } from "@chakra-ui/react";
 import Layout from "../components/layouts/layout";
@@ -8,6 +7,7 @@ import Nav from "../components/NavBar";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
 import { AuthContext } from '../components/AuthProvider';
+import TopButton from '../components/TopButton';
 //import "../public/login_func/css/service-style.css"; //service에서의 탑 버튼 만들기
 import '../public/login_func/css/service-style.css'; // 글로벌 CSS 파일 경로
 import { ChakraProvider } from "@chakra-ui/react";
@@ -36,6 +36,14 @@ const Website = ({ Component, pageProps, router }) => {
     //     }
     //   }, [isLoggedIn, isLoginPage, router]);
 
+    const currentpath = router.pathname;
+    const isCreditPage = currentpath === '/Website';
+    if (router.pathname ==='/Website'){
+        return(
+            <Component {...pageProps}/>
+        )
+    }
+
     function Website({ Component, pageProps }) {
         return (
             <ChakraProvider theme={theme}>
@@ -61,6 +69,7 @@ const Website = ({ Component, pageProps, router }) => {
                     }}
                 >
                     <Component {...pageProps} key={router.route}></Component>
+                    <TopButton/>
                     <Bottom></Bottom>
                 </AnimatePresence>
             </Layout>

@@ -1,26 +1,27 @@
 //import NextLink from "next/link";
+
 import React, { useState, useEffect, Fragment } from "react";
 import {
     Container,
     Heading,
     Box,
     Button,
-    Flex,
     Text,
     CardBody,
-    CardFooter,
     CardHeader,
     Stack,
     Card,
     Image,
-    Link,
     Divider,
+    useBreakpointValue
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
+
+import { Mobile } from "../components/responsive";
 
 const Page = () => {
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
@@ -37,8 +38,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -81,15 +82,17 @@ const Page = () => {
         title: PerformanceItem.title,
         description: "04월 18일(화) 온라인, " + PerformanceItem.location,
     }));
-
+    <responsive/>
     return (
-        <div>
-            <Fragment>
-                <Container maxWidth="100%">
-                    <div>&nbsp;</div>
-
+        <Box>
+            
+            <div>
+            <Box>
+                <Box>
+                    <Box>
                     <ImageSlider></ImageSlider>
-                    <Container pt={3} maxWidth="100%">
+                    </Box>
+                    <Box maxWidth="100%">
                         <Box flexGrow={1} display={"flex"}>
                             <Heading
                                 size="2xl"
@@ -100,15 +103,20 @@ const Page = () => {
                                 새로운 행사들을 여기서 한 눈에 봐요 &#x1F600;
                             </Heading>
                         </Box>
-                    </Container>
-                </Container>
+                    </Box>
+                </Box>
 
                 <Divider mt={8} mb={8} />
                 {/*뮤지컬과 행사 슬라이더 */}
                 <Box display="flex">
-                    <p style={{ fontSize: "40px", fontWeight: "bold" }}>
+                    <Box >
+                    <Text
+                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
+                        fontWeight="bold"
+                    >
                         뮤지컬과
-                    </p>
+                    </Text>
+                    </Box>
                     <Stack direction="row" h="80px" p={4}>
                         <Divider orientation="vertical" />
                         <Text>
@@ -124,15 +132,24 @@ const Page = () => {
                         <Box key={index} px={3}>
                             <Card
                                 maxW="sm"
+                                h="100%"
                                 borderWidth="0"
                                 borderRadius="lg"
                                 overflow="hidden"
                             >
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    style={{ width: "300px", height: "350px" }}
-                                />
+                                <Box
+                                    w={{ base: "100%"}}
+                                    h="350px"
+                                   
+                                >
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        objectFit="cover"
+                                        w="100%"
+                                        h="100%"
+                                    />
+                                </Box>
                                 <CardHeader>
                                     <Text
                                         fontSize="xl"
@@ -194,6 +211,12 @@ const Page = () => {
                                     borderWidth="0"
                                     borderRadius="lg"
                                     overflow="hidden"
+                                    
+                                >
+                                <Box
+                                    w={{ base: "100%"}}
+                                    h="350px"
+                                   
                                 >
                                     <Image
                                         src={item.image}
@@ -203,6 +226,7 @@ const Page = () => {
                                             height: "350px",
                                         }}
                                     />
+                                </Box>
                                     <CardHeader>
                                         <Text
                                             fontSize="xl"
@@ -240,8 +264,11 @@ const Page = () => {
                         ))}
                     </Slider>
                 </div>
-            </Fragment>
+            </Box>
         </div>
+            
+            
+        </Box> 
     );
 };
 

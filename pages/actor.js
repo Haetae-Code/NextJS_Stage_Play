@@ -11,7 +11,15 @@ import {
   Tfoot,
   Tr,
   Th,
-  Input
+  Input,
+  Modal,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+  Center
 } from "@chakra-ui/react";
 
 const Actor = () => {
@@ -24,7 +32,9 @@ const Actor = () => {
       imageUrl: "",
     });
     const [isEditing, setIsEditing] = useState(false);
-
+    const{isOpen,onOpen,onClose}=useDisclosure();
+ 
+    
     useEffect(() => {
       fetch("/api/actors")
         .then((response) => response.json())
@@ -43,20 +53,26 @@ const Actor = () => {
         console.error("필수 항목을 입력하세요.");
         return;
       }
-  
-      setActors((prevActors) => [...prevActors, editableActor]);
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-      setIsFormVisible(false);
-    };
-  
-    const handleDelete = (actor) => {
-      const updatedActors = actors.filter((a) => a !== actor);
-      setActors(updatedActors);
+    
+      fetch("/api/ActorEdit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editableActor),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setActors((prevActors) => [...prevActors, data]);
+          setEditableActor({
+            name: "",
+            department: "",
+            introduction: "",
+            imageUrl: "",
+          });
+          setIsFormVisible(false);
+        })
+        .catch((error) => console.error(error));
     };
   
     const handleEdit = (actor) => {
@@ -65,26 +81,26 @@ const Actor = () => {
     };
 
     const handleSave = () => {
-      setActors((prevActors) =>
-        prevActors.map((actor) =>
-          actor === editableActor ? { ...editableActor } : actor
-        )
-      );
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-    };
-
-    const handleCancelEdit = () => {
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
+      fetch(`/api/ActorEdit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editableActor),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setActors((prevActors) =>
+            prevActors.map((actor) => (actor.actor_key === data.actor_key ? data : actor))
+          );
+          setEditableActor({
+            name: "",
+            department: "",
+            introduction: "",
+            imageUrl: "",
+          });
+        })
+        .catch((error) => console.error(error));
     };
 
     function truncateText(text, maxLength) {
@@ -94,10 +110,44 @@ const Actor = () => {
         return text.substring(0, maxLength) + '...';
       }
     }
-    
+
+    const handleDelete = (actor) => {
+      fetch(`/api/ActorEdit`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(actor),
+      })
+        .then(() => {
+          const updatedActors = actors.filter((a) => a.actor_key !== actor.actor_key);
+          setActors(updatedActors);
+        })
+        .catch((error) => console.error(error));
+    };
+
+
+    const handleImageUpload = (e) => {
+      const selectedImage = e.target.files[0];
+      if (selectedImage) {
+        const formData = new FormData();
+        formData.append("image", selectedImage); // "image"는 서버에서 이미지를 업로드하는 필드 이름
+        fetch("/api/uploadImage", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const imageUrl = data.imageUrl; // 서버에서 반환한 이미지 URL
+            setEditableActor((prevActor) => ({ ...prevActor, imageUrl }));
+          })
+          .catch((error) => console.error(error));
+      }
+    };
+
   return (
     <div>
-      <Text ml="50px">배우를 한 번에 관리하는 페이지입니다.</Text>
+
       <Box mt="40px" border="1px solid">
         <br />
         <Text ml="50px" fontSize="30px">
@@ -151,19 +201,68 @@ const Actor = () => {
           </Box>
         )}
 
-<Stack ml="50px">
-        <Flex flexWrap="wrap" gap="20px" maxHeight="1000px" overflowY="auto">
-          {actors.map((actor, index) => (
-            <Box key={index} py={10} flex="1 1 45%" mt="-35px">
-              <Flex>
+      <Stack ml={{ base: "0", md: "20px" }}>
+        <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
+          {actors.map((actor) => (
+                          <Box
+                          key={actor.id}
+                          flex={{ base: "1 1 100%", sm: "1 1 50%", md: "1 1 33.33%", lg: "1 1 25%" }}
+                          mb="20px"
+                        >
+             <Flex  direction="column"  alignItems="center">
+                <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
                   alt="No image"
                   borderRadius="full"
                   boxSize="100px"
-                  mt="center"
+                 onClick={onOpen}
                 />
-                <TableContainer ml="30px">
+                </Center>
+                <Modal isCentered isOpen={isOpen} onClose={onClose} size="xl">
+                 <ModalContent>
+                  <ModalHeader>배우 어쩌구</ModalHeader>
+                  <ModalCloseButton/>
+                  <ModalBody>
+                  <Image
+                  src={actor.imageUrl || "https://bit.ly/dan-abramov"}
+                  alt="No image"
+                  borderRadius="full"
+                  boxSize="100px"
+                  mt="center"
+                 onClick={onOpen}
+                />
+                 <TableContainer ml="40px">
+                  <Table variant="simple">
+                    <Tfoot>
+                      <Tr>
+                        <Th>이름</Th>
+                        <Th>
+                           <Text isTruncated> {actor.name}</Text>
+                        </Th>
+                      </Tr>
+                      <Tr>
+                        <Th>학과</Th>
+                        <Th>
+                          <Text isTruncated> {actor.department}</Text>
+                        </Th>
+                      </Tr>
+                      <Tr>
+                        <Th>소개</Th>
+                        <Th>
+                          <Text isTruncated>{actor.introduction}</Text>
+                        </Th>
+                      </Tr>
+                    </Tfoot>
+                  </Table>
+                </TableContainer>
+                  </ModalBody>
+                  <ModalFooter>
+                  </ModalFooter>
+                  </ModalContent> 
+                  </Modal>
+
+                <TableContainer ml="40px">
                   <Table variant="simple">
                     <Tfoot>
                       <Tr>
@@ -192,7 +291,7 @@ const Actor = () => {
                               name="department"
                             />
                           ) : (
-                            <Text isTruncated> {truncateText(actor.department, 4)}</Text>
+                            <Text isTruncated> {truncateText(actor.department,6)}</Text>
                           )}
                         </Th>
                       </Tr>
@@ -207,29 +306,36 @@ const Actor = () => {
                               name="introduction"
                             />
                           ) : (
-                            <Text isTruncated>{truncateText(actor.introduction, 4)}</Text>
+                            <Text isTruncated>{truncateText(actor.introduction,6)}</Text>
                           )}
                         </Th>
                       </Tr>
                     </Tfoot>
                   </Table>
                 </TableContainer>
-
-                <Box mt="60px">
-                  {isEditing && editableActor === actor ? (
+                <Flex justifyContent="space-between" alignItems="center" mt="10px">
+                <Box mt={{ base: "20px", md: "60px" }}>
+              {isEditing && editableActor === actor ? (
+                <>
+                  <Button ml="20px" mr="10px" onClick={handleSave}>
+                    저장
+                  </Button>
+                  <input type="file" accept="image/*" onChange={handleImageUpload} />
+                  {/* <Button size="sm" onClick={handleImageUpload}>이미지 업로드</Button>*/ }
+                </>
+              ) : (
                     <>
-                      <Button ml="20px" mr="10px" onClick={handleSave}>
-                        저장
-                      </Button>
-                      <Button onClick={handleCancelEdit}>취소</Button>
-                    </>
-                  ) : (
+                      <Stack spacing="10px" direction={{ base: "column", sm: "row" }}>
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
+                     <Button   ml="20px" mr="10px" onClick={()=>handleDelete(actor)}>삭제</Button>
+                    </Stack>
+                     </>
                   )}
-                  <Button onClick={() => handleDelete(actor)}>삭제</Button>
+
                 </Box>
+                </Flex>
               </Flex>
             </Box>
 

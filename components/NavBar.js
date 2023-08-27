@@ -20,15 +20,21 @@ import {
     AccordionPanel,
     Button,
     Text,
+    useDisclosure,
     VStack,
     Divider,
     Icon,
     useMediaQuery,
+    List,
+    ListItem,
+    Stack,
+    Center
 } from "@chakra-ui/react";
 
 import { HamburgerIcon, CalendarIcon } from "@chakra-ui/icons";
 // import { IoLogoGithub } from 'react-icons/io5'
 import ColorMode from "./ColorModeButton";
+import SearchBar from "./SearchBar";
 
 const LinkItem = ({ href, path, target, children, ...props }) => {
     const active = path === href;
@@ -53,10 +59,13 @@ const MenuLink = forwardRef((props, ref) => (
     <Link ref={ref} as={NextLink} {...props} />
 ));
 
+
 const Navbar = (props) => {
     const [isMobile] = useMediaQuery("(max-width: 955px)");
 
     const [isHovered, setIsHovered] = useState(false);
+    
+
 
     useEffect(() => {
         console.log("isHovered value changed:", isHovered);
@@ -71,8 +80,29 @@ const Navbar = (props) => {
         console.log("handleMouseLeave called");
         setIsHovered(false);
     }
+    
 
     const { path } = props;
+
+      //검색창 확인을 위해.
+
+      const [showSuggestions, setShowSuggestions] = useState(false);
+      const [suggestions, setSuggestions] = useState([
+        "추천검색어1",
+        "추천검색어2",
+        "추천검색어3",
+        "추천검색어4",
+        "이번주 상영작",
+      ]);
+      const popularSuggestions = ["인기 검색어 1", "인기 검색어 2", "인기 검색어 3"];
+    
+      const handleSearchClick = () => {
+        setShowSuggestions(!showSuggestions);
+        //선택 검색어 로직 처리해야함
+      };
+
+      const showMovieSuggestions = suggestions.includes("이번주 상영작");
+
     return (
         <Fragment>
             <VStack>
@@ -99,7 +129,10 @@ const Navbar = (props) => {
                         </Heading>
 
                         <Container>
+
                             <Flex align="center" mr={5}>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                            <Box position="relative" width="500px">
                                 {/*검색바*/}
                                 <Input
                                     borderWidth={"2px"}
@@ -109,7 +142,106 @@ const Navbar = (props) => {
                                     placeholder="Search"
                                     //htmlSize={20} width='auto'
                                     width="500px"
-                                />
+                                    onClick={handleSearchClick}
+                                  />
+ {showSuggestions && (
+  <Box
+    position="absolute"
+    top="100%"
+    left={0}
+    width="100%"
+    backgroundColor="#333"
+    color="white"
+    border="1px solid #ccc"
+    borderRadius="4px"
+    boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
+    zIndex={1}
+    style={{
+      marginTop: "4px",
+      transform: "translateY(0)",
+      opacity: 1,
+      visibility: "visible",
+    }}
+    transition="transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease"
+  >
+    <Box padding="8px 12px" borderBottom="1px solid white">
+      <Text color="white" fontWeight="bold">
+        최근 검색어
+      </Text>
+    </Box>
+    {suggestions.map((suggestion, index) => (
+      <Box
+        key={index}
+        padding="8px 12px"
+        cursor="pointer"
+        transition="background-color 0.3s ease"
+        _hover={{ backgroundColor: "#444" }}
+        onClick={() => handleSuggestionClick(suggestion)}
+        textAlign="left"
+      >
+        {suggestion === "이번주 상영작" ? (
+          <Box>
+            <Box
+              padding="8px 12px"
+              borderBottom="1px solid white"
+              marginTop="8px"
+              cursor="pointer"
+              onClick={() => handleSuggestionClick("이번주 상영작")}
+            >
+              <Center>
+                <Text color="white" fontWeight="bold">
+                  이번주 상영작
+                </Text>
+              </Center>
+            </Box>
+            {showMovieSuggestions && (
+              <Box
+                padding="8px 12px"
+                textAlign="left"
+                cursor="pointer"
+                onClick={() => handleSuggestionClick("이번주 상영작")}
+              >
+                <Stack direction="row" align="center" spacing={2} marginTop="8px">
+                  <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
+                    <img
+                      src="https://bit.ly/dan-abramov"
+                      alt="이번주 상영작"
+                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                    />
+                  </Box>
+                  <Text color="white" marginTop="8px">오페라의 유령</Text>
+                </Stack>
+              </Box>
+            )}
+          </Box>
+        ) : (
+          <Text color="white">{suggestion}</Text>
+        )}
+      </Box>
+    ))}
+    <Box padding="8px 12px" borderBottom="1px solid white" marginTop="8px">
+      <Text color="white" fontWeight="bold">
+        인기 검색어
+      </Text>
+    </Box>
+    {popularSuggestions.map((popularSuggestion, index) => (
+      <Box
+        key={index}
+        padding="8px 12px"
+        cursor="pointer"
+        transition="background-color 0.3s ease"
+        _hover={{ backgroundColor: "#444" }}
+        onClick={() => handleSuggestionClick(popularSuggestion)}
+        textAlign="left"
+      >
+        <Text color="white">{popularSuggestion}</Text>
+      </Box>
+    ))}
+  </Box>
+)}
+
+          </Box>
+        </div>
                                 {/* 모바일로 볼 때 검색바 밑으로 내려가게 
                 <Container>
                   <Flex align="center" mr={5}>
@@ -128,7 +260,7 @@ const Navbar = (props) => {
                             </Flex>
                         </Container>
 
-                        {/* {mob} */}
+
                         <Accordion>
                             <AccordionItem>
                                 <h2>
@@ -150,93 +282,10 @@ const Navbar = (props) => {
 
                                         <ColorMode></ColorMode>
 
-                                        <Box
-                                            ml={2}
-                                            display={{
-                                                base: "inline-block",
-                                                md: "none",
-                                            }}
-                                        >
-                                            <Menu isLazy id="navbar-menu">
-                                                <MenuButton
-                                                    as={IconButton}
-                                                    icon={<HamburgerIcon />}
-                                                    variant="outline"
-                                                    aria-lable="Options"
-                                                />
-                                                <AccordionButton>
-                                                    <MenuItem
-                                                        as={MenuLink}
-                                                        href="/"
-                                                    >
-                                                        <Text
-                                                            fontsize={{
-                                                                base: "24px",
-                                                                md: "40px",
-                                                                lg: "56px",
-                                                            }}
-                                                        >
-                                                            Menu1
-                                                        </Text>
-                                                    </MenuItem>
-                                                </AccordionButton>
-                                                <AccordionButton>
-                                                    <MenuItem
-                                                        as={MenuLink}
-                                                        href="/"
-                                                    >
-                                                        <Text
-                                                            fontsize={{
-                                                                base: "24px",
-                                                                md: "40px",
-                                                                lg: "56px",
-                                                            }}
-                                                        >
-                                                            Menu2
-                                                        </Text>
-                                                    </MenuItem>
-                                                </AccordionButton>
-                                                <AccordionButton>
-                                                    <MenuItem
-                                                        as={MenuLink}
-                                                        href="/"
-                                                    >
-                                                        <Text
-                                                            fontsize={{
-                                                                base: "24px",
-                                                                md: "40px",
-                                                                lg: "56px",
-                                                            }}
-                                                        >
-                                                            Menu3
-                                                        </Text>
-                                                    </MenuItem>
-                                                </AccordionButton>
-                                                <AccordionButton>
-                                                    <MenuItem
-                                                        as={MenuLink}
-                                                        href="/"
-                                                    >
-                                                        <Text
-                                                            fontsize={{
-                                                                base: "24px",
-                                                                md: "40px",
-                                                                lg: "56px",
-                                                            }}
-                                                        >
-                                                            Menu4
-                                                        </Text>
-                                                    </MenuItem>
-                                                </AccordionButton>
-                                                대머리
-                                            </Menu>
-                                        </Box>
+
                                     </Box>
                                 </h2>
-                                <AccordionPanel pb={4}>
-                                    테스트 삼아서 만들어봤는데 잘 됐으면 좋겠다
-                                    메롱.
-                                </AccordionPanel>
+
                             </AccordionItem>
                         </Accordion>
 
@@ -276,7 +325,9 @@ const Navbar = (props) => {
         </Box>
         */}
                     </Container>
+
                     <Container textAlign="center">
+                        {/*서비스 소개*/}
                         <Menu>
                             <LinkItem href="./service" path={path}>
                                 <MenuButton
@@ -307,48 +358,20 @@ const Navbar = (props) => {
                                 <MenuItem>Item 2</MenuItem>
                             </MenuList>
                         </Menu>
-
+                        {/*학과소개*/}
                         <Menu>
-                            <LinkItem href="./announcement" path={path}>
-                                <MenuButton
-                                    marginRight="20px"
-                                    as={IconButton}
-                                    fontSize="lg"
-                                    variant="unstyled"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    공지사항
-                                </MenuButton>
-                            </LinkItem>
-                            <MenuList
-                                isOpen={true}
-                                style={{
-                                    position: "absolute",
-                                    top: "100%",
-                                    left: 0,
-                                    display: "block",
-                                }}
+
+                            <MenuButton
+                                marginRight="20px"
+                                as={IconButton}
+                                fontSize="lg"
+                                variant="unstyled"
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
                             >
-                                <MenuItem>
-                                    <span>안녕하세요.</span>
-                                </MenuItem>
-                            </MenuList>
-                        </Menu>
+                                학과 소개
+                            </MenuButton>
 
-                        <Menu>
-                            <LinkItem href="./department" path={path}>
-                                <MenuButton
-                                    marginRight="20px"
-                                    as={IconButton}
-                                    fontSize="lg"
-                                    variant="unstyled"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    학과 소개
-                                </MenuButton>
-                            </LinkItem>
                             <MenuList
                                 isOpen={true}
                                 style={{
@@ -377,8 +400,9 @@ const Navbar = (props) => {
                             </MenuList>
                         </Menu>
 
+                        {/*공지사항*/}
                         <Menu>
-                            <LinkItem href="./reservation" path={path}>
+                            <LinkItem href="./announcement" path={path}>
                                 <MenuButton
                                     marginRight="20px"
                                     as={IconButton}
@@ -387,7 +411,7 @@ const Navbar = (props) => {
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    예약 &nbsp; <Icon as={CalendarIcon} />
+                                    공지사항
                                 </MenuButton>
                             </LinkItem>
                             <MenuList
@@ -400,7 +424,7 @@ const Navbar = (props) => {
                                 }}
                             >
                                 <MenuItem>
-                                    <span>이게 진짜 되네요.</span>
+                                    <span>안녕하세요.</span>
                                 </MenuItem>
                             </MenuList>
                         </Menu>
