@@ -115,13 +115,12 @@ const reservationcheck = () => {
             {/*예약자 리스트 박스*/}
             <Flex direction={{ base: 'column', md: 'row' }}>
                 <Stack mt={{ base: 5, md: 0 }} mr={{ base: 0, md: 1 }} w={{ base: '100%', md: '61%' }}>
-                    <Box><Text >재학생</Text></Box>
+                    <Box mt={10}><Text >재학생</Text></Box>
                     <Box
                         overflowX="auto"
                         h="200px"
                         whiteSpace="nowrap"
                         px="32px"
-                        mt={10}
                         fontSize="md"
                         borderRadius={10}
                         border="1px solid dodgerblue"
@@ -183,21 +182,21 @@ const reservationcheck = () => {
                         </TableContainer>
                     </Box>
                 </Stack>
-                <Stack mt={{ base: 5, md: 0 }} 
-                w={{ base: '100%', md: '39%' }}
+                <Stack mt={{ base: 5, md: 0 }}
+                    w={{ base: '100%', md: '39%' }}
                 >
-                    <Box><Text >외부인</Text></Box>
+                    <Box mt={10}><Text >외부인</Text></Box>
                     <Box
                         overflowX="auto"
                         h="200px"
                         whiteSpace="nowrap"
                         px="32px"
-                        mt={10}
+
                         fontSize="md"
                         borderRadius={10}
                         border="1px solid dodgerblue"
                         p={1}
-                        
+
                     >
                         <TableContainer>
                             <Table size='sm'>
