@@ -51,13 +51,29 @@ import {
     const [reservationStatus, setReservationStatus] = useState("");
   
     const [perform_Info, setperform_Info] = useState([]);
-    
     useEffect(() => {
         fetch(`/api/perform_Info/${id}`)
         .then((response) => response.json())
         .then((data) => setperform_Info(data))
         .catch((error) => console.error(error));
     }, [id]);
+
+    const [Performance, setPerformance] = useState([]);
+    useEffect(() => {
+        fetch(`/api/Performance/${id}`)
+            .then((response) => response.json())
+            .then((data) => setPerformance(data))
+            .catch((error) => console.error(error));
+    }, [id]);
+
+    const [actors, setActors] = useState([]);
+    useEffect(() => {
+        fetch(`/api/actors/${id}`)
+            .then((response) => response.json())
+            .then((data) => setActors(data))
+            .catch((error) => console.error(error));
+    }, [id]);
+
     const handleTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
@@ -123,7 +139,7 @@ import {
   
     return (
         <>
-            {perform_Info.slice(0, 1).map((perform) => (
+            {Performance.map((PerformanceItem) => (
             <Card
                 direction={{ base: "column", sm: "row" }}
                 overflow="hidden"
@@ -132,17 +148,38 @@ import {
                 <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src={perform.img_url}
+                    src={infoItem.img_url}
                     alt=""
                 />
   
                 <CardBody>
-                    <Heading size="md">{perform.title}</Heading>
+                    <Heading size="md">{PerformanceItem.title}</Heading>
                     <print>&nbsp;&nbsp;&nbsp;</print>
-                    <Text py="2">장 소:{perform.address} {perform.location}</Text>
+                    <Text py="2">장 소: {PerformanceItem.address} {PerformanceItem.location}</Text>
                     <Text py="2">출연진:</Text>
-                    <Text py="2">기 간:{perform.view_day}</Text>
-                    <Text py="2">시 간:{perform.view_time}</Text>
+                        <Stack spacing={2}>
+                            {actors.map((actor) => (
+                                <Text key={actor.id} py="1">
+                                    {actor.name} 
+                                </Text>
+                            ))}
+                        </Stack>
+                    <Text py="2">기 간:</Text>
+                        <Stack spacing={2}>
+                            {perform_Info.map((infoItem) => (
+                                <Text py="1">
+                                    {infoItem.view_date}
+                                </Text>
+                            ))}
+                        </Stack>
+                    <Text py="2">시 간:</Text>
+                        <Stack spacing={2}>
+                            {perform_Info.map((infoItem) => (
+                                <Text py="1">
+                                    {infoItem.view_time} 
+                                </Text>
+                            ))}
+                        </Stack>
                     <Text py="2">줄거리:</Text>
                 </CardBody>
             </Card>
@@ -159,9 +196,11 @@ import {
                             <AccordionIcon />
                         </AccordionButton>
                     </h2>
+                    {Performance.map((Performance) => (
                     <AccordionPanel pb={4}>
-                        관람 시 주의해야 할 사항들을 적는 공간입니다.
+                        {Performance.rule}
                     </AccordionPanel>
+                    ))}
                 </AccordionItem>
             </Accordion>
             <print>&nbsp;</print>
@@ -226,7 +265,7 @@ import {
                     size="md"
                     type="date"
                     min="2023-08-01"
-                    max="2023-08-31"
+                    max="2023-09-31"
                     onChange={handleTimeChange}
                     value={selectedTime}
                 />

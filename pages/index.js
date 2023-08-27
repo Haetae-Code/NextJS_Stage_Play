@@ -38,8 +38,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4}),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -111,7 +111,7 @@ const Page = () => {
                 <Box display="flex">
                     <Box >
                     <Text
-                        fontSize={{ base: "30px", sm: "40px", md: "50px"}}
+                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
                         fontWeight="bold"
                     >
                         뮤지컬과
@@ -221,9 +221,10 @@ const Page = () => {
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        objectFit="cover"
-                                        w="100%"
-                                        h="100%"
+                                        style={{
+                                            width: "300px",
+                                            height: "350px",
+                                        }}
                                     />
                                 </Box>
                                     <CardHeader>
