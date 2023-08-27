@@ -25,7 +25,7 @@ import {
     Divider,
     Icon,
     useMediaQuery,
-    
+
 } from "@chakra-ui/react";
 
 import { HamburgerIcon, CalendarIcon } from "@chakra-ui/icons";
@@ -131,7 +131,7 @@ const Navbar = (props) => {
                             </Flex>
                         </Container>
 
-                        
+
                         <Accordion>
                             <AccordionItem>
                                 <h2>
@@ -153,10 +153,10 @@ const Navbar = (props) => {
 
                                         <ColorMode></ColorMode>
 
-                                        
+
                                     </Box>
                                 </h2>
-                                
+
                             </AccordionItem>
                         </Accordion>
 
@@ -196,8 +196,9 @@ const Navbar = (props) => {
         </Box>
         */}
                     </Container>
-                    
+
                     <Container textAlign="center">
+                        {/*서비스 소개*/}
                         <Menu>
                             <LinkItem href="./service" path={path}>
                                 <MenuButton
@@ -228,48 +229,20 @@ const Navbar = (props) => {
                                 <MenuItem>Item 2</MenuItem>
                             </MenuList>
                         </Menu>
-
+                        {/*학과소개*/}
                         <Menu>
-                            <LinkItem href="./announcement" path={path}>
-                                <MenuButton
-                                    marginRight="20px"
-                                    as={IconButton}
-                                    fontSize="lg"
-                                    variant="unstyled"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    공지사항
-                                </MenuButton>
-                            </LinkItem>
-                            <MenuList
-                                isOpen={true}
-                                style={{
-                                    position: "absolute",
-                                    top: "100%",
-                                    left: 0,
-                                    display: "block",
-                                }}
+
+                            <MenuButton
+                                marginRight="20px"
+                                as={IconButton}
+                                fontSize="lg"
+                                variant="unstyled"
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
                             >
-                                <MenuItem>
-                                    <span>안녕하세요.</span>
-                                </MenuItem>
-                            </MenuList>
-                        </Menu>
+                                학과 소개
+                            </MenuButton>
 
-                        <Menu>
-                            
-                                <MenuButton
-                                    marginRight="20px"
-                                    as={IconButton}
-                                    fontSize="lg"
-                                    variant="unstyled"
-                                    onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    학과 소개
-                                </MenuButton>
-                            
                             <MenuList
                                 isOpen={true}
                                 style={{
@@ -298,8 +271,9 @@ const Navbar = (props) => {
                             </MenuList>
                         </Menu>
 
+                        {/*공지사항*/}
                         <Menu>
-                            <LinkItem href="./reservation" path={path}>
+                            <LinkItem href="./announcement" path={path}>
                                 <MenuButton
                                     marginRight="20px"
                                     as={IconButton}
@@ -308,7 +282,7 @@ const Navbar = (props) => {
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    예약 &nbsp; <Icon as={CalendarIcon} />
+                                    공지사항
                                 </MenuButton>
                             </LinkItem>
                             <MenuList
@@ -321,7 +295,7 @@ const Navbar = (props) => {
                                 }}
                             >
                                 <MenuItem>
-                                    <span>이게 진짜 되네요.</span>
+                                    <span>안녕하세요.</span>
                                 </MenuItem>
                             </MenuList>
                         </Menu>
