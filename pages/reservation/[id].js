@@ -78,7 +78,7 @@ const Page = (actorData) => {
                         alignItems={"center"}
                         flexDirection={["column", "row"]}
                     >
-                        <Box mb={[10, 0]} mr={[0, 10]}>
+                        <Box mb={[10, 0]} mr={[0, 10]} w={300} h={400}>
                             <Image
                                 src={PerformanceItem.img_url}
                                 alt="No image"
@@ -195,7 +195,7 @@ const Page = (actorData) => {
                                         </Tr>
                                     </Thead>
                                 </Table>
-                                <Box pt={10} >
+                                <Box pt={10} w={300} h={400}>
                                     <Image
                                     
                                         src={PerformanceItem.img_url}
