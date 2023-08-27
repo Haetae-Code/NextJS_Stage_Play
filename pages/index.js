@@ -38,8 +38,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToShow: useBreakpointValue({ base: 1.5, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1.5, sm: 1, md: 1, lg: 1}),
         afterChange: (index) => handleSliderChange(index),
     };
 
@@ -111,7 +111,7 @@ const Page = () => {
                 <Box display="flex">
                     <Box >
                     <Text
-                        fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
+                        fontSize={{ base: "30px", sm: "40px"}}
                         fontWeight="bold"
                     >
                         뮤지컬과
@@ -126,36 +126,34 @@ const Page = () => {
                 </Box>
 
                 <p>&nbsp;</p>
-
+                
                 <Slider {...settings}>
                     {dataMusical.map((item, index) => (
                         <Box key={index} px={3}>
                             <Card
                                 maxW="sm"
-                                h="100%"
+                                h="550px"
                                 borderWidth="0"
                                 borderRadius="lg"
                                 overflow="hidden"
                             >
                                 <Box
                                     w={{ base: "100%"}}
-                                    h="350px"
+                                    h="320px"
                                    
                                 >
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        objectFit="cover"
+                                        
                                         w="100%"
                                         h="100%"
                                     />
                                 </Box>
-                                <CardHeader>
+                                <CardHeader h="30px" mb={5}>
                                     <Text
                                         fontSize="xl"
                                         fontWeight="bold"
-                                        ml={5}
-                                        mt={2}
                                         style={{
                                             whiteSpace: "nowrap",
                                             overflow: "hidden",
@@ -166,7 +164,7 @@ const Page = () => {
                                         {item.title}
                                     </Text>
                                 </CardHeader>
-                                <CardBody h="100px">
+                                <CardBody h="160px">
                                     <Text fontSize="md">
                                         {item.description}
                                     </Text>
@@ -175,6 +173,7 @@ const Page = () => {
                                 <Button
                                     colorScheme="blue"
                                     onClick={() => handleReservation(item.id)}
+                                    h="40px"
                                 >
                                     예매하기
                                 </Button>
@@ -183,16 +182,19 @@ const Page = () => {
                         </Box>
                     ))}
                 </Slider>
-
+                
                 {/*영화과 행사 슬라이더 */}
 
                 <print>&nbsp;</print>
                 <Divider mt={8} mb={8} />
                 <div style={{ position: "center" }}>
                     <Box display="flex">
-                        <p style={{ fontSize: "40px", fontWeight: "bold" }}>
-                            영화과
-                        </p>
+                    <Text
+                        fontSize={{ base: "30px", sm: "40px"}}
+                        fontWeight="bold"
+                    >
+                        영화과
+                    </Text>
                         <Stack direction="row" h="80px" p={4}>
                             <Divider orientation="vertical" />
                             <Text>
@@ -203,61 +205,56 @@ const Page = () => {
                     </Box>
                     <p>&nbsp;</p>
 
-                    <Slider {...settings}>
-                        {dataMovie.map((item, index) => (
-                            <Box key={index} px={3}>
-                                <Card
-                                    maxW="sm"
-                                    borderWidth="0"
-                                    borderRadius="lg"
-                                    overflow="hidden"
-                                    
-                                >
+                <Slider {...settings}>
+                    {dataMusical.map((item, index) => (
+                        <Box key={index} px={3}>
+                            <Card
+                                maxW="sm"
+                                h="550px"
+                                borderWidth="0"
+                                borderRadius="lg"
+                                overflow="hidden"
+                            >
                                 <Box
                                     w={{ base: "100%"}}
-                                    h="350px"
+                                    h="320px"
                                    
                                 >
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        style={{
-                                            width: "300px",
-                                            height: "350px",
-                                        }}
+                                        
+                                        w="100%"
+                                        h="100%"
                                     />
                                 </Box>
-                                    <CardHeader>
-                                        <Text
-                                            fontSize="xl"
-                                            fontWeight="bold"
-                                            ml={5}
-                                            mt={2}
-                                            style={{
-                                                whiteSpace: "nowrap",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                width: "80%",
-                                            }}
-                                        >
-                                            {item.title}
-                                        </Text>
-                                    </CardHeader>
-                                    <CardBody>
-                                        <Text fontSize="md">
-                                            {item.description}
-                                        </Text>
-                                    </CardBody>
-
-                                    {/* <Link href="./reservation"> */}
-                                    <Button
-                                        colorScheme="blue"
-                                        onClick={() =>
-                                            handleReservation(item.id)
-                                        }
+                                <CardHeader h="30px" mb={5}>
+                                    <Text
+                                        fontSize="xl"
+                                        fontWeight="bold"
+                                        style={{
+                                            whiteSpace: "nowrap",
+                                            overflow: "hidden",
+                                            textOverflow: "ellipsis",
+                                            width: "80%",
+                                        }}
                                     >
-                                        예매하기
-                                    </Button>
+                                        {item.title}
+                                    </Text>
+                                </CardHeader>
+                                <CardBody h="160px">
+                                    <Text fontSize="md">
+                                        {item.description}
+                                    </Text>
+                                </CardBody>
+                                {/* <Link href="./reservation"> */}
+                                <Button
+                                    colorScheme="blue"
+                                    onClick={() => handleReservation(item.id)}
+                                    h="40px"
+                                >
+                                    예매하기
+                                </Button>
                                     {/* </Link> */}
                                 </Card>
                             </Box>
