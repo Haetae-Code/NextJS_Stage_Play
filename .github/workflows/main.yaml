@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }} # Add your SSH username here
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Add your SSH private key here
           source: "." # Specify the source directory you want to deploy
-          target: "/home/project" # Specify the target directory on the remote machine
+          target: "/home/ubuntu/project" # Specify the target directory on the remote machine
