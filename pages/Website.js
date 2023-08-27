@@ -12,14 +12,13 @@ const titleStyle = {
 const CustomCredit = ({ title, roles, children }) => (
   <Box>
     <VStack spacing="20px" margin="20px">
-      <Text style={titleStyle}>{title}</Text>
-      <Text fontSize="20px">{roles}</Text>
+      <Text style={{ ...titleStyle, color: "white" }}>{title}</Text>
+      <Text fontSize="20px" color="white">{roles}</Text>
       {children}
     </VStack>
     <br />
   </Box>
 );
-
 const Service = () => {
   const [creditsVisible, setCreditsVisible] = useState(false);
   const [showTitlePrompt, setShowTitlePrompt] = useState(false);
@@ -27,31 +26,31 @@ const Service = () => {
   const creditsContent = [
     <VStack spacing="20px" margin="20px">
       <CustomCredit title="Manager" roles="(각 부서별 역할 적는 곳)">
-        <Text fontSize="30px">채준혁</Text>
-        <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
+        <Text fontSize="30px" color="white">채준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
       </CustomCredit>
 
       <CustomCredit title="Front" roles="(각 부서별 역할 적는 곳)">
-      <Text fontSize="30px">김준서</Text>
-        <Text mt="5px" fontSize="20px">"재밌노"</Text>
-        <Text fontSize="30px">박지환</Text>
-        <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
-        <Text fontSize="30px">김민경</Text>
-        <Text mt="5px" fontSize="20px">"너무 재미있어요"</Text>
+      <Text fontSize="30px" color="white">김준서</Text>
+        <Text mt="5px" fontSize="20px" color="white">"재밌노"</Text>
+        <Text fontSize="30px" color="white">박지환</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+        <Text fontSize="30px" color="white">김민경</Text>
+        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
       </CustomCredit>
 
       <CustomCredit title="DB" roles="(각 부서별 역할 적는 곳)">
-      <Text fontSize="30px">채준혁</Text>
-        <Text mt="5px" fontSize="20px">"내용"</Text>
-        <Text fontSize="30px">윤태성</Text>
-        <Text mt="5px" fontSize="20px">"내용"</Text>
-        <Text fontSize="30px">최인서</Text>
-        <Text mt="5px" fontSize="20px">"내용"</Text>
+      <Text fontSize="30px" color="white">채준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text fontSize="30px" color="white">윤태성</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text fontSize="30px" color="white">최인서</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
       </CustomCredit>
 
       <CustomCredit title="Server" roles="(각 부서별 역할 적는 곳)">
-        <Text fontSize="30px">이준혁</Text>
-        <Text mt="5px" fontSize="20px">"내용"</Text>        
+        <Text fontSize="30px" color="white">이준혁</Text>
+        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>        
       </CustomCredit>    
     </VStack>,
   ];
@@ -120,7 +119,7 @@ const Service = () => {
         >
           <a href="./service" style={{ textDecoration: "none" }}>
             <Text
-              fontSize="3xl"
+              fontSize="4xl"
               position="absolute"
               top="20px"
               left="20px"

@@ -84,15 +84,15 @@ const Page = () => {
     }));
     <responsive/>
     return (
-        <Fragment>
+        <Box>
             
             <div>
-            <Fragment>
-                <Container maxWidth="100%">
-                    <div>&nbsp;</div>
-
+            <Box>
+                <Box>
+                    <Box>
                     <ImageSlider></ImageSlider>
-                    <Container pt={3} maxWidth="100%">
+                    </Box>
+                    <Box maxWidth="100%">
                         <Box flexGrow={1} display={"flex"}>
                             <Heading
                                 size="2xl"
@@ -103,18 +103,20 @@ const Page = () => {
                                 새로운 행사들을 여기서 한 눈에 봐요 &#x1F600;
                             </Heading>
                         </Box>
-                    </Container>
-                </Container>
+                    </Box>
+                </Box>
 
                 <Divider mt={8} mb={8} />
                 {/*뮤지컬과 행사 슬라이더 */}
                 <Box display="flex">
+                    <Box >
                     <Text
                         fontSize={{ base: "30px", sm: "40px", md: "50px", lg: "60px" }}
                         fontWeight="bold"
                     >
                         뮤지컬과
                     </Text>
+                    </Box>
                     <Stack direction="row" h="80px" p={4}>
                         <Divider orientation="vertical" />
                         <Text>
@@ -130,6 +132,7 @@ const Page = () => {
                         <Box key={index} px={3}>
                             <Card
                                 maxW="sm"
+                                h="100%"
                                 borderWidth="0"
                                 borderRadius="lg"
                                 overflow="hidden"
@@ -137,7 +140,7 @@ const Page = () => {
                                 <Box
                                     w={{ base: "100%"}}
                                     h="350px"
-                                    mx="auto"
+                                   
                                 >
                                     <Image
                                         src={item.image}
@@ -208,6 +211,12 @@ const Page = () => {
                                     borderWidth="0"
                                     borderRadius="lg"
                                     overflow="hidden"
+                                    
+                                >
+                                <Box
+                                    w={{ base: "100%"}}
+                                    h="350px"
+                                   
                                 >
                                     <Image
                                         src={item.image}
@@ -217,6 +226,7 @@ const Page = () => {
                                             height: "350px",
                                         }}
                                     />
+                                </Box>
                                     <CardHeader>
                                         <Text
                                             fontSize="xl"
@@ -254,11 +264,11 @@ const Page = () => {
                         ))}
                     </Slider>
                 </div>
-            </Fragment>
+            </Box>
         </div>
             
             
-        </Fragment> 
+        </Box> 
     );
 };
 
