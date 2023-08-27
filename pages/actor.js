@@ -147,7 +147,7 @@ const Actor = () => {
 
   return (
     <div>
-      <Text  ml={{ base: "10px", md: "50px" }}>배우를 한 번에 관리하는 페이지입니다.</Text>
+
       <Box mt="40px" border="1px solid">
         <br />
         <Text ml="50px" fontSize="30px">
@@ -201,17 +201,15 @@ const Actor = () => {
           </Box>
         )}
 
-      <Stack ml={{ base: "0", md: "80px" }}>
+      <Stack ml={{ base: "0", md: "20px" }}>
         <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor) => (
                           <Box
                           key={actor.id}
-                          py={10}
-                          flex={{ base: "1 1 100%", md: "1 1 45%" }}
-                          mt={{ base: "10px", md: "-20px" }}
-                          ml={{ base: "0", md: "-20px" }}
+                          flex={{ base: "1 1 100%", sm: "1 1 50%", md: "1 1 33.33%", lg: "1 1 25%" }}
+                          mb="20px"
                         >
-             <Flex  direction="column">
+             <Flex  direction="column"  alignItems="center">
                 <Center mt="10px" >
                 <Image
                   src={actor.imageUrl || "https://bit.ly/dan-abramov"}
