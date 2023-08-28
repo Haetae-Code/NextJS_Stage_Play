@@ -4,18 +4,10 @@ import {
     Flex,
     Image,
     Table,
-    Thead,
     Tbody,
-    Tfoot,
     Tr,
-    Th,
     Td,
     TableContainer,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Text,
     Button,
     Stack,
@@ -29,10 +21,6 @@ import {
     PopoverContent,
     PopoverHeader,
     PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
     FormControl,
     FormLabel,
     FormErrorMessage,
@@ -44,8 +32,7 @@ import KakaoMap from "../components/kakaomap";
 import Actor from "./addedactor";
 
 const Page = () => {
-    //const [title, setTitle] = useState("제목")
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState('');
     const [state, setState] = useState({
         title: "제목",
         location: "101호 대강당",
@@ -55,232 +42,62 @@ const Page = () => {
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
     });
-    const handletitleInputChange = (e) => setInput(e.target.value)
-    const handleInputChange =(e) => setInput(e.target.value)
-    const isError = input === ''
+
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
 
     const handleSaveReservation = () => {
-        // 이후 실제 db와 연결해서 확인
         window.alert("저장되었습니다.");
     };
 
     return (
         <Box>
-            <Box>
-                
-                <Flex
-                    
-                    alignItems={"center"}
-                    flexDirection={["column", "row"]}
-                >
-                    
-                    <Stack  display="flex">
-                        <Box alignItems="center" justifyContent="center">
-                            
-                            <TableContainer>
-                                <Table variant="simple" size={["sm", "md"]}>
-                                    <Tbody>
-                                        <Tr>
-                                            <Td>제목</Td>
-                                            <Td>    
-                                                <Editable
-                                                defaultValue={
-                                                    state.title
-                                                }
-                                                onChange={(value) => 
-                                                    handleStateChange(
-                                                        "title", 
-                                                        value
-                                                        )
-                                                    }
-                                                >                       
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="sm"
-                                                    />
-                                                </Editable>
-                                            </Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Td>도로명 주소</Td>
-                                            <Td>
-                                            <Editable
-                                                defaultValue={state.address}
-                                                onChange={(value) =>
-                                                    handleStateChange(
-                                                        "address",
-                                                        value
-                                                    )
-                                                }
-                                            >
-                                                <EditablePreview
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                                <EditableInput
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                            </Editable>
-                                            </Td>
-                                            
-                                        </Tr>
-                                        <Tr>
-                                            <Td>상세 장소</Td>
+            <Flex alignItems={"center"} flexDirection={["column", "row"]}>
+                <Stack display="flex">
+                    <Box>
+                        <TableContainer>
+                            <Table variant="simple" size={["sm", "md"]}>
+                                <Tbody>
+                                    {/* Table for inputting and editing various details */}
+                                    {Object.keys(state).map((key, index) => (
+                                        <Tr key={index}>
+                                            <Td>{key}</Td>
                                             <Td>
                                                 <Editable
-                                                    defaultValue={
-                                                        state.location
-                                                    }
-                                                    onChange={(value) =>
-                                                        handleStateChange(
-                                                            "location",
-                                                            value
-                                                        )
-                                                    }
+                                                    defaultValue={state[key]}
+                                                    onChange={(value) => handleStateChange(key, value)}
                                                 >
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                </Editable>
-                                            </Td>
-                                            <Td>
-                                            <Editable
-                                                defaultValue={
-                                                    state.InfoLocation
-                                                }
-                                                onChange={(value) =>
-                                                    handleStateChange(
-                                                        " InfoLocation",
-                                                        value
-                                                    )
-                                                }
-                                            >
-                                                <EditablePreview
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                                <EditableInput
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                            </Editable>
-                                            </Td>
-                                            
-                                        </Tr>
-                                        <Tr>
-                                            <Td>공연 일자</Td>
-                                            <Td>
-                                                <Editable
-                                                    defaultValue={state.period}
-                                                    onChange={(value) =>
-                                                        handleStateChange(
-                                                            "period",
-                                                            value
-                                                        )
-                                                    }
-                                                >
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                </Editable>
-                                            </Td>
-                                            
-                                        </Tr>
-                                        <Tr>
-                                            <Td>
-                                                시작 시간
-                                            </Td>
-                                            
-                                            
-                                        </Tr>
-                                        <Tr>
-                                            <Td>공연 길이</Td>
-                                            <Td>
-                                                <Editable
-                                                    defaultValue={state.time}
-                                                    onChange={(value) =>
-                                                        handleStateChange(
-                                                            "time",
-                                                            value
-                                                        )
-                                                    }
-                                                >
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                    />
+                                                    <EditablePreview border="1px solid" p={2} borderRadius="md" />
+                                                    <EditableInput border="1px solid" p={2} borderRadius="md" />
                                                 </Editable>
                                             </Td>
                                         </Tr>
-                                        <Tr>
-                                            <Td>수용 인원</Td>
-                                        </Tr>
-                                        <Tr>
-                                            <Td>관람 수칙</Td>
-                                        </Tr>
-                                    </Tbody>
-                                    
-                                </Table>
-                                
-                            </TableContainer>
-                            <Divider/>
-                                                                                
-                            <Text fontSize="xl">배우</Text>
-                            <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
-                            <Box>
-                                <Popover>
+                                    ))}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+
+                        <Divider />
+
+                        <Text fontSize="xl">배우</Text>
+                        <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
+                        <Box>
+                            <Popover>
                                 <PopoverTrigger>
                                     <Button>배우 추가</Button>
                                 </PopoverTrigger>
                                 <PopoverContent width="1000px" maxH="xl" placement="right">
-                                    <PopoverHeader >등록 배우 조회</PopoverHeader>
-                                    <PopoverBody overflow="auto"><Actor/></PopoverBody>
+                                    <PopoverHeader>등록 배우 조회</PopoverHeader>
+                                    <PopoverBody overflow="auto"><Actor /></PopoverBody>
                                 </PopoverContent>
-                                </Popover>
-                            </Box>
-                            
-                            
-                            <Divider/>
-                                
+                            </Popover>
                         </Box>
-                       
-                    </Stack>
-                </Flex>
-            </Box>
+
+                        <Divider />
+                    </Box>
+                </Stack>
+            </Flex>
 
             <Box>
                 <Button size="sm" onClick={handleSaveReservation}>
