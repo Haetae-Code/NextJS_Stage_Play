@@ -7,24 +7,22 @@ const UploadForm = () => {
   const [uploadMessage, setUploadMessage] = useState('');
   const [uploadedURI, setUploadedURI] = useState('');
 
-  // Handle file selection from input
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
     setUploadMessage('');
     setUploadedURI('');
   };
 
-  // Handle file upload to server
   const handleUpload = async () => {
-    if (!selectedFile) {
-      setUploadMessage('이미지 파일을 선택');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-
     try {
+      if (!selectedFile) {
+        setUploadMessage('이미지 파일을 선택');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
       const response = await axios.post('/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -49,7 +47,7 @@ const UploadForm = () => {
       <Button onClick={handleUpload}>업로드</Button>
 
       {uploadMessage && <Text>{uploadMessage}</Text>}
-
+      
       {uploadedURI && (
         <VStack>
           <Text>업로드된 이미지 URL:</Text>
