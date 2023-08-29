@@ -27,7 +27,7 @@ const ImageSlider = () => {
                     if (mouseOver) return;
                     timeout = setTimeout(() => {
                         slider.next();
-                    }, 2000);
+                    }, 3000);
                 }
                 slider.on("created", () => {
                     slider.container.addEventListener("mouseover", () => {
@@ -47,7 +47,7 @@ const ImageSlider = () => {
         ]
     );
     return (
-        <Box
+        <Container
         w="100%"
         display= "flex"
         position= "center"
@@ -62,7 +62,7 @@ const ImageSlider = () => {
                 <div className="keen-slider__slide number-slide1">
                     <Image
                         src="/asset/image/ImageSlider/Acting.png"
-                        alt="Dan Abramov"
+                        alt="cwulogo"
                         borderRadius={"10"}
                         style={{ maxWidth: "100%" }}
                     />
@@ -70,13 +70,13 @@ const ImageSlider = () => {
                 <div className="keen-slider__slide number-slide2">
                     <Image
                         src="/asset/image/ImageSlider/Acting.png"
-                        alt="Dan Abramov"
+                        alt="cwulogo"
                         borderRadius={"10"}
                         style={{ maxWidth: "100%" }}
                     />
                 </div>
             </div>
-        </Box>
+        </Container>
     );
 };
 export default ImageSlider;

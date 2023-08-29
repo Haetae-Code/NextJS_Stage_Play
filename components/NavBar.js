@@ -6,7 +6,6 @@ import {
   Box,
   Link,
   Heading,
-  Flex,
   Menu,
   MenuItem,
   MenuList,
@@ -16,19 +15,14 @@ import {
   Input,
   Accordion,
   AccordionItem,
-  AccordionButton,
-  AccordionPanel,
   Button,
   Text,
-  useDisclosure,
   VStack,
   Divider,
-  Icon,
   useMediaQuery,
-  List,
-  ListItem,
   Stack,
-  Center
+  Center,
+  VisuallyHidden,
 } from "@chakra-ui/react";
 
 import { HamburgerIcon, CalendarIcon } from "@chakra-ui/icons";
@@ -61,7 +55,7 @@ const MenuLink = forwardRef((props, ref) => (
 
 
 const Navbar = (props) => {
-  const [isMobile] = useMediaQuery("(max-width: 955px)");
+  const [isMobile] = useMediaQuery("(max-width: 795px)");
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -107,7 +101,6 @@ const Navbar = (props) => {
     <Fragment>
       <VStack>
         <Box
-          position="flex"
           as="nav"
           w="100%"
           bg={useColorModeValue("#ffffff40", "#20202380")}
@@ -115,172 +108,138 @@ const Navbar = (props) => {
           zIndex={2}
           {...props}
         >
+          {/* 로고, 관리자 컨테이너  */}
           <Container
             display="flex"
-            p={3}
+            alignItems="center"
             maxW="container.xl"
-            wrap="wrap"
-            justify="space-between"
-          >
-            {/*로고 아이콘*/}
-            <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-              <Logo />
-            </Heading>
-            {/* 관리자 페이지*/}
-            <Accordion>
-              <AccordionItem>
-                <Box flex={1}>
-                  <Button
-                    style={{
-                      mr: "100px",
-                      border: "none",
-                      backgroundColor: "transparent",
-                    }}
-                  >
-                    <LinkItem
-                      href="./admin"
-                      path={path}
-                    >
-                      관리자 페이지
-                    </LinkItem>
-                  </Button>
-                  <ColorMode></ColorMode>
-                </Box>
-              </AccordionItem> 
-            </Accordion>
-            </Container>
+            justifyContent={"space-between"}>
 
-            {/*검색어*/}
+            {/*로고 아이콘*/}
+            <Box>
+                <Logo />
+            </Box>
+
+            {/*검색바*/}
             <Container>
-              <Flex align="center" mr={5}>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <Box position="relative" width="500px">
-                    {/*검색바*/}
+              {!isMobile && (
+                <Box position="relative" >
+                  <Box>
                     <Input
-                      borderWidth={"2px"}
-                      borderRadius="100"
+                      borderWidth="2px"
+                      borderRadius="20"
                       borderColor={"#2d6fbb"}
                       variant="outline"
                       placeholder="Search"
-                      //htmlSize={20} width='auto'
-                      width="500px"
+                      width="100%"
                       onClick={handleSearchClick}
                     />
-                    {showSuggestions && (
-                      <Box
-                        position="absolute"
-                        top="100%"
-                        left={0}
-                        width="100%"
-                        backgroundColor="#333"
-                        color="white"
-                        border="1px solid #ccc"
-                        borderRadius="4px"
-                        boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
-                        zIndex={1}
-                        style={{
-                          marginTop: "4px",
-                          transform: "translateY(0)",
-                          opacity: 1,
-                          visibility: "visible",
-                        }}
-                        transition="transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease"
-                      >
-                        <Box padding="8px 12px" borderBottom="1px solid white">
-                          <Text color="white" fontWeight="bold">
-                            최근 검색어
-                          </Text>
-                        </Box>
-                        {suggestions.map((suggestion, index) => (
-                          <Box
-                            key={index}
-                            padding="8px 12px"
-                            cursor="pointer"
-                            transition="background-color 0.3s ease"
-                            _hover={{ backgroundColor: "#444" }}
-                            onClick={() => handleSuggestionClick(suggestion)}
-                            textAlign="left"
-                          >
-                            {suggestion === "이번주 상영작" ? (
-                              <Box>
+                  </Box>
+                  {showSuggestions && (
+                    <Box
+                      position="absolute"
+                      top="100%"
+                      left={0}
+                      width="100%"
+                      backgroundColor="#333"
+                      color="white"
+                      border="1px solid #ccc"
+                      borderRadius="4px"
+                      boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
+                      zIndex={1}
+                      style={{
+                        marginTop: "4px",
+                        transform: "translateY(0)",
+                        opacity: 1,
+                        visibility: "visible",
+                      }}
+                      transition="transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease"
+                    >
+                      <Box padding="8px 12px" borderBottom="1px solid white">
+                        <Text color="white" fontWeight="bold">
+                          최근 검색어
+                        </Text>
+                      </Box>
+                      {suggestions.map((suggestion, index) => (
+                        <Box
+                          key={index}
+                          padding="8px 12px"
+                          cursor="pointer"
+                          transition="background-color 0.3s ease"
+                          _hover={{ backgroundColor: "#444" }}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          textAlign="left"
+                        >
+                          {suggestion === "이번주 상영작" ? (
+                            <Box>
+                              <Box
+                                padding="8px 12px"
+                                borderBottom="1px solid white"
+                                marginTop="8px"
+                                cursor="pointer"
+                                onClick={() => handleSuggestionClick("이번주 상영작")}
+                              >
+                                <Center>
+                                  <Text color="white" fontWeight="bold">
+                                    이번주 상영작
+                                  </Text>
+                                </Center>
+                              </Box>
+                              {showMovieSuggestions && (
                                 <Box
                                   padding="8px 12px"
-                                  borderBottom="1px solid white"
-                                  marginTop="8px"
+                                  textAlign="left"
                                   cursor="pointer"
                                   onClick={() => handleSuggestionClick("이번주 상영작")}
                                 >
-                                  <Center>
-                                    <Text color="white" fontWeight="bold">
-                                      이번주 상영작
-                                    </Text>
-                                  </Center>
+                                  <Stack direction="row" align="center" spacing={2} marginTop="8px">
+                                    <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
+                                      <img
+                                        src="https://bit.ly/dan-abramov"
+                                        alt="이번주 상영작"
+                                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                                      />
+                                    </Box>
+                                    <Text color="white" marginTop="8px">오페라의 유령</Text>
+                                  </Stack>
                                 </Box>
-                                {showMovieSuggestions && (
-                                  <Box
-                                    padding="8px 12px"
-                                    textAlign="left"
-                                    cursor="pointer"
-                                    onClick={() => handleSuggestionClick("이번주 상영작")}
-                                  >
-                                    <Stack direction="row" align="center" spacing={2} marginTop="8px">
-                                      <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
-                                        <img
-                                          src="https://bit.ly/dan-abramov"
-                                          alt="이번주 상영작"
-                                          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                                        />
-                                      </Box>
-                                      <Text color="white" marginTop="8px">오페라의 유령</Text>
-                                    </Stack>
-                                  </Box>
-                                )}
-                              </Box>
-                            ) : (
-                              <Text color="white">{suggestion}</Text>
-                            )}
-                          </Box>
-                        ))}
-                        <Box padding="8px 12px" borderBottom="1px solid white" marginTop="8px">
-                          <Text color="white" fontWeight="bold">
-                            인기 검색어
-                          </Text>
+                              )}
+                            </Box>
+                          ) : (
+                            <Text color="white">{suggestion}</Text>
+                          )}
                         </Box>
-                        {popularSuggestions.map((popularSuggestion, index) => (
-                          <Box
-                            key={index}
-                            padding="8px 12px"
-                            cursor="pointer"
-                            transition="background-color 0.3s ease"
-                            _hover={{ backgroundColor: "#444" }}
-                            onClick={() => handleSuggestionClick(popularSuggestion)}
-                            textAlign="left"
-                          >
-                            <Text color="white">{popularSuggestion}</Text>
-                          </Box>
-                        ))}
+                      ))}
+                      <Box padding="8px 12px" borderBottom="1px solid white" marginTop="8px">
+                        <Text color="white" fontWeight="bold">
+                          인기 검색어
+                        </Text>
                       </Box>
-                    )}
-
-                  </Box>
-                </div>
-                {/* 모바일로 볼 때 검색바 밑으로 내려가게 
-                <Container>
-                  <Flex align="center" mr={5}>
-                    {!isMobile && (
-                      <Input
-                      borderWidth={'2px'}
-                      borderRadius='100'
-                      borderColor={'#2d6fbb'}
-                      variant='outline'
-                      placeholder='Search'
-                      width='500px'
-                      />
-                    )}
-                  </Flex>
-                </Container>*/}
-              </Flex>
+                      {popularSuggestions.map((popularSuggestion, index) => (
+                        <Box
+                          key={index}
+                          padding="8px 12px"
+                          cursor="pointer"
+                          transition="background-color 0.3s ease"
+                          _hover={{ backgroundColor: "#444" }}
+                          onClick={() => handleSuggestionClick(popularSuggestion)}
+                          textAlign="left"
+                        >
+                          <Text color="white">{popularSuggestion}</Text>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+              )}
             </Container>
+
+            {/* 다크 모드 */}
+            <Box ml={100}>
+              <ColorMode></ColorMode>
+            </Box>
+          </Container>
+
 
           {/* <Box  flex={1} align="right">
           <ColorMode />
@@ -318,14 +277,128 @@ const Navbar = (props) => {
         </Box>
         */}
 
-          <Container textAlign="center">
+          {/* 모바일 검색바 */}
+            <Container>
+              {isMobile &&(
+                <Box position="relative" >
+                  <Box>
+                    <Input
+                      borderWidth={"2px"}
+                      borderRadius="20"
+                      borderColor={"#2d6fbb"}
+                      variant="outline"
+                      placeholder="Search"
+                      width="100%"
+                      onClick={handleSearchClick}
+                    />
+                  </Box>
+                  {showSuggestions && (
+                    <Box
+                      position="absolute"
+                      top="100%"
+                      left={0}
+                      width="100%"
+                      backgroundColor="#333"
+                      color="white"
+                      border="1px solid #ccc"
+                      borderRadius="4px"
+                      boxShadow="0px 2px 4px rgba(0, 0, 0, 0.1)"
+                      zIndex={1}
+                      style={{
+                        marginTop: "4px",
+                        transform: "translateY(0)",
+                        opacity: 1,
+                        visibility: "visible",
+                      }}
+                      transition="transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease"
+                    >
+                      <Box padding="8px 12px" borderBottom="1px solid white">
+                        <Text color="white" fontWeight="bold">
+                          최근 검색어
+                        </Text>
+                      </Box>
+                      {suggestions.map((suggestion, index) => (
+                        <Box
+                          key={index}
+                          padding="8px 12px"
+                          cursor="pointer"
+                          transition="background-color 0.3s ease"
+                          _hover={{ backgroundColor: "#444" }}
+                          onClick={() => handleSuggestionClick(suggestion)}
+                          textAlign="left"
+                        >
+                          {suggestion === "이번주 상영작" ? (
+                            <Box>
+                              <Box
+                                padding="8px 12px"
+                                borderBottom="1px solid white"
+                                marginTop="8px"
+                                cursor="pointer"
+                                onClick={() => handleSuggestionClick("이번주 상영작")}
+                              >
+                                <Center>
+                                  <Text color="white" fontWeight="bold">
+                                    이번주 상영작
+                                  </Text>
+                                </Center>
+                              </Box>
+                              {showMovieSuggestions && (
+                                <Box
+                                  padding="8px 12px"
+                                  textAlign="left"
+                                  cursor="pointer"
+                                  onClick={() => handleSuggestionClick("이번주 상영작")}
+                                >
+                                  <Stack direction="row" align="center" spacing={2} marginTop="8px">
+                                    <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
+                                      <img
+                                        src="https://bit.ly/dan-abramov"
+                                        alt="이번주 상영작"
+                                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                                      />
+                                    </Box>
+                                    <Text color="white" marginTop="8px">오페라의 유령</Text>
+                                  </Stack>
+                                </Box>
+                              )}
+                            </Box>
+                          ) : (
+                            <Text color="white">{suggestion}</Text>
+                          )}
+                        </Box>
+                      ))}
+                      <Box padding="8px 12px" borderBottom="1px solid white" marginTop="8px">
+                        <Text color="white" fontWeight="bold">
+                          인기 검색어
+                        </Text>
+                      </Box>
+                      {popularSuggestions.map((popularSuggestion, index) => (
+                        <Box
+                          key={index}
+                          padding="8px 12px"
+                          cursor="pointer"
+                          transition="background-color 0.3s ease"
+                          _hover={{ backgroundColor: "#444" }}
+                          onClick={() => handleSuggestionClick(popularSuggestion)}
+                          textAlign="left"
+                        >
+                          <Text color="white">{popularSuggestion}</Text>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+              )}
+            </Container>
+
+          {/* 소개란 */}
+          <Container textAlign="center" mt={3}>
             {/*서비스 소개*/}
             <Menu>
               <LinkItem href="./service" path={path}>
                 <MenuButton
-                  marginRight="20px"
                   as={IconButton}
-                  fontSize="lg"
+                  mr="20px"
                   aria-label="Options"
                   variant="unstyled"
                   _hover={{ bg: "transparent !important" }}
@@ -350,13 +423,12 @@ const Navbar = (props) => {
                 <MenuItem>Item 2</MenuItem>
               </MenuList>
             </Menu>
+
             {/*학과소개*/}
             <Menu>
-
               <MenuButton
-                marginRight="20px"
+                mr="20px"
                 as={IconButton}
-                fontSize="lg"
                 variant="unstyled"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -396,9 +468,8 @@ const Navbar = (props) => {
             <Menu>
               <LinkItem href="./announcement" path={path}>
                 <MenuButton
-                  marginRight="20px"
+                  mr="20px"
                   as={IconButton}
-                  fontSize="lg"
                   variant="unstyled"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
@@ -433,12 +504,8 @@ const Navbar = (props) => {
              Manu4
            </LinkItem> */}
 
-            <Box>
-              <br />
-              <br />
-            </Box>
           </Container>
-          <Divider mb={0} mt={-5} orientaion="horizontal" />
+          <Divider mb={5} />
         </Box>
       </VStack>
     </Fragment>

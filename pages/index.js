@@ -12,6 +12,8 @@ import {
     Image,
     Divider,
     useBreakpointValue,
+    Flex,
+    Center,
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";
 import Slider from "react-slick";
@@ -61,7 +63,7 @@ const Page = () => {
                 <ImageSlider />
                 <Box maxWidth="100%">
                     <Box flexGrow={1} display={"flex"}>
-                        <Heading size="2xl" as="h1" variant="page-title" mt="100px">
+                        <Heading  as="h1" variant="page-title" mt="100px">
                             새로운 행사들을 여기서 한 눈에 봐요 &#x1F600;
                         </Heading>
                     </Box>
@@ -69,19 +71,19 @@ const Page = () => {
 
                 <Divider mt={8} mb={8} />
 
-                {/* Musical Event Slider */}
-                <Box display="flex">
-                    <Box>
-                        <Text fontSize={{ base: "30px", sm: "40px" }} fontWeight="bold">
+                {/* 뮤지컬과 */}
+                <Flex mb={3}>
+                    <Box w={110}>
+                        <Text fontSize= "2xl" fontWeight="bold">
                             뮤지컬과
                         </Text>
                     </Box>
-                    <Stack direction="row" h="80px" p={4}>
-                        <Divider orientation="vertical" />
-                        <Text>우리 학교 뮤지컬과 학생들의 공연들이에요 &#x2B50;</Text>
-                    </Stack>
-                </Box>
-
+                    <Box mt={2}>
+                        <Text >뮤지컬과 학생들의 공연들이에요 &#x2B50;</Text>
+                    </Box>
+                </Flex>
+                
+                <Box mb={20} mx={5}>
                 <Slider {...settings}>
                     {dataMusical.map((item, index) => (
                         <Box key={index} px={3}>
@@ -104,20 +106,21 @@ const Page = () => {
                         </Box>
                     ))}
                 </Slider>
-
-                {/* Movie Event Slider */}
-                <Divider mt={8} mb={8} />
-
-                <Box display="flex">
-                    <Text fontSize={{ base: "30px", sm: "40px" }} fontWeight="bold">
-                        영화과
-                    </Text>
-                    <Stack direction="row" h="80px" p={4}>
-                        <Divider orientation="vertical" />
-                        <Text>우리 학교 영화과 학생들의 공연은 어떨까요? &#x1F606;</Text>
-                    </Stack>
                 </Box>
+                
+                {/* 영화과 */}
+                <Flex mb={3}>
+                    <Box w={100}>
+                        <Text fontSize= "2xl" fontWeight="bold">
+                            영화과
+                        </Text>
+                    </Box>
+                    <Box mt={3}>
+                        <Text textAlign={"center"}>영화과 학생들의 공연은 어떨까요? &#x1F606;</Text>
+                    </Box>
+                </Flex>
 
+                <Box mb={10} mx={5}>
                 <Slider {...settings}>
                     {dataMovie.map((item, index) => (
                         <Box key={index} px={3}>
@@ -140,6 +143,7 @@ const Page = () => {
                         </Box>
                     ))}
                 </Slider>
+                </Box>
             </Box>
         </Box>
     );
