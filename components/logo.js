@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Text, useColorModeValue, chakra } from "@chakra-ui/react";
+import { Text, useColorModeValue, chakra, Box} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 
@@ -29,14 +29,12 @@ const CwuLogoImage = chakra(Image, {
 const Logo = () => {
     return (
         <Link href="/" scroll={false}>
-            <LogoBox>
+            <Box display="flex" alignItems="center">
                 <CwuLogoImage
                     src="/asset/image/cwulogo.png"
                     alt="cwulogo"
-                    borderRadius="10"
-                    width="100"
-                    height="100"
-                    pt={"5"}
+                    width="70"
+                    height="70"
                 />
                 <Text
                     color={useColorModeValue("gray.800", "whiteAlpha.900")}
@@ -46,7 +44,7 @@ const Logo = () => {
                 >
                     Stage Play
                 </Text>
-            </LogoBox>
+            </Box>
         </Link>
     );
 };

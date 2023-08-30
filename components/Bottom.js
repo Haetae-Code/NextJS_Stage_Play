@@ -12,6 +12,9 @@ import React, { useState, useEffect } from "react";
 const notices = ["개발자 노트:", "오늘의 공지사항:", "추후 공지예정:"];
 
 export const Bottom = (props) => {
+
+    const { path } = props;
+
     const [currentNoticeIndex, setCurrentNoticeIndex] = useState(0);
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -26,11 +29,10 @@ export const Bottom = (props) => {
         };
     }, []);
     return (
-        <Box>
-            <Divider my={8} />
-            <Container>
+        <Container>
+            <Divider my={5} />
                 <Box display="flex">
-                    <div style={{ flex: 1 }}>
+                    <div>
                         <Text
                             fontSize="md"
                             fontWeight="bold"
@@ -40,37 +42,26 @@ export const Bottom = (props) => {
                         </Text>
                     </div>
                 </Box>
-            </Container>
 
             <Box>
                 <Divider my={8} />
-                <Flex justifyContent="center" mr="100px">
+                <Flex justifyContent="center">
                     <Box display="flex" justifyContent="center">
                         <Button
                             mt={1}
-                            ml={90}
+
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
                             backgroundColor={null}
                         >
                             <Link color="inactiveColor">
-                                대표 번호 010-xxxx-xxx
+                                대표 번호
                             </Link>
                         </Button>
+
                         <Button
                             mt={1}
-                            ml={90}
-                            fontSize="sm"
-                            fontWeight="bold"
-                            bg={"transparent"}
-                            backgroundColor={null}
-                        >
-                            <Link color="inactiveColor">회사 소개</Link>
-                        </Button>
-                        <Button
-                            mt={1}
-                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
@@ -78,28 +69,21 @@ export const Bottom = (props) => {
                         >
                             <Link color="inactiveColor">서비스 소개</Link>
                         </Button>
+                        {/* 관리자 페이지 */}
                         <Button
                             mt={1}
-                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
                             backgroundColor={null}
                         >
-                            <Link color="inactiveColor">자주 묻는 질문</Link>
-                        </Button>
-
-                        <Button
-                            mt={1}
-                            ml={90}
-                            fontSize="sm"
-                            fontWeight="bold"
-                            bg={"transparent"}
-                            backgroundColor={null}
-                            _focus={{ boxShadow: "none" }}
-                            _active={{ backgroundColor: "blue.600" }}
-                        >
-                            <Link color="inactiveColor">건의사항</Link>
+                            <Link
+                            color="inactiveColor"
+                                href="./admin"
+                                path={path}
+                            >
+                                관리자 페이지
+                            </Link>
                         </Button>
                     </Box>
                 </Flex>
@@ -107,6 +91,6 @@ export const Bottom = (props) => {
             <footer style={{ height: "100px" }}>
                 {/*페이지 하단 여유 공간*/}
             </footer>
-        </Box>
+        </Container>
     );
 };

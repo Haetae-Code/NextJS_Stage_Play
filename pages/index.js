@@ -51,7 +51,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: PerformanceItem.location,
+        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
     });
 
     const dataMusical = Performance.map(generateData);
