@@ -37,6 +37,7 @@ import {
   const Page2 = () => {
     const router = useRouter();
     const { id } = router.query;
+    const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
@@ -74,12 +75,16 @@ import {
             .catch((error) => console.error(error));
     }, [id]);
 
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value);
+    };
+
     const handleTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
 
     const timeOptions = perform_Info
-    .filter((perform) => perform.view_date === selectedTime)
+    .filter((perform) => perform.view_date === selectedDate)
     .map((perform) => perform.view_time);
 
     for (let i = 0; i < perform_Info.length; i++) {
@@ -190,7 +195,7 @@ import {
                     </h2>
                     {Performance.map((Performance) => (
                     <AccordionPanel pb={4}>
-                        {Performance.rule}
+                        {Performance.rules}
                     </AccordionPanel>
                     ))}
                 </AccordionItem>
@@ -258,15 +263,14 @@ import {
                     type="date"
                     min="2023-08-01"
                     max="2023-09-31"
-                    onChange={handleTimeChange}
-                    value={selectedTime}
+                    onChange={handleDateChange}
+                    value={selectedDate}
                 />
                 <print>&nbsp;</print>
             </FormControl>
   
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
-  
                 <select value={selectedTime} onChange={handleTimeChange}>
                     {timeOptions.map((time) => (
                         <option key={time} value={time}>
@@ -274,7 +278,6 @@ import {
                         </option>
                     ))}
                 </select>
-  
                 <print>&nbsp;</print>
             </FormControl>
   
