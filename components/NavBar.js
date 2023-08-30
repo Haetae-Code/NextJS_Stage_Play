@@ -410,18 +410,6 @@ const Navbar = (props) => {
                   서비스 소개
                 </MenuButton>
               </LinkItem>
-              <MenuList
-                isOpen={true}
-                style={{
-                  position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  display: "block",
-                }}
-              >
-                <MenuItem>Item 1</MenuItem>
-                <MenuItem>Item 2</MenuItem>
-              </MenuList>
             </Menu>
 
             {/*학과소개*/}
@@ -477,19 +465,6 @@ const Navbar = (props) => {
                   공지사항
                 </MenuButton>
               </LinkItem>
-              <MenuList
-                isOpen={true}
-                style={{
-                  position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  display: "block",
-                }}
-              >
-                <MenuItem>
-                  <span>안녕하세요.</span>
-                </MenuItem>
-              </MenuList>
             </Menu>
 
             {/* <LinkItem

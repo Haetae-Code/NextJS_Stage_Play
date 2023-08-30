@@ -33,8 +33,8 @@ const Page = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1.5, sm: 2, md: 3, lg: 4 }),
-        slidesToScroll: useBreakpointValue({ base: 1.5, sm: 1, md: 1, lg: 1 }),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 1, lg: 1 }),
         afterChange: (index) => setSliderIndex(index),
     };
 
