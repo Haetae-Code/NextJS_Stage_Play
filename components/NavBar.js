@@ -392,7 +392,7 @@ const Navbar = (props) => {
             </Container>
 
           {/* 소개란 */}
-          <Container textAlign="center" mt={3}>
+          <Container textAlign="center" my={3}>
             {/*서비스 소개*/}
             <Menu>
               <LinkItem href="./service" path={path}>
@@ -403,7 +403,6 @@ const Navbar = (props) => {
                   variant="unstyled"
                   _hover={{ bg: "transparent !important" }}
                   _focus={{ none: true }}
-                  zIndex="1"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -480,7 +479,7 @@ const Navbar = (props) => {
            </LinkItem> */}
 
           </Container>
-          <Divider mb={5} />
+          <Divider my={0}/>
         </Box>
       </VStack>
     </Fragment>

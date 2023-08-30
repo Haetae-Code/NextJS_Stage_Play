@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Box, Center, Container, Flex } from "@chakra-ui/react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
@@ -27,7 +27,7 @@ const ImageSlider = () => {
                     if (mouseOver) return;
                     timeout = setTimeout(() => {
                         slider.next();
-                    }, 2000);
+                    }, 5000);
                 }
                 slider.on("created", () => {
                     slider.container.addEventListener("mouseover", () => {
@@ -47,38 +47,32 @@ const ImageSlider = () => {
         ]
     );
     return (
-        <div>
-            <Container
-                style={{
-                    display: "flex",
-                    position: "center",
-                    justifyContent: "center",
-                    maxWidth: "1000px",
-                    padding: "0 100px",
-                    textAlign: "center",
-                }}
+            <Box
+            
+            position={"Center"}
+            justifyContent={"Center"}
+            textAlign={"Center"}
+            W="100%"
+            mb={10}
             >
-                <div
+                <Box
                     ref={sliderRef}
                     className="keen-slider"
-                    style={{ width: "100%", margin: "0 auto" }}
                 >
-                    <div className="keen-slider__slide number-slide1">
+                    <Box className="keen-slider__slide number-slide1">
                         <Image
                             src="/asset/image/ImageSlider/Acting.png"
                             alt="Dan Abramov"
-                            borderRadius={"10"}
-                            style={{ maxWidth: "100%" }}
+                            w={"100%"}
                         />
-                    </div>
-                    <div className="keen-slider__slide number-slide2">
+                    </Box>
+                    <Box className="keen-slider__slide number-slide2">
                         <Image
                             src="/asset/image/ImageSlider/Acting.png"
                             alt="Dan Abramov"
-                            borderRadius={"10"}
-                            style={{ maxWidth: "100%" }}
+                            w={"100%"}
                         />
-                    </div>
+                    </Box>
                     {/* <div className="keen-slider__slide number-slide1">
                     
                     <Images
@@ -88,30 +82,9 @@ const ImageSlider = () => {
                     width="600"
                     height="300"
                     />
-                </div>
-                <div className="keen-slider__slide number-slide1">
-                    
-                    <Images
-                    src="/asset/image/ImageSlider/Broadcasting.png"
-                    alt='cwulogo'
-                    borderRadius="10"
-                    width="600"
-                    height="300"
-                    />
-                </div>
-                <div className="keen-slider__slide number-slide1">
-                    
-                    <Images
-                    src="/asset/image/ImageSlider/Musical.png"
-                    alt='cwulogo'
-                    borderRadius="10"
-                    width="600"
-                    height="300"
-                    />
-                </div> */}
-                </div>
-            </Container>
-        </div>
+                    </div>*/}
+                </Box>
+            </Box>
     );
 };
 export default ImageSlider;

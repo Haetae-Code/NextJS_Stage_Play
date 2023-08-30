@@ -31,10 +31,10 @@ const Page = () => {
 
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 1, lg: 1 }),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 5 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 4 }),
         afterChange: (index) => setSliderIndex(index),
     };
 
@@ -63,8 +63,8 @@ const Page = () => {
                 <ImageSlider />
                 <Box maxWidth="100%">
                     <Box flexGrow={1} display={"flex"}>
-                        <Heading  as="h1" variant="page-title" mt="100px">
-                            새로운 행사들을 여기서 한 눈에 봐요 &#x1F600;
+                        <Heading  as="h1" variant="page-title">
+                            현재 상영중인 행사
                         </Heading>
                     </Box>
                 </Box>
@@ -83,6 +83,7 @@ const Page = () => {
                     </Box>
                 </Flex>
                 
+                {/* 뮤지컬과 슬라이더 */}
                 <Box mb={20} mx={5}>
                 <Slider {...settings}>
                     {dataMusical.map((item, index) => (
@@ -120,6 +121,7 @@ const Page = () => {
                     </Box>
                 </Flex>
 
+                {/* 영화과 슬라이더 */}
                 <Box mb={10} mx={5}>
                 <Slider {...settings}>
                     {dataMovie.map((item, index) => (
