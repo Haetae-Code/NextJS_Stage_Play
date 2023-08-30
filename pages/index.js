@@ -51,7 +51,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: PerformanceItem.location,
+        description: PerformanceItem.address + PerformanceItem.location,
     });
 
     const dataMusical = Performance.map(generateData);

@@ -11,8 +11,8 @@ handler.use((req, res, next) => {
 handler.get(async (req, res) => {
     try {
         const results = await db.query(
-            "SELECT P.performance_key, P.title, P.location, P.capacity, P.address, P.img_url, D.view_date, T.view_time FROM Stage_Play_DB.Time T join Stage_Play_DB.Performance P on T.performance_key = P.performance_key join Stage_Play_DB.Date D on T.date_key = D.date_key;"
-        );
+            "SELECT * FROM Stage_Play_DB.Date D join Stage_Play_DB.Time T WHERE D.date_key = T.date_key;", 
+            [id]);
         res.status(200).json(results);
     } catch (error) {
         console.error(error);
