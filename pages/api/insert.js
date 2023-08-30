@@ -9,7 +9,14 @@ insert.use((req, res, next) => {
 
 insert.post(async (req, res) => {
   try {
-    const { name, phone_number, say_actor, userType, department, id, identity, time_key } = req.body;
+    const { performance_key, name, phone_number, say_actor, userType, department, id, identity, selectedTime } = req.body;
+
+    const timeParts = selectedTime.split(' ');
+    const hour = parseInt(timeParts[0], 10);
+    const minute = parseInt(timeParts[1], 10);
+    const Time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;
+
+    const time_key = (await db.query(`SELECT time_key FROM Stage_Play_DB.Time WHERE view_time = ? AND performance_key = ?`, [Time, performance_key]))[0].time_key;
     
     const audience_key = (await db.query("SELECT COALESCE(MAX(audience_key), 0) + 1 AS audience_key FROM Stage_Play_DB.Audience"))[0].audience_key;
 

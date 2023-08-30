@@ -118,6 +118,7 @@ import {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              performance_key: id,
               name,
               phone_number: phone_number,
               say_actor: say_actor,
@@ -125,7 +126,7 @@ import {
               department: department,
               id: studentID,
               identity: occupation,
-              time_key: perform_Info[0].performance_key,
+              selectedTime: selectedTime,
             }),
           });
     
