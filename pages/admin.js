@@ -28,7 +28,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ReservationEdit from "./reservationedit";
+import ReservationEdit from "./reservation_edit";
 
 
 const admin = () => {
@@ -184,7 +184,7 @@ const admin = () => {
                         등록 공연
                     </Text>
                     <Box mt="-40px" mr="60px" mb="10px" align="right">
-                    <Link color="inactiveColor" href="./reservationadd"><Button>공연 추가</Button></Link>
+                    <Link color="inactiveColor" href="./reservation_add"><Button>공연 추가</Button></Link>
                     </Box>
                 </Box>
                 <Box
@@ -387,22 +387,22 @@ const admin = () => {
                                                                             <Text fontSize="30px">
                                                                                 2023.08.09 
                                                                             </Text>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">21:00-22:00</Button></Link>
                                                                             <br/>
                                                                             </Box>
                                                                             <Box mt="10px">
                                                                             <Text fontSize="30px">
                                                                                 2023.08.10
                                                                             </Text>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservationedit"><Button ml="20px">21:00-22:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button>13:00-14:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">15:00-16:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">17:00-18:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">19:00-20:00</Button></Link>
+                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">21:00-22:00</Button></Link>
                                                                             </Box>
                                                                         </Box>
                                                                         
