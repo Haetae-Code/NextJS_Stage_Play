@@ -21,7 +21,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
 
-import { Mobile } from "../components/responsive";
 
 const Page = () => {
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);

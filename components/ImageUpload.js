@@ -1,3 +1,4 @@
+//이미지 업로드 컴포넌트
 import { Box, Button, Input } from '@chakra-ui/react';
 import { useState } from 'react';
 

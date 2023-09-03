@@ -1,7 +1,10 @@
+//네비바 컴포넌트
 import React, { forwardRef, Fragment, useState, useEffect } from "react";
-import Logo from "./logo";
 import NextLink from "next/link";
+import Image from "next/image";
+import styled from "@emotion/styled";
 import {
+    chakra,
     Container,
     Box,
     Link,
@@ -33,6 +36,7 @@ import {
 
 import { HamburgerIcon, CalendarIcon } from "@chakra-ui/icons";
 // import { IoLogoGithub } from 'react-icons/io5'
+
 import ColorMode from "./ColorModeButton";
 import SearchBar from "./SearchBar";
 
@@ -59,6 +63,28 @@ const MenuLink = forwardRef((props, ref) => (
     <Link ref={ref} as={NextLink} {...props} />
 ));
 
+const LogoBox = styled.span`
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    line-height: 20px;
+    padding: 10px;
+
+    > svg {
+        transition: 200ms ease;
+    }
+
+    &:hover > svg {
+        transform: rotate(20deg);
+    }
+`;
+
+const CwuLogoImage = chakra(Image, {
+    shouldForwardProp: (prop) =>
+        ["width", "height", "src", "alt"].includes(prop),
+});
 
 const Navbar = (props) => {
     const [isMobile] = useMediaQuery("(max-width: 955px)");
@@ -125,7 +151,26 @@ const Navbar = (props) => {
                     >
                         {/*로고 아이콘*/}
                         <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-                            <Logo />
+                          <Link href="/" scroll={false}>
+                            <LogoBox>
+                              <CwuLogoImage
+                                src="/asset/image/cwulogo.png"
+                                alt="cwulogo"
+                                borderRadius="10"
+                                width="100"
+                                height="100"
+                                pt={"5"}
+                              />
+                              <Text
+                                  color={useColorModeValue("gray.800", "whiteAlpha.900")}
+                                  //   fontFamily='M PLUS Rounded 1c", sans-serif'
+                                  fontWeight="bold"
+                                  ml={3}
+                              >
+                              Stage Play
+                              </Text>
+                            </LogoBox>
+                          </Link>
                         </Heading>
 
                         <Container>
