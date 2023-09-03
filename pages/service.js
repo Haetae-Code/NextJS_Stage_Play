@@ -2,7 +2,7 @@
 import { Text, Heading, Box, Divider, Stack, Image, Center } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react"; //중괄호 내용 삽입 , { useState, useEffect }
 import { Link as ScrollLink } from "react-scroll"; //버튼을 누르면 위로 이동하는 애니메이션 추가 예정
-import styles from "../public/login_func/css/service-style.css";
+//import styles from "../public/login_func/css/service-style.css";
 //import styles from '../뭐시기.css' //스타일 css 파일 불러오기
 
 //야매 도전
