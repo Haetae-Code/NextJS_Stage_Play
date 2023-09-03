@@ -36,11 +36,11 @@ const Page = () => {
 
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1.5, sm: 2, md: 3, lg: 4 }),
-        slidesToScroll: useBreakpointValue({ base: 1.5, sm: 1, md: 1, lg: 1}),
-        afterChange: (index) => handleSliderChange(index),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 5 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 4 }),
+        afterChange: (index) => setSliderIndex(index),
     };
 
     const [Performance, setPerformance] = useState([]);
@@ -72,7 +72,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+        description: PerformanceItem.address + PerformanceItem.location,
     }));
 
     //영화과 데이터
@@ -80,7 +80,7 @@ const Page = () => {
         id: PerformanceItem.performance_key,
         image: PerformanceItem.img_url,
         title: PerformanceItem.title,
-        description: "04월 18일(화) 온라인, " + PerformanceItem.location,
+        description: PerformanceItem.address + PerformanceItem.location,
     }));
     <responsive/>
     return (
@@ -94,13 +94,8 @@ const Page = () => {
                     </Box>
                     <Box maxWidth="100%">
                         <Box flexGrow={1} display={"flex"}>
-                            <Heading
-                                size="2xl"
-                                as="h1"
-                                variant="page-title"
-                                mt="100px"
-                            >
-                                새로운 행사들을 여기서 한 눈에 봐요 &#x1F600;
+                        <Heading  as="h1" variant="page-title">
+                            현재 상영중인 행사
                             </Heading>
                         </Box>
                     </Box>
