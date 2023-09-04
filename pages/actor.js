@@ -19,7 +19,8 @@ import {
   ModalFooter,
   ModalBody,
   useDisclosure,
-  Center
+  Center,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 const Actor = () => {
@@ -33,6 +34,9 @@ const Actor = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const{isOpen,onOpen,onClose}=useDisclosure();
+
+    const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
+
  
     
     useEffect(() => {
@@ -145,10 +149,12 @@ const Actor = () => {
       }
     };
 
+    
+
   return (
     <div>
 
-      <Box mt="40px" border="1px solid">
+    
         <br />
         <Text ml="50px" fontSize="30px">
           배우 목록
@@ -202,11 +208,16 @@ const Actor = () => {
         )}
 
       <Stack ml={{ base: "0", md: "20px" }}>
-        <Flex flexWrap="wrap" gap="5px" maxHeight="1000px" overflowY="auto">
+        <Flex flexWrap="wrap" gap={{ base: "10px", md: "20px" }} justifyContent="flex-start" alignItems="stretch" mt="20px">
           {actors.map((actor) => (
                           <Box
                           key={actor.id}
-                          flex={{ base: "1 1 100%", sm: "1 1 50%", md: "1 1 33.33%", lg: "1 1 25%" }}
+                          flex={
+                            isSmallerThan500
+                              ? "1 1 calc(50% - 20px)" // 500px 미만일 때
+                              : "1 1 calc(33.33% - 20px)" // 그 외
+                          }
+
                           mb="20px"
                         >
              <Flex  direction="column"  alignItems="center">
@@ -317,20 +328,21 @@ const Actor = () => {
                 <Box mt={{ base: "20px", md: "60px" }}>
               {isEditing && editableActor === actor ? (
                 <>
+                 <input type="file" accept="image/*" onChange={handleImageUpload} />
+                  {/* <Button size="sm" onClick={handleImageUpload}>이미지 업로드</Button>*/ }
                   <Button ml="20px" mr="10px" onClick={handleSave}>
                     저장
                   </Button>
-                  <input type="file" accept="image/*" onChange={handleImageUpload} />
-                  {/* <Button size="sm" onClick={handleImageUpload}>이미지 업로드</Button>*/ }
+                 
                 </>
               ) : (
                     <>
-                      <Stack spacing="10px" direction={{ base: "column", sm: "row" }}>
+                     
                     <Button ml="20px" mr="10px" onClick={() => handleEdit(actor)}>
                       편집
                     </Button>
                      <Button   ml="20px" mr="10px" onClick={()=>handleDelete(actor)}>삭제</Button>
-                    </Stack>
+                   
                      </>
                   )}
 
@@ -342,7 +354,7 @@ const Actor = () => {
           ))}
         </Flex>
       </Stack>
-      </Box>
+     
 
     </div>
   );
