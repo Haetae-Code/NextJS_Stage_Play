@@ -25,6 +25,7 @@ import { useRouter } from "next/router";
 const Page = () => {
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
     const router = useRouter();
+    const [isMobile] = useMediaQuery("(max-width: 795px)");
     const handleReservation = (id) => {
         router.push(`/reservation/${id}`);
     };
@@ -35,10 +36,10 @@ const Page = () => {
 
     const settings = {
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 500,
-        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 5 }),
-        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 4 }),
+        slidesToShow: useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 }),
+        slidesToScroll: useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 3 }),
         afterChange: (index) => setSliderIndex(index),
     };
 
