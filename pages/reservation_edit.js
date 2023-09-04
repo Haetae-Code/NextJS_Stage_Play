@@ -27,7 +27,6 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    useMediaQuery,
     PopoverHeader,
     PopoverBody,
     PopoverFooter,
@@ -46,7 +45,6 @@ import Actor from "./addedactor";
 
 const Page = () => {
     //const [title, setTitle] = useState("제목")
-    const [isMobile] = useMediaQuery("(max-width: 795px)");
     const [input, setInput] = useState('')
     const [state, setState] = useState({
         title: "제목",
@@ -63,7 +61,7 @@ const Page = () => {
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
-    
+
     const handleSaveReservation = () => {
         // 이후 실제 db와 연결해서 확인
         window.alert("저장되었습니다.");
@@ -72,12 +70,16 @@ const Page = () => {
     return (
         <Box>
             <Box>
+                
                 <Flex
+                    
                     alignItems={"center"}
                     flexDirection={["column", "row"]}
-                >  
+                >
+                    
                     <Stack  display="flex">
-                        <Box alignItems="center" justifyContent="center"> 
+                        <Box alignItems="center" justifyContent="center">
+                            
                             <TableContainer>
                                 <Table variant="simple" size={["sm", "md"]}>
                                     <Tbody>
@@ -264,13 +266,9 @@ const Page = () => {
                                 <PopoverTrigger>
                                     <Button>배우 추가</Button>
                                 </PopoverTrigger>
-                                <PopoverContent 
-                                    width="1000px" 
-                                    maxH="xl" 
-                                    placement="right"
-                                    overflow="auto"
-                                >
-                                    <box><Actor/></box>
+                                <PopoverContent width="1000px" maxH="xl" placement="right">
+                                    <PopoverHeader >등록 배우 조회</PopoverHeader>
+                                    <PopoverBody overflow="auto"><Actor/></PopoverBody>
                                 </PopoverContent>
                                 </Popover>
                             </Box>

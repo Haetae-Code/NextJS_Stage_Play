@@ -37,7 +37,6 @@ import {
   const Page2 = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
@@ -75,16 +74,12 @@ import {
             .catch((error) => console.error(error));
     }, [id]);
 
-    const handleDateChange = (event) => {
-        setSelectedDate(event.target.value);
-    };
-
     const handleTimeChange = (event) => {
         setSelectedTime(event.target.value);
     };
 
     const timeOptions = perform_Info
-    .filter((perform) => perform.view_date === selectedDate)
+    .filter((perform) => perform.view_date === selectedTime)
     .map((perform) => perform.view_time);
 
     for (let i = 0; i < perform_Info.length; i++) {
@@ -118,7 +113,6 @@ import {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              performance_key: id,
               name,
               phone_number: phone_number,
               say_actor: say_actor,
@@ -126,7 +120,7 @@ import {
               department: department,
               id: studentID,
               identity: occupation,
-              selectedTime: selectedTime,
+              time_key: perform_Info[0].performance_key,
             }),
           });
     
@@ -196,7 +190,7 @@ import {
                     </h2>
                     {Performance.map((Performance) => (
                     <AccordionPanel pb={4}>
-                        {Performance.rules}
+                        {Performance.rule}
                     </AccordionPanel>
                     ))}
                 </AccordionItem>
@@ -264,14 +258,15 @@ import {
                     type="date"
                     min="2023-08-01"
                     max="2023-09-31"
-                    onChange={handleDateChange}
-                    value={selectedDate}
+                    onChange={handleTimeChange}
+                    value={selectedTime}
                 />
                 <print>&nbsp;</print>
             </FormControl>
   
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
+  
                 <select value={selectedTime} onChange={handleTimeChange}>
                     {timeOptions.map((time) => (
                         <option key={time} value={time}>
@@ -279,6 +274,7 @@ import {
                         </option>
                     ))}
                 </select>
+  
                 <print>&nbsp;</print>
             </FormControl>
   

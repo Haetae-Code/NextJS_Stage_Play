@@ -1,3 +1,4 @@
+//카카오맵 컴포넌트
 import { useEffect } from "react";
 
 function KakaoMap(props) {
