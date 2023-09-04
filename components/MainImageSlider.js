@@ -1,9 +1,9 @@
-import { Box, Center, Container, Flex } from "@chakra-ui/react";
+import { Container, Box, Image } from "@chakra-ui/react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
 // import Image from 'next/image'
-import { Image } from "@chakra-ui/react";
+
 
 // const Images = chakra(Image, {
 //     shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
@@ -27,7 +27,7 @@ const ImageSlider = () => {
                     if (mouseOver) return;
                     timeout = setTimeout(() => {
                         slider.next();
-                    }, 5000);
+                    }, 2000);
                 }
                 slider.on("created", () => {
                     slider.container.addEventListener("mouseover", () => {
@@ -47,44 +47,36 @@ const ImageSlider = () => {
         ]
     );
     return (
-            <Box
-            
-            position={"Center"}
-            justifyContent={"Center"}
-            textAlign={"Center"}
-            W="100%"
-            mb={10}
+        <Box
+        w="100%"
+        display= "flex"
+        position= "center"
+        justifyContent= "center"
+        textAlign= "center"
+        >
+            <div
+                ref={sliderRef}
+                className="keen-slider"
+                style={{ width: "100%"}}
             >
-                <Box
-                    ref={sliderRef}
-                    className="keen-slider"
-                >
-                    <Box className="keen-slider__slide number-slide1">
-                        <Image
-                            src="/asset/image/ImageSlider/Acting.png"
-                            alt="Dan Abramov"
-                            w={"100%"}
-                        />
-                    </Box>
-                    <Box className="keen-slider__slide number-slide2">
-                        <Image
-                            src="/asset/image/ImageSlider/Acting.png"
-                            alt="Dan Abramov"
-                            w={"100%"}
-                        />
-                    </Box>
-                    {/* <div className="keen-slider__slide number-slide1">
-                    
-                    <Images
-                    src="/asset/image/ImageSlider/Acting.png"
-                    alt='cwulogo'
-                    borderRadius="10"
-                    width="600"
-                    height="300"
+                <div className="keen-slider__slide number-slide1">
+                    <Image
+                        src="/asset/image/ImageSlider/Acting.png"
+                        alt="Dan Abramov"
+                        borderRadius={"10"}
+                        style={{ maxWidth: "100%" }}
                     />
-                    </div>*/}
-                </Box>
-            </Box>
+                </div>
+                <div className="keen-slider__slide number-slide2">
+                    <Image
+                        src="/asset/image/ImageSlider/Acting.png"
+                        alt="Dan Abramov"
+                        borderRadius={"10"}
+                        style={{ maxWidth: "100%" }}
+                    />
+                </div>
+            </div>
+        </Box>
     );
 };
 export default ImageSlider;

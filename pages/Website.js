@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Text, Box, VStack } from "@chakra-ui/react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
@@ -19,6 +20,7 @@ const CustomCredit = ({ title, roles, children }) => (
     <br />
   </Box>
 );
+
 const Service = () => {
   const [creditsVisible, setCreditsVisible] = useState(false);
   const [showTitlePrompt, setShowTitlePrompt] = useState(false);
@@ -51,7 +53,7 @@ const Service = () => {
       <CustomCredit title="Server" roles="(각 부서별 역할 적는 곳)">
         <Text fontSize="30px" color="white">이준혁</Text>
         <Text mt="5px" fontSize="20px" color="white">"내용"</Text>        
-      </CustomCredit>    
+      </CustomCredit>  
     </VStack>,
   ];
   const [currentCredit, cycleCredits] = useCycle(...creditsContent);
@@ -59,20 +61,20 @@ const Service = () => {
   useEffect(() => {
     setTimeout(() => {
       setCreditsVisible(true);
-    }, 1000);
+    }); // 1초 후에 크레딧을 표시하도록 수정
 
     setTimeout(() => {
       setShowTitlePrompt(true);
-    }, 1000 + (creditsContent.length * 20000));
+    },(creditsContent.length * 15000));
 
     setTimeout(() => {
       setCreditsVisible(false);
-    }, 1000 + (creditsContent.length * 20000) + 10000);
+    },(creditsContent.length * 15000));
 
     setTimeout(() => {
       // 크레딧 컨텐츠가 모두 출력된 후 1초 뒤에 service.js 페이지로 이동
       window.location.href = "./service"; // 원하는 페이지 경로로 수정
-    }, 1000 + (creditsContent.length * 20000) + 1000); // 1초 뒤에 이동
+    },(creditsContent.length * 15000) + 1000); // 1초 뒤에 이동
   }, []);
 
   const loopCredits = () => {
@@ -86,7 +88,7 @@ const Service = () => {
           initial={{ y: "100%" }}
           animate={{ y: "-100%" }}
           exit={{ y: "100%" }}
-          transition={{ duration: 20, ease: "linear" }}
+          transition={{ duration: 15, ease: "linear" }}
         >
           {currentCredit}
         </motion.div>
@@ -132,7 +134,6 @@ const Service = () => {
           </a>
           {loopCredits()}
         </motion.div>
-        
       </Box>
     </Box>
   );
