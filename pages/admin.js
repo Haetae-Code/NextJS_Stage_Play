@@ -45,12 +45,61 @@ const admin = () => {
     const [showEditPage, setShowEditPage] = useState(false);
     const [reservationData, setReservationData] = useState(false);
 
+    const [Performance, setPerformance] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/Performance")
+            .then((response) => response.json())
+            .then((data) => setPerformance(data))
+            .catch((error) => console.error(error));
+    }, []);
+
+    const [Times, setTimes] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/Times")
+            .then((response) => response.json())
+            .then((data) => setPerformance(data))
+            .catch((error) => console.error(error));
+    }, []);
+
+    for (let i = 0; i < Times.length; i++) {
+        // view_day 파싱
+        const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
+        const matchedDay = Times[i].view_date.match(dateRegex);
+        Times[i].view_date = matchedDay[1];
+    }
+
+
+
     //공연 조회
     const { isOpen: isViewModalOpen, onOpen: onViewModalOpen, onClose: onViewModalClose } = useDisclosure();
     //공연 수정
     const { isOpen: isEditModalOpen, onOpen: onEditModalOpen, onClose: onEditModalClose } = useDisclosure();
     //공연 삭제
     const { isOpen: isDelModalOpen, onOpen: onDelModalOpen, onClose: onDelModalClose} = useDisclosure();
+
+    const [selectedPerformance, setSelectedPerformance] = useState(null);
+    
+    const groupData = (performanceId) => {
+        const finditem = dataMusical.find(item => item.id === performanceId);
+        setSelectedPerformance(finditem);
+    }
+
+    const onViewModal = (performanceId) => {
+        groupData(performanceId)
+        onViewModalOpen();
+    };
+
+    const onEditModal = (performanceId) => {
+        groupData(performanceId)
+        onEditModalOpen();
+    };
+
+    const onDelModal = (performanceId) => {
+        groupData(performanceId)
+        onEditModalOpen();
+    };
 
     useEffect(() => {
         // 로그인 상태를 체크하여 로그인하지 않은 경우 login 페이지로 리다이렉트
@@ -106,7 +155,7 @@ const admin = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    
+
 
     const settings = {
         dots: true,
@@ -118,33 +167,12 @@ const admin = () => {
     };
 
     //뮤지컬학과 데이터
-    const dataMusical = [
-        {
-            image: "https://www.m-i.kr/news/photo/202101/784601_561474_542.jpg",
-            title: "오페라의 유령",
-            data: "04월 18일(화) 온라인,강남구",
-        },
-        {
-            image: "https://www.kgnews.co.kr/data/photos/20220728/art_16578463029062_e1b76e.jpg",
-            title: "마틸다",
-            data: "04월 18일(화) 온라인,강남구",
-        },
-        {
-            image: "https://image.yes24.com/images/chyes24/froala/0/44431/26305.jpg0",
-            title: "문스토리",
-            data: "04월 18일(화) 온라인,강남구",
-        },
-        {
-            image: "https://newsimg.sedaily.com/2018/10/22/1S60FSQK8D_1.jpg",
-            title: "그날들",
-            data: "04월 18일(화) 온라인,강남구",
-        },
-        {
-            image: "https://img.newspim.com/news/2018/11/01/1811011558557240.jpg",
-            title: "젠틀맨스가이드-사랑과 살인편",
-            data: "04월 18일(화) 온라인,강남구",
-        },
-    ];
+    const dataMusical = Performance.map((PerformanceItem) => ({
+        id: PerformanceItem.performance_key,
+        image: PerformanceItem.img_url,
+        title: PerformanceItem.title,
+        description: PerformanceItem.address + PerformanceItem.location,
+    }));
 
     return (
         <div>
@@ -184,7 +212,7 @@ const admin = () => {
                         등록 공연
                     </Text>
                     <Box mt="-40px" mr="60px" mb="10px" align="right">
-                    <Link color="inactiveColor" href="./reservation_add"><Button>공연 추가</Button></Link>
+                    <Link color="inactiveColor" href="./reservationadd"><Button>공연 추가</Button></Link>
                     </Box>
                 </Box>
                 <Box
@@ -272,11 +300,10 @@ const admin = () => {
                                                         <Button
                                                             size="sm"
                                                             colorScheme="blue"
-                                                            onClick={onViewModalOpen}
+                                                            onClick={() => onViewModal(item.id)} 
                                                         >
                                                             조회
                                                         </Button>
-
                                                         
 
                                                         <Modal isOpen={isViewModalOpen} onClose={onViewModalClose}>
@@ -298,35 +325,32 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={item.image} 
+                                                                        <Image src={selectedPerformance.img_url} 
                                                                         style={{
                                                                             width: "20%",
                                                                             objectFit: "cover",
                                                                         }}/>
                                                                         <Box ml="30px">
-                                                                            <Box>
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.09 
-                                                                            </Text>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            <br/>
-                                                                            </Box>
-                                                                            <Box mt="10px">
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.10
-                                                                            </Text>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_check"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            </Box>
+                                                                            {selectedPerformance && (
+                                                                                <>
+                                                                                    <Text fontSize="30px">{selectedPerformance.title}</Text>
+                                                                                    {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((Dtime) => (
+                                                                                        <Box key={Dtime.view_date}>
+                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
+                                                                                                <Flex flexWrap="wrap" mt="10px">
+                                                                                                    {Dtime.filter(Dtime.view_date === Times.view_date).map((time) => (
+                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
+                                                                                                        <Button ml="10px" mt="10px">
+                                                                                                            {time.view_time}
+                                                                                                        </Button>
+                                                                                                    </Link>
+                                                                                                    ))}
+                                                                                                </Flex>
+                                                                                        </Box>
+                                                                                    ))}
+                                                                                </>
+                                                                            )}
                                                                         </Box>
-                                                                        
                                                                     </Flex>
                                                                     <Flex>
                                                                         
@@ -337,7 +361,7 @@ const admin = () => {
                                                                 </ModalBody>
 
                                                                 <ModalFooter>
-                                                                    <Button mr={3} onClick={onViewModalClose}>
+                                                                    <Button mr={3} onClick={() => onViewModal(item.id)} >
                                                                         닫기
                                                                     </Button>
                                                                     
@@ -349,10 +373,7 @@ const admin = () => {
                                                     <Button
                                                         size="sm"
                                                         colorScheme="blue"
-                                                        onClick={
-                                                            //handleEditClick
-                                                            onEditModalOpen
-                                                        }
+                                                        onClick={() => onEditModal(item.id)} 
                                                         ml="10px"
                                                         mr="10px"
                                                     >
@@ -377,33 +398,25 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={item.image} 
+                                                                        <Image src={selectedPerformance.img_url} 
                                                                         style={{
                                                                             width: "20%",
                                                                             objectFit: "cover",
                                                                         }}/>
                                                                         <Box ml="30px">
-                                                                            <Box>
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.09 
-                                                                            </Text>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            <br/>
-                                                                            </Box>
-                                                                            <Box mt="10px">
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.10
-                                                                            </Text>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor" href="./reservation_edit"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            </Box>
+                                                                            {selectedPerformance && (
+                                                                                <>
+                                                                                <Box>
+                                                                                <Text fontSize="30px">{selectedPerformance.title}</Text>
+                                                                                {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((time) => (
+                                                                                    <Box key={Dtime.view_date}>
+                                                                                        <Link key={time} color="inactiveColor"><Button ml="20px">{time.view_time}</Button></Link>
+                                                                                    </Box>
+                                                                                ))}
+                                                                                <br/>
+                                                                                </Box>
+                                                                                </>
+                                                                            )}
                                                                         </Box>
                                                                         
                                                                     </Flex>
@@ -425,13 +438,14 @@ const admin = () => {
                                                             
                                                         </Modal>
                                                     
+
                                                         <Button
                                                             size="sm"
                                                             colorScheme="blue"
-                                                            onClick={onDelModalOpen}
+                                                            onClick={() => onDelModal(item.id)} 
                                                         >
                                                             삭제
-                                                        </Button>                            
+                                                        </Button>
                                                         <Modal isOpen={isDelModalOpen} onClose={onDelModalClose}>
                                                             <ModalOverlay
                                                                 bg='transparent'
@@ -452,33 +466,23 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={item.image} 
+                                                                        <Image src={selectedPerformance.img_url} 
                                                                         style={{
                                                                             width: "20%",
                                                                             objectFit: "cover",
                                                                         }}/>
                                                                         <Box ml="30px">
+                                                                            {selectedPerformance && (
                                                                             <Box>
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.09 
-                                                                            </Text>
-                                                                            <Link color="inactiveColor" ><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            <br/>
+                                                                                <Text fontSize="30px">{selectedPerformance.title}</Text>
+                                                                                {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((Dtime) => (
+                                                                                <Link key={time} color="inactiveColor" href="./reservation_edit">
+                                                                                    <Button ml="20px">{Dtime.view_time}</Button>
+                                                                                </Link>
+                                                                                ))}
+                                                                                <br/>
                                                                             </Box>
-                                                                            <Box mt="10px">
-                                                                            <Text fontSize="30px">
-                                                                                2023.08.10
-                                                                            </Text>
-                                                                            <Link color="inactiveColor"><Button>13:00-14:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">15:00-16:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">17:00-18:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">19:00-20:00</Button></Link>
-                                                                            <Link color="inactiveColor"><Button ml="20px">21:00-22:00</Button></Link>
-                                                                            </Box>
+                                                                            )}
                                                                         </Box>
                                                                         
                                                                     </Flex>
