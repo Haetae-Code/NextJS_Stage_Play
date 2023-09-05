@@ -1,3 +1,4 @@
+// id를 통한 배우정보
 const nextConnect = require("next-connect");
 const db = require("../db");
 

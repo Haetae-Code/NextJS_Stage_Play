@@ -1,5 +1,5 @@
+//db 연결
 //root권한을 가진 계정
-
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
 

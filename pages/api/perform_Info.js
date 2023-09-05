@@ -1,3 +1,4 @@
+// 모든 공연 정보(key, title, address, image, time, date) in the Performance, Time, Date table
 const nextConnect = require("next-connect");
 const db = require("./db");
 

@@ -1,3 +1,4 @@
+// 모든 배우 선택
 const nextConnect = require("next-connect");
 const db = require("./db");
 

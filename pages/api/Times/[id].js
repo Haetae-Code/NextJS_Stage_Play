@@ -1,3 +1,4 @@
+// 한 공연에 대한 날짜와 시간
 const nextConnect = require("next-connect");
 const db = require("../db");
 

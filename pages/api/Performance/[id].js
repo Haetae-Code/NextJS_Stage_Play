@@ -1,3 +1,4 @@
+// id에 대한 공연 정보(in the 'Performance' table)
 const nextConnect = require("next-connect");
 const db = require("../db");
 
