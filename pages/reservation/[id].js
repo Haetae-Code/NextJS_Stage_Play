@@ -52,6 +52,34 @@ const Page = (actorData) => {
             .catch((error) => console.error(error));
     }, [id]);
 
+    const [Times, setTimes] = useState([]);
+    useEffect(() => {
+        fetch(`/api/Times/${id}`)
+            .then((response) => response.json())
+            .then((data) => setTimes(data))
+            .catch((error) => console.error(error));
+    }, [id]);
+    
+    for (let i = 0; i < Times.length; i++) {
+        const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
+        const matchedDay = Times[i].view_date.match(dateRegex);
+        Times[i].view_date = matchedDay[1];
+
+        const timeParts = Times[i].view_time.split(':');
+        const hour = parseInt(timeParts[0], 10);
+        const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
+        Times[i].view_time = `${hour}시 ${minute}분`;
+      }    
+
+    // Group performance times by date
+    const groupedTimes = Times.reduce((acc, time) => {
+        const date = time.view_date;
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(time.view_time);
+        return acc;
+    }, {});
 
     return (
         <Box>
@@ -97,14 +125,17 @@ const Page = (actorData) => {
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 기간</Td>
-                                                <Stack>
-                                                    <Td>2023/03/17 13시, 17시</Td>
-                                                    <Td>2023/03/18 13시, 17시</Td>
-                                                </Stack>
+                                                <Td>
+                                                    {Object.entries(groupedTimes).map(([date, times]) => (
+                                                        <Box key={date}>
+                                                            <strong>{date}</strong>: {times.join(', ')}
+                                                        </Box>
+                                                    ))}
+                                                </Td>
                                             </Tr>
                                             <Tr>
                                                 <Td>공연 시간</Td>
-                                                <Td>170분</Td>
+                                                <Td>{PerformanceItem.run_time}분</Td>
                                             </Tr>
                                         </Tbody>
 
@@ -215,7 +246,7 @@ const Page = (actorData) => {
                                     <Tbody>
                                         <Tr>
 
-                                            <Td>주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항주의 사항</Td>
+                                            <Td>{PerformanceItem.rules}</Td>
                                         </Tr>
                                     </Tbody>
                                 </Table>
@@ -226,7 +257,7 @@ const Page = (actorData) => {
                         <TabPanel py={10}>
                             <Stack>
                                 <Box py={10}>
-                                    {actors.slice(0, 1).map((actor) => (
+                                    {actors.map((actor) => (
                                         <Flex>
                                             <Image
                                                 src="https://bit.ly/dan-abramov"
