@@ -10,16 +10,17 @@ const s3 = new S3({
   region: process.env.AWS_REGION,
 });
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+
+const upload = multer({
+  storage: multer.memoryStorage(), 
+});
 
 export default async function handler(req, res) {
   try {
     if (req.method === 'POST') {
-
       upload.single('file')(req, res, async (error) => {
         if (error) {
-          return res.status(400).json({ message: '파일 업로드 오류2:', error:error.message }); //<=여기서 자꾸 업로드 오류가 뜬다. 해결해주면 준서가 몬스터 사줌
+          return res.status(400).json({ message: '파일 업로드 오류2', error: error.message });
         }
 
         if (!req.file) {
