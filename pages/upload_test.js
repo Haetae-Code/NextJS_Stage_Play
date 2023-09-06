@@ -8,9 +8,15 @@ const UploadForm = () => {
   const [uploadedURI, setUploadedURI] = useState('');
 
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setUploadMessage('');
-    setUploadedURI('');
+    const selected = event.target.files[0];
+    if (selected) {
+      setSelectedFile(selected);
+      setUploadMessage('');
+      setUploadedURI('');
+    } else {
+      setUploadMessage('이미지 파일을 선택');
+      setSelectedFile(null);
+    }
   };
 
   const handleUpload = async () => {

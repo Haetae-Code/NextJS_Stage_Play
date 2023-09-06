@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
       upload.single('file')(req, res, async (error) => {
         if (error) {
-          return res.status(400).json({ message: '파일 업로드 오류2:', error }); //<=여기서 자꾸 업로드 오류가 뜬다. 해결해주면 준서가 몬스터 사줌
+          return res.status(400).json({ message: '파일 업로드 오류2:', error:error.message }); //<=여기서 자꾸 업로드 오류가 뜬다. 해결해주면 준서가 몬스터 사줌
         }
 
         if (!req.file) {
