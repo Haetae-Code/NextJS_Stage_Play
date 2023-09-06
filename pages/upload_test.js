@@ -34,8 +34,8 @@ const UploadForm = () => {
         setUploadedURI(response.data.message);
       }
     } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      setUploadMessage('이미지 업로드에 실패');
+      console.error('이미지 서버 전송 오류:', error);
+      setUploadMessage('이미지 전송에 실패');
       setUploadedURI('');
     }
   };
