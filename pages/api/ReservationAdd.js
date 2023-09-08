@@ -10,8 +10,10 @@ insert.use((req, res, next) => {
 
 insert.post(async (req, res) => {
   try {
-    const { title, location, period, time, price, InfoLocation, address } = req.body;
+    const { title, location, address, runtime, capacity, InfoLocation } = req.body;
     
+    const insertReservation = "INSERT INTO Stage_Play_DB.Student (title, location, address, runtime,) VALUES (?, ?, ?)";
+    const insertReservationValues = [title, location, department];
 
     res.status(200).json({ message: "Data inserted successfully" });
   } catch (error) {
