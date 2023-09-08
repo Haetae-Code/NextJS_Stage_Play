@@ -43,12 +43,13 @@ import ImageUpload from '../components/ImageUpload';
 const Page = () => {
     //const [title, setTitle] = useState("제목");
     const[selectedFile, setSelectedFile] = useState(null);
+    const [reservationStatus, setReservationStatus] = useState("");
     
     const [state, setState] = useState({
         title: "제목",
         location: "101호 대강당",
-        period: "2023/03/17~2023/03/20",
-        time: "171분",
+        period: "2023-03-17, 2023-03-20",
+        time: "171", //숫자만 작성
         price: "A석-5000원 B석-3000원",
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
@@ -58,9 +59,61 @@ const Page = () => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
 
-    const handleSaveReservation = () => {
-        // 이후 실제 db와 연결해서 확인
-        window.alert("저장되었습니다.");
+    // 데이터 형식 체크
+    const handleSubmit = async () => {
+        const isValidDateFormat = (dates) => {
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            return dates.match(regex) !== null;
+        };
+        
+        const isValidPeriodFormat = (period) => {
+            const dates = period.split(", ");
+            return dates.length >= 1 && dates.every(isValidDateFormat);
+        };
+
+        const isValidRunTimeFormat = (runTime) => {
+            const regex = /^\d+$/;
+            return runTime.match(regex) !== null;
+        };
+        
+        if (!isValidRunTimeFormat(state.time)) {
+            console.error("run_time은 숫자만 입력해야 합니다.");
+            return;
+        } 
+
+        if (!isValidPeriodFormat(state.period)) {
+            console.error("period는 YYYY-MM-DD 형식이어야 합니다.");
+            return;
+    }
+
+    try {
+        const response = await fetch("/api/ReservationAdd", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title,
+                location,
+                period,
+                time,
+                price,
+                InfoLocation,
+                address,
+            }),
+          });
+    
+          if (response.ok) {
+            setReservationStatus("공연 추가 성공");
+            console.log("Reservation submitted");
+          } else {
+            setReservationStatus("공연 추가 실패. 다시 시도해주세요.");
+            console.error("Reservation failed");
+          }
+        } catch (error) {
+            setReservationStatus("공연 추가 실패. 다시 시도해주세요.");  
+          console.error(error);
+        }
     };
 
     //[파일 선택 기능]
@@ -295,7 +348,7 @@ const Page = () => {
             </Box>
 
             <Box>
-                <Button size="sm" onClick={handleSaveReservation}>
+                <Button size="sm" onClick={handleDataCheck}>
                     저장
                 </Button>
                 
