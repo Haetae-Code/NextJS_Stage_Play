@@ -49,7 +49,7 @@ const Page = () => {
         title: "제목",
         location: "101호 대강당",
         period: "2023-03-17, 2023-03-20",
-        time: "171", //숫자만 작성
+        runtime: "171", //숫자만 작성
         price: "A석-5000원 B석-3000원",
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
@@ -293,7 +293,7 @@ const Page = () => {
                                                     defaultValue={state.time}
                                                     onChange={(value) =>
                                                         handleStateChange(
-                                                            "time",
+                                                            "runtime",
                                                             value
                                                         )
                                                     }
