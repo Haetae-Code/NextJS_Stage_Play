@@ -17,8 +17,24 @@ import {
     Td,
     Stack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const reservationcheck = () => {
+    const router = useRouter();
+    const { id } = router.query;
+    const [Performance, setPerformance] = useState([]);
+    useEffect(() => {
+        fetch(`/api/Performance/${id}`)
+            .then((response) => response.json())
+            .then((data) => setPerformance(data))
+            .catch((error) => console.error(error));
+    }, [id]);
+    
+    
+    
+    
+    
+    
     return (
         <Box>
             <Heading mt={5}>예약자 리스트</Heading>

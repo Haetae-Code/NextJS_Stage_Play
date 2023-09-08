@@ -33,6 +33,9 @@ import ReservationEdit from "./reservation_edit";
 
 const admin = () => {
     const router = useRouter();
+    const handleReservaation_Add = (id) => {
+        router.push(`/reservation_add`);
+    };
     const { isLoggedIn } = useContext(AuthContext);
     const [showComponent, setShowComponent] = useState(false);
 
