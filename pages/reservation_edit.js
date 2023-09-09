@@ -75,9 +75,11 @@ const Page = () => {
                     
                     alignItems={"center"}
                     flexDirection={["column", "row"]}
+                    textAlign="center"
+                    justifyContent="center"
                 >
                     
-                    <Stack  display="flex">
+                    <Stack  display="flex" width={["100%", "80%"]} padding={[4, 8]}>
                         <Box alignItems="center" justifyContent="center">
                             
                             <TableContainer>
@@ -101,11 +103,13 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                     <EditableInput
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="sm"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
                                             </Td>
@@ -126,11 +130,13 @@ const Page = () => {
                                                     border="1px solid"
                                                     p={2}
                                                     borderRadius="md"
+                                                    fontSize={["md", "lg"]}
                                                 />
                                                 <EditableInput
                                                     border="1px solid"
                                                     p={2}
                                                     borderRadius="md"
+                                                    fontSize={["md", "lg"]}
                                                 />
                                             </Editable>
                                             </Td>
@@ -154,11 +160,13 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                     <EditableInput
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
                                             </Td>
@@ -178,11 +186,13 @@ const Page = () => {
                                                     border="1px solid"
                                                     p={2}
                                                     borderRadius="md"
+                                                    fontSize={["md", "lg"]}
                                                 />
                                                 <EditableInput
                                                     border="1px solid"
                                                     p={2}
                                                     borderRadius="md"
+                                                    fontSize={["md", "lg"]}
                                                 />
                                             </Editable>
                                             </Td>
@@ -204,11 +214,13 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                     <EditableInput
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
                                             </Td>
@@ -237,11 +249,13 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                     <EditableInput
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
                                             </Td>
@@ -259,14 +273,14 @@ const Page = () => {
                             </TableContainer>
                             <Divider/>
                                                                                 
-                            <Text fontSize="xl">배우</Text>
+                            <Text fontSize={["xl", "2xl"]}>배우</Text>
                             <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
                             <Box>
                                 <Popover>
                                 <PopoverTrigger>
                                     <Button>배우 추가</Button>
                                 </PopoverTrigger>
-                                <PopoverContent width="1000px" maxH="xl" placement="right">
+                                <PopoverContent width={["100%", "500px"]} maxH={["100vh", "xl"]} placement="right">
                                     <PopoverHeader >등록 배우 조회</PopoverHeader>
                                     <PopoverBody overflow="auto"><Actor/></PopoverBody>
                                 </PopoverContent>
@@ -282,7 +296,7 @@ const Page = () => {
                 </Flex>
             </Box>
 
-            <Box>
+            <Box textAlign="center">
                 <Button size="sm" onClick={handleSaveReservation}>
                     저장
                 </Button>
