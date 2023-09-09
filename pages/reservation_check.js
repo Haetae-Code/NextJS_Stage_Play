@@ -18,6 +18,7 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useState,useEffect } from 'react'
 
 const reservationcheck = () => {
     const router = useRouter();
