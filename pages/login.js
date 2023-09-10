@@ -38,7 +38,7 @@ const LoginPage = () => {
               </Text>
               <span className="login100-form-title p-b-48">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <img src="/asset/image/cwulogo.png" width="200" height="200" alt="Logo" />
+                  <img src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/cwulogo.png" width="200" height="200" alt="Logo" />
                 </Box>
                 <i className="icon-class-name"></i> {/* 아이콘 클래스 이름 추가 */}
               </span>
