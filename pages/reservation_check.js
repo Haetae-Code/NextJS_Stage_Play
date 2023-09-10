@@ -55,7 +55,7 @@ const reservationcheck = () => {
                         <Image
                             w="50%"
                             h="100%"
-                            src="https://bit.ly/dan-abramov"
+                            src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                             alt="Dan Abramov"
                             mr={5}
                         ></Image>

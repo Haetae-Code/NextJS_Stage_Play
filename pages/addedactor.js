@@ -108,7 +108,7 @@ const addedactor = () => {
             <Box key={index} py={10} flex="1 1 45%" mt="-35px">
               <Flex>
                 <Image
-                  src={actor.imageUrl || "https://bit.ly/dan-abramov"}
+                  src={actor.imageUrl || "https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"}
                   alt="No image"
                   borderRadius="full"
                   boxSize="100px"

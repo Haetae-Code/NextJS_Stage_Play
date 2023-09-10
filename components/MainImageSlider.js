@@ -61,7 +61,7 @@ const ImageSlider = () => {
             >
                 <div className="keen-slider__slide number-slide1">
                     <Image
-                        src="/asset/image/ImageSlider/Acting.png"
+                        src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/Acting.png"
                         alt="Dan Abramov"
                         borderRadius={"10"}
                         style={{ maxWidth: "100%" }}
@@ -69,7 +69,7 @@ const ImageSlider = () => {
                 </div>
                 <div className="keen-slider__slide number-slide2">
                     <Image
-                        src="/asset/image/ImageSlider/Acting.png"
+                        src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/Acting.png"
                         alt="Dan Abramov"
                         borderRadius={"10"}
                         style={{ maxWidth: "100%" }}

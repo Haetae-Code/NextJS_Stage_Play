@@ -52,7 +52,7 @@ const service = () => {
                     </Text>
                 </Stack>
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -75,14 +75,14 @@ const service = () => {
                     </Text>
                 </Stack>
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
                  mt="center"
                 />
                 <Text fontSize="30px">
-                    <a href="https://github.com/wwmmIIll">김준서</a>
+                    <a href="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg">김준서</a>
                 </Text>{" "}
                 {/*<<<<<<<<<<<<개인 깃허브 주소 */}
                 <Text mt="5px" fontSize="20px">
@@ -90,7 +90,7 @@ const service = () => {
                 </Text>
                 <br />
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -102,7 +102,7 @@ const service = () => {
                 </Text>
                 <br />
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -125,7 +125,7 @@ const service = () => {
                     </Text>
                 </Stack>
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -137,7 +137,7 @@ const service = () => {
                 </Text>
                 <br />
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -160,7 +160,7 @@ const service = () => {
                     </Text>
                 </Stack>
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -172,7 +172,7 @@ const service = () => {
                 </Text>
                 <br />
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -184,7 +184,7 @@ const service = () => {
                 </Text>
                 <br />
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
@@ -207,7 +207,7 @@ const service = () => {
                     </Text>
                 </Stack>
                 <Image
-                 src="https://bit.ly/dan-abramov"
+                 src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                  alt="사진"
                  borderRadius="full"
                  boxSize="150px"
