@@ -131,6 +131,10 @@ const Page = () => {
 
     }
 
+    const handleDataCheck=()=>{
+
+    }
+
     return (
         <Box>
             <Box>
@@ -139,10 +143,12 @@ const Page = () => {
                     
                     alignItems={"center"}
                     flexDirection={["column", "row"]}
+                    textAlign="center"
+                    justifyContent="center"
                 >
                     
-                    <Stack  display="flex">
-                        <Box>
+                    <Stack  display="flex" width={["100%", "80%"]} padding={[4, 8]}>
+                        <Box alignItems="center" justifyContent="center">
                             <TableContainer>
                                 <Table variant="simple" size={["sm", "md"]}>
                                     <Tbody>
@@ -351,7 +357,7 @@ const Page = () => {
                 </Flex>
             </Box>
 
-            <Box>
+            <Box textAlign="center">
                 <Button size="sm" onClick={handleDataCheck}>
                     저장
                 </Button>
