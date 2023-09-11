@@ -1,10 +1,26 @@
 // 공연 예약 insert 
 const nextConnect = require("next-connect");
 const db = require("./db");
+const { opt_checkSearchedWord } = require("../../injectioncode");
 
 const insert = nextConnect();
 
 insert.use((req, res, next) => {
+  const { name, phone_number, say_actor, userType, department, identity, selectedTime } = req.body;
+
+  if (
+    !opt_checkSearchedWord(name) ||
+    !opt_checkSearchedWord(phone_number) ||
+    !opt_checkSearchedWord(say_actor) ||
+    !opt_checkSearchedWord(userType) ||
+    !opt_checkSearchedWord(department) ||
+    !opt_checkSearchedWord(identity) ||
+    !opt_checkSearchedWord(selectedTime)
+  ) {
+    res.status(400).json({ message: "Invalid input" });
+    return;
+  }
+
   next();
 });
 

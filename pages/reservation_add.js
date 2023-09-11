@@ -45,8 +45,6 @@ const Page = () => {
     const[selectedFile, setSelectedFile] = useState(null);
     const [reservationStatus, setReservationStatus] = useState("");
     
-    //날짜에 맞는 시간을 추가할 수 있게 부탁드립니다
-    //공연 규칙도 필요합니다
     const [state, setState] = useState({
         title: "제목",
         location: "101호 대강당",

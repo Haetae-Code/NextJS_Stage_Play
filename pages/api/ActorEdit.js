@@ -1,10 +1,22 @@
 // 배우 추가&편집&삭제
 const nextConnect = require("next-connect");
 const db = require("./db");
+const { opt_checkSearchedWord } = require("../../injectioncode");
 
 const handler = nextConnect();
 
 handler.use((req, res, next) => {
+    const { name, deparment, introduction } = req.body;
+
+    if (
+      !opt_checkSearchedWord(name) ||
+      !opt_checkSearchedWord(department) ||
+      !opt_checkSearchedWord(introduction) 
+    ) {
+      res.status(400).json({ message: "Invalid input" });
+      return;
+    }
+
     next();
 });
 
