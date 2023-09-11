@@ -249,7 +249,7 @@ const Navbar = (props) => {
                 <Stack direction="row" align="center" spacing={2} marginTop="8px">
                   <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
                     <img
-                      src="https://bit.ly/dan-abramov"
+                      src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
                       alt="이번주 상영작"
                       style={{ width: "100%", height: "100%", objectFit: "contain" }}
                     />
