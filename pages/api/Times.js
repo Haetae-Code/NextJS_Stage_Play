@@ -12,8 +12,7 @@ handler.use((req, res, next) => {
 handler.get(async (req, res) => {
     try {
         const results = await db.query(
-            "SELECT * FROM Stage_Play_DB.Date D join Stage_Play_DB.Time T WHERE D.date_key = T.date_key;", 
-            [id]);
+            "SELECT * FROM Stage_Play_DB.Date D join Stage_Play_DB.Time T WHERE D.date_key = T.date_key");
         res.status(200).json(results);
     } catch (error) {
         console.error(error);

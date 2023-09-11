@@ -62,7 +62,7 @@ const admin = () => {
     useEffect(() => {
         fetch("/api/Times")
             .then((response) => response.json())
-            .then((data) => setPerformance(data))
+            .then((data) => setTimes(data))
             .catch((error) => console.error(error));
     }, []);
 
@@ -73,8 +73,6 @@ const admin = () => {
         Times[i].view_date = matchedDay[1];
     }
 
-
-
     //공연 조회
     const { isOpen: isViewModalOpen, onOpen: onViewModalOpen, onClose: onViewModalClose } = useDisclosure();
     //공연 수정
@@ -84,23 +82,18 @@ const admin = () => {
 
     const [selectedPerformance, setSelectedPerformance] = useState(null);
     
-    const groupData = (performanceId) => {
-        const finditem = dataMusical.find(item => item.id === performanceId);
-        setSelectedPerformance(finditem);
-    }
-
     const onViewModal = (performanceId) => {
-        groupData(performanceId)
+        setSelectedPerformance(performanceId)
         onViewModalOpen();
     };
 
     const onEditModal = (performanceId) => {
-        groupData(performanceId)
+        setSelectedPerformance(performanceId)
         onEditModalOpen();
     };
 
     const onDelModal = (performanceId) => {
-        groupData(performanceId)
+        setSelectedPerformance(performanceId)
         onEditModalOpen();
     };
 
@@ -328,20 +321,22 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={selectedPerformance.img_url} 
-                                                                        style={{
-                                                                            width: "20%",
-                                                                            objectFit: "cover",
-                                                                        }}/>
+                                                                        <Image 
+                                                                            src={dataMusical.find(item => item.id === selectedPerformance)?.image}
+                                                                            style={{
+                                                                                width: "20%",
+                                                                                objectFit: "cover",
+                                                                            }}
+                                                                        />
                                                                         <Box ml="30px">
-                                                                            {selectedPerformance && (
+                                                                            {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
                                                                                 <>
-                                                                                    <Text fontSize="30px">{selectedPerformance.title}</Text>
-                                                                                    {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((Dtime) => (
+                                                                                    <Text fontSize="30px">{item.title}</Text>
+                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
                                                                                         <Box key={Dtime.view_date}>
                                                                                                 <Text fontSize="30px">{Dtime.view_date}</Text>
                                                                                                 <Flex flexWrap="wrap" mt="10px">
-                                                                                                    {Dtime.filter(Dtime.view_date === Times.view_date).map((time) => (
+                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
                                                                                                     <Link key={time} color="inactiveColor" href="./reservation_check">
                                                                                                         <Button ml="10px" mt="10px">
                                                                                                             {time.view_time}
@@ -352,7 +347,7 @@ const admin = () => {
                                                                                         </Box>
                                                                                     ))}
                                                                                 </>
-                                                                            )}
+                                                                            ))}
                                                                         </Box>
                                                                     </Flex>
                                                                     <Flex>
@@ -401,25 +396,33 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={selectedPerformance.img_url} 
-                                                                        style={{
-                                                                            width: "20%",
-                                                                            objectFit: "cover",
-                                                                        }}/>
+                                                                        <Image 
+                                                                            src={dataMusical.find(item => item.id === selectedPerformance)?.image}
+                                                                            style={{
+                                                                                width: "20%",
+                                                                                objectFit: "cover",
+                                                                            }}
+                                                                        />
                                                                         <Box ml="30px">
-                                                                            {selectedPerformance && (
+                                                                        {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
                                                                                 <>
-                                                                                <Box>
-                                                                                <Text fontSize="30px">{selectedPerformance.title}</Text>
-                                                                                {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((time) => (
-                                                                                    <Box key={Dtime.view_date}>
-                                                                                        <Link key={time} color="inactiveColor"><Button ml="20px">{time.view_time}</Button></Link>
-                                                                                    </Box>
-                                                                                ))}
-                                                                                <br/>
-                                                                                </Box>
+                                                                                    <Text fontSize="30px">{item.title}</Text>
+                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
+                                                                                        <Box key={Dtime.view_date}>
+                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
+                                                                                                <Flex flexWrap="wrap" mt="10px">
+                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
+                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
+                                                                                                        <Button ml="10px" mt="10px">
+                                                                                                            {time.view_time}
+                                                                                                        </Button>
+                                                                                                    </Link>
+                                                                                                    ))}
+                                                                                                </Flex>
+                                                                                        </Box>
+                                                                                    ))}
                                                                                 </>
-                                                                            )}
+                                                                            ))}
                                                                         </Box>
                                                                         
                                                                     </Flex>
@@ -469,23 +472,33 @@ const admin = () => {
                                                                     </Text>
                                                                     <Box>
                                                                     <Flex>
-                                                                        <Image src={selectedPerformance.img_url} 
-                                                                        style={{
-                                                                            width: "20%",
-                                                                            objectFit: "cover",
-                                                                        }}/>
+                                                                        <Image 
+                                                                            src={dataMusical.find(item => item.id === selectedPerformance)?.image}
+                                                                            style={{
+                                                                                width: "20%",
+                                                                                objectFit: "cover",
+                                                                            }}
+                                                                        />
                                                                         <Box ml="30px">
-                                                                            {selectedPerformance && (
-                                                                            <Box>
-                                                                                <Text fontSize="30px">{selectedPerformance.title}</Text>
-                                                                                {Times.filter(Times.performance_key === selectedPerformance.performance_key).map((Dtime) => (
-                                                                                <Link key={time} color="inactiveColor" href="./reservation_edit">
-                                                                                    <Button ml="20px">{Dtime.view_time}</Button>
-                                                                                </Link>
-                                                                                ))}
-                                                                                <br/>
-                                                                            </Box>
-                                                                            )}
+                                                                        {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
+                                                                                <>
+                                                                                    <Text fontSize="30px">{item.title}</Text>
+                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
+                                                                                        <Box key={Dtime.view_date}>
+                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
+                                                                                                <Flex flexWrap="wrap" mt="10px">
+                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
+                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
+                                                                                                        <Button ml="10px" mt="10px">
+                                                                                                            {time.view_time}
+                                                                                                        </Button>
+                                                                                                    </Link>
+                                                                                                    ))}
+                                                                                                </Flex>
+                                                                                        </Box>
+                                                                                    ))}
+                                                                                </>
+                                                                            ))}
                                                                         </Box>
                                                                         
                                                                     </Flex>
