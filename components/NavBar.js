@@ -1,4 +1,4 @@
-//?��비바 컴포?��?��
+//네비바 컴포넌트
 import React, { forwardRef, Fragment, useState, useEffect } from "react";
 import NextLink from "next/link";
 import Image from "next/image";
@@ -110,24 +110,24 @@ const Navbar = (props) => {
 
     const { path } = props;
 
-      //�??���? ?��?��?�� ?��?��.
+      //검색창 확인을 위해.
 
       const [showSuggestions, setShowSuggestions] = useState(false);
       const [suggestions, setSuggestions] = useState([
-        "추천�??��?��1",
-        "추천�??��?��2",
-        "추천�??��?��3",
-        "추천�??��?��4",
-        "?��번주 ?��?��?��",
+        "추천검색어1",
+        "추천검색어2",
+        "추천검색어3",
+        "추천검색어4",
+        "이번주 상영작",
       ]);
-      const popularSuggestions = ["?���? �??��?�� 1", "?���? �??��?�� 2", "?���? �??��?�� 3"];
+      const popularSuggestions = ["인기 검색어 1", "인기 검색어 2", "인기 검색어 3"];
     
       const handleSearchClick = () => {
         setShowSuggestions(!showSuggestions);
-        //?��?�� �??��?�� 로직 처리?��?��?��
+        //선택 검색어 로직 처리해야함
       };
 
-      const showMovieSuggestions = suggestions.includes("?��번주 ?��?��?��");
+      const showMovieSuggestions = suggestions.includes("이번주 상영작");
 
     return (
         <Fragment>
@@ -149,7 +149,7 @@ const Navbar = (props) => {
                         align="center"
                         justify="space-between"
                     >
-                        {/*로고 ?��?���?*/}
+                        {/*로고 아이콘*/}
                         <Heading as="h1" size="lg" letterSpacing={"tighter"}>
                           <Link href="/" scroll={false}>
                             <LogoBox>
@@ -178,7 +178,7 @@ const Navbar = (props) => {
                             <Flex align="center" mr={5}>
                             <div style={{ display: "flex", alignItems: "center" }}>
                             <Box position="relative" width="500px">
-                                {/*�??���?*/}
+                                {/*검색바*/}
                                 <Input
                                     borderWidth={"2px"}
                                     borderRadius="100"
@@ -211,7 +211,7 @@ const Navbar = (props) => {
   >
     <Box padding="8px 12px" borderBottom="1px solid white">
       <Text color="white" fontWeight="bold">
-        최근 �??��?��
+        최근 검색어
       </Text>
     </Box>
     {suggestions.map((suggestion, index) => (
@@ -224,18 +224,18 @@ const Navbar = (props) => {
         onClick={() => handleSuggestionClick(suggestion)}
         textAlign="left"
       >
-        {suggestion === "?��번주 ?��?��?��" ? (
+        {suggestion === "이번주 상영작" ? (
           <Box>
             <Box
               padding="8px 12px"
               borderBottom="1px solid white"
               marginTop="8px"
               cursor="pointer"
-              onClick={() => handleSuggestionClick("?��번주 ?��?��?��")}
+              onClick={() => handleSuggestionClick("이번주 상영작")}
             >
               <Center>
                 <Text color="white" fontWeight="bold">
-                  ?��번주 ?��?��?��
+                  이번주 상영작
                 </Text>
               </Center>
             </Box>
@@ -244,17 +244,17 @@ const Navbar = (props) => {
                 padding="8px 12px"
                 textAlign="left"
                 cursor="pointer"
-                onClick={() => handleSuggestionClick("?��번주 ?��?��?��")}
+                onClick={() => handleSuggestionClick("이번주 상영작")}
               >
                 <Stack direction="row" align="center" spacing={2} marginTop="8px">
                   <Box width="80px" height="160px" borderRadius="4px" overflow="hidden">
                     <img
-                      src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/f46e43c2-f4f0-4787-b34e-a310cecc221a.jpg"
-                      alt="?��번주 ?��?��?��"
+                      src="https://bit.ly/dan-abramov"
+                      alt="이번주 상영작"
                       style={{ width: "100%", height: "100%", objectFit: "contain" }}
                     />
                   </Box>
-                  <Text color="white" marginTop="8px">?��?��?��?�� ?��?��</Text>
+                  <Text color="white" marginTop="8px">오페라의 유령</Text>
                 </Stack>
               </Box>
             )}
@@ -266,7 +266,7 @@ const Navbar = (props) => {
     ))}
     <Box padding="8px 12px" borderBottom="1px solid white" marginTop="8px">
       <Text color="white" fontWeight="bold">
-        ?���? �??��?��
+        인기 검색어
       </Text>
     </Box>
     {popularSuggestions.map((popularSuggestion, index) => (
@@ -287,7 +287,7 @@ const Navbar = (props) => {
 
           </Box>
         </div>
-                                {/* 모바?���? �? ?�� �??���? 밑으�? ?��?���?�? 
+                                {/* 모바일로 볼 때 검색바 밑으로 내려가게 
                 <Container>
                   <Flex align="center" mr={5}>
                     {!isMobile && (
@@ -321,7 +321,7 @@ const Navbar = (props) => {
                                                 href="./admin"
                                                 path={path}
                                             >
-                                                �?리자 ?��?���?
+                                                관리자 페이지
                                             </LinkItem>
                                         </Button>
 
@@ -372,7 +372,7 @@ const Navbar = (props) => {
                     </Container>
 
                     <Container textAlign="center">
-                        {/*?��비스 ?���?*/}
+                        {/*서비스 소개*/}
                         <Menu>
                             <LinkItem href="./service" path={path}>
                                 <MenuButton
@@ -387,7 +387,7 @@ const Navbar = (props) => {
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    ?��비스 ?���?
+                                    서비스 소개
                                 </MenuButton>
                             </LinkItem>
                             <MenuList
@@ -403,7 +403,7 @@ const Navbar = (props) => {
                                 <MenuItem>Item 2</MenuItem>
                             </MenuList>
                         </Menu>
-                        {/*?��과소�?*/}
+                        {/*학과소개*/}
                         <Menu>
 
                             <MenuButton
@@ -414,7 +414,7 @@ const Navbar = (props) => {
                                 onMouseEnter={handleMouseEnter}
                                 onMouseLeave={handleMouseLeave}
                             >
-                                ?���? ?���?
+                                학과 소개
                             </MenuButton>
 
                             <MenuList
@@ -431,7 +431,7 @@ const Navbar = (props) => {
                                     href="https://musical.chungwoon.ac.kr/musical/index.do"
                                 >
                                     <MenuItem>
-                                        <span>뮤�??컬학�?</span>
+                                        <span>뮤지컬학과</span>
                                     </MenuItem>
                                 </Link>
                                 <Link
@@ -439,13 +439,13 @@ const Navbar = (props) => {
                                     href="https://bf.chungwoon.ac.kr/bf/index.do"
                                 >
                                     <MenuItem>
-                                        <span>방송?��?���?</span>
+                                        <span>방송영화과</span>
                                     </MenuItem>
                                 </Link>
                             </MenuList>
                         </Menu>
 
-                        {/*공�???��?��*/}
+                        {/*공지사항*/}
                         <Menu>
                             <LinkItem href="./announcement" path={path}>
                                 <MenuButton
@@ -456,7 +456,7 @@ const Navbar = (props) => {
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                 >
-                                    공�???��?��
+                                    공지사항
                                 </MenuButton>
                             </LinkItem>
                             <MenuList
@@ -469,7 +469,7 @@ const Navbar = (props) => {
                                 }}
                             >
                                 <MenuItem>
-                                    <span>?��?��?��?��?��.</span>
+                                    <span>안녕하세요.</span>
                                 </MenuItem>
                             </MenuList>
                         </Menu>
