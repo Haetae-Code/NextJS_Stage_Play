@@ -54,6 +54,7 @@ const Page = () => {
         price: "A석-5000원 B석-3000원",
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
+        capacity: "40",
         rules: "규칙규칙",
     });
 
@@ -78,8 +79,18 @@ const Page = () => {
             return runTime.match(regex) !== null;
         };
         
+        const isValidCapacityFormat = (capacity) => {
+            const regex = /^\d+$/;
+            return capacity.match(regex) !== null;
+        };
+
         if (!isValidRunTimeFormat(state.time)) {
             console.error("run_time은 숫자만 입력해야 합니다.");
+            return;
+        } 
+
+        if (!isValidCapacityFormat(state.capacity)) {
+            console.error("capacity은 숫자만 입력해야 합니다.");
             return;
         } 
 
@@ -102,6 +113,9 @@ const Page = () => {
                 price,
                 InfoLocation,
                 address,
+                runtime,
+                capacity,
+                rules,
             }),
           });
     
@@ -291,17 +305,12 @@ const Page = () => {
                                             <Td>
                                                 시작 시간
                                             </Td>
-                                            
-                                            
-                                        </Tr>
-                                        <Tr>
-                                            <Td>공연 길이</Td>
                                             <Td>
                                                 <Editable
                                                     defaultValue={state.time}
                                                     onChange={(value) =>
                                                         handleStateChange(
-                                                            "runtime",
+                                                            "time",
                                                             value
                                                         )
                                                     }
@@ -318,12 +327,83 @@ const Page = () => {
                                                     />
                                                 </Editable>
                                             </Td>
+                                            
+                                            
+                                        </Tr>
+                                        <Tr>
+                                            <Td>공연 길이</Td>
+                                            <Td>
+                                            <Editable
+                                                defaultValue={state.runtime}
+                                                onChange={(value) =>
+                                                    handleStateChange(
+                                                        "runtime",
+                                                        value
+                                                    )
+                                                }
+                                            >
+                                                <EditablePreview
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                                <EditableInput
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                            </Editable>
+                                            </Td>
                                         </Tr>
                                         <Tr>
                                             <Td>수용 인원</Td>
+                                            <Td>
+                                            <Editable
+                                                defaultValue={state.capacity}
+                                                onChange={(value) =>
+                                                    handleStateChange(
+                                                        "capacity",
+                                                        value
+                                                    )
+                                                }
+                                            >
+                                                <EditablePreview
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                                <EditableInput
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                            </Editable>
+                                            </Td>
                                         </Tr>
                                         <Tr>
                                             <Td>관람 수칙</Td>
+                                            <Td>
+                                            <Editable
+                                                defaultValue={state.rules}
+                                                onChange={(value) =>
+                                                    handleStateChange(
+                                                        "rules",
+                                                        value
+                                                    )
+                                                }
+                                            >
+                                                <EditablePreview
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                                <EditableInput
+                                                    border="1px solid"
+                                                    p={2}
+                                                    borderRadius="md"
+                                                />
+                                            </Editable>
+                                            </Td>
                                         </Tr>
                                     </Tbody>
                                     
@@ -356,7 +436,7 @@ const Page = () => {
             </Box>
 
             <Box textAlign="center">
-                <Button size="sm" onClick={handleDataCheck}>
+                <Button size="sm" onClick={handleSubmit}>
                     저장
                 </Button>
                 
