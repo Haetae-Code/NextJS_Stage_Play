@@ -28,6 +28,7 @@ const UploadForm = () => {
 
       const formData = new FormData();
       formData.append('file', selectedFile);
+      console.log(formData.get('file'));
       const response = await axios.post('/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
