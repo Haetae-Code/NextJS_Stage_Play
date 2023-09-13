@@ -7,13 +7,14 @@ import AuthProvider from '../components/AuthProvider';
 import { AuthContext } from '../components/AuthProvider';
 import TopButton from '../components/TopButton';
 import '../public/login_func/css/service-style.css'; // 글로벌 CSS 파일 경로
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useMediaQuery } from "@chakra-ui/react";
 
 if (typeof window !== "undefined") {
     window.history.scrollRestoration = "manual";
 }
-const Website = ({ Component, pageProps, router }) => {
 
+const Website = ({ Component, pageProps, router }) => {
+    const [isMobile] = useMediaQuery("(max-width: 795px)");
     const currentpath = router.pathname;
     const isCreditPage = currentpath === '/Website';
     if (router.pathname ==='/Website'){
@@ -34,7 +35,7 @@ const Website = ({ Component, pageProps, router }) => {
     return (
         <Chakra cookies={pageProps.cookies}>
             {/* <Header></Header> */}
-            <Nav></Nav>
+            { isMobile ? (<Bottom/>):(<Nav/>)}
             <AuthProvider>
             <Layout router={router}>
                 <AnimatePresence
