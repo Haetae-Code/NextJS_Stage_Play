@@ -81,6 +81,7 @@ const admin = () => {
     const { isOpen: isDelModalOpen, onOpen: onDelModalOpen, onClose: onDelModalClose} = useDisclosure();
 
     const [selectedPerformance, setSelectedPerformance] = useState(null);
+    const [selectedPerformanceTimes, setSelectedPerformanceTimes] = useState([]);
     
     const onViewModal = (performanceId) => {
         setSelectedPerformance(performanceId)
@@ -104,14 +105,6 @@ const admin = () => {
           router.push('/login');
         }
       }, [isLoggedIn, router]);
-
-    // useEffect(() => { //컴포먼트 연결 지연 테스트코드
-    // const timer = setTimeout(() => {
-    //     setShowComponent(true);
-    // }, 500);
-
-    // return () => clearTimeout(timer);
-    // }, []);
 
     const handleClick = () => {
         setShowEditPage((prevValue) => !prevValue);
@@ -152,7 +145,6 @@ const admin = () => {
         };
     }, []);
 
-
     const settings = {
         dots: true,
         infinite: true,
@@ -169,6 +161,23 @@ const admin = () => {
         title: PerformanceItem.title,
         description: PerformanceItem.address + PerformanceItem.location,
     }));
+
+    const performanceTimesByDate = {};
+
+    Times.forEach((time) => {
+        const performanceId = time.performance_key;
+        const date = time.view_date;
+        
+        if (!performanceTimesByDate[performanceId]) {
+            performanceTimesByDate[performanceId] = {};
+        }
+        
+        if (!performanceTimesByDate[performanceId][date]) {
+            performanceTimesByDate[performanceId][date] = [];
+        }
+        
+        performanceTimesByDate[performanceId][date].push(time.view_time);
+    });
 
     return (
         <div>
@@ -208,7 +217,7 @@ const admin = () => {
                         등록 공연
                     </Text>
                     <Box mt="-40px" mr="60px" mb="10px" align="right">
-                    <Link color="inactiveColor" href="./reservationadd"><Button>공연 추가</Button></Link>
+                    <Link color="inactiveColor" href="./reservation_add"><Button>공연 추가</Button></Link>
                     </Box>
                 </Box>
                 <Box
@@ -329,25 +338,32 @@ const admin = () => {
                                                                             }}
                                                                         />
                                                                         <Box ml="30px">
-                                                                            {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
-                                                                                <>
-                                                                                    <Text fontSize="30px">{item.title}</Text>
-                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
-                                                                                        <Box key={Dtime.view_date}>
-                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
-                                                                                                <Flex flexWrap="wrap" mt="10px">
-                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
-                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
-                                                                                                        <Button ml="10px" mt="10px">
-                                                                                                            {time.view_time}
-                                                                                                        </Button>
-                                                                                                    </Link>
-                                                                                                    ))}
-                                                                                                </Flex>
-                                                                                        </Box>
-                                                                                    ))}
-                                                                                </>
-                                                                            ))}
+                                                                        {dataMusical.filter((item) => item.id === selectedPerformance).map((item) => (
+                                                                            <React.Fragment key={item.id}>
+                                                                                <Text fontSize="30px">{item.title}</Text>
+                                                                                {Object.keys(performanceTimesByDate[selectedPerformance]).map((date) => (
+                                                                                    <Box key={date}>
+                                                                                        <Text fontSize="30px">{date}</Text>
+                                                                                        <Flex flexWrap="wrap" mt="10px">
+                                                                                            {performanceTimesByDate[selectedPerformance][date].map((time) => (
+                                                                                                <Link
+                                                                                                    key={time}
+                                                                                                    color="inactiveColor"
+                                                                                                    onClick={() => {
+                                                                                                        const url = `/reservation_check?performanceId=${selectedPerformance}&date=${date}&time=${time}`;
+                                                                                                        router.push(url);
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <Button ml="10px" mt="10px">
+                                                                                                        {time}
+                                                                                                    </Button>
+                                                                                                </Link>
+                                                                                            ))}
+                                                                                        </Flex>
+                                                                                    </Box>
+                                                                                ))}
+                                                                            </React.Fragment>
+                                                                        ))}
                                                                         </Box>
                                                                     </Flex>
                                                                     <Flex>
@@ -404,25 +420,32 @@ const admin = () => {
                                                                             }}
                                                                         />
                                                                         <Box ml="30px">
-                                                                        {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
-                                                                                <>
-                                                                                    <Text fontSize="30px">{item.title}</Text>
-                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
-                                                                                        <Box key={Dtime.view_date}>
-                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
-                                                                                                <Flex flexWrap="wrap" mt="10px">
-                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
-                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
-                                                                                                        <Button ml="10px" mt="10px">
-                                                                                                            {time.view_time}
-                                                                                                        </Button>
-                                                                                                    </Link>
-                                                                                                    ))}
-                                                                                                </Flex>
-                                                                                        </Box>
-                                                                                    ))}
-                                                                                </>
-                                                                            ))}
+                                                                        {dataMusical.filter((item) => item.id === selectedPerformance).map((item) => (
+                                                                            <React.Fragment key={item.id}>
+                                                                                <Text fontSize="30px">{item.title}</Text>
+                                                                                {Object.keys(performanceTimesByDate[selectedPerformance]).map((date) => (
+                                                                                    <Box key={date}>
+                                                                                        <Text fontSize="30px">{date}</Text>
+                                                                                        <Flex flexWrap="wrap" mt="10px">
+                                                                                            {performanceTimesByDate[selectedPerformance][date].map((time) => (
+                                                                                                <Link
+                                                                                                    key={time}
+                                                                                                    color="inactiveColor"
+                                                                                                    onClick={() => {
+                                                                                                        const url = `/reservation_edit?performanceId=${selectedPerformance}`;
+                                                                                                        router.push(url);
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <Button ml="10px" mt="10px">
+                                                                                                        {time}
+                                                                                                    </Button>
+                                                                                                </Link>
+                                                                                            ))}
+                                                                                        </Flex>
+                                                                                    </Box>
+                                                                                ))}
+                                                                            </React.Fragment>
+                                                                        ))}
                                                                         </Box>
                                                                         
                                                                     </Flex>
@@ -480,25 +503,29 @@ const admin = () => {
                                                                             }}
                                                                         />
                                                                         <Box ml="30px">
-                                                                        {dataMusical.filter(item => item.id === selectedPerformance).map((item) => (
-                                                                                <>
-                                                                                    <Text fontSize="30px">{item.title}</Text>
-                                                                                    {Times.filter(times => times.performance_key === item.id).map((Dtime) => (
-                                                                                        <Box key={Dtime.view_date}>
-                                                                                                <Text fontSize="30px">{Dtime.view_date}</Text>
-                                                                                                <Flex flexWrap="wrap" mt="10px">
-                                                                                                    {Times.filter(Times => Dtime.view_date === Times.view_date).map((time) => (
-                                                                                                    <Link key={time} color="inactiveColor" href="./reservation_check">
-                                                                                                        <Button ml="10px" mt="10px">
-                                                                                                            {time.view_time}
-                                                                                                        </Button>
-                                                                                                    </Link>
-                                                                                                    ))}
-                                                                                                </Flex>
-                                                                                        </Box>
-                                                                                    ))}
-                                                                                </>
-                                                                            ))}
+                                                                        {dataMusical.filter((item) => item.id === selectedPerformance).map((item) => (
+                                                                            <React.Fragment key={item.id}>
+                                                                                <Text fontSize="30px">{item.title}</Text>
+                                                                                {Object.keys(performanceTimesByDate[selectedPerformance]).map((date) => (
+                                                                                    <Box key={date}>
+                                                                                        <Text fontSize="30px">{date}</Text>
+                                                                                        <Flex flexWrap="wrap" mt="10px">
+                                                                                            {performanceTimesByDate[selectedPerformance][date].map((time) => (
+                                                                                                <Link
+                                                                                                    key={time}
+                                                                                                    color="inactiveColor"
+                                                                                                    href="./reservation_check"
+                                                                                                >
+                                                                                                    <Button ml="10px" mt="10px">
+                                                                                                        {time}
+                                                                                                    </Button>
+                                                                                                </Link>
+                                                                                            ))}
+                                                                                        </Flex>
+                                                                                    </Box>
+                                                                                ))}
+                                                                            </React.Fragment>
+                                                                        ))}
                                                                         </Box>
                                                                         
                                                                     </Flex>
