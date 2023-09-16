@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 
 const notices = ["개발자 노트:", "오늘의 공지사항:", "추후 공지예정:"];
 
-export const Bottom = (props) => {
+export const Bottom = () => {
     const [currentNoticeIndex, setCurrentNoticeIndex] = useState(0);
     useEffect(() => {
         const intervalId = setInterval(() => {
