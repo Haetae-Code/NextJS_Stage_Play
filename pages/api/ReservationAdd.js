@@ -1,12 +1,12 @@
 //공연 추가
 const nextConnect = require("next-connect");
-const db = require("./db");
+{/*const db = require("./db");*/}
 const { opt_checkSearchedWord } = require("../../injectioncode");
 
 const insert = nextConnect();
 
 insert.use((req, res, next) => {
-  const { title, location, address, runtime, capacity, Infolocation } = req.body;
+  const { title, location, address, runtime, capacity } = req.body;
 
   if (
     !opt_checkSearchedWord(title) ||
@@ -25,10 +25,10 @@ insert.use((req, res, next) => {
 
 insert.post(async (req, res) => {
   try {
-    const { title, location, address, runtime, capacity, InfoLocation } = req.body;
+    {/*const { title, location, address, } = req.body;*/}
     
-    const insertReservation = "INSERT INTO Stage_Play_DB.Performance (img_url, title, location, address, run_time, rules) VALUES (?, ?, ?, ?, ?, ?)";
-    const insertReservationValues = [img_url, title, location, address, run_time, rules];
+    {/*const insertReservation = "INSERT INTO Stage_Play_DB.Performance (img_url, title, location, address, run_time, rules) VALUES (?, ?, ?, ?, ?, ?)";
+  const insertReservationValues = [img_url, title, location, address, run_time, rules];*/}
 
     res.status(200).json({ message: "Data inserted successfully" });
   } catch (error) {

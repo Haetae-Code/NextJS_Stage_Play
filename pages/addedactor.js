@@ -14,95 +14,90 @@ import {
   Input
 } from "@chakra-ui/react";
 
-const addedactor = () => {
-    const [actors, setActors] = useState([]);
-    const [isFormVisible, setIsFormVisible] = useState(false);
-    const [editableActor, setEditableActor] = useState({
+const AddedActor = () => {
+  const [actors, setActors] = useState([]);
+  {/*const [isFormVisible, setIsFormVisible] = useState(false);*/}
+  const [editableActor, setEditableActor] = useState({
+    name: "",
+    department: "",
+    introduction: "",
+    imageUrl: "",
+  });
+  const [isEditing] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/actors")
+      .then((response) => response.json())
+      .then((data) => setActors(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditableActor((prevActor) => ({ ...prevActor, [name]: value }));
+  };
+
+  {/*const handleAddActor = () => {
+    // 필수 항목 입력 확인
+    if (!editableActor.name || !editableActor.department || !editableActor.introduction) {
+      console.error("필수 항목을 입력하세요.");
+      return;
+    }
+
+    setActors((prevActors) => [...prevActors, editableActor]);
+    setEditableActor({
       name: "",
       department: "",
       introduction: "",
       imageUrl: "",
     });
-    const [isEditing, setIsEditing] = useState(false);
+    setIsFormVisible(false);
+  };*/}
 
-    useEffect(() => {
-      fetch("/api/actors")
-        .then((response) => response.json())
-        .then((data) => setActors(data))
-        .catch((error) => console.error(error));
-    }, []);
-  
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setEditableActor((prevActor) => ({ ...prevActor, [name]: value }));
-    };
-  
-    const handleAddActor = () => {
-      // 필수 항목 입력 확인
-      if (!editableActor.name || !editableActor.department || !editableActor.introduction) {
-        console.error("필수 항목을 입력하세요.");
-        return;
-      }
-  
-      setActors((prevActors) => [...prevActors, editableActor]);
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-      setIsFormVisible(false);
-    };
-  
-    const handleDelete = (actor) => {
-      const updatedActors = actors.filter((a) => a !== actor);
-      setActors(updatedActors);
-    };
-  
-    const handleEdit = (actor) => {
-      setEditableActor(actor);
-      setIsEditing(true); 
-    };
+  {/*const handleDelete = (actor) => {
+    const updatedActors = actors.filter((a) => a !== actor);
+    setActors(updatedActors);
+  };*/}
 
-    const handleSave = () => {
-      setActors((prevActors) =>
-        prevActors.map((actor) =>
-          actor === editableActor ? { ...editableActor } : actor
-        )
-      );
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-    };
+  {/*const handleEdit = (actor) => {
+    setEditableActor(actor);
+    setIsEditing(true);
+  };*/}
 
-    const handleCancelEdit = () => {
-      setEditableActor({
-        name: "",
-        department: "",
-        introduction: "",
-        imageUrl: "",
-      });
-    };
+  {/*const handleSave = () => {
+    setActors((prevActors) =>
+      prevActors.map((actor) =>
+        actor === editableActor ? { ...editableActor } : actor
+      )
+    );
+    setEditableActor({
+      name: "",
+      department: "",
+      introduction: "",
+      imageUrl: "",
+    });
+  };*/}
 
-    function truncateText(text, maxLength) {
-      if (text.length <= maxLength) {
-        return text;
-      } else {
-        return text.substring(0, maxLength) + '...';
-      }
+  {/*const handleCancelEdit = () => {
+    setEditableActor({
+      name: "",
+      department: "",
+      introduction: "",
+      imageUrl: "",
+    });
+  };*/}
+
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      return text.substring(0, maxLength) + '...';
     }
-    
-  return (
-    <div>
-      
-      <Box mt="40px" >
-        
+  }
 
-       
-        <Stack ml="50px">
+  return (
+    <Box mt="40px" >
+      <Stack ml="50px">
         <Flex flexWrap="wrap" gap="20px" maxHeight="1000px" overflowY="auto">
           {actors.map((actor, index) => (
             <Box key={index} py={10} flex="1 1 45%" mt="-35px">
@@ -167,17 +162,14 @@ const addedactor = () => {
                 </TableContainer>
                 <Box>
                   <Button>선택</Button>
-                </Box>            
+                </Box>
               </Flex>
             </Box>
-
           ))}
         </Flex>
       </Stack>
-      </Box>
-
-    </div>
+    </Box>
   );
 };
 
-export default addedactor;
+export default AddedActor;

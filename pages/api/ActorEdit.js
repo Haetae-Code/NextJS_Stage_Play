@@ -6,7 +6,7 @@ const { opt_checkSearchedWord } = require("../../injectioncode");
 const handler = nextConnect();
 
 handler.use((req, res, next) => {
-    const { name, deparment, introduction } = req.body;
+    const { name, department, introduction } = req.body;
 
     if (
       !opt_checkSearchedWord(name) ||
@@ -25,10 +25,10 @@ handler.delete(async (req, res) => {
     try {    
         const { actor_key } = req.body;
 
-        const results = await db.query(
+        {/*const results = await db.query(
             "DELETE FROM Stage_Play_DB.Actor WHERE actor_key = ?",
             [actor_key]
-        );
+        );*/}
         res.status(200).json({ message: "Actor deleted successfully" });
     } catch (error) {
         console.error(error);
