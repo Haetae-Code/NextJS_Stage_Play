@@ -1,4 +1,4 @@
-import {  Box, Image, Center } from "@chakra-ui/react";
+import {  Box, Image} from "@chakra-ui/react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
