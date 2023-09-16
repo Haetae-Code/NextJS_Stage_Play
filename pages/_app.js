@@ -4,7 +4,6 @@ import Chakra from "../components/chakra";
 import Nav from "../components/NavBar";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
-import { AuthContext } from '../components/AuthProvider';
 import TopButton from '../components/TopButton';
 import '../public/login_func/css/service-style.css'; // 글로벌 CSS 파일 경로
 import { ChakraProvider, useMediaQuery } from "@chakra-ui/react";
@@ -16,20 +15,20 @@ if (typeof window !== "undefined") {
 const Website = ({ Component, pageProps, router }) => {
     const [isMobile] = useMediaQuery("(max-width: 795px)");
     const currentpath = router.pathname;
-    const isCreditPage = currentpath === '/Website';
+    {/*const isCreditPage = currentpath === '/Website';*/}
     if (router.pathname ==='/Website'){
         return(
             <Component {...pageProps}/>
         )
     }
 
-    function Website({ Component, pageProps }) {
+    {/*function Website({ Component, pageProps }) {
         return (
             <ChakraProvider theme={theme}>
                 <Component {...pageProps} />
             </ChakraProvider>
         );
-      }
+      }*/}
 
     //원래 본문
     return (

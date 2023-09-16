@@ -20,7 +20,7 @@ import {
 import { useRouter } from "next/router";
 import { useState,useEffect } from 'react'
 
-const reservationcheck = () => {
+const ReservationCheck = () => {
     const router = useRouter();
     const { performanceId, date, time } = router.query;
     const [Performance, setPerformance] = useState([]);
@@ -257,4 +257,4 @@ const reservationcheck = () => {
         </Box>
     );
 };
-export default reservationcheck;
+export default ReservationCheck;

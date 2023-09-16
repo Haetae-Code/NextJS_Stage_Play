@@ -1,25 +1,14 @@
 import {
-    Heading,
     Box,
     Flex,
-    Image,
     Table,
-    Thead,
     Tbody,
-    Tfoot,
     Tr,
-    Th,
     Td,
     TableContainer,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Text,
     Button,
     Stack,
-    Link,
     Editable,
     EditablePreview,
     EditableInput,
@@ -29,14 +18,9 @@ import {
     PopoverContent,
     PopoverHeader,
     PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
-    Input,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import KakaoMap from "../components/kakaomap";
+{/*import KakaoMap from "../components/kakaomap";*/}
 import Actor from "./addedactor";
 import ImageUpload from '../components/ImageUpload';
 
@@ -139,14 +123,14 @@ const Page = () => {
     }
 
     //[서버 업로드용] - 백엔드 이미지 업로드 로직 구현 필요합니다. 
-    const handleUpload= () => {
+    {/*const handleUpload= () => {
 
     }
 
     const handleDataCheck=()=>{
 
     }
-
+    */}
     return (
         <Box>
             <Box>

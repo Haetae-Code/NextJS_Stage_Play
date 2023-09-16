@@ -28,7 +28,7 @@ import KakaoMap from "../../components/kakaomap";
 import { useRouter } from "next/router";
 //import { auto } from "@popperjs/core";
 
-const Page = (actorData) => {
+const Page = () => {
     const router = useRouter();
     const { id } = router.query;
     const handleReservationdetail = (id) => {

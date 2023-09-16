@@ -29,30 +29,30 @@ const Service = () => {
     <VStack spacing="20px" margin="20px">
       <CustomCredit title="Manager" roles="(각 부서별 역할 적는 곳)">
         <Text fontSize="30px" color="white">채준혁</Text>
-        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+        <Text mt="5px" fontSize="20px" color="white">너무 재미있어요</Text>
       </CustomCredit>
 
       <CustomCredit title="Front" roles="(각 부서별 역할 적는 곳)">
       <Text fontSize="30px" color="white">김준서</Text>
-        <Text mt="5px" fontSize="20px" color="white">"재밌노"</Text>
+        <Text mt="5px" fontSize="20px" color="white">재밌노</Text>
         <Text fontSize="30px" color="white">박지환</Text>
-        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+        <Text mt="5px" fontSize="20px" color="white">너무 재미있어요</Text>
         <Text fontSize="30px" color="white">김민경</Text>
-        <Text mt="5px" fontSize="20px" color="white">"너무 재미있어요"</Text>
+        <Text mt="5px" fontSize="20px" color="white">너무 재미있어요</Text>
       </CustomCredit>
 
       <CustomCredit title="DB" roles="(각 부서별 역할 적는 곳)">
       <Text fontSize="30px" color="white">채준혁</Text>
-        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text mt="5px" fontSize="20px" color="white">내용</Text>
         <Text fontSize="30px" color="white">윤태성</Text>
-        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text mt="5px" fontSize="20px" color="white">내용</Text>
         <Text fontSize="30px" color="white">최인서</Text>
-        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>
+        <Text mt="5px" fontSize="20px" color="white">내용</Text>
       </CustomCredit>
 
       <CustomCredit title="Server" roles="(각 부서별 역할 적는 곳)">
         <Text fontSize="30px" color="white">이준혁</Text>
-        <Text mt="5px" fontSize="20px" color="white">"내용"</Text>        
+        <Text mt="5px" fontSize="20px" color="white">내용</Text>        
       </CustomCredit>  
     </VStack>,
   ];
