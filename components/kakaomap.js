@@ -73,7 +73,7 @@ function KakaoMap(props) {
         // });
 
         // infowindow.open(map, marker);
-    }, []);
+    }, [str_addressValue]);
 
     return (
         <div>
