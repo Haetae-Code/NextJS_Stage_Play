@@ -1,4 +1,4 @@
-import {  Box, Image } from "@chakra-ui/react";
+import {  Box, Image, Center } from "@chakra-ui/react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
@@ -27,7 +27,7 @@ const ImageSlider = () => {
                     if (mouseOver) return;
                     timeout = setTimeout(() => {
                         slider.next();
-                    }, 2000);
+                    }, 5000);
                 }
                 slider.on("created", () => {
                     slider.container.addEventListener("mouseover", () => {
@@ -48,34 +48,32 @@ const ImageSlider = () => {
     );
     return (
         <Box
-        w="100%"
-        display= "flex"
-        position= "center"
-        justifyContent= "center"
-        textAlign= "center"
+        width= "100%"
+        position={"Center"}
+        justifyContent= {"Center"}
+        textAlign= {"Center"}
+        mb={10}
         >
-            <div
+            <Box
                 ref={sliderRef}
                 className="keen-slider"
                 style={{ width: "100%"}}
             >
-                <div className="keen-slider__slide number-slide1">
+                <Box className="keen-slider__slide number-slide1">
                     <Image
                         src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/Acting.png"
                         alt="Dan Abramov"
-                        borderRadius={"10"}
-                        style={{ maxWidth: "100%" }}
+                        w={"100%"}                        
                     />
-                </div>
-                <div className="keen-slider__slide number-slide2">
+                </Box>
+                <Box className="keen-slider__slide number-slide2">
                     <Image
                         src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/Acting.png"
                         alt="Dan Abramov"
-                        borderRadius={"10"}
-                        style={{ maxWidth: "100%" }}
+                        w={"100%"}
                     />
-                </div>
-            </div>
+                </Box>
+            </Box>
         </Box>
     );
 };
