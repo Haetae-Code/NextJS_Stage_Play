@@ -110,7 +110,7 @@ const Navbar = (props) => {
 
       //검색창 확인을 위해.
 
-      const [showSuggestions, setShowSug gestions] = useState(false);
+      const [showSuggestions, setShowSuggestions] = useState(false);
       const [suggestions, setSuggestions] = useState([
         "추천검색어1",
         "추천검색어2",

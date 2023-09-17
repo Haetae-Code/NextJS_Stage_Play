@@ -88,7 +88,7 @@ const CwuLogoImage = chakra(Image, {
 
 const Navbar = (props) => {
     
-
+    const [isMobile] = useMediaQuery("(max-width: 795px)");
     const [isHovered, setIsHovered] = useState(false);
     
 
@@ -279,7 +279,7 @@ const Navbar = (props) => {
                                 )}
                             </Box>                
                             </div>
-                                                        {/* 모바일로 볼 때 검색바 밑으로 내려가게 
+                                                        
                                         <Container>
                                         <Flex align="center" mr={5}>
                                             {!isMobile && (
@@ -293,7 +293,7 @@ const Navbar = (props) => {
                                             />
                                             )}
                                         </Flex>
-                                        </Container>*/}
+                                        </Container>
                             </Flex>
                         </Container>
 
