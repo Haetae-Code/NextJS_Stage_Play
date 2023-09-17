@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import Layout from "../components/layouts/layout";
 import Chakra from "../components/chakra";
 import Nav from "../components/NavBar";
+import Nav_MOB from "../components/Navbar_mobile";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
 import { AuthContext } from '../components/AuthProvider';
@@ -35,7 +36,7 @@ const Website = ({ Component, pageProps, router }) => {
     return (
         <Chakra cookies={pageProps.cookies}>
             {/* <Header></Header> */}
-            { isMobile ? (<Bottom/>):(<Nav/>)}
+            { isMobile ? (<Nav_MOB/>):(<Nav/>)}
             <AuthProvider>
             <Layout router={router}>
                 <AnimatePresence
