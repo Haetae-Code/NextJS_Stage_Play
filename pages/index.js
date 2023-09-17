@@ -1,8 +1,7 @@
 //import NextLink from "next/link";
 
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect} from "react";
 import {
-    Container,
     Heading,
     Box,
     Button,
@@ -26,15 +25,14 @@ import { useRouter } from "next/router";
 const Page = () => {
     const [, /*sliderIndex*/ setSliderIndex] = useState(0);
     const router = useRouter();
-    const [isMobile] = useMediaQuery("(max-width: 795px)");
+    {/*const [isMobile] = useMediaQuery("(max-width: 795px)");*/}
     const handleReservation = (id) => {
         router.push(`/reservation/${id}`);
     };
 
-    const handleSliderChange = (index) => {
+    {/*const handleSliderChange = (index) => {
         setSliderIndex(index);
-    };
-
+    };*/}
     const settings = {
         dots: true,
         infinite: true,
@@ -202,7 +200,7 @@ const Page = () => {
                     <p>&nbsp;</p>
 
                 <Slider {...settings}>
-                    {dataMusical.map((item, index) => (
+                    {dataMovie.map((item, index) => (
                         <Box key={index} px={3}>
                             <Card
                                 maxW="sm"

@@ -6,7 +6,7 @@ import { Link as ScrollLink } from "react-scroll"; //버튼을 누르면 위로 
 //import styles from '../뭐시기.css' //스타일 css 파일 불러오기
 
 //야매 도전
-const service = () => {
+const Service = () => {
     const [showScrollButton, setShowScrollButton] = useState(false);
 
     useEffect(() => {
@@ -239,4 +239,4 @@ const service = () => {
     );
 };
 
-export default service;
+export default Service;

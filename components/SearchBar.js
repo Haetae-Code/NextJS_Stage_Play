@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Container, Input } from "@chakra-ui/react";
 
-const Navbar = (props) => {
-  const { path } = props;
+const Navbar = () => {
+
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [suggestions, setSuggestions] = useState([
+  const [suggestions,] = useState([
     "React",
     "JavaScript",
     "Chakra UI",

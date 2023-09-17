@@ -13,7 +13,7 @@ function KakaoMap(props) {
 
         document.head.appendChild(mapScript);
 
-        const onLoadKakaoMap = (props) => {
+        const onLoadKakaoMap = () => {
             
             
             window.kakao.maps.load(() => {
@@ -73,7 +73,7 @@ function KakaoMap(props) {
         // });
 
         // infowindow.open(map, marker);
-    }, []);
+    }, [str_addressValue]);
 
     return (
         <div>

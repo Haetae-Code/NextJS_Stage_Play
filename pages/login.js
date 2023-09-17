@@ -1,4 +1,4 @@
-import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon} from "@chakra-ui/react";
+import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon, Script} from "@chakra-ui/react";
 import { useState, useContext } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/router';
@@ -108,15 +108,15 @@ const LoginPage = () => {
         </div>
       </div>
       <div id="dropDownSelect1"></div>
-      <script src="/login_func/vendor/jquery/jquery-3.2.1.min.js"></script>
-      <script src="/login_func/vendor/animsition/js/animsition.min.js"></script>
-      <script src="/login_func/vendor/bootstrap/js/popper.js"></script>
-      <script src="/login_func/vendor/bootstrap/js/bootstrap.min.js"></script>
-      <script src="/login_func/vendor/select2/select2.min.js"></script>
-      <script src="/login_func/vendor/daterangepicker/moment.min.js"></script>
-      <script src="/login_func/endor/daterangepicker/daterangepicker.js"></script>
-      <script src="/login_func/vendor/countdowntime/countdowntime.js"></script>
-      <script src="/login_func/js/main.js"></script>
+      <Script src="/login_func/vendor/jquery/jquery-3.2.1.min.js" async defer/>
+      <Script src="/login_func/vendor/animsition/js/animsition.min.js"/>
+      <Script src="/login_func/vendor/bootstrap/js/popper.js"/>
+      <Script src="/login_func/vendor/bootstrap/js/bootstrap.min.js"/>
+      <Script src="/login_func/vendor/select2/select2.min.js"/>
+      <Script src="/login_func/vendor/daterangepicker/moment.min.js"/>
+      <Script src="/login_func/endor/daterangepicker/daterangepicker.js"/>
+      <Script src="/login_func/vendor/countdowntime/countdowntime.js"/>
+      <Script src="/login_func/js/main.js"/>
     </div>
   );
 };

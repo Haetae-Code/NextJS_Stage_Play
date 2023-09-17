@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';

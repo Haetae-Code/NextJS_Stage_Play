@@ -20,16 +20,16 @@ import {
 import { useRouter } from "next/router";
 import { useState,useEffect } from 'react'
 
-const reservationcheck = () => {
+const ReservationCheck = () => {
     const router = useRouter();
-    const { id } = router.query;
+    const { performanceId, date, time } = router.query;
     const [Performance, setPerformance] = useState([]);
     useEffect(() => {
-        fetch(`/api/Performance/${id}`)
+        fetch(`/api/Performance/${performanceId}`)
             .then((response) => response.json())
             .then((data) => setPerformance(data))
             .catch((error) => console.error(error));
-    }, [id]);
+    }, [performanceId]);
     
     
     
@@ -257,4 +257,4 @@ const reservationcheck = () => {
         </Box>
     );
 };
-export default reservationcheck;
+export default ReservationCheck;

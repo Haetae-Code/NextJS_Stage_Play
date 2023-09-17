@@ -5,10 +5,9 @@ import Nav from "../components/NavBar";
 import Nav_MOB from "../components/Navbar_mobile";
 import { Bottom } from "../components/Bottom";
 import AuthProvider from '../components/AuthProvider';
-import { AuthContext } from '../components/AuthProvider';
 import TopButton from '../components/TopButton';
 import '../public/login_func/css/service-style.css'; // 글로벌 CSS 파일 경로
-import { ChakraProvider, useMediaQuery } from "@chakra-ui/react";
+import {useMediaQuery } from "@chakra-ui/react";
 
 if (typeof window !== "undefined") {
     window.history.scrollRestoration = "manual";

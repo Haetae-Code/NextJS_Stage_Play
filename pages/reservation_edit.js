@@ -1,25 +1,14 @@
 import {
-    Heading,
     Box,
     Flex,
-    Image,
     Table,
-    Thead,
     Tbody,
-    Tfoot,
     Tr,
-    Th,
     Td,
     TableContainer,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
     Text,
     Button,
     Stack,
-    Link,
     Editable,
     EditablePreview,
     EditableInput,
@@ -29,18 +18,9 @@ import {
     PopoverContent,
     PopoverHeader,
     PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import KakaoMap from "../components/kakaomap";
+{/*import KakaoMap from "../components/kakaomap";*/}
 import Actor from "./addedactor";
 
 const Page = () => {
@@ -55,9 +35,9 @@ const Page = () => {
         InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
     });
-    const handletitleInputChange = (e) => setInput(e.target.value)
+    {/*const handletitleInputChange = (e) => setInput(e.target.value)
     const handleInputChange =(e) => setInput(e.target.value)
-    const isError = input === ''
+const isError = input === ''*/}
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
