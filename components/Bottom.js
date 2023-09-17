@@ -44,23 +44,21 @@ export const Bottom = () => {
 
             <Box>
                 <Divider my={8} />
-                <Flex justifyContent="center" mr="100px">
+                <Flex justifyContent="center">
                     <Box display="flex" justifyContent="center">
                         <Button
                             mt={1}
-                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
                             backgroundColor={null}
                         >
                             <Link color="inactiveColor">
-                                대표 번호 010-xxxx-xxx
+                                대표 번호
                             </Link>
                         </Button>
                         <Button
                             mt={1}
-                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
@@ -70,7 +68,6 @@ export const Bottom = () => {
                         </Button>
                         <Button
                             mt={1}
-                            ml={90}
                             fontSize="sm"
                             fontWeight="bold"
                             bg={"transparent"}
@@ -78,29 +75,7 @@ export const Bottom = () => {
                         >
                             <Link color="inactiveColor">서비스 소개</Link>
                         </Button>
-                        <Button
-                            mt={1}
-                            ml={90}
-                            fontSize="sm"
-                            fontWeight="bold"
-                            bg={"transparent"}
-                            backgroundColor={null}
-                        >
-                            <Link color="inactiveColor">자주 묻는 질문</Link>
-                        </Button>
 
-                        <Button
-                            mt={1}
-                            ml={90}
-                            fontSize="sm"
-                            fontWeight="bold"
-                            bg={"transparent"}
-                            backgroundColor={null}
-                            _focus={{ boxShadow: "none" }}
-                            _active={{ backgroundColor: "blue.600" }}
-                        >
-                            <Link color="inactiveColor">건의사항</Link>
-                        </Button>
                     </Box>
                 </Flex>
             </Box>
