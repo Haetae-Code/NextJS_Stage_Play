@@ -19,21 +19,37 @@ import {
     PopoverHeader,
     PopoverBody,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 {/*import KakaoMap from "../components/kakaomap";*/}
 import Actor from "./addedactor";
+import { useRouter } from 'next/router';
 
 const Page = () => {
-    //const [title, setTitle] = useState("제목")
+    const router = useRouter();
+    const { performanceId } = router.query;
     const [input, setInput] = useState('')
+
+    const [Performance, setPerformance] = useState([]);
+    useEffect(() => {
+        if (performanceId) {
+            fetch(`/api/Performance/${performanceId}`)
+                .then((response) => response.json())
+                .then((data) => setPerformance(data))
+                .catch((error) => console.error(error));
+        }
+    }, [performanceId]);
+
     const [state, setState] = useState({
-        title: "제목",
-        location: "101호 대강당",
-        period: "2023/03/17~2023/03/20",
-        time: "171분",
+        title: Performance.title,
+        location: Performance.location,
+        period: "2023-03-17, 2023-03-20",
+        time: "13:00:00, 17:00:00",
+        runtime: Performance.run_time, //숫자만 작성
         price: "A석-5000원 B석-3000원",
-        InfoLocation: "홍주문화회관",
-        address: "충남 홍성군 홍성읍 내포로 164",
+        InfoLocation: Performance.location,
+        address: Performance.address,
+        capacity: Performance.capacity,
+        rules: Performance.rules,
     });
     {/*const handletitleInputChange = (e) => setInput(e.target.value)
     const handleInputChange =(e) => setInput(e.target.value)
@@ -42,9 +58,74 @@ const isError = input === ''*/}
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
 
-    const handleSaveReservation = () => {
-        // 이후 실제 db와 연결해서 확인
-        window.alert("저장되었습니다.");
+    // 데이터 형식 체크
+    const handleSaveReservation = async () => {
+        const isValidDateFormat = (dates) => {
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            return dates.match(regex) !== null;
+        };
+            
+        const isValidPeriodFormat = (period) => {
+            const dates = period.split(", ");
+            return dates.length >= 1 && dates.every(isValidDateFormat);
+        };
+    
+        const isValidRunTimeFormat = (runTime) => {
+            const regex = /^\d+$/;
+            return runTime.match(regex) !== null;
+        };
+            
+        const isValidCapacityFormat = (capacity) => {
+            const regex = /^\d+$/;
+            return capacity.match(regex) !== null;
+        };
+
+        if (!isValidRunTimeFormat(state.time)) {
+            console.error("run_time은 숫자만 입력해야 합니다.");
+            return;
+        } 
+    
+        if (!isValidCapacityFormat(state.capacity)) {
+            console.error("capacity은 숫자만 입력해야 합니다.");
+            return;
+        } 
+    
+        if (!isValidPeriodFormat(state.period)) {
+            console.error("period는 YYYY-MM-DD 형식이어야 합니다.");
+            return;
+        }
+    
+        try {
+            const response = await fetch("/api/ReservationAdd", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title,
+                    location,
+                    period,
+                    time,
+                    price,
+                    InfoLocation,
+                    address,
+                    runtime,
+                    capacity,
+                    rules,
+                }),
+              });
+        
+              if (response.ok) {
+                setInput("공연 편집 성공");
+                console.log("Reservation edit submitted");
+              } else {
+                setInput("공연 편집 실패. 다시 시도해주세요.");
+                console.error("Reservation edit failed");
+              }
+            } catch (error) {
+                setInput("공연 편집 실패. 다시 시도해주세요.");  
+              console.error(error);
+        }
     };
 
     return (
@@ -210,7 +291,32 @@ const isError = input === ''*/}
                                             <Td>
                                                 시작 시간
                                             </Td>
-                                            
+                                            <Td>    
+                                                <Editable
+                                                defaultValue={
+                                                    state.time
+                                                }
+                                                onChange={(value) => 
+                                                    handleStateChange(
+                                                        "time", 
+                                                        value
+                                                        )
+                                                    }
+                                                >                       
+                                                    <EditablePreview
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="md"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                    <EditableInput
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="sm"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                </Editable>
+                                            </Td>
                                             
                                         </Tr>
                                         <Tr>
@@ -220,7 +326,7 @@ const isError = input === ''*/}
                                                     defaultValue={state.time}
                                                     onChange={(value) =>
                                                         handleStateChange(
-                                                            "time",
+                                                            "runtime",
                                                             value
                                                         )
                                                     }
@@ -242,9 +348,61 @@ const isError = input === ''*/}
                                         </Tr>
                                         <Tr>
                                             <Td>수용 인원</Td>
+                                            <Td>    
+                                                <Editable
+                                                defaultValue={
+                                                    state.capacity
+                                                }
+                                                onChange={(value) => 
+                                                    handleStateChange(
+                                                        "capacity", 
+                                                        value
+                                                        )
+                                                    }
+                                                >                       
+                                                    <EditablePreview
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="md"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                    <EditableInput
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="sm"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                </Editable>
+                                            </Td>
                                         </Tr>
                                         <Tr>
                                             <Td>관람 수칙</Td>
+                                            <Td>    
+                                                <Editable
+                                                defaultValue={
+                                                    state.rules
+                                                }
+                                                onChange={(value) => 
+                                                    handleStateChange(
+                                                        "rules", 
+                                                        value
+                                                        )
+                                                    }
+                                                >                       
+                                                    <EditablePreview
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="md"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                    <EditableInput
+                                                        border="1px solid"
+                                                        p={2}
+                                                        borderRadius="sm"
+                                                        fontSize={["md", "lg"]}
+                                                    />
+                                                </Editable>
+                                            </Td>
                                         </Tr>
                                     </Tbody>
                                     

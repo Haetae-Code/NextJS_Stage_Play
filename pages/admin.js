@@ -28,12 +28,20 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 const Admin = () => {
     const router = useRouter();
-    {/*const handleReservaation_Add = (id) => {
-        router.push(`/reservation_add`);
-    };*/}
+    const handleCheckPage = (performanceId, selectedDate, selectedTime) => {
+        router.push({
+          pathname: '/reservation_check',
+          query: { performanceId, selectedDate, selectedTime }
+        });
+      };
+    const handleEditPage = (performanceId) => {
+        router.push({
+          pathname: '/reservation_edit',
+          query: { performanceId }
+        });
+      };
     const { isLoggedIn } = useContext(AuthContext);
     {/*const [showComponent, setShowComponent] = useState(false);*/}
 
@@ -348,10 +356,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                                                             <Link
                                                                                                                 key={time}
                                                                                                                 color="inactiveColor"
-                                                                                                                onClick={() => {
-                                                                                                                    const url = `/reservation_check?performanceId=${selectedPerformance}&date=${date}&time=${time}`;
-                                                                                                                    router.push(url);
-                                                                                                                }}
+                                                                                                                onClick={() => handleCheckPage(selectedPerformance, date, time)}
                                                                                                             >
                                                                                                                 <Button ml="10px" mt="10px">
                                                                                                                     {time}
@@ -374,7 +379,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                     </ModalBody>
 
                                                                     <ModalFooter>
-                                                                        <Button mr={3} onClick={() => onViewModal(item.id)} >
+                                                                        <Button mr={3} onClick={onViewModalClose} >
                                                                             닫기
                                                                         </Button>
 
@@ -431,10 +436,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                                                             <Link
                                                                                                                 key={time}
                                                                                                                 color="inactiveColor"
-                                                                                                                onClick={() => {
-                                                                                                                    const url = `/reservation_edit?performanceId=${selectedPerformance}`;
-                                                                                                                    router.push(url);
-                                                                                                                }}
+                                                                                                                onClick={() => handleEditPage(selectedPerformance)}                                                                                                          
                                                                                                             >
                                                                                                                 <Button ml="10px" mt="10px">
                                                                                                                     {time}
@@ -515,7 +517,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                                                             <Link
                                                                                                                 key={time}
                                                                                                                 color="inactiveColor"
-                                                                                                                href="./reservation_check"
+                                                                                                                //onClick={() => handleDel(performanceId)}
                                                                                                             >
                                                                                                                 <Button ml="10px" mt="10px">
                                                                                                                     {time}
