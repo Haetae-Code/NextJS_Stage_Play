@@ -84,7 +84,7 @@ const Page = () => {
     }
 
     try {
-        const response = await fetch("/api/ReservationAdd", {
+        const response = await fetch("/api/ReservationEdit", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

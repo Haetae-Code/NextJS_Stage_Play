@@ -40,16 +40,16 @@ const Page = () => {
     }, [performanceId]);
 
     const [state, setState] = useState({
-        title: Performance.title,
-        location: Performance.location,
+        title: Performance['title'],
+        location: Performance['location'],
         period: "2023-03-17, 2023-03-20",
         time: "13:00:00, 17:00:00",
-        runtime: Performance.run_time, //숫자만 작성
+        run_time: Performance['run_time'], //숫자만 작성
         price: "A석-5000원 B석-3000원",
-        InfoLocation: Performance.location,
-        address: Performance.address,
-        capacity: Performance.capacity,
-        rules: Performance.rules,
+        InfoLocation: Performance['location'],
+        address: Performance['address'],
+        capacity: Performance['capacity'],
+        rules: Performance['rules'],
     });
     {/*const handletitleInputChange = (e) => setInput(e.target.value)
     const handleInputChange =(e) => setInput(e.target.value)

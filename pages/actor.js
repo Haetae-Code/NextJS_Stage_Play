@@ -116,20 +116,24 @@ const Actor = () => {
     }
 
     const handleDelete = (actor) => {
-      fetch(`/api/ActorEdit`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(actor),
-      })
-        .then(() => {
-          const updatedActors = actors.filter((a) => a.actor_key !== actor.actor_key);
-          setActors(updatedActors);
-        })
-        .catch((error) => console.error(error));
-    };
-
+      const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
+        if (confirmDelete) {
+            const handleDelete = (actor) => {
+                fetch(`/api/ActorEdit`, {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(actor),
+                })
+                .then(() => {
+                  const updatedActors = actors.filter((a) => a.actor_key !== actor.actor_key);
+                  setActors(updatedActors);
+                })
+                .catch((error) => console.error(error));
+            };
+          }
+      }
 
     const handleImageUpload = (e) => {
       const selectedImage = e.target.files[0];

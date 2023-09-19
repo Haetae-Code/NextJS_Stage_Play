@@ -13,8 +13,7 @@ insert.use((req, res, next) => {
     !opt_checkSearchedWord(location) ||
     !opt_checkSearchedWord(address) ||
     !opt_checkSearchedWord(runtime) ||
-    !opt_checkSearchedWord(capacity) ||
-    !opt_checkSearchedWord(InfoLocation)
+    !opt_checkSearchedWord(capacity) 
   ) {
     res.status(400).json({ message: "Invalid input" });
     return;

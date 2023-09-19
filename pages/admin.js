@@ -30,18 +30,38 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Admin = () => {
     const router = useRouter();
-    const handleCheckPage = (performanceId, selectedDate, selectedTime) => {
+
+    const handleCheckPage = (performance_key, selectedDate, selectedTime) => {
         router.push({
           pathname: '/reservation_check',
-          query: { performanceId, selectedDate, selectedTime }
+          query: { performance_key, selectedDate, selectedTime }
         });
       };
-    const handleEditPage = (performanceId) => {
+    const handleEditPage = (performance_key) => {
         router.push({
           pathname: '/reservation_edit',
-          query: { performanceId }
+          query: { performance_key }
         });
       };
+    const handleDel = (performance_key) => {
+        const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
+        if (confirmDelete) {
+            const handleDelete = (performance_key) => {
+                fetch(`/api/ReservationEdit`, {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(performance_key),
+                })
+                  .then(() => {
+                    window.alert("삭제되었습니다");
+                  })
+                  .catch((error) => console.error(error));
+              };
+        }
+      }
+    
     const { isLoggedIn } = useContext(AuthContext);
     {/*const [showComponent, setShowComponent] = useState(false);*/}
 
