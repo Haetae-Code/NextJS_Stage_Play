@@ -6,11 +6,13 @@ const { opt_checkSearchedWord } = require("../../injectioncode");
 const handler = nextConnect();
 
 handler.use((req, res, next) => {
-    const { title, location, address, run_time, capacity, rules } = req.body;
+    const { title, location, period, time, address, run_time, capacity, rules } = req.body;
 
     if (
       !opt_checkSearchedWord(title) ||
       !opt_checkSearchedWord(location) ||
+      !opt_checkSearchedWord(period) ||
+      !opt_checkSearchedWord(time) ||
       !opt_checkSearchedWord(address) ||
       !opt_checkSearchedWord(run_time) ||
       !opt_checkSearchedWord(capacity) ||
@@ -42,7 +44,10 @@ handler.delete(async (req, res) => {
 // insert Reservation
 handler.post(async (req, res) => {
     try {
-        const { title, location, address, run_time, capacity } = req.body;
+        const { title, location, period, time, address, run_time, capacity, rules } = req.body;
+        
+        const dateArray = period.split(", ");
+        const TimeArray = time.split(", ");
 
         const InsertActor = "INSERT INTO Stage_Play_DB.Performance (title, location, address, run_time, capacity, rules) VALUES (?, ?, ?, ?, ?, ?)";
         const InsertActorValues = [title, location, address, run_time, capacity, rules];
@@ -59,11 +64,14 @@ handler.post(async (req, res) => {
 // update Reservation
 handler.put(async (req, res) => {
     try {
-        const { actor_key, name, department, introduction } = req.body;
+        const { title, location, period, time, address, run_time, capacity, rules } = req.body;
 
+        const dateArray = period.split(", ");
+        const TimeArray = time.split(", ");
+        
         const results = await db.query(
-            "UPDATE Stage_Play_DB.Actor SET name = ?, department = ?, introduction = ? WHERE actor_key = ?", 
-            [name, department, introduction, actor_key]
+            "UPDATE Stage_Play_DB.Performance SET title = ?, location = ?, address = ?, run_time = ?, capacity = ?, rules = ? WHERE actor_key = ?", 
+            [title, location, address, run_time, capacity, rules]
         );
         
         res.status(200).json({ message: "Actor updated successfully" });
@@ -74,4 +82,3 @@ handler.put(async (req, res) => {
 });
 
 export default handler;
-

@@ -31,12 +31,11 @@ const Page = () => {
     
     const [state, setState] = useState({
         title: "제목",
-        location: "101호 대강당",
+        location: "홍주문화회관 101호 대강당",
         period: "2023-03-17, 2023-03-20",
         time: "13:00:00, 17:00:00",
         runtime: "171", //숫자만 작성
         price: "A석-5000원 B석-3000원",
-        InfoLocation: "홍주문화회관",
         address: "충남 홍성군 홍성읍 내포로 164",
         capacity: "40",
         rules: "규칙규칙",
@@ -232,30 +231,6 @@ const Page = () => {
                                                         borderRadius="md"
                                                     />
                                                 </Editable>
-                                            </Td>
-                                            <Td>
-                                            <Editable
-                                                defaultValue={
-                                                    state.InfoLocation
-                                                }
-                                                onChange={(value) =>
-                                                    handleStateChange(
-                                                        " InfoLocation",
-                                                        value
-                                                    )
-                                                }
-                                            >
-                                                <EditablePreview
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                                <EditableInput
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                />
-                                            </Editable>
                                             </Td>
                                             
                                         </Tr>

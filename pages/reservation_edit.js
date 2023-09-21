@@ -26,31 +26,51 @@ import { useRouter } from 'next/router';
 
 const Page = () => {
     const router = useRouter();
-    const { performanceId } = router.query;
+    const { performance_key } = router.query;
     const [input, setInput] = useState('')
+    const [state, setState] = useState({
+        title: "",
+        location: "",
+        period: "",
+        time: "",
+        runtime: "", //숫자만 작성
+        price: "",
+        address: "",
+        capacity: "",
+        rules: "",
+    });
 
     const [Performance, setPerformance] = useState([]);
+    const [Times, setTimes] = useState([]);
+    
     useEffect(() => {
-        if (performanceId) {
-            fetch(`/api/Performance/${performanceId}`)
-                .then((response) => response.json())
-                .then((data) => setPerformance(data))
-                .catch((error) => console.error(error));
-        }
-    }, [performanceId]);
+      if (performance_key) {
+        fetch(`/api/Performance/${performance_key}`)
+          .then((response) => response.json())
+          .then((data) => setPerformance(data))
+          .catch((error) => console.error(error));
+      }
+    }, [performance_key]);
+    const addPerformance = (newPerformance) => {
+        setPerformance(prevPerformance => [...prevPerformance, newPerformance]);
+      };
+    
+    useEffect(() => {
+      if (performance_key) {
+        fetch(`/api/Times/${performance_key}`)
+          .then((response) => response.json())
+          .then((data) => setTimes(data))
+          .catch((error) => console.error(error));
+      }
+    }, [performance_key]);
+    const addTimes = (newTimes) => {
+        const DatesArray = Times.map((timesItem) => timesItem.view_date);
+        const DatesConcatenated = timesArray.join(', ');
+        const timesArray = Times.map((timesItem) => timesItem.view_time);
+        const timesConcatenated = timesArray.join(', ');
+        setTimes(prevTimes => [...prevPerformance, newPerformance]);
+    };
 
-    const [state, setState] = useState({
-        title: Performance['title'],
-        location: Performance['location'],
-        period: "2023-03-17, 2023-03-20",
-        time: "13:00:00, 17:00:00",
-        run_time: Performance['run_time'], //숫자만 작성
-        price: "A석-5000원 B석-3000원",
-        InfoLocation: Performance['location'],
-        address: Performance['address'],
-        capacity: Performance['capacity'],
-        rules: Performance['rules'],
-    });
     {/*const handletitleInputChange = (e) => setInput(e.target.value)
     const handleInputChange =(e) => setInput(e.target.value)
 const isError = input === ''*/}
@@ -96,7 +116,7 @@ const isError = input === ''*/}
         }
     
         try {
-            const response = await fetch("/api/ReservationAdd", {
+            const response = await fetch("/api/ReservationEdit", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -107,7 +127,6 @@ const isError = input === ''*/}
                     period,
                     time,
                     price,
-                    InfoLocation,
                     address,
                     runtime,
                     capacity,
@@ -125,6 +144,7 @@ const isError = input === ''*/}
             } catch (error) {
                 setInput("공연 편집 실패. 다시 시도해주세요.");  
               console.error(error);
+            
         }
     };
 
@@ -231,33 +251,6 @@ const isError = input === ''*/}
                                                     />
                                                 </Editable>
                                             </Td>
-                                            <Td>
-                                            <Editable
-                                                defaultValue={
-                                                    state.InfoLocation
-                                                }
-                                                onChange={(value) =>
-                                                    handleStateChange(
-                                                        " InfoLocation",
-                                                        value
-                                                    )
-                                                }
-                                            >
-                                                <EditablePreview
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                    fontSize={["md", "lg"]}
-                                                />
-                                                <EditableInput
-                                                    border="1px solid"
-                                                    p={2}
-                                                    borderRadius="md"
-                                                    fontSize={["md", "lg"]}
-                                                />
-                                            </Editable>
-                                            </Td>
-                                            
                                         </Tr>
                                         <Tr>
                                             <Td>공연 일자</Td>
