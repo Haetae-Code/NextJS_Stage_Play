@@ -43,16 +43,16 @@ const Admin = () => {
           query: { performance_key }
         });
       };
-    const handleDel = (performance_key) => {
+    const handleDel = (performance_key, view_date, view_time) => {
         const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
         if (confirmDelete) {
-            const handleDelete = (performance_key) => {
+            const handleDelete = (performance_key, view_date, view_time) => {
                 fetch(`/api/ReservationEdit`, {
                   method: "DELETE",
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: JSON.stringify(performance_key),
+                  body: JSON.stringify(performance_key, view_date, view_time),
                 })
                   .then(() => {
                     window.alert("삭제되었습니다");
@@ -537,7 +537,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                                                             <Link
                                                                                                                 key={time}
                                                                                                                 color="inactiveColor"
-                                                                                                                //onClick={() => handleDel(performanceId)}
+                                                                                                                //onClick={() => handleDel(selectedPerformance, date, time)}
                                                                                                             >
                                                                                                                 <Button ml="10px" mt="10px">
                                                                                                                     {time}

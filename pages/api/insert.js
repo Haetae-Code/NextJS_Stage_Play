@@ -28,7 +28,7 @@ insert.post(async (req, res) => {
   try {
     const { performance_key, name, phone_number, say_actor, userType, department, id, identity, selectedTime } = req.body;
 
-    const timeParts = selectedTime.split(' ');
+    const timeParts = selectedTime.split(':');
     const hour = parseInt(timeParts[0], 10);
     const minute = parseInt(timeParts[1], 10);
     const Time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;

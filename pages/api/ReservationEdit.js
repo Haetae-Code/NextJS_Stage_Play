@@ -1,25 +1,20 @@
-// 배우 추가&편집&삭제
+// 공연 추가&편집&삭제
 const nextConnect = require("next-connect");
 const db = require("./db");
 const { opt_checkSearchedWord } = require("../../injectioncode");
 
 const handler = nextConnect();
 
-handler.use((req, res, next) => {
+handler.use(async (req, res, next) => {
     const { title, location, period, time, address, run_time, capacity, rules } = req.body;
 
-    if (
-      !opt_checkSearchedWord(title) ||
-      !opt_checkSearchedWord(location) ||
-      !opt_checkSearchedWord(period) ||
-      !opt_checkSearchedWord(time) ||
-      !opt_checkSearchedWord(address) ||
-      !opt_checkSearchedWord(run_time) ||
-      !opt_checkSearchedWord(capacity) ||
-      !opt_checkSearchedWord(rules)
-    ) {
-      res.status(400).json({ message: "Invalid input" });
-      return;
+    const isValidInput = [
+        title, location, period, time, address, run_time, capacity, rules
+    ].every(opt_checkSearchedWord);
+
+    if (!isValidInput) {
+        res.status(400).json({ message: "Invalid input" });
+        return;
     }
 
     next();
@@ -28,11 +23,11 @@ handler.use((req, res, next) => {
 // delete Reservation
 handler.delete(async (req, res) => {
     try {    
-        const { peformance_key } = req.body;
+        const { peformance_key, view_date, view_time } = req.body;
 
         {/*const results = await db.query(
-            "DELETE FROM Stage_Play_DB.Performance WHERE performance_key = ?",
-            [performance_key]
+            "DELETE FROM Date D join Time T WHERE D.date_key = T.date_key AND T.performance_key = ? AND D.view_date = ? AND T.view_time =?",
+            [performance_key, view_date, view_time]
         );*/}
         res.status(200).json({ message: "Performance deleted successfully" });
     } catch (error) {
@@ -41,20 +36,50 @@ handler.delete(async (req, res) => {
     }
 });
 
+async function insertDate(time) {
+    const result = await db.query(
+        "SELECT date_key FROM Stage_Play_DB.Date WHERE view_time = ?;", 
+        [time]
+    );
+
+    if (result.length === 0) {
+        const insertResult = await db.query(
+            "INSERT INTO Stage_Play_DB.Date (view_time) VALUES (?)",
+            [time]
+        );
+        return insertResult[0][0]['LAST_INSERT_ID()'];    
+    } else {
+        return result[0].date_key;
+    }
+}
+
 // insert Reservation
 handler.post(async (req, res) => {
     try {
         const { title, location, period, time, address, run_time, capacity, rules } = req.body;
         
-        const dateArray = period.split(", ");
-        const TimeArray = time.split(", ");
+        const DateArray = period.split(/[,\s]+/);
+        const TimeArray = time.split(/[,\s]+/);
 
-        const InsertActor = "INSERT INTO Stage_Play_DB.Performance (title, location, address, run_time, capacity, rules) VALUES (?, ?, ?, ?, ?, ?)";
-        const InsertActorValues = [title, location, address, run_time, capacity, rules];
+        const InsertPerformance = "INSERT INTO Stage_Play_DB.Performance (title, location, address, run_time, capacity, rules) VALUES (?, ?, ?, ?, ?, ?)";
+        const InsertPerformanceValues = [title, location, address, run_time, capacity, rules];
 
-        await db.query(InsertActor, InsertActorValues);
+        const [{ performance_key }] = await db.query(
+            "SELECT COALESCE(MAX(performance_key), 0) + 1 AS performance_key FROM Stage_Play_DB.Performance"
+        ); 
 
-        res.status(200).json({ message: "Actor inserted successfully" });
+        const datekey = await Promise.all(TimeArray.map(insertDate));
+
+        for (const dateItem of DateArray) {
+            for (let i = 0; i < TimeArray.length; i++) {
+                await db.query(
+                    "INSERT INTO Stage_Play_DB.Time (date_key, performance_key, view_time) VALUES (?, ?, ?)",
+                    [datekey[i], performance_key, dateItem]
+                );
+            }
+        }
+
+        res.status(200).json({ message: "Performance inserted successfully" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
@@ -64,17 +89,17 @@ handler.post(async (req, res) => {
 // update Reservation
 handler.put(async (req, res) => {
     try {
-        const { title, location, period, time, address, run_time, capacity, rules } = req.body;
+        const { title, location, period, time, address, run_time, capacity, rules, performance_key } = req.body;
 
-        const dateArray = period.split(", ");
-        const TimeArray = time.split(", ");
+        const dateArray = period.split(/[,\s]+/);
+        const TimeArray = time.split(/[,\s]+/);
         
         const results = await db.query(
-            "UPDATE Stage_Play_DB.Performance SET title = ?, location = ?, address = ?, run_time = ?, capacity = ?, rules = ? WHERE actor_key = ?", 
-            [title, location, address, run_time, capacity, rules]
+            "UPDATE Stage_Play_DB.Performance SET title = ?, location = ?, address = ?, run_time = ?, capacity = ?, rules = ? WHERE performance_key = ?", 
+            [title, location, address, run_time, capacity, rules, performance_key]
         );
         
-        res.status(200).json({ message: "Actor updated successfully" });
+        res.status(200).json({ message: "Performance updated successfully" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
