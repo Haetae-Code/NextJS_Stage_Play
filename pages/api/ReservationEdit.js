@@ -36,20 +36,20 @@ handler.delete(async (req, res) => {
     }
 });
 
-async function insertDate(time) {
-    const result = await db.query(
-        "SELECT date_key FROM Stage_Play_DB.Date WHERE view_time = ?;", 
-        [time]
+async function insertDate(date) {
+    const DateKey = await db.query(
+        "SELECT date_key FROM Stage_Play_DB.Date WHERE view_date = ?;", 
+        [date]
     );
 
-    if (result.length === 0) {
+    if (DateKey.length === 0) {
         const insertResult = await db.query(
-            "INSERT INTO Stage_Play_DB.Date (view_time) VALUES (?)",
-            [time]
+            "INSERT INTO Stage_Play_DB.Date (view_date) VALUES (?)",
+            [date]
         );
         return insertResult[0][0]['LAST_INSERT_ID()'];    
     } else {
-        return result[0].date_key;
+        return DateKey[0].date_key;
     }
 }
 
@@ -98,6 +98,17 @@ handler.put(async (req, res) => {
             "UPDATE Stage_Play_DB.Performance SET title = ?, location = ?, address = ?, run_time = ?, capacity = ?, rules = ? WHERE performance_key = ?", 
             [title, location, address, run_time, capacity, rules, performance_key]
         );
+
+        const datekey = await Promise.all(TimeArray.map(insertDate));
+
+        for (const dateItem of DateArray) {
+            for (let i = 0; i < TimeArray.length; i++) {
+                await db.query(
+                    "UPDATE INTO Stage_Play_DB.Time (date_key, performance_key, view_time) VALUES (?, ?, ?)",
+                    [datekey[i], performance_key, dateItem]
+                );
+            }
+        }
         
         res.status(200).json({ message: "Performance updated successfully" });
     } catch (error) {
