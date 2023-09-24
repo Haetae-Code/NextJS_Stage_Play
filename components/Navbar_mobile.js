@@ -91,7 +91,22 @@ const Navbar = (props) => {
     const [isMobile] = useMediaQuery("(max-width: 795px)");
     const [isHovered, setIsHovered] = useState(false);
     
-
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const divWidth = `${windowWidth}px`;
+    useEffect(() => {
+      // 창 크기 변경 이벤트 핸들러
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      // 컴포넌트가 마운트될 때 이벤트 리스너 등록
+      window.addEventListener("resize", handleResize);
+  
+      // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행되도록 함
 
     useEffect(() => {
         console.log("isHovered value changed:", isHovered);
@@ -177,9 +192,15 @@ const Navbar = (props) => {
 
                             <Flex align="center" mr={5}>
                             <div style={{ display: "flex", alignItems: "center" }}>
-                            <Box position="relative" width="500px">
+                            <Box position="relative" width = {divWidth}>
                                 {/*검색바*/}
-                                <SearchBar/>
+                                <Container>
+                                        <Flex align="center" mr={5}>
+                                            {!isMobile ? (
+                                                <SearchBar/>
+                                            ):(<SearchBar/>)}
+                                        </Flex>
+                                </Container>
 
                                 {showSuggestions && (
                                     <Box
@@ -279,21 +300,8 @@ const Navbar = (props) => {
                                 )}
                             </Box>                
                             </div>
-                                                        
-                                        <Container>
-                                        <Flex align="center" mr={5}>
-                                            {!isMobile && (
-                                            <Input
-                                            borderWidth={'2px'}
-                                            borderRadius='100'
-                                            borderColor={'#2d6fbb'}
-                                            variant='outline'
-                                            placeholder='Search'
-                                            width='500px'
-                                            />
-                                            )}
-                                        </Flex>
-                                        </Container>
+                                        {/*모바일 실행했을 때 아래로 내려오게  */}             
+                                        
                             </Flex>
                         </Container>
 

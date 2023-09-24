@@ -187,7 +187,7 @@ const Navbar = (props) => {
                                     width="500px"
                                     onClick={handleSearchClick}
                                   />
-                        {showSuggestions && (
+                        {/*{showSuggestions && (
                           <Box
                             position="absolute"
                             top="100%"
@@ -281,7 +281,7 @@ const Navbar = (props) => {
                               </Box>
                             ))}
                           </Box>
-                        )}
+                            )}*/}
 
                                   </Box>
                                 </div>
