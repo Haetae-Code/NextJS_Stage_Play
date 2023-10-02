@@ -22,20 +22,34 @@ import { useState,useEffect } from 'react'
 
 const ReservationCheck = () => {
     const router = useRouter();
-    const { performanceId, date, time } = router.query;
+    const { performance_key, date, time } = router.query;
     const [Performance, setPerformance] = useState([]);
     useEffect(() => {
-        fetch(`/api/Performance/${performanceId}`)
+        fetch(`/api/Performance/${performance_key}`)
             .then((response) => response.json())
             .then((data) => setPerformance(data))
             .catch((error) => console.error(error));
-    }, [performanceId]);
+    }, [performance_key]);
     
+    const [Audience, setAudience] = useState([]);
+    useEffect(() => {
+        fetch("/api/audience")
+            .then((response) => response.json())
+            .then((data) => setAudience(data))
+            .catch((error) => console.error(error));
+    }, [performance_key, date, time]);
     
-    
-    
-    
-    
+    const [Student, setStudent] = useState([]);
+    const [Outsider, setOutsider] = useState([]);
+    //split Audience
+    for(let i=0; i < Audience.length; i++)
+    {
+        if (Audience[i].student_key != NULL)
+            setStudent(Audience[i]);
+        else if (Audience[i].student_key == NULL)
+            setOutsider(Audience[i]);
+    }
+
     return (
         <Box>
             <Heading mt={5}>예약자 리스트</Heading>
@@ -64,18 +78,22 @@ const ReservationCheck = () => {
                                 {/* 예약현황 백분율 */}
                                 <Flex>
                                     <Text>예약 현황 &nbsp;</Text>
-                                    <Text>80</Text>
+                                    <Text>{Audience.length}</Text>
                                     <Text>/</Text>
                                     <Text>100</Text>
                                 </Flex>
-                                <Progress value={80} />
+                                <Progress value={Audience.length} />
                             </Box>
 
                             {/* 공연설명 */}
-                            <Text>공연 제목:</Text>
-                            <Text>공연 장소:</Text>
-                            <Text>공연 날짜:</Text>
-                            <Text>공연 시간:</Text>
+                            {Performance.map((PerformanceItem) => (
+                            <>
+                            <Text>공연 제목: {PerformanceItem.title}</Text>
+                            <Text>공연 장소: {PerformanceItem.address} {PerformanceItem.location}</Text>
+                            <Text>공연 날짜: {date}</Text>
+                            <Text>공연 시간: {time}</Text>
+                            </>
+                            ))}
                         </Stack>
                     </Flex>
                 </Box>
@@ -157,44 +175,17 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
+                                {Student.map((StudentItem) => (
                                 <Tbody>
                                     <Tr>
-                                        <Td>김준서</Td>
-                                        <Td>20210371</Td>
-                                        <Td>컴퓨터공학과</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>박지환</Td>
-                                        <Td>20200371</Td>
-                                        <Td>컴퓨터공학과</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>김민경</Td>
-                                        <Td>20210371</Td>
-                                        <Td>컴퓨터공학과</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>최인서</Td>
-                                        <Td>20210371</Td>
-                                        <Td>컴퓨터공학과</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>윤태성</Td>
-                                        <Td>20210371</Td>
-                                        <Td>컴퓨터공학과</Td>
-                                        <Td>010-7704-5971</Td>
+                                        <Td>{StudentItem.name}</Td>
+                                        <Td>{StudentItem.id}</Td>
+                                        <Td>{StudentItem.department}</Td>
+                                        <Td>{StudentItem.phone_number}</Td>
                                         <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
                                     </Tr>
                                 </Tbody>
-
+                                ))}
                             </Table>
                         </TableContainer>
                     </Box>
@@ -226,29 +217,15 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
+                                {Outsider.map((OutsiderItem) => (
                                 <Tbody>
                                     <Tr>
-                                        <Td>채준혁</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>이준혁</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>전민혁</Td>
-                                        <Td>010-7704-5971</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>전채린</Td>
-                                        <Td>010-7704-5971</Td>
+                                        <Td>{OutsiderItem.name}</Td>
+                                        <Td>{OutsiderItem.phone_number}</Td>
                                         <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
                                     </Tr>
                                 </Tbody>
-
+                                ))}
                             </Table>
                         </TableContainer>
                     </Box>

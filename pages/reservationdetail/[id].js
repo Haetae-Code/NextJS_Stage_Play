@@ -37,7 +37,7 @@ import {
   const Page2 = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [selectedTime, setSelectedTime] = useState("");
+    const [selectedDate, setSelectedDate] = useState("");
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [showOccupationForm, setShowOccupationForm] = useState(false);
@@ -47,8 +47,17 @@ import {
     const [userType, setUserType] = useState(""); // "student" or "external"
     const [department, setDepartment] = useState("");
     const [studentID, setStudentID] = useState("");
-    const [occupation, setOccupation] = useState("");  
+    const [occupation, setOccupation] = useState("");
+    const [time, setTime] = useState("");
     const [reservationStatus, setReservationStatus] = useState("");
+
+    const handleStudentCheckboxChange = () => {
+        setShowStudentForm(!showStudentForm); 
+    };
+    
+    const handleExternalCheckboxChange = () => {
+        setShowOccupationForm(!showOccupationForm);
+    };
   
     const [perform_Info, setperform_Info] = useState([]);
     useEffect(() => {
@@ -75,11 +84,11 @@ import {
     }, [id]);
 
     const handleTimeChange = (event) => {
-        setSelectedTime(event.target.value);
+        setSelectedDate(event.target.value);
     };
 
     const timeOptions = perform_Info
-    .filter((perform) => perform.view_date === selectedTime)
+    .filter((perform) => perform.view_date === selectedDate)
     .map((perform) => perform.view_time);
 
     for (let i = 0; i < perform_Info.length; i++) {
@@ -107,6 +116,9 @@ import {
   
     const handleSubmit = async () => {
         try {
+            console.log(selectedDate);
+            console.log(time);
+        
           const response = await fetch("/api/insert", {
             method: "POST",
             headers: {
@@ -121,19 +133,20 @@ import {
                 department: department,
                 id: studentID,
                 identity: occupation,
-                selectedTime: selectedTime,
+                selectedDate: selectedDate,
+                time: time,
             }),
           });
     
           if (response.ok) {
-            setReservationStatus("예매가 성공적으로 완료되었습니다");
+            setReservationStatus("예매를 성공적으로 완료되었습니다");
             console.log("Reservation submitted");
           } else {
-            setReservationStatus("예매가 실패했습니다. 다시 시도해주세요.");
+            setReservationStatus("예매를 실패했습니다. 다시 시도해주세요.");
             console.error("Reservation failed");
           }
         } catch (error) {
-            setReservationStatus("예매가 실패했습니다. 다시 시도해주세요.");  
+            setReservationStatus("예매를 실패했습니다. 다시 시도해주세요.");  
           console.error(error);
         }
       };
@@ -191,7 +204,7 @@ import {
                     </h2>
                     {Performance.map((Performance) => (
                     <AccordionPanel pb={4}>
-                        {Performance.rule}
+                        {Performance.rules}
                     </AccordionPanel>
                     ))}
                 </AccordionItem>
@@ -214,7 +227,7 @@ import {
                     name="test"
                     id="test1"
                     value="1"
-                    onClick={handleStudentButton}
+                    onClick={handleStudentCheckboxChange}
                     checked={showStudentForm}
                 />
                 <Text>재학생</Text>
@@ -224,7 +237,7 @@ import {
                     name="test"
                     id="test2"
                     value="2"
-                    onClick={handleExternalButton}
+                    onClick={handleExternalCheckboxChange}
                     checked={showOccupationForm}
                 />
                 <Text>외부인</Text>
@@ -260,7 +273,7 @@ import {
                     min="2023-08-01"
                     max="2023-09-31"
                     onChange={handleTimeChange}
-                    value={selectedTime}
+                    value={selectedDate}
                 />
                 <print>&nbsp;</print>
             </FormControl>
@@ -268,9 +281,9 @@ import {
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
   
-                <select value={selectedTime} onChange={handleTimeChange}>
+                <select value={time} onChange={handleTimeChange}>
                     {timeOptions.map((time) => (
-                        <option key={time} value={time}>
+                        <option key={time} value={time} onChange={(e) => setTime(e.target.value)}>
                             {time}
                         </option>
                     ))}
