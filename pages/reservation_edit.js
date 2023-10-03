@@ -49,6 +49,7 @@ const Page = () => {
           .then((response) => response.json())
           .then((data) => setPerformance(data))
           .catch((error) => console.error(error));
+          console.log(Performance);
       }
     }, [performance_key]);
     const addPerformance = (newPerformance) => {
@@ -194,6 +195,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].title}
                                             </Td>
                                         </Tr>
                                         <Tr>
@@ -221,6 +223,7 @@ const isError = input === ''*/}
                                                     fontSize={["md", "lg"]}
                                                 />
                                             </Editable>
+                                            {Performance && Performance[0] && Performance[0].address}
                                             </Td>
                                             
                                         </Tr>
@@ -251,6 +254,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].location}
                                             </Td>
                                         </Tr>
                                         <Tr>
@@ -278,6 +282,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].period}
                                             </Td>
                                             
                                         </Tr>
@@ -310,6 +315,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].time}
                                             </Td>
                                             
                                         </Tr>
@@ -338,6 +344,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].run_time}
                                             </Td>
                                         </Tr>
                                         <Tr>
@@ -367,6 +374,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].capacity}
                                             </Td>
                                         </Tr>
                                         <Tr>
@@ -396,6 +404,7 @@ const isError = input === ''*/}
                                                         fontSize={["md", "lg"]}
                                                     />
                                                 </Editable>
+                                                {Performance && Performance[0] && Performance[0].rules}
                                             </Td>
                                         </Tr>
                                     </Tbody>
