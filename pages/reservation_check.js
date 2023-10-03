@@ -22,7 +22,9 @@ import { useState,useEffect } from 'react'
 
 const ReservationCheck = () => {
     const router = useRouter();
-    const { performance_key, date, time } = router.query;
+    const { performance_key, selectedDate, selectedTime } = router.query;
+    const date = selectedDate;
+    const time = selectedTime;
     const [Performance, setPerformance] = useState([]);
     useEffect(() => {
         fetch(`/api/Performance/${performance_key}`)
@@ -33,11 +35,21 @@ const ReservationCheck = () => {
     
     const [Audience, setAudience] = useState([]);
     useEffect(() => {
-        fetch("/api/audience")
+        fetch("/api/audience",{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                performance_key,
+                selectedDate,
+                selectedTime,
+            }),
+          })
             .then((response) => response.json())
             .then((data) => setAudience(data))
             .catch((error) => console.error(error));
-    }, [performance_key, date, time]);
+    },);
     
     const [Student, setStudent] = useState([]);
     const [Outsider, setOutsider] = useState([]);
@@ -49,6 +61,11 @@ const ReservationCheck = () => {
         else if (Audience[i].student_key == NULL)
             setOutsider(Audience[i]);
     }
+
+    const [searchName, setSearchName] = useState('');
+    const [searchStudentNumber, setSearchStudentNumber] = useState('');
+    const [searchDepartment, setSearchDepartment] = useState('모두');
+    const [searchPhoneNumber, setSearchPhoneNumber] = useState('');
 
     return (
         <Box>
@@ -90,8 +107,8 @@ const ReservationCheck = () => {
                             <>
                             <Text>공연 제목: {PerformanceItem.title}</Text>
                             <Text>공연 장소: {PerformanceItem.address} {PerformanceItem.location}</Text>
-                            <Text>공연 날짜: {date}</Text>
-                            <Text>공연 시간: {time}</Text>
+                            <Text>공연 날짜: {selectedDate}</Text>
+                            <Text>공연 시간: {selectedTime}</Text>
                             </>
                             ))}
                         </Stack>
@@ -115,14 +132,14 @@ const ReservationCheck = () => {
                             <Text w="30%">
                                 이름: &nbsp;
                             </Text>
-                            <Input mb={3} w="full" name="name" type="text" />
+                            <Input mb={3} w="full" name="name" type="text" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
                         </Flex>
 
                         <Flex>
                             <Text w="30%">
                                 학번: &nbsp;
                             </Text>
-                            <Input mb={3} w="full" name="name" type="text" />
+                            <Input mb={3} w="full" name="name" type="text" value={searchStudentNumber} onChange={(e) => setSearchStudentNumber(e.target.value)} />
                         </Flex>
 
                         <Flex >
@@ -130,8 +147,9 @@ const ReservationCheck = () => {
                                 학과: &nbsp;
                             </Text>
 
-                            <Select mb={3} w="full" name="student">
+                            <Select mb={3} w="full" name="student" value={searchDepartment} onChange={(e) => setSearchDepartment(e.target.value)} >
                                 <option>모두</option>
+                                <option>컴퓨터공학과</option>
                             </Select>
                         </Flex>
 
@@ -139,7 +157,7 @@ const ReservationCheck = () => {
                             <Text w="30%">
                                 전화번호: &nbsp;
                             </Text>
-                            <Input mb={3} w="full" name="name" type="text" />
+                            <Input mb={3} w="full" name="name" type="text" value={searchPhoneNumber} onChange={(e) => setSearchPhoneNumber(e.target.value)} />
                         </Flex>
 
                         <Button colorScheme="blue" /*onClick={() => search()}*/>검색</Button>
@@ -175,7 +193,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
-                                {Student.map((StudentItem) => (
+                                {studentAttendees.map((StudentItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{StudentItem.name}</Td>
@@ -217,7 +235,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
-                                {Outsider.map((OutsiderItem) => (
+                                {outsiderAttendees.map((OutsiderItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{OutsiderItem.name}</Td>

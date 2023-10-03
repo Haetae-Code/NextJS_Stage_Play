@@ -38,27 +38,28 @@ import {
     const router = useRouter();
     const { id } = router.query;
     const [selectedDate, setSelectedDate] = useState("");
+    const [selectedTime, setSelectedTime] = useState("");
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [showOccupationForm, setShowOccupationForm] = useState(false);
     const [name, setName] = useState("");
     const [phone_number, setPhoneNumber] = useState("");
     const [say_actor, setSay_Actor] = useState("");
-    const [userType, setUserType] = useState(""); // "student" or "external"
+    const [userType, setUserType] = useState(""); 
     const [department, setDepartment] = useState("");
     const [studentID, setStudentID] = useState("");
     const [occupation, setOccupation] = useState("");
-    const [time, setTime] = useState("");
     const [reservationStatus, setReservationStatus] = useState("");
 
+    /*
     const handleStudentCheckboxChange = () => {
         setShowStudentForm(!showStudentForm); 
     };
     
-    const handleExternalCheckboxChange = () => {
+    const handleOutsiderCheckboxChange = () => {
         setShowOccupationForm(!showOccupationForm);
     };
-  
+    */
     const [perform_Info, setperform_Info] = useState([]);
     useEffect(() => {
         fetch(`/api/perform_Info/${id}`)
@@ -87,6 +88,11 @@ import {
         setSelectedDate(event.target.value);
     };
 
+    const saveTime = (event) => {
+        setSelectedDate(event.target.value);
+        console.log(selectedTime);
+    };
+
     const timeOptions = perform_Info
     .filter((perform) => perform.view_date === selectedDate)
     .map((perform) => perform.view_time);
@@ -108,17 +114,14 @@ import {
         setShowOccupationForm(false);
     };
   
-    const handleExternalButton = () => {
-        setUserType("external");
+    const handleOutsiderButton = () => {
+        setUserType("outsider");
         setShowStudentForm(false);
         setShowOccupationForm(true);
     };
   
     const handleSubmit = async () => {
         try {
-            console.log(selectedDate);
-            console.log(time);
-        
           const response = await fetch("/api/insert", {
             method: "POST",
             headers: {
@@ -131,10 +134,10 @@ import {
                 say_actor: say_actor,
                 userType,
                 department: department,
-                id: studentID,
+                studentID: studentID,
                 identity: occupation,
                 selectedDate: selectedDate,
-                time: time,
+                selectedTime: selectedTime,
             }),
           });
     
@@ -227,7 +230,7 @@ import {
                     name="test"
                     id="test1"
                     value="1"
-                    onClick={handleStudentCheckboxChange}
+                    onClick={handleStudentButton}
                     checked={showStudentForm}
                 />
                 <Text>재학생</Text>
@@ -237,7 +240,7 @@ import {
                     name="test"
                     id="test2"
                     value="2"
-                    onClick={handleExternalCheckboxChange}
+                    onClick={handleOutsiderButton}
                     checked={showOccupationForm}
                 />
                 <Text>외부인</Text>
@@ -281,9 +284,9 @@ import {
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
   
-                <select value={time} onChange={handleTimeChange}>
+                <select value={selectedTime}>
                     {timeOptions.map((time) => (
-                        <option key={time} value={time} onChange={(e) => setTime(e.target.value)}>
+                        <option key={time} value={time} onChange={(e) => setSelectedTime(e.target.value)}>
                             {time}
                         </option>
                     ))}

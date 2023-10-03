@@ -5,14 +5,17 @@ const { opt_checkSearchedWord } = require("../../injectioncode");
 const insert = nextConnect();
 
 insert.use((req, res, next) => {
-  const { name, phone_number, say_actor, userType, department, identity, selectedDate, time } = req.body;
+  const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time } = req.body;
 
+  console.log(performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time);
   if (
+    !opt_checkSearchedWord(performance_key) ||
     !opt_checkSearchedWord(name) ||
     !opt_checkSearchedWord(phone_number) ||
     !opt_checkSearchedWord(say_actor) ||
     !opt_checkSearchedWord(userType) ||
     !opt_checkSearchedWord(department) ||
+    !opt_checkSearchedWord(studentID) ||
     !opt_checkSearchedWord(identity) ||
     !opt_checkSearchedWord(selectedDate) ||
     !opt_checkSearchedWord(time) 
@@ -36,6 +39,7 @@ async function getTimeKey(performance_key, selectedDate, Time) {
   `;
 
   const [result] = await db.query(query, [performance_key, selectedDate, Time]);
+  console.log(result);
   return result ? result.time_key : null;
 }
 
@@ -44,7 +48,7 @@ async function getAudienceKey() {
   return result.audience_key;
 }
 
-async function insertAudience(name, phone_number, say_actor, userType, department, id, identity) {
+async function insertAudience(name, phone_number, say_actor, userType, department, studentID, identity) {
   const audience_key = await getAudienceKey();
 
   if (userType === 'student') {
@@ -52,11 +56,11 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
     const insertAudienceValues = [name, phone_number, say_actor];
     
     const insertStudentQuery = "INSERT INTO Stage_Play_DB.Student (audience_key, id, department) VALUES (?, ?, ?)";
-    const insertStudentValues = [audience_key, id, department];
+    const insertStudentValues = [audience_key, studentID, department];
 
     await db.query(insertAudienceQuery, insertAudienceValues);
     await db.query(insertStudentQuery, insertStudentValues);
-  } else if (userType === 'external') {
+  } else if (userType === 'outsider') {
     const insertAudienceQuery = "INSERT INTO Stage_Play_DB.Audience (audience_key, name, phone_number, say_actor) VALUES (?, ?, ?, ?)";
     const insertAudienceValues = [audience_key, name, phone_number, say_actor];     
 
@@ -74,7 +78,7 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
 
 insert.post(async (req, res) => {
   try {
-    const { performance_key, name, phone_number, say_actor, userType, department, id, identity, selectedDate, time } = req.body;
+    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time } = req.body;
 
     const Time = getTimeFromInput(time);
 
@@ -84,7 +88,7 @@ insert.post(async (req, res) => {
       throw new Error("Invalid time");
     }
 
-    const audience_key = await insertAudience(name, phone_number, say_actor, userType, department, id, identity);
+    const audience_key = await insertAudience(name, phone_number, say_actor, userType, department, studentID, identity);
 
     const insertReservationQuery = "INSERT INTO Stage_Play_DB.Reservation (audience_key, time_key) VALUES (?, ?)";
     const insertReservationValues = [audience_key, time_key];

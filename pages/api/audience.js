@@ -6,19 +6,12 @@ const handler = nextConnect();
 
 handler.use((req, res, next) => {
     // middleware for error handling
-    const { performance_key, date, time } = req.body;
-    console.log(performance_key + date + time);
-    const isValidDateFormat = (date) => {
-        const regex = /^\d{4}-\d{2}-\d{2}$/;
-        return dates.match(regex) !== null;
-    };
     next();
 });
 
 handler.get(async (req, res) => {
     try {
-        const { performance_key, date, time } = req.body;
-        
+        const { performance_key, selectedDate, selectedTime } = req.body;
         const time_key = await db.query(`
             SELECT T.time_key 
             FROM Stage_Play_DB.Date D 
@@ -27,8 +20,7 @@ handler.get(async (req, res) => {
             WHERE T.performance_key = ? 
               AND D.view_date = ? 
               AND T.view_time = ?
-        `, [performance_key, date, time]);
-        console.log("time_key", time_key);
+        `, [performance_key, selectedDate, selectedTime]);
 
         const [audience_key] = await db.query("SELECT audience_key FROM Stage_Play_DB.Reservation WHERE time_key = ?", [time_key]);
 
