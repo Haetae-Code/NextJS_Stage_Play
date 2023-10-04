@@ -5,9 +5,9 @@ const { opt_checkSearchedWord } = require("../../injectioncode");
 const insert = nextConnect();
 
 insert.use((req, res, next) => {
-  const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time } = req.body;
+  const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime } = req.body;
 
-  console.log(performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time);
+  console.log(performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime);
   if (
     !opt_checkSearchedWord(performance_key) ||
     !opt_checkSearchedWord(name) ||
@@ -18,7 +18,7 @@ insert.use((req, res, next) => {
     !opt_checkSearchedWord(studentID) ||
     !opt_checkSearchedWord(identity) ||
     !opt_checkSearchedWord(selectedDate) ||
-    !opt_checkSearchedWord(time) 
+    !opt_checkSearchedWord(selectedTime) 
   ) {
     res.status(400).json({ message: "Invalid input" });
     return;
@@ -78,9 +78,9 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
 
 insert.post(async (req, res) => {
   try {
-    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, time } = req.body;
+    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime } = req.body;
 
-    const Time = getTimeFromInput(time);
+    const Time = getTimeFromInput(selectedTime);
 
     const time_key = await getTimeKey(performance_key, selectedDate, Time);
 

@@ -23,8 +23,6 @@ import { useState,useEffect } from 'react'
 const ReservationCheck = () => {
     const router = useRouter();
     const { performance_key, selectedDate, selectedTime } = router.query;
-    const date = selectedDate;
-    const time = selectedTime;
     const [Performance, setPerformance] = useState([]);
     useEffect(() => {
         fetch(`/api/Performance/${performance_key}`)
@@ -66,7 +64,40 @@ const ReservationCheck = () => {
     const [searchStudentNumber, setSearchStudentNumber] = useState('');
     const [searchDepartment, setSearchDepartment] = useState('모두');
     const [searchPhoneNumber, setSearchPhoneNumber] = useState('');
+    const [studentAttendees, setStudentAttendees] = useState([]);
+    const [outsiderAttendees, setOutsiderAttendees] = useState([]);
 
+    const filterStudentAttendees = () => {
+        return Audience.filter((attendee) => {
+          return (
+            attendee.student_key !== null &&
+            (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
+            (!searchStudentNumber || attendee.id.includes(searchStudentNumber)) &&
+            (searchDepartment === '모두' || attendee.department === searchDepartment) &&
+            (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
+          );
+        });
+    };
+      
+    const filterOutsiderAttendees = () => {
+        return Audience.filter((attendee) => {
+          return (
+            attendee.student_key === null &&
+            (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
+            (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
+          );
+        });
+    };
+          
+
+    useEffect(() => {
+        const filteredStudentAttendees = filterStudentAttendees();
+        const filteredOutsiderAttendees = filterOutsiderAttendees();
+      
+        setStudentAttendees(filteredStudentAttendees);
+        setOutsiderAttendees(filteredOutsiderAttendees);
+    }, [Audience, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber]);
+      
     return (
         <Box>
             <Heading mt={5}>예약자 리스트</Heading>

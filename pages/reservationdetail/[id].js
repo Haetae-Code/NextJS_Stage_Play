@@ -88,11 +88,6 @@ import {
         setSelectedDate(event.target.value);
     };
 
-    const saveTime = (event) => {
-        setSelectedDate(event.target.value);
-        console.log(selectedTime);
-    };
-
     const timeOptions = perform_Info
     .filter((perform) => perform.view_date === selectedDate)
     .map((perform) => perform.view_time);
@@ -284,9 +279,9 @@ import {
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
   
-                <select value={selectedTime}>
+                <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
                     {timeOptions.map((time) => (
-                        <option key={time} value={time} onChange={(e) => setSelectedTime(e.target.value)}>
+                        <option key={time} value={time} >
                             {time}
                         </option>
                     ))}

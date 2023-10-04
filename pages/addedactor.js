@@ -95,6 +95,38 @@ const AddedActor = () => {
     }
   }
 
+  const handleActorAdd = async () => {
+    try {
+      const response = await fetch("/api/AddActor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          performance_key: performance_key,
+          actor_key: actor.actor_key,
+        }),
+      });
+
+      if (response.ok) {
+        window.alert("공연에 배우를 추가했습니다.");
+        console.log("Add actor Success");
+      } else {
+        window.alert("배우 추가를 실패했습니다.");
+        console.error("Add actor fail");
+      }
+    } catch (error) {
+        window.alert("배우 추가를 실패했습니다.");  
+      console.error(error);
+    }
+  };
+
+  const [ selectedActor, setSelectedActor ] = useState("");
+  const handleSelectActor = (actor) => {
+    setSelectedActor(actor);
+    handleActorAdd(performance_key, actor.actor_key);
+  };
+
   return (
     <Box mt="40px" >
       <Stack ml="50px">
@@ -161,7 +193,7 @@ const AddedActor = () => {
                   </Table>
                 </TableContainer>
                 <Box>
-                  <Button>선택</Button>
+                  <Button onClick = {() => handleSelectActor(actor)}>선택</Button>
                 </Box>
               </Flex>
             </Box>
