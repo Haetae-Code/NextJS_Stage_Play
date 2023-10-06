@@ -35,7 +35,7 @@ const Website = ({ Component, pageProps, router }) => {
     return (
         <Chakra cookies={pageProps.cookies}>
             {/* <Header></Header> */}
-            { isMobile ? (<Nav_MOB/>):(<Nav/>)}
+            { isMobile ? (null):(<Nav/>)}
             <AuthProvider>
             <Layout router={router}>
                 <AnimatePresence

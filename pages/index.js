@@ -134,7 +134,6 @@ const Page = () => {
                                 <Box
                                     w={{ base: "100%"}}
                                     h="320px"
-                                   
                                 >
                                     <Image
                                         src={item.image}
@@ -167,8 +166,7 @@ const Page = () => {
                                 <Button
                                     colorScheme="blue"
                                     onClick={() => handleReservation(item.id)}
-                                    h="40px"
-                                >
+                                    h="40px">
                                     예매하기
                                 </Button>
                                 {/* </Link> */}
