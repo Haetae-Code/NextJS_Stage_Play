@@ -23,6 +23,16 @@ const Website = ({ Component, pageProps, router }) => {
         )
     }
 
+    if (currentpath === '/login') {
+        return (
+            <Chakra cookies={pageProps.cookies}>
+                <AuthProvider>
+                    <Component {...pageProps} />
+                </AuthProvider>
+            </Chakra>
+        );
+    }
+
     function Website({ Component, pageProps }) {
         return (
             <ChakraProvider theme={theme}>

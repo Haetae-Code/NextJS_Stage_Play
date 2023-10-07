@@ -1,4 +1,4 @@
-import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon, Script} from "@chakra-ui/react";
+import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon, Script, Flex} from "@chakra-ui/react";
 import { useState, useContext } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/router';
@@ -28,14 +28,42 @@ const LoginPage = () => {
   };
 
   return (
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
+      bg="gray.100"
+      p={4}
+    >
+    <Box
+      p="4"
+      bg="white"
+      borderRadius="10px"
+      overflow="hidden"
+      padding="77px 55px 33px 55px"
+      boxShadow="0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+      mozBoxShadow="0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+      webkitBoxShadow="0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+      oBoxShadow="0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+      msBoxShadow="0 5px 10px 0px rgba(0, 0, 0, 0.1)"
+      maxW="390px"
+      margin="auto"
+    >
     <div>
       <div className="limiter">
         <div className="container-login100">
           <div className="wrap-login100">
             <form className="login100-form validate-form" onSubmit={handleLogin}>
-              <Text className="login100-form-title p-b-26">
+              <Text className="login100-form-title p-b-26"
+                display="block"
+                fontFamily="Poppins-Bold"
+                fontSize="30px"
+                color="#333333"
+                lineHeight="1.2"
+                textAlign="center">
                 CWU STAGE PLAY
               </Text>
+              
               <span className="login100-form-title p-b-48">
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <img src="https://nextstagefolder1.s3.ap-northeast-2.amazonaws.com/cwulogo.png" width="200" height="200" alt="Logo" />
@@ -85,7 +113,26 @@ const LoginPage = () => {
               <div className="container-login100-form-btn">
                 <div className="wrap-login100-form-btn">
                   <div className="login100-form-bgbtn"></div>
-                  <Button colorScheme="blue" color={"white"} className="login100-form-btn" type="submit">
+                  <Button colorScheme="blue"
+                    color="white"
+                    className="login100-form-btn"
+                    type="submit"
+                    fontFamily="Poppins-Medium"
+                    fontSize="15px"
+                    lineHeight="1.2"
+                    textTransform="uppercase"
+                    display={{
+                      base: "block",
+                      md: "-webkit-box",
+                      lg: "-webkit-flex",
+                      xl: "-moz-box",
+                      "2xl": "-ms-flexbox",
+                    }}
+                    justifyContent="center"
+                    alignItems="center"
+                    padding="0 20px"
+                    width="100%"
+                    height="50px">
                     로그인
                   </Button>
                 </div>
@@ -108,7 +155,7 @@ const LoginPage = () => {
         </div>
       </div>
       <div id="dropDownSelect1"></div>
-      <Script src="/login_func/vendor/jquery/jquery-3.2.1.min.js" async defer/>
+      {/* <Script src="/login_func/vendor/jquery/jquery-3.2.1.min.js" async defer/>
       <Script src="/login_func/vendor/animsition/js/animsition.min.js"/>
       <Script src="/login_func/vendor/bootstrap/js/popper.js"/>
       <Script src="/login_func/vendor/bootstrap/js/bootstrap.min.js"/>
@@ -116,9 +163,13 @@ const LoginPage = () => {
       <Script src="/login_func/vendor/daterangepicker/moment.min.js"/>
       <Script src="/login_func/endor/daterangepicker/daterangepicker.js"/>
       <Script src="/login_func/vendor/countdowntime/countdowntime.js"/>
-      <Script src="/login_func/js/main.js"/>
+      <Script src="/login_func/js/main.js"/> */}
     </div>
+    </Box>
+    </Flex>
   );
 };
+
+
 
 export default LoginPage;
