@@ -36,7 +36,7 @@
     "formidable": "^3.5.1",
     "framer-motion": "^9.0.4",
     "fs": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.1",
+    "jsonwebtoken": "^9.0.2",
     "keen-slider": "^6.8.5",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
