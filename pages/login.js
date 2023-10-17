@@ -80,6 +80,7 @@ const LoginPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="input100"
                   border={"none"}
+                  variant='flushed' placeholder='Email'
                 />
                 {/* 오류 메시지가 필요한 경우 */}
                 {/*<FormErrorMessage>이메일 틀렸다!</FormErrorMessage>*/}
@@ -96,6 +97,7 @@ const LoginPage = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     border={"none"}
+                    variant='filled' placeholder='Password'
                   />
                   <InputRightElement>
                   {/* 눌렀을때 비밀번호 보이게 */}
