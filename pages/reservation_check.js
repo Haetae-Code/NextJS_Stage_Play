@@ -23,7 +23,7 @@ import { useState,useEffect } from 'react'
 const ReservationCheck = () => {
     const router = useRouter();
     const { performance_key, selectedDate, selectedTime } = router.query;
-    const [Performance, setPerformance] = useState([]);
+    const [ Performance, setPerformance ] = useState([]);
     useEffect(() => {
         fetch(`/api/Performance/${performance_key}`)
             .then((response) => response.json())
@@ -34,7 +34,7 @@ const ReservationCheck = () => {
     const [Audience, setAudience] = useState([]);
     useEffect(() => {
         fetch("/api/audience",{
-            method: "GET",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
@@ -51,13 +51,14 @@ const ReservationCheck = () => {
     
     const [Student, setStudent] = useState([]);
     const [Outsider, setOutsider] = useState([]);
-    //split Audience
+
+    // split Audience
     for(let i=0; i < Audience.length; i++)
     {
-        if (Audience[i].student_key != NULL)
-            setStudent(Audience[i]);
-        else if (Audience[i].student_key == NULL)
-            setOutsider(Audience[i]);
+        if (Audience[i].student_key !== null)
+            setStudent(prev => [...prev, Audience[i]]);
+        else
+            setOutsider(prev => [...prev, Audience[i]]);
     }
 
     const [searchName, setSearchName] = useState('');
@@ -68,35 +69,44 @@ const ReservationCheck = () => {
     const [outsiderAttendees, setOutsiderAttendees] = useState([]);
 
     const filterStudentAttendees = () => {
-        return Audience.filter((attendee) => {
-          return (
-            attendee.student_key !== null &&
-            (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
-            (!searchStudentNumber || attendee.id.includes(searchStudentNumber)) &&
-            (searchDepartment === '모두' || attendee.department === searchDepartment) &&
-            (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
-          );
+        return Student.filter((attendee) => {
+            return (
+                (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
+                (!searchStudentNumber || attendee.id.includes(searchStudentNumber)) &&
+                (searchDepartment === '모두' || attendee.department === searchDepartment) &&
+                (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
+            );
         });
     };
       
     const filterOutsiderAttendees = () => {
-        return Audience.filter((attendee) => {
-          return (
-            attendee.student_key === null &&
-            (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
-            (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
-          );
+        return Outsider.filter((attendee) => {
+            return (
+                (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
+                (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
+            );
         });
     };
           
-
     useEffect(() => {
         const filteredStudentAttendees = filterStudentAttendees();
         const filteredOutsiderAttendees = filterOutsiderAttendees();
       
         setStudentAttendees(filteredStudentAttendees);
         setOutsiderAttendees(filteredOutsiderAttendees);
-    }, [Audience, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber]);
+    }, [Student, Outsider, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber]);
+    
+    const search = () => {
+        const filteredStudentAttendees = filterStudentAttendees();
+        const filteredOutsiderAttendees = filterOutsiderAttendees();
+  
+        setStudentAttendees(filteredStudentAttendees);
+        setOutsiderAttendees(filteredOutsiderAttendees);
+    };
+
+    useEffect(() => {
+        search(); // 초기 검색을 수행
+    }, []);
       
     return (
         <Box>

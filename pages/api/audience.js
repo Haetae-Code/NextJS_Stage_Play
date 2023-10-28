@@ -5,11 +5,24 @@ const db = require("./db");
 const handler = nextConnect();
 
 handler.use((req, res, next) => {
-    // middleware for error handling
+    const { performance_key, selectedDate, selectedTime } = req.body;
+    const [hour, minute] = selectedTime.split(':');
+    const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;
+    req.body.selectedTime = formattedTime;
+
+    if (
+    !opt_checkSearchedWord(performance_key) ||
+    !opt_checkSearchedWord(selectedDate) ||
+    !opt_checkSearchedWord(selectedTime) 
+    ) {
+    res.status(400).json({ message: "Invalid input" });
+    return;
+    }
+
     next();
 });
 
-handler.get(async (req, res) => {
+handler.post(async (req, res) => {
     try {
         const { performance_key, selectedDate, selectedTime } = req.body;
         const time_key = await db.query(`

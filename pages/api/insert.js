@@ -5,9 +5,18 @@ const { opt_checkSearchedWord } = require("../../injectioncode");
 const insert = nextConnect();
 
 insert.use((req, res, next) => {
-  const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime } = req.body;
+  const { performance_key, name, phone_number, say_actor, userType, department, 
+        studentID, identity, selectedDate, selectedTime } = req.body;
+  
+  const [hour, minute] = selectedTime.split(':');
+  const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;
+  req.body.selectedTime = formattedTime;
 
-  console.log(performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime);
+  console.log("Reservation: " +
+              performance_key, name, phone_number, 
+              say_actor, userType, department, studentID, 
+              identity, selectedDate, selectedTime);
+
   if (
     !opt_checkSearchedWord(performance_key) ||
     !opt_checkSearchedWord(name) ||
@@ -80,9 +89,7 @@ insert.post(async (req, res) => {
   try {
     const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime } = req.body;
 
-    const Time = getTimeFromInput(selectedTime);
-
-    const time_key = await getTimeKey(performance_key, selectedDate, Time);
+    const time_key = await getTimeKey(performance_key, selectedDate, selectedTime);
 
     if (!time_key) {
       throw new Error("Invalid time");
@@ -100,10 +107,5 @@ insert.post(async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-function getTimeFromInput(timeInput) {
-  const [hour, minute] = timeInput.split(':');
-  return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;
-}
 
 export default insert;
