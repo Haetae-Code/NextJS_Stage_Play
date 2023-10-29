@@ -122,6 +122,7 @@ const AddedActor = () => {
   };
 
   const [ selectedActor, setSelectedActor ] = useState("");
+  const [ performance_key, setPerformance_key ] = useState("");
   const handleSelectActor = (actor) => {
     setSelectedActor(actor);
     handleActorAdd(performance_key, actor.actor_key);
