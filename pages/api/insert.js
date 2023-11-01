@@ -1,56 +1,35 @@
 const nextConnect = require("next-connect");
 const db = require("./db");
-const { opt_checkSearchedWord } = require("../../injectioncode");
+const opt_checkSearchedWord  = require("../../injectioncode");
 
 const insert = nextConnect();
 
-insert.use((req, res, next) => {
-  const { performance_key, name, phone_number, say_actor, userType, department, 
-        studentID, identity, selectedDate, selectedTime } = req.body;
-  
-  const [hour, minute] = selectedTime.split(':');
-  const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:00`;
-  req.body.selectedTime = formattedTime;
+insert.use(async (req, res, next) => {
+  try {
+    const { performance_key, name, phone_number, say_actor, userType, department, 
+      studentID, identity, selectedDate, selectedTime, time_key } = req.body;
 
-  console.log("Reservation: " +
-              performance_key, name, phone_number, 
-              say_actor, userType, department, studentID, 
-              identity, selectedDate, selectedTime);
+    console.log("Reservation: " +
+                performance_key, name, phone_number, 
+                say_actor, userType, department, studentID, 
+                identity, selectedDate, selectedTime, time_key);
 
-  if (
-    !opt_checkSearchedWord(performance_key) ||
-    !opt_checkSearchedWord(name) ||
-    !opt_checkSearchedWord(phone_number) ||
-    !opt_checkSearchedWord(say_actor) ||
-    !opt_checkSearchedWord(userType) ||
-    !opt_checkSearchedWord(department) ||
-    !opt_checkSearchedWord(studentID) ||
-    !opt_checkSearchedWord(identity) ||
-    !opt_checkSearchedWord(selectedDate) ||
-    !opt_checkSearchedWord(selectedTime) 
-  ) {
-    res.status(400).json({ message: "Invalid input" });
-    return;
+    const isValidInput = [
+      performance_key, name, phone_number, say_actor, userType, department, 
+      studentID, identity, selectedDate, selectedTime
+    ].every(opt_checkSearchedWord);
+
+    if (!isValidInput) {
+      res.status(400).json({ message: "Invalid input" });
+      return;
+    }
+
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-
-  next();
 });
-
-async function getTimeKey(performance_key, selectedDate, Time) {
-  const query = `
-    SELECT T.time_key 
-    FROM Stage_Play_DB.Date D 
-    JOIN Stage_Play_DB.Time T 
-    ON D.date_key = T.date_key 
-    WHERE T.performance_key = ? 
-      AND D.view_date = ? 
-      AND T.view_time = ?
-  `;
-
-  const [result] = await db.query(query, [performance_key, selectedDate, Time]);
-  console.log(result);
-  return result ? result.time_key : null;
-}
 
 async function getAudienceKey() {
   const [result] = await db.query("SELECT COALESCE(MAX(audience_key), 0) + 1 AS audience_key FROM Stage_Play_DB.Audience");
@@ -87,13 +66,10 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
 
 insert.post(async (req, res) => {
   try {
-    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime } = req.body;
+    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime, time_key } = req.body;
+    console.log(selectedDate + selectedTime);
 
-    const time_key = await getTimeKey(performance_key, selectedDate, selectedTime);
-
-    if (!time_key) {
-      throw new Error("Invalid time");
-    }
+    console.log(time_key);
 
     const audience_key = await insertAudience(name, phone_number, say_actor, userType, department, studentID, identity);
 

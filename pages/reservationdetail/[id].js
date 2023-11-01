@@ -23,6 +23,7 @@ import {
   //import react from "react";
   import React, { useState, useEffect } from "react";
   import { useRouter} from "next/router";
+  //import { set } from "core-js/core/dict";
   
   /*const checkOnlyOne = (checkThis) => {
     const checkboxes = document.getElementsByName("test");
@@ -39,6 +40,7 @@ import {
     const { id } = router.query;
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
+    const [time_key, setTime_key] = useState("");
     //const [isOpen, setIsOpen] = useState(false);
     const [showStudentForm, setShowStudentForm] = useState(false);
     const [showOccupationForm, setShowOccupationForm] = useState(false);
@@ -60,11 +62,11 @@ import {
         setShowOccupationForm(!showOccupationForm);
     };
     */
-    const [perform_Info, setperform_Info] = useState([]);
+    const [Times, setTimes] = useState([]);
     useEffect(() => {
-        fetch(`/api/perform_Info/${id}`)
+        fetch(`/api/Times/${id}`)
         .then((response) => response.json())
-        .then((data) => setperform_Info(data))
+        .then((data) => setTimes(data))
         .catch((error) => console.error(error));
     }, [id]);
 
@@ -86,26 +88,39 @@ import {
 
     const handleTimeChange = (event) => {
         setSelectedDate(event.target.value);
+        setSelectedTime("");
     };
 
-    const handlesetTime = (event) => {
-        setSelectedTime(event.target.value);
+    const handlesetTime = (e) => {
+        const selectedValue = e.target.value;
+        setTimeout(() => {
+            if (timeOptions.length === 1) {
+                setSelectedTime(timeOptions[0]);
+            }
+            else {
+                setSelectedTime(selectedValue);
+            }
+            console.log(selectedTime);
+        }, 0);
     };
 
-    const timeOptions = perform_Info
-    .filter((perform) => perform.view_date === selectedDate)
-    .map((perform) => perform.view_time);
+    const timeOptions = Times
+    .filter((timeItem) => timeItem.view_date === selectedDate)
+    .map((timeItem) => timeItem.view_time);
 
-    for (let i = 0; i < perform_Info.length; i++) {
+    useEffect(() => {
+        if (selectedTime === "") {
+            const tempTime = timeOptions[0];
+            setSelectedTime(tempTime);
+            console.log(selectedTime);
+            }
+    }, [timeOptions, selectedTime]);
+
+    for (let i = 0; i < Times.length; i++) {
         const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
-        const matchedDay = perform_Info[i].view_date.match(dateRegex);
-        perform_Info[i].view_date = matchedDay[1];
-
-        const timeParts = perform_Info[i].view_time.split(':');
-        const hour = parseInt(timeParts[0], 10);
-        const minute = timeParts.length > 1 ? parseInt(timeParts[1], 10) : "00";
-        perform_Info[i].view_time = `${hour}시 ${minute}분`;
-      }      
+        const matchedDay = Times[i].view_date.match(dateRegex);
+        Times[i].view_date = matchedDay[1];
+    }    
 
     const handleStudentButton = () => {
         setUserType("student");
@@ -119,8 +134,21 @@ import {
         setShowOccupationForm(true);
     };
   
+    const searchKey = () => {
+        const matchingTime = Times.find(item => item.view_time === selectedTime &&
+                                         item.view_date === selectedDate);
+        console.log(matchingTime);
+        if (matchingTime) {
+            const time_key = matchingTime.time_key;
+            setTime_key(time_key);
+        } else {
+            console.log('No matching time_key found.');
+        }    
+    };
+
     const handleSubmit = async () => {
         try {
+          searchKey();
           const response = await fetch("/api/insert", {
             method: "POST",
             headers: {
@@ -137,6 +165,7 @@ import {
                 identity: occupation,
                 selectedDate: selectedDate,
                 selectedTime: selectedTime,
+                time_key: time_key,
             }),
           });
     
@@ -182,9 +211,9 @@ import {
                         </Stack>
                     <Text py="2">기 간:</Text>
                         <Stack spacing={2}>
-                            {perform_Info.map((infoItem) => (
+                            {Times.map((timeItem) => (
                                 <Text py="1">
-                                    {infoItem.view_date}  {infoItem.view_time}
+                                    {timeItem.view_date}  {timeItem.view_time}
                                 </Text>
                             ))}
                         </Stack>
@@ -283,7 +312,7 @@ import {
             <FormControl isRequired>
                 <FormLabel>시간 선택</FormLabel>
   
-                <select value={selectedTime} onChange={handlesetTime}>
+                <select value={selectedTime} onChange={(e) => handlesetTime(e)}>
                     {timeOptions.map((time, index) => (
                         <option key={index} value={time}>
                             {time}

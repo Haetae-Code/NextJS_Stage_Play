@@ -15,6 +15,8 @@ handler.get(async (req, res) => {
         const results = await db.query(
             "SELECT * FROM Date D join Time T WHERE D.date_key = T.date_key AND T.performance_key = ?;", 
             [id]);
+
+        console.log(results);
         res.status(200).json(results);
     } catch (error) {
         console.error(error);
