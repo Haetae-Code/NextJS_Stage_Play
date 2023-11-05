@@ -67,7 +67,7 @@ const Page = () => {
             return capacity.match(regex) !== null;
         };
 
-        if (!isValidRunTimeFormat(state.time)) {
+        if (!isValidRunTimeFormat(state.runtime)) {
             console.error("run_time은 숫자만 입력해야 합니다.");
             return;
         } 
