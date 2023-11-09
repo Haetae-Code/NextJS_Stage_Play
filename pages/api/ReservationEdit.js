@@ -17,20 +17,23 @@ handler.use(async (req, res, next) => {
         return;
     }
 
+    await db.beginTransaction();
     next();
 });
 
 // delete Reservation
 handler.delete(async (req, res) => {
     try {    
-        const { peformance_key, view_date, view_time } = req.body;
+        const { peformance_key, view_date, view_time, time_key } = req.body;
 
         {/*const results = await db.query(
-            "DELETE FROM Date D join Time T WHERE D.date_key = T.date_key AND T.performance_key = ? AND D.view_date = ? AND T.view_time =?",
-            [performance_key, view_date, view_time]
+            "DELETE FROM Stage_Play_DB.Time WHERE time_key = ?",
+            [time_key]
         );*/}
+        await db.commit();
         res.status(200).json({ message: "Performance deleted successfully" });
     } catch (error) {
+        await db.rollback();
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
@@ -78,9 +81,10 @@ handler.post(async (req, res) => {
                 );
             }
         }
-
+        await db.commit();
         res.status(200).json({ message: "Performance inserted successfully" });
     } catch (error) {
+        await db.rollback();
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
@@ -109,9 +113,10 @@ handler.put(async (req, res) => {
                 );
             }
         }
-        
+        await db.commit();
         res.status(200).json({ message: "Performance updated successfully" });
     } catch (error) {
+        await db.rollback();
         console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }

@@ -137,7 +137,6 @@ import {
     const searchKey = () => {
         const matchingTime = Times.find(item => item.view_time === selectedTime &&
                                          item.view_date === selectedDate);
-        console.log(matchingTime);
         if (matchingTime) {
             const time_key = matchingTime.time_key;
             setTime_key(time_key);

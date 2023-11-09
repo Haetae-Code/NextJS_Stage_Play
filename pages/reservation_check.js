@@ -19,10 +19,11 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState,useEffect } from 'react'
+import { getAudience } from './api/SearchResult'
 
 const ReservationCheck = () => {
     const router = useRouter();
-    const { performance_key, selectedDate, selectedTime } = router.query;
+    const { performance_key, selectedDate, selectedTime, time_key } = router.query;
     const [ Performance, setPerformance ] = useState([]);
     useEffect(() => {
         fetch(`/api/Performance/${performance_key}`)
@@ -47,66 +48,21 @@ const ReservationCheck = () => {
             .then((response) => response.json())
             .then((data) => setAudience(data))
             .catch((error) => console.error(error));
-    },);
+    },[performance_key, selectedDate, selectedTime, time_key]);
     
-    const [Student, setStudent] = useState([]);
-    const [Outsider, setOutsider] = useState([]);
-
-    // split Audience
-    for(let i=0; i < Audience.length; i++)
-    {
-        if (Audience[i].student_key !== null)
-            setStudent(prev => [...prev, Audience[i]]);
-        else
-            setOutsider(prev => [...prev, Audience[i]]);
+    const AudienceSearch = () => {
+        getAudience(Audience, searchName, searchNumber,
+                        searchDepartment, searchPhone);
     }
 
     const [searchName, setSearchName] = useState('');
     const [searchStudentNumber, setSearchStudentNumber] = useState('');
     const [searchDepartment, setSearchDepartment] = useState('모두');
     const [searchPhoneNumber, setSearchPhoneNumber] = useState('');
-    const [studentAttendees, setStudentAttendees] = useState([]);
-    const [outsiderAttendees, setOutsiderAttendees] = useState([]);
 
-    const filterStudentAttendees = () => {
-        return Student.filter((attendee) => {
-            return (
-                (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
-                (!searchStudentNumber || attendee.id.includes(searchStudentNumber)) &&
-                (searchDepartment === '모두' || attendee.department === searchDepartment) &&
-                (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
-            );
-        });
-    };
-      
-    const filterOutsiderAttendees = () => {
-        return Outsider.filter((attendee) => {
-            return (
-                (!searchName || attendee.name.toLowerCase().includes(searchName.toLowerCase())) &&
-                (!searchPhoneNumber || attendee.phone_number.includes(searchPhoneNumber))
-            );
-        });
-    };
-          
-    useEffect(() => {
-        const filteredStudentAttendees = filterStudentAttendees();
-        const filteredOutsiderAttendees = filterOutsiderAttendees();
-      
-        setStudentAttendees(filteredStudentAttendees);
-        setOutsiderAttendees(filteredOutsiderAttendees);
-    }, [Student, Outsider, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber]);
-    
-    const search = () => {
-        const filteredStudentAttendees = filterStudentAttendees();
-        const filteredOutsiderAttendees = filterOutsiderAttendees();
-  
-        setStudentAttendees(filteredStudentAttendees);
-        setOutsiderAttendees(filteredOutsiderAttendees);
-    };
-
-    useEffect(() => {
-        search(); // 초기 검색을 수행
-    }, []);
+    // useEffect(() => {
+    //     AudienceSearch();
+    // }, []);
       
     return (
         <Box>
@@ -190,7 +146,13 @@ const ReservationCheck = () => {
 
                             <Select mb={3} w="full" name="student" value={searchDepartment} onChange={(e) => setSearchDepartment(e.target.value)} >
                                 <option>모두</option>
+                                <option>건축공학과</option>
+                                <option>설비소방학과</option>
+                                <option>토목환경공학과</option>
+                                <option>전자공학과</option>
                                 <option>컴퓨터공학과</option>
+                                <option>멀티미디어학과</option>
+                                <option>화학생명공학과</option>
                             </Select>
                         </Flex>
 
@@ -234,7 +196,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
-                                {studentAttendees.map((StudentItem) => (
+                                {Audience.filter(ad => ad.student_key === AudienceSearch.student_key).map((StudentItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{StudentItem.name}</Td>
@@ -276,7 +238,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
-                                {outsiderAttendees.map((OutsiderItem) => (
+                                {Audience.filter(ad => ad.outsider_key === AudienceSearch.outsider_key).map((OutsiderItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{OutsiderItem.name}</Td>

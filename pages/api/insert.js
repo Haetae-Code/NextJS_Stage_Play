@@ -32,7 +32,7 @@ insert.use(async (req, res, next) => {
 });
 
 async function getAudienceKey() {
-  const [result] = await db.query("SELECT COALESCE(MAX(audience_key), 0) + 1 AS audience_key FROM Stage_Play_DB.Audience");
+  const [result] = await db.query("SELECT COALESCE(MAX(audience_key), 0) + 1 AS audience_key FROM Stage_Play_DB.Audience;");
   return result.audience_key;
 }
 
@@ -59,6 +59,7 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
     await db.query(insertOutsiderQuery, insertOutsiderValues);
   } else {
     throw new Error("Unsupported userType");
+    return;
   }
 
   return audience_key;
@@ -67,7 +68,6 @@ async function insertAudience(name, phone_number, say_actor, userType, departmen
 insert.post(async (req, res) => {
   try {
     const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime, time_key } = req.body;
-    console.log(selectedDate + selectedTime);
 
     console.log(time_key);
 

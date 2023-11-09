@@ -32,9 +32,10 @@ const Admin = () => {
     const router = useRouter();
 
     const handleCheckPage = (performance_key, selectedDate, selectedTime) => {
+        const time_key = searchtime_key(performance_key, selectedDate, selectedTime);
         router.push({
           pathname: '/reservation_check',
-          query: { performance_key, selectedDate, selectedTime }
+          query: { performance_key, selectedDate, selectedTime, time_key }
         });
       };
     const handleEditPage = (performance_key) => {
@@ -47,12 +48,14 @@ const Admin = () => {
         const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
         if (confirmDelete) {
             const handleDelete = (performance_key, view_date, view_time) => {
+                const time_key = searchtime_key(performance_key, 
+                                                electedDate, selectedTime);
                 fetch(`/api/ReservationEdit`, {
                   method: "DELETE",
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: JSON.stringify(performance_key, view_date, view_time),
+                  body: JSON.stringify(performance_key, view_date, view_time, time_key),
                 })
                   .then(() => {
                     window.alert("삭제되었습니다");
@@ -75,7 +78,6 @@ const [showPage, setShowPage] = useState(false);*/}
 const [reservationData, setReservationData] = useState(false);*/}
 
     const [Performance, setPerformance] = useState([]);
-
     useEffect(() => {
         fetch("/api/Performance")
             .then((response) => response.json())
@@ -84,7 +86,6 @@ const [reservationData, setReservationData] = useState(false);*/}
     }, []);
 
     const [Times, setTimes] = useState([]);
-
     useEffect(() => {
         fetch("/api/Times")
             .then((response) => response.json())
@@ -93,11 +94,11 @@ const [reservationData, setReservationData] = useState(false);*/}
     }, []);
 
     for (let i = 0; i < Times.length; i++) {
-        // view_day 파싱
+        // view_date 파싱
         const dateRegex = /^(\d{4}-\d{2}-\d{2})/;
         const matchedDay = Times[i].view_date.match(dateRegex);
         Times[i].view_date = matchedDay[1];
-    }
+    }  
 
     //공연 조회
     const { isOpen: isViewModalOpen, onOpen: onViewModalOpen, onClose: onViewModalClose } = useDisclosure();
@@ -187,6 +188,13 @@ const [reservationData, setReservationData] = useState(false);*/}
         title: PerformanceItem.title,
         description: PerformanceItem.address + PerformanceItem.location,
     }));
+
+    const searchtime_key = (s_key, s_date, s_time) => {
+        let result = Times.filter(i => i.perfornmace_key === s_key &&
+                                    i.view_date === s_date &&
+                                    i.view_time === s_time)
+        return result;
+    }
 
     const performanceTimesByDate = {};
 

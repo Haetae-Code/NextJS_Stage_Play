@@ -37,7 +37,42 @@ const query = (sql, values) => {
     });
 };
 
+const beginTransaction = () => {
+    return new Promise((resolve, reject) => {
+      connection.beginTransaction((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  };
+  
+  const commit = () => {
+    return new Promise((resolve, reject) => {
+      connection.commit((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  };
+  
+  const rollback = () => {
+    return new Promise((resolve, reject) => {
+      connection.rollback(() => {
+        resolve();
+      });
+    });
+  };
+
 module.exports = {
     query,
     connection, // Add this line to export the connection object
+    beginTransaction,
+    commit,
+    rollback,
 };
