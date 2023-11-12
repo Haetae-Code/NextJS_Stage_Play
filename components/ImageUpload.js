@@ -17,8 +17,8 @@ const ImageUpload = () => {
 
   return (
     <Box>
-      <Input type="file" onChange={handleFileChange} />
-      <Button onClick={handleUpload} mt={2} disabled={!selectedFile}>
+      <Input type="file" size="sm" w="500px"flex="1" onChange={handleFileChange} />
+      <Button onClick={handleUpload} ml={2} mt={2} disabled={!selectedFile}>
         Upload
       </Button>
     </Box>

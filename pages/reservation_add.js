@@ -28,7 +28,8 @@ const Page = () => {
     //const [title, setTitle] = useState("제목");
     const[selectedFile, setSelectedFile] = useState(null);
     const [reservationStatus, setReservationStatus] = useState("");
-    
+    const [selectedTime, setSelectedTime] = useState("");
+    const [selectedDate, setSelectedDate] = useState("");
     const [state, setState] = useState({
         title: "제목",
         location: "홍주문화회관 101호 대강당",
@@ -44,6 +45,11 @@ const Page = () => {
     const handleStateChange = (field, value) => {
         setState((prevState) => ({ ...prevState, [field]: value }));
     };
+
+    const handleTimeChange = (event) => {
+        setSelectedDate(event.target.value);
+        setSelectedTime("");
+    }
 
     // 데이터 형식 체크
     const handleSubmit = async () => {
@@ -255,6 +261,10 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        size="md"
+                                                        type="date"
+                                                        onChange={handleTimeChange}
+                                                        value={selectedDate}
                                                     />
                                                 </Editable>
                                             </Td>
@@ -283,6 +293,7 @@ const Page = () => {
                                                         border="1px solid"
                                                         p={2}
                                                         borderRadius="md"
+                                                        type="time"
                                                     />
                                                 </Editable>
                                             </Td>
@@ -371,12 +382,12 @@ const Page = () => {
                             </TableContainer>
                             <Divider/>
                                                                                 
-                            <Text fontSize="xl">배우</Text>
+                            <Text fontSize="xl" mt={2}>배우</Text>
                             <Text>공연에 참여하는 배우를 손쉽게 추가해요!</Text>
                             <Box>
                                 <Popover>
                                 <PopoverTrigger>
-                                    <Button>배우 추가</Button>
+                                    <Button mb={2}>배우 추가</Button>
                                 </PopoverTrigger>
                                 <PopoverContent width="1000px" maxH="xl" placement="right">
                                     <PopoverHeader >등록 배우 조회</PopoverHeader>
