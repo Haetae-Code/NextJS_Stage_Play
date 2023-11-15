@@ -34,26 +34,28 @@ const ReservationCheck = () => {
     
     const [Audience, setAudience] = useState([]);
     useEffect(() => {
-        fetch("/api/audience",{
+        fetch("/api/audience", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 performance_key,
                 selectedDate,
                 selectedTime,
+                time_key,
             }),
-          })
-            .then((response) => response.json())
-            .then((data) => setAudience(data))
-            .catch((error) => console.error(error));
+        })
+        .then((response) => response.json())
+        .then((data) => setAudience(data))
+        .catch((error) => console.error(error));
     },[performance_key, selectedDate, selectedTime, time_key]);
     
     const AudienceSearch = () => {
-        getAudience(Audience, searchName, searchNumber,
-                        searchDepartment, searchPhone);
-    }
+        const result = getAudience(Audience, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber)
+            .catch((error) => console.error(error));
+        return result
+    };
 
     const [searchName, setSearchName] = useState('');
     const [searchStudentNumber, setSearchStudentNumber] = useState('');
@@ -163,7 +165,7 @@ const ReservationCheck = () => {
                             <Input mb={3} w="full" name="name" type="text" value={searchPhoneNumber} onChange={(e) => setSearchPhoneNumber(e.target.value)} />
                         </Flex>
 
-                        <Button colorScheme="blue" /*onClick={() => search()}*/>검색</Button>
+                        <Button colorScheme="blue" /*onClick={() => AudienceSearch()}*/>검색</Button>
                     </Box>
                 </Box>
             </Flex>
@@ -196,7 +198,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
-                                {Audience.filter(ad => ad.student_key === AudienceSearch.student_key).map((StudentItem) => (
+                                {Audience.filter(ad => ad.student_key !== null).map((StudentItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{StudentItem.name}</Td>
@@ -238,7 +240,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
-                                {Audience.filter(ad => ad.outsider_key === AudienceSearch.outsider_key).map((OutsiderItem) => (
+                                {Audience.filter(ad => ad.outsider_key !== null).map((OutsiderItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{OutsiderItem.name}</Td>

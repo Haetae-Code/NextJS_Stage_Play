@@ -146,8 +146,8 @@ import {
     };
 
     const handleSubmit = async () => {
+        searchKey();
         try {
-          searchKey();
           const response = await fetch("/api/insert", {
             method: "POST",
             headers: {

@@ -32,7 +32,7 @@ const Admin = () => {
     const router = useRouter();
 
     const handleCheckPage = (performance_key, selectedDate, selectedTime) => {
-        const time_key = searchtime_key(performance_key, selectedDate, selectedTime);
+        let time_key = searchtime_key(performance_key, selectedDate, selectedTime);
         router.push({
           pathname: '/reservation_check',
           query: { performance_key, selectedDate, selectedTime, time_key }
@@ -55,7 +55,9 @@ const Admin = () => {
                   headers: {
                     "Content-Type": "application/json"
                   },
-                  body: JSON.stringify(performance_key, view_date, view_time, time_key),
+                  body: JSON.stringify(performance_key, 
+                                        view_date, view_time, 
+                                        time_key),
                 })
                   .then(() => {
                     window.alert("삭제되었습니다");
@@ -189,10 +191,15 @@ const [reservationData, setReservationData] = useState(false);*/}
         description: PerformanceItem.address + PerformanceItem.location,
     }));
 
-    const searchtime_key = (s_key, s_date, s_time) => {
-        let result = Times.filter(i => i.perfornmace_key === s_key &&
-                                    i.view_date === s_date &&
-                                    i.view_time === s_time)
+    const searchtime_key = (performance_key, selectedDate, selectedTime) => {
+        const result = Times
+        .filter(item =>
+            item.performance_key === performance_key &&
+            item.view_date === selectedDate &&
+            item.view_time === selectedTime
+        )
+        .map(item => item.time_key);
+
         return result;
     }
 
