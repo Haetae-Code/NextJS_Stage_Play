@@ -23,9 +23,8 @@ handler.use((req, res, next) => {
 handler.post(async (req, res) => {
   try {
     const { performance_key, selectedDate, selectedTime, time_key } = req.body;
-    console.log(performance_key + selectedDate + selectedTime + time_key);
 
-    const audienceKeysResult = await db.query("SELECT audience_key FROM Stage_Play_DB.Reservation");
+    const audienceKeysResult = await db.query("SELECT audience_key FROM Stage_Play_DB.Reservation WHERE time_key = ?", [time_key]);
     const audienceKeys = audienceKeysResult.map(row => row.audience_key);
 
     if (audienceKeys.length === 0) {
@@ -58,7 +57,6 @@ handler.post(async (req, res) => {
     if (audiences.length === 0) {
       res.status(200).json({ message: "No valid audience data found" });
     } else {
-      console.log(audiences);
       res.status(200).json(audiences);
     }
 

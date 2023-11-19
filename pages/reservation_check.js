@@ -19,7 +19,8 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState,useEffect } from 'react'
-import { getAudience } from './api/SearchResult'
+import { getAudience } from './api/Utils/SearchResult.js'
+import { departmentList } from "../public/data/departmentList.js";
 
 const ReservationCheck = () => {
     const router = useRouter();
@@ -31,7 +32,8 @@ const ReservationCheck = () => {
             .then((data) => setPerformance(data))
             .catch((error) => console.error(error));
     }, [performance_key]);
-    
+
+    const [filteredAudience, setFilteredAudience] = useState([]);
     const [Audience, setAudience] = useState([]);
     useEffect(() => {
         fetch("/api/audience", {
@@ -47,14 +49,38 @@ const ReservationCheck = () => {
             }),
         })
         .then((response) => response.json())
-        .then((data) => setAudience(data))
+        .then((data) => {setAudience(data); setFilteredAudience(data);})
         .catch((error) => console.error(error));
     },[performance_key, selectedDate, selectedTime, time_key]);
-    
-    const AudienceSearch = () => {
-        const result = getAudience(Audience, searchName, searchStudentNumber, searchDepartment, searchPhoneNumber)
-            .catch((error) => console.error(error));
-        return result
+
+    const AudienceSearch = async () => {
+        try {
+            console.log(
+                Audience + " " +
+                searchName + " " +
+                searchStudentNumber + " " +
+                searchDepartment + " " +
+                searchPhoneNumber
+            );
+
+            const result = await getAudience(
+                Audience,
+                searchName,
+                searchStudentNumber,
+                searchDepartment,
+                searchPhoneNumber
+            );
+
+            if (result) {
+                setFilteredAudience(result);
+            } else {
+                console.error(error);
+                window.alert("검색결과가 없습니다.");
+            }
+        } catch (error) {
+            console.error(error);
+            window.alert('An error occurred while searching for audience data. Please try again.');
+        }
     };
 
     const [searchName, setSearchName] = useState('');
@@ -62,10 +88,6 @@ const ReservationCheck = () => {
     const [searchDepartment, setSearchDepartment] = useState('모두');
     const [searchPhoneNumber, setSearchPhoneNumber] = useState('');
 
-    // useEffect(() => {
-    //     AudienceSearch();
-    // }, []);
-      
     return (
         <Box>
             <Heading mt={5}>예약자 리스트</Heading>
@@ -148,13 +170,9 @@ const ReservationCheck = () => {
 
                             <Select mb={3} w="full" name="student" value={searchDepartment} onChange={(e) => setSearchDepartment(e.target.value)} >
                                 <option>모두</option>
-                                <option>건축공학과</option>
-                                <option>설비소방학과</option>
-                                <option>토목환경공학과</option>
-                                <option>전자공학과</option>
-                                <option>컴퓨터공학과</option>
-                                <option>멀티미디어학과</option>
-                                <option>화학생명공학과</option>
+                                {departmentList.map((dpItem) => (
+                                <option key={dpItem}>{dpItem}</option>
+                                ))}
                             </Select>
                         </Flex>
 
@@ -165,7 +183,7 @@ const ReservationCheck = () => {
                             <Input mb={3} w="full" name="name" type="text" value={searchPhoneNumber} onChange={(e) => setSearchPhoneNumber(e.target.value)} />
                         </Flex>
 
-                        <Button colorScheme="blue" /*onClick={() => AudienceSearch()}*/>검색</Button>
+                        <Button colorScheme="blue" onClick={AudienceSearch}>검색</Button>
                     </Box>
                 </Box>
             </Flex>
@@ -198,7 +216,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
-                                {Audience.filter(ad => ad.student_key !== null).map((StudentItem) => (
+                                {filteredAudience.filter(ad => ad.student_key !== null).map((StudentItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{StudentItem.name}</Td>
@@ -240,7 +258,7 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
-                                {Audience.filter(ad => ad.outsider_key !== null).map((OutsiderItem) => (
+                                {filteredAudience.filter(ad => ad.outsider_key !== null).map((OutsiderItem) => (
                                 <Tbody>
                                     <Tr>
                                         <Td>{OutsiderItem.name}</Td>
