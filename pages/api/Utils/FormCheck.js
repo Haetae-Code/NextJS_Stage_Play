@@ -1,4 +1,6 @@
 //검색 포맷 검사
+import { departmentList } from "../../../public/data/departmentList.js";
+
 export async function FormatStudentID (studentID) 
 {
   const studentIDRegex = /^[0-9]{8}$/;
@@ -7,6 +9,10 @@ export async function FormatStudentID (studentID)
 
 export async function FormatPhoneNumber(phone_number) {
   const phoneNumberRegex = /^01(?:0|1|[6-9])-(\d{3}|\d{4})-\d{4}$/;
+
+  if (phone_number.replace(/\D/g, '').length !== 11) {
+    return null; // Return null for invalid 11-digit numbers
+  }
 
   if (!phoneNumberRegex.test(phone_number)) {
     // If '-' is not present, add it to the phoneNumber
@@ -23,12 +29,8 @@ function formattedPhoneNumberWithDashes(phone_number) {
   return phone_number.replace(/(\d{3})(\d{4})(\d{4})/, '010-$1-$2-$3');
 }
 
-const departmentListFile = '../../../public/data/departmentList.js';
 export async function FormatDepartment(department) {
   try {
-    const response = await fetch(departmentListFile);
-    const departmentList = await response.json();
-
     if (department === '모두' || departmentList.includes(department)) {
       return department;
     } else {

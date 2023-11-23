@@ -24,7 +24,7 @@ export async function getAudience(Audience, searchName, searchStudentNumber, sea
     }
 
     if (searchDepartment) {
-      departmentList = await FormatDepartment();
+      departmentList = await FormatDepartment(searchDepartment);
       if (!departmentList) {
         window.alert('학과를 다시 선택해주세요');
         return null;
@@ -32,18 +32,34 @@ export async function getAudience(Audience, searchName, searchStudentNumber, sea
     }
 
     const filteredAudience = Audience.filter(audience => {
-      const isValidStudentID = !formattedStudentID || (audience.studentID !== null && audience.studentID.includes(formattedStudentID));
-      const isValidName = audience.name.includes(searchName);
-      const isValidDepartment = !searchDepartment || searchDepartment === '모두' || departmentList.includes(audience.department);
-      const isValidPhoneNumber = !formattedPhoneNumber || audience.phone_number.includes(formattedPhoneNumber);
+      const filters = [];
 
-      return isValidStudentID && isValidName && isValidDepartment && isValidPhoneNumber;
+      if (formattedStudentID) {
+        filters.push(audience.id === formattedStudentID);
+      }
+    
+      if (searchName) {
+        filters.push(audience.name === searchName);
+      }
+    
+      if (searchDepartment) {
+        if (searchDepartment === '모두') {
+          filters.push(audience.department !== null);
+        } else {
+          filters.push(audience.department === searchDepartment);
+        }
+      }
+    
+      if (formattedPhoneNumber) {
+        filters.push(audience.phone_number === formattedPhoneNumber);
+      }
+    
+      return filters.some(filter => filter);
     });
 
     return filteredAudience;
   } catch (error) {
     console.error('Error in searchAudience:', error);
-    window.alert('An error occurred while searching for audience data. Please try again.');
     throw error;
   }
 }

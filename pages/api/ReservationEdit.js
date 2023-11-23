@@ -13,7 +13,7 @@ handler.use(async (req, res, next) => {
     ].every(opt_checkSearchedWord);
 
     if (!isValidInput) {
-        res.status(400).json({ message: "Invalid input" });
+        res.status(400).json({ message: "Invalid" });
         return;
     }
 

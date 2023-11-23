@@ -79,7 +79,6 @@ const ReservationCheck = () => {
             }
         } catch (error) {
             console.error(error);
-            window.alert('An error occurred while searching for audience data. Please try again.');
         }
     };
 
