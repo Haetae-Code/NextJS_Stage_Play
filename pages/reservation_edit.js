@@ -29,7 +29,7 @@ const Page = () => {
     const { performance_key } = router.query;
     const [input, setInput] = useState('')
     const [state, setState] = useState({
-        title: "",
+        title: "Performance && Performance[0] && Performance[0].title",
         location: "",
         period: "",
         time: "",
@@ -39,10 +39,25 @@ const Page = () => {
         capacity: "",
         rules: "",
     });
+    
 
     const [Performance, setPerformance] = useState([]);
     const [Times, setTimes] = useState([]);
     
+    useEffect(() => {
+        if (Performance && Performance[0]) {
+            setState((prevState) => ({
+                ...prevState,
+                title: Performance[0].title || "",
+                location: Performance[0].location || "",
+                period: Performance[0].period || "",
+                time: Performance[0].time || "",
+                runtime: Performance[0].run_time || "",
+                // 나머지 필드도 필요에 따라 추가하세요
+            }));
+        }
+    }, [Performance]);
+
     useEffect(() => {
       if (performance_key) {
         fetch(`/api/Performance/${performance_key}`)
@@ -378,35 +393,40 @@ const isError = input === ''*/}
                                             </Td>
                                         </Tr>
                                         <Tr>
-                                            <Td>관람 수칙</Td>
-                                            <Td>    
-                                                <Editable
-                                                defaultValue={
-                                                    state.rules
-                                                }
-                                                onChange={(value) => 
-                                                    handleStateChange(
-                                                        "rules", 
-                                                        value
-                                                        )
-                                                    }
-                                                >                       
-                                                    <EditablePreview
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="md"
-                                                        fontSize={["md", "lg"]}
-                                                    />
-                                                    <EditableInput
-                                                        border="1px solid"
-                                                        p={2}
-                                                        borderRadius="sm"
-                                                        fontSize={["md", "lg"]}
-                                                    />
-                                                </Editable>
-                                                {Performance && Performance[0] && Performance[0].rules}
-                                            </Td>
-                                        </Tr>
+    <Td>관람 수칙</Td>
+    <Td>
+        <Editable
+            defaultValue={state.rules}
+            onChange={(value) =>
+                handleStateChange("rules", value)
+            }
+        >
+            <EditablePreview
+                border="1px solid"
+                p={2}
+                borderRadius="md"
+                fontSize={["md", "lg"]}
+            />
+            <EditableInput
+                border="1px solid"
+                p={2}
+                borderRadius="sm"
+                fontSize={["md", "lg"]}
+            />
+        </Editable>
+        {Performance && Performance[0] && (
+            <Text whiteSpace="pre-wrap">
+                {Performance[0].rules.split("※").map((rule, index, array) => (
+                    <React.Fragment key={index}>
+                        {rule.trim()}
+                        {index < array.length - 1 && <br />} {/* 마지막 줄은 <br /> 추가하지 않음 */}
+                        {index < array.length - 1 && "※"} {/* ※ 추가, 마지막 줄은 추가하지 않음 */}
+                    </React.Fragment>
+                ))}
+            </Text>
+        )}
+    </Td>
+</Tr>
                                     </Tbody>
                                     
                                 </Table>
