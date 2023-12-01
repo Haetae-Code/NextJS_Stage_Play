@@ -23,13 +23,17 @@ import React, { useState, useEffect } from "react";
 {/*import KakaoMap from "../components/kakaomap";*/}
 import Actor from "./addedactor";
 import { useRouter } from 'next/router';
+//import { add } from "date-fns.js";
+import * as dataCheck from "./api/Utils/datacheck.js";
+
+
 
 const Page = () => {
     const router = useRouter();
     const { performance_key } = router.query;
     const [input, setInput] = useState('')
     const [state, setState] = useState({
-        title: "Performance && Performance[0] && Performance[0].title",
+        title: "",
         location: "",
         period: "",
         time: "",
@@ -65,6 +69,7 @@ const Page = () => {
           .then((data) => setPerformance(data))
           .catch((error) => console.error(error));
           console.log(Performance);
+          /*addPerformance(Performance);*/
       }
     }, [performance_key]);
     const addPerformance = (newPerformance) => {
@@ -96,41 +101,22 @@ const isError = input === ''*/}
 
     // 데이터 형식 체크
     const handleSaveReservation = async () => {
-        const isValidDateFormat = (dates) => {
-            const regex = /^\d{4}-\d{2}-\d{2}$/;
-            return dates.match(regex) !== null;
-        };
-            
-        const isValidPeriodFormat = (period) => {
-            const dates = period.split(", ");
-            return dates.length >= 1 && dates.every(isValidDateFormat);
-        };
-    
-        const isValidRunTimeFormat = (runTime) => {
-            const regex = /^\d+$/;
-            return runTime.match(regex) !== null;
-        };
-            
-        const isValidCapacityFormat = (capacity) => {
-            const regex = /^\d+$/;
-            return capacity.match(regex) !== null;
-        };
+        // 여기서부터
+    if (!dataCheck.isValidRunTimeFormat(state.time)) {
+        console.error("run_time은 숫자만 입력해야 합니다.");
+        return;
+    }
 
-        if (!isValidRunTimeFormat(state.time)) {
-            console.error("run_time은 숫자만 입력해야 합니다.");
-            return;
-        } 
-    
-        if (!isValidCapacityFormat(state.capacity)) {
-            console.error("capacity은 숫자만 입력해야 합니다.");
-            return;
-        } 
-    
-        if (!isValidPeriodFormat(state.period)) {
-            console.error("period는 YYYY-MM-DD 형식이어야 합니다.");
-            return;
-        }
-    
+    if (!dataCheck.isValidCapacityFormat(state.capacity)) {
+        console.error("capacity은 숫자만 입력해야 합니다.");
+        return;
+    }
+
+    if (!dataCheck.isValidPeriodFormat(state.period)) {
+        console.error("period는 YYYY-MM-DD 형식이어야 합니다.");
+        return;
+    }
+    //여기까지 함수로 만들기
         try {
             const response = await fetch("/api/ReservationEdit", {
                 method: "POST",
@@ -159,12 +145,10 @@ const isError = input === ''*/}
                 console.error("Reservation edit failed");
               }
             } catch (error) {
-                setInput("공연 편집 실패. 다시 시도해주세요.");  
-              console.error(error);
-            
-        }
-    };
-
+                setInput("공연 편집 실패. 다시 시도해주세요.");
+                console.error(error);
+            }
+        };
     return (
         <Box>
             <Box>
