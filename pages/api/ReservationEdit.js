@@ -61,8 +61,8 @@ handler.post(async (req, res) => {
     try {
         const { title, location, period, time, address, run_time, capacity, rules } = req.body;
         
-        const DateArray = period.split(/[,\s]+/);
-        const TimeArray = time.split(/[,\s]+/);
+        const DateArray = period.split(/[,\s]+|T/);
+        const TimeArray = DateArray[1];
 
         const InsertPerformance = "INSERT INTO Stage_Play_DB.Performance (title, location, address, run_time, capacity, rules) VALUES (?, ?, ?, ?, ?, ?)";
         const InsertPerformanceValues = [title, location, address, run_time, capacity, rules];
@@ -95,8 +95,9 @@ handler.put(async (req, res) => {
     try {
         const { title, location, period, time, address, run_time, capacity, rules, performance_key } = req.body;
 
-        const dateArray = period.split(/[,\s]+/);
-        const TimeArray = time.split(/[,\s]+/);
+        const rDateArray = period.split(/[,\s]+|T/);
+        const DateArray = rDateArray[0];
+        const TimeArray = rDateArray[1];
         
         const results = await db.query(
             "UPDATE Stage_Play_DB.Performance SET title = ?, location = ?, address = ?, run_time = ?, capacity = ?, rules = ? WHERE performance_key = ?", 

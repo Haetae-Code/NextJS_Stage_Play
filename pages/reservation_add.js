@@ -54,7 +54,7 @@ const Page = () => {
     // 데이터 형식 체크
     const handleSubmit = async () => {
         const isValidDateFormat = (dates) => {
-            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
             return dates.match(regex) !== null;
         };
         
@@ -248,6 +248,7 @@ const Page = () => {
                                                     onChange={(value) =>
                                                         handleStateChange(
                                                             "period",
+                                                            
                                                             value
                                                         )
                                                     }
@@ -262,7 +263,7 @@ const Page = () => {
                                                         p={2}
                                                         borderRadius="md"
                                                         size="md"
-                                                        type="date"
+                                                        type="datetime-local"
                                                         onChange={handleTimeChange}
                                                         value={selectedDate}
                                                     />
@@ -270,7 +271,7 @@ const Page = () => {
                                             </Td>
                                             
                                         </Tr>
-                                        <Tr>
+                                        {/*<Tr>
                                             <Td>
                                                 시작 시간
                                             </Td>
@@ -299,7 +300,7 @@ const Page = () => {
                                             </Td>
                                             
                                             
-                                        </Tr>
+                                                </Tr>*/}
                                         <Tr>
                                             <Td>공연 길이</Td>
                                             <Td>
