@@ -1,4 +1,4 @@
-import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon, Script, Flex} from "@chakra-ui/react";
+import { Box, Button, Text, FormControl, FormLabel, Input, InputGroup, InputRightElement, Icon, Flex} from "@chakra-ui/react";
 import { useState, useContext } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useRouter } from 'next/router';
@@ -6,7 +6,7 @@ import { AuthContext } from '../components/AuthProvider';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

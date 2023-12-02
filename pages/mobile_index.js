@@ -8,12 +8,6 @@ import {
   Image,
   Input,
   useBreakpointValue,
-  Slider,
-  Card,
-  CardHeader,
-  CardBody,
-  Button,
-  Text,
   Flex,
   Container
 } from "@chakra-ui/react";

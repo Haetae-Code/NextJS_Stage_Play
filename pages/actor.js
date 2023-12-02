@@ -115,10 +115,10 @@ const Actor = () => {
       }
     }
 
-    const handleDelete = (actor) => {
-      const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
-        if (confirmDelete) {
+  
             const handleDelete = (actor) => {
+              const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
+              if (confirmDelete) {
                 fetch(`/api/ActorEdit`, {
                   method: "DELETE",
                   headers: {
@@ -133,7 +133,7 @@ const Actor = () => {
                 .catch((error) => console.error(error));
             };
           }
-      }
+      
 
     const handleImageUpload = (e) => {
       const selectedImage = e.target.files[0];

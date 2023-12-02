@@ -12,7 +12,6 @@ import {
     Card,
     Image,
     Divider,
-    useMediaQuery,
     useBreakpointValue
 } from "@chakra-ui/react";
 import ImageSlider from "../components/MainImageSlider";
