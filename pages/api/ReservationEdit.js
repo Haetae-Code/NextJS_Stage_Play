@@ -93,7 +93,7 @@ handler.post(async (req, res) => {
 // update Reservation
 handler.put(async (req, res) => {
     try {
-        const { title, location, period, time, address, run_time, capacity, rules, performance_key } = req.body;
+        const { title, location, period, address, run_time, capacity, rules, performance_key } = req.body;
 
         const rDateArray = period.split(/[,\s]+|T/);
         const DateArray = rDateArray[0];

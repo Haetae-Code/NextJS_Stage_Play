@@ -69,7 +69,7 @@ insert.post(async (req, res) => {
   try {
     transaction = await db.beginTransaction();
 
-    const { performance_key, name, phone_number, say_actor, userType, department, studentID, identity, selectedDate, selectedTime, time_key } = req.body;
+    const {  name, phone_number, say_actor, userType, department, studentID, identity,  time_key } = req.body;
 
     const audience_key = await insertAudience(name, phone_number, say_actor, userType, department, studentID, identity);
 

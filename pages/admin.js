@@ -44,6 +44,7 @@ const Admin = () => {
           query: { performance_key }
         });
       };
+    /* handleDel 사용 안 됨@@
     const handleDel = (performance_key, view_date, view_time) => {
         const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
         if (confirmDelete) {
@@ -65,12 +66,13 @@ const Admin = () => {
                   .catch((error) => console.error(error));
               };
         }
-      }
+      }*/
     
     const { isLoggedIn } = useContext(AuthContext);
     {/*const [showComponent, setShowComponent] = useState(false);*/}
 
-    const [sliderIndex, setSliderIndex] = useState(0);
+    /* sliderIndex 사용 안 됨@@
+    const [sliderIndex, setSliderIndex] = useState(0);*/
     const [slidesToShow, setSlidesToShow] = useState(3);
 
     {/*const [actorData, setActorData] = useState(null);
@@ -107,7 +109,7 @@ const [reservationData, setReservationData] = useState(false);*/}
     //공연 수정
     const { isOpen: isEditModalOpen, onOpen: onEditModalOpen, onClose: onEditModalClose } = useDisclosure();
     //공연 삭제
-    const { isOpen: isDelModalOpen, onOpen: onDelModalOpen, onClose: onDelModalClose } = useDisclosure();
+    const { isOpen: isDelModalOpen, onClose: onDelModalClose } = useDisclosure();
 
     const [selectedPerformance, setSelectedPerformance] = useState(null);
     {/*const [selectedPerformanceTimes, setSelectedPerformanceTimes] = useState([]);*/}

@@ -65,23 +65,27 @@ export const Iphone = () => {
 
   return (
     <Container className="iphone">
+
       {/* navbar */}
-      <Flex justifyContent={"space-between"}>
+      <Flex justifyContent="space-between">
+        <Box>
+          <Image className="mdi-light-menu" alt="Mdi light menu" src="/asset/image/cwulogo.png" />
+        </Box>
 
-        <Image className="mdi-light-menu" alt="Mdi light menu" src="/asset/image/cwulogo.png" />
-
-        <Image className="Logo" alt="Element" src="/asset/image/cwulogo.png" />
+        <Box>
+          <Image className="Logo" alt="Element" src="/asset/image/cwulogo.png" />
+        </Box>
 
         <Box>
           <ColorMode></ColorMode>
         </Box>
+      </Flex>
 
         {/* search bar */}
         <Box className="mingcute-search-wrapper">
           <Image className="mingcute-search" alt="Mingcute search" src="mingcute-search-2-fill.svg" />
           <Input placeholder="Search"></Input>
         </Box>
-      </Flex>
 
       {/* body */}
       <Box className="div">
