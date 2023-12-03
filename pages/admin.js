@@ -38,10 +38,11 @@ const Admin = () => {
           query: { performance_key, selectedDate, selectedTime, time_key }
         });
       };
-    const handleEditPage = (performance_key) => {
+    const handleEditPage = (performance_key, selectedDate, selectedTime) => {
+        let time_key = searchtime_key(performance_key, selectedDate, selectedTime);
         router.push({
           pathname: '/reservation_edit',
-          query: { performance_key }
+          query: { performance_key, selectedDate, selectedTime, time_key }
         });
       };
     const handleDel = (performance_key, view_date, view_time) => {
@@ -471,7 +472,7 @@ const [reservationData, setReservationData] = useState(false);*/}
                                                                                                             <Link
                                                                                                                 key={time}
                                                                                                                 color="inactiveColor"
-                                                                                                                onClick={() => handleEditPage(selectedPerformance)}                                                                                                          
+                                                                                                                onClick={() => handleEditPage(selectedPerformance, date, time)}                                                                                                          
                                                                                                             >
                                                                                                                 <Button ml="10px" mt="10px">
                                                                                                                     {time}

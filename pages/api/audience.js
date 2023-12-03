@@ -57,6 +57,7 @@ handler.post(async (req, res) => {
     if (audiences.length === 0) {
       res.status(200).json({ message: "No valid audience data found" });
     } else {
+      console.log(audience);
       res.status(200).json(audiences);
     }
 

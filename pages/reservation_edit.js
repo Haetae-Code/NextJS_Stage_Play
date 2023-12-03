@@ -26,7 +26,7 @@ import { useRouter } from 'next/router';
 
 const Page = () => {
     const router = useRouter();
-    const { performance_key } = router.query;
+    const { performance_key, selectedDate, selectedTime, time_key } = router.query;
     const [input, setInput] = useState('')
     const [state, setState] = useState({
         title: "Performance && Performance[0] && Performance[0].title",

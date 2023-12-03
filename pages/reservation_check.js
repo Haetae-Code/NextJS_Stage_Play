@@ -50,7 +50,11 @@ const ReservationCheck = () => {
         })
         .then((response) => response.json())
         .then((data) => {setAudience(data); setFilteredAudience(data);})
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            console.error(error);
+            setAudience([]);
+            setFilteredAudience([]);
+        });
     },[performance_key, selectedDate, selectedTime, time_key]);
 
     const AudienceSearch = async () => {
@@ -215,17 +219,37 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*재학생 예약자 확인*/}
-                                {filteredAudience.filter(ad => ad.student_key !== null).map((StudentItem) => (
+                                {filteredAudience.length > 0 && (
                                 <Tbody>
-                                    <Tr>
-                                        <Td>{StudentItem.name}</Td>
-                                        <Td>{StudentItem.id}</Td>
-                                        <Td>{StudentItem.department}</Td>
-                                        <Td>{StudentItem.phone_number}</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
+                                    {filteredAudience
+                                        .filter((ad) => ad.student_key !== null)
+                                        .map((StudentItem) => (
+                                            <Tr key={StudentItem.id}>
+                                                <Td>{StudentItem.name}</Td>
+                                                <Td>{StudentItem.id}</Td>
+                                                <Td>{StudentItem.department}</Td>
+                                                <Td>{StudentItem.phone_number}</Td>
+                                                <Td>
+                                                    <Button size="xs" colorScheme="blue" mr={1}>
+                                                        수정
+                                                    </Button>
+                                                    <Button size="xs" colorScheme="blue">
+                                                        삭제
+                                                    </Button>
+                                                </Td>
+                                            </Tr>
+                                        ))}
                                 </Tbody>
-                                ))}
+                                )}
+                                {filteredAudience.length === 0 && (
+                                    <Tbody>
+                                        <Tr>
+                                            <Td colSpan={5} textAlign="center">
+                                                예약자가 없습니다.
+                                            </Td>
+                                        </Tr>
+                                    </Tbody>
+                                )}
                             </Table>
                         </TableContainer>
                     </Box>
@@ -257,15 +281,35 @@ const ReservationCheck = () => {
                                 </Thead>
 
                                 {/*외부인 예약자 확인*/}
-                                {filteredAudience.filter(ad => ad.outsider_key !== null).map((OutsiderItem) => (
-                                <Tbody>
-                                    <Tr>
-                                        <Td>{OutsiderItem.name}</Td>
-                                        <Td>{OutsiderItem.phone_number}</Td>
-                                        <Td><Button size="xs" colorScheme="blue" mr={1}>수정</Button><Button size="xs" colorScheme="blue">삭제</Button></Td>
-                                    </Tr>
-                                </Tbody>
-                                ))}
+                                {filteredAudience.length > 0 && (
+                                    <Tbody>
+                                        {filteredAudience
+                                            .filter((ad) => ad.outsider_key !== null)
+                                            .map((OutsiderItem) => (
+                                                <Tr key={OutsiderItem.id}>
+                                                    <Td>{OutsiderItem.name}</Td>
+                                                    <Td>{OutsiderItem.phone_number}</Td>
+                                                    <Td>
+                                                        <Button size="xs" colorScheme="blue" mr={1}>
+                                                            수정
+                                                        </Button>
+                                                        <Button size="xs" colorScheme="blue">
+                                                            삭제
+                                                        </Button>
+                                                    </Td>
+                                                </Tr>
+                                            ))}
+                                    </Tbody>
+                                )}
+                                {filteredAudience.length === 0 && (
+                                    <Tbody>
+                                        <Tr>
+                                            <Td colSpan={3} textAlign="center">
+                                                예약자가 없습니다.
+                                            </Td>
+                                        </Tr>
+                                    </Tbody>
+                                )}
                             </Table>
                         </TableContainer>
                     </Box>
